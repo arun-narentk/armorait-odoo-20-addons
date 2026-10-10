@@ -26,7 +26,7 @@ Depends on armora.gst.registration from armora_gst_base.
 
 ## License
 
-LGPL-3
+OPL-1
 
 ## Support
 

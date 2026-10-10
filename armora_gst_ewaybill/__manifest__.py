@@ -40,5 +40,7 @@ Developed by ARMORA IT Technologies
     'installable': True,
     'application': False,
     'auto_install': False,
-    'license': 'LGPL-3',
+    'license': 'OPL-1',
+    'price': 9.00,
+    'currency': 'USD',
 }

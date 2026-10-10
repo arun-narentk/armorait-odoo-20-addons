@@ -56,5 +56,5 @@ Email:   info@armorait.com
     'installable': True,
     'application': True,
     'auto_install': False,
-    'license': 'LGPL-3',
+    'license': 'OPL-1',
 }

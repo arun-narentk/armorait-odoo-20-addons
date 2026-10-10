@@ -26,7 +26,7 @@ Does not claim statutory GST audit certification.
 
 ## License
 
-LGPL-3
+OPL-1
 
 ## Support
 

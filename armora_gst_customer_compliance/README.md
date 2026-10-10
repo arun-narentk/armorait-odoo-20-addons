@@ -26,7 +26,7 @@ Partner-centric compliance for customers/receivables.
 
 ## License
 
-LGPL-3
+OPL-1
 
 ## Support
 

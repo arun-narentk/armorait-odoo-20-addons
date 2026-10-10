@@ -26,7 +26,7 @@ Uses Odoo l10n_in reverse charge tax flags. Does not invent RCM legal rules.
 
 ## License
 
-LGPL-3
+OPL-1
 
 ## Support
 

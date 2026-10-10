@@ -125,7 +125,7 @@ Modules that build on this foundation include:
 
 ## License
 
-LGPL-3
+OPL-1
 
 ## Support
 

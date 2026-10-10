@@ -25,7 +25,7 @@ Installable skeleton (`18.0.1.1.0`). Compliance fields and validation engines la
 
 ## License
 
-LGPL-3
+OPL-1
 
 ## Support
 

@@ -26,7 +26,7 @@ Builds on l10n_in export fields. Does not submit documents to customs/GSTN.
 
 ## License
 
-LGPL-3
+OPL-1
 
 ## Support
 

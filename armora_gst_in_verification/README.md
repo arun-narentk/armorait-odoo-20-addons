@@ -26,7 +26,7 @@ Does not claim GST Portal API access unless separately configured. Complements l
 
 ## License
 
-LGPL-3
+OPL-1
 
 ## Support
 

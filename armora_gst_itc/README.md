@@ -26,7 +26,7 @@ Complements GSTR-2B / GSTR-3B modules. Does not auto-claim ITC on the GST portal
 
 ## License
 
-LGPL-3
+OPL-1
 
 ## Support
 

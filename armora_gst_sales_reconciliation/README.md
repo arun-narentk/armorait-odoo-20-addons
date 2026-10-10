@@ -26,7 +26,7 @@ Complements GSTR-1 filing workflows in armora_gst_filing.
 
 ## License
 
-LGPL-3
+OPL-1
 
 ## Support
 

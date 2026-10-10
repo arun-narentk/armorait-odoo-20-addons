@@ -30,7 +30,7 @@ Odoo `account.tax` remains responsible for tax calculation. Draft rate changes m
 
 ## License
 
-LGPL-3
+OPL-1
 
 ## Support
 

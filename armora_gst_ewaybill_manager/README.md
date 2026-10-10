@@ -26,7 +26,7 @@ Complements Odoo l10n_in_edi_ewaybill and existing armora_gst_ewaybill extension
 
 ## License
 
-LGPL-3
+OPL-1
 
 ## Support
 

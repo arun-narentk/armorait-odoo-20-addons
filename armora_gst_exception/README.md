@@ -26,7 +26,7 @@ Foundation exception center. Downstream modules can post issues into it later.
 
 ## License
 
-LGPL-3
+OPL-1
 
 ## Support
 

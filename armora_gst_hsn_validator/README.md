@@ -25,7 +25,7 @@ Installable skeleton (`18.0.1.1.0`). Validation engine, domain fields and produc
 
 ## License
 
-LGPL-3
+OPL-1
 
 ## Support
 

@@ -26,7 +26,7 @@ Calendar helpers only. Does not file returns or connect to GST Portal.
 
 ## License
 
-LGPL-3
+OPL-1
 
 ## Support
 

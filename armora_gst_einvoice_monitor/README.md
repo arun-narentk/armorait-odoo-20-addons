@@ -26,7 +26,7 @@ Complements Odoo l10n_in_edi and existing armora_gst_einvoice extensions.
 
 ## License
 
-LGPL-3
+OPL-1
 
 ## Support
 

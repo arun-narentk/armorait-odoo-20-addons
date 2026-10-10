@@ -127,4 +127,4 @@ Or run tagged tests: `armora_gst_filing` post_install suite.
 https://www.armorait.com/  
 info@armorait.com
 
-License: LGPL-3
+License: OPL-1

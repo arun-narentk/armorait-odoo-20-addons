@@ -56,7 +56,7 @@ in later steps.
 
 ## License
 
-LGPL-3
+OPL-1
 
 ## Support
 

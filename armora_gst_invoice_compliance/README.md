@@ -27,7 +27,7 @@ Extends armora_gst_invoice_validator with compliance-oriented views.
 
 ## License
 
-LGPL-3
+OPL-1
 
 ## Support
 

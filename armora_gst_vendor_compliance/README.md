@@ -26,7 +26,7 @@ Partner-centric compliance. Does not scrape GST Portal data by default.
 
 ## License
 
-LGPL-3
+OPL-1
 
 ## Support
 

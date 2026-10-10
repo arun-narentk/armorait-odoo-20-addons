@@ -26,7 +26,7 @@ Analytics layer only. Does not modify accounting entries.
 
 ## License
 
-LGPL-3
+OPL-1
 
 ## Support
 

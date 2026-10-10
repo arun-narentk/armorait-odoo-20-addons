@@ -26,7 +26,7 @@ Works with standard customer/vendor credit notes. Related: armora_invoice_credit
 
 ## License
 
-LGPL-3
+OPL-1
 
 ## Support
 

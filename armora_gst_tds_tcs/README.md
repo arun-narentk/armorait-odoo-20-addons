@@ -26,7 +26,7 @@ Does not replace Odoo Indian withholding modules. Complements l10n_in_withholdin
 
 ## License
 
-LGPL-3
+OPL-1
 
 ## Support
 

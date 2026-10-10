@@ -26,7 +26,7 @@ Complements GSTR-2B workflows; does not replace armora_gst_2b_reconciliation.
 
 ## License
 
-LGPL-3
+OPL-1
 
 ## Support
 
