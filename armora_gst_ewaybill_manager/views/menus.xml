@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu placeholder. Actions/views are added when domain models are implemented. -->
+    <menuitem id="menu_armora_gst_ewaybill_manager_root"
+              name="E-Way Bill Manager"
+              parent="armora_gst_base.menu_armora_gst_root"
+              sequence="50"
+              groups="armora_gst_ewaybill_manager.group_armora_gst_ewaybill_manager_user"/>
+</odoo>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_armora_gst_rate_list" model="ir.ui.view">
+        <field name="name">armora.gst.rate.list</field>
+        <field name="model">armora.gst.rate</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="total_gst_rate"/>
+                <field name="igst_rate" optional="hide"/>
+                <field name="cgst_rate" optional="hide"/>
+                <field name="sgst_rate" optional="hide"/>
+                <field name="hsn_sac_code" optional="show"/>
+                <field name="effective_from"/>
+                <field name="effective_to"/>
+                <field name="state"/>
+                <field name="type_applicability" optional="hide"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="active" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_armora_gst_rate_form" model="ir.ui.view">
+        <field name="name">armora.gst.rate.form</field>
+        <field name="model">armora.gst.rate</field>
+        <field name="arch" type="xml">
+            <form string="GST Rate">
+                <header>
+                    <button name="action_set_active" type="object" string="Activate"
+                            invisible="state != 'draft'"
+                            groups="armora_gst_rate_manager.group_armora_gst_rate_manager_manager"/>
+                    <button name="action_set_expired" type="object" string="Expire"
+                            invisible="state != 'active'"
+                            groups="armora_gst_rate_manager.group_armora_gst_rate_manager_manager"/>
+                    <button name="action_cancel" type="object" string="Cancel"
+                            invisible="state in ('cancelled', 'expired')"
+                            groups="armora_gst_rate_manager.group_armora_gst_rate_manager_manager"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,active,expired"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="e.g. GST 18%"/></h1>
+                    </div>
+                    <group>
+                        <group string="Identity">
+                            <field name="code"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="gst_registration_id"/>
+                            <field name="active"/>
+                            <field name="source_reference"/>
+                        </group>
+                        <group string="Applicability">
+                            <field name="tax_category"/>
+                            <field name="type_applicability"/>
+                            <field name="hsn_sac_code"/>
+                            <field name="effective_from"/>
+                            <field name="effective_to"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="GST Components (%)">
+                            <field name="igst_rate"/>
+                            <field name="cgst_rate"/>
+                            <field name="sgst_rate"/>
+                            <field name="cess_rate"/>
+                            <field name="total_gst_rate"/>
+                        </group>
+                        <group string="Notes">
+                            <div class="text-muted" colspan="2">
+                                Component percentages are configuration metadata.
+                                Odoo account.tax remains responsible for tax calculation.
+                                SGST/UTGST uses Odoo SGST tax tags; there is no separate UTGST field.
+                            </div>
+                            <field name="note" nolabel="1" colspan="2" placeholder="Internal notes"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Odoo Tax Mapping" name="tax_mapping">
+                            <group>
+                                <group string="Sale">
+                                    <field name="tax_sale_intra_id"/>
+                                    <field name="tax_sale_inter_id"/>
+                                    <field name="tax_cess_sale_id"/>
+                                </group>
+                                <group string="Purchase">
+                                    <field name="tax_purchase_intra_id"/>
+                                    <field name="tax_purchase_inter_id"/>
+                                    <field name="tax_cess_purchase_id"/>
+                                </group>
+                            </group>
+                            <div class="alert alert-info" role="alert">
+                                Map to existing Indian chart taxes. Do not create duplicate account.tax
+                                records from this screen. Mapping validation is expanded in a later step.
+                            </div>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_armora_gst_rate_search" model="ir.ui.view">
+        <field name="name">armora.gst.rate.search</field>
+        <field name="model">armora.gst.rate</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="hsn_sac_code"/>
+                <field name="company_id"/>
+                <filter name="filter_active_state" string="Active" domain="[('state', '=', 'active')]"/>
+                <filter name="filter_draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                <filter name="filter_expired" string="Expired" domain="[('state', '=', 'expired')]"/>
+                <filter name="filter_sale" string="Sale" domain="[('type_applicability', 'in', ('sale', 'both'))]"/>
+                <filter name="filter_purchase" string="Purchase" domain="[('type_applicability', 'in', ('purchase', 'both'))]"/>
+                <filter name="filter_open_ended" string="Open-ended" domain="[('effective_to', '=', False)]"/>
+                <group>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                    <filter name="group_code" string="Code" context="{'group_by': 'code'}"/>
+                    <filter name="group_company" string="Company" context="{'group_by': 'company_id'}"/>
+                    <filter name="group_category" string="Category" context="{'group_by': 'tax_category'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_armora_gst_rate" model="ir.actions.act_window">
+        <field name="name">GST Rates</field>
+        <field name="res_model">armora.gst.rate</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_filter_active_state': 1}</field>
+    </record>
+</odoo>

@@ -1,0 +1,11 @@
+id,name,model_id,group_id/id,operation,domain
+access_armora_gst_hsn_result_user,armora.gst.hsn.validation.result.user,armora.gst.hsn.validation.result,armora_gst_hsn_validator.group_armora_gst_hsn_validator_user,r,
+access_armora_gst_hsn_result_manager,armora.gst.hsn.validation.result.manager,armora.gst.hsn.validation.result,armora_gst_hsn_validator.group_armora_gst_hsn_validator_manager,crud,
+armora_gst_hsn_validation_result_comp_rule,HSN Validation Result: multi-company,armora.gst.hsn.validation.result,,crud,"[('company_id', 'in', company_ids)]"
+access_armora_gst_hsn_run_user,armora.gst.hsn.validation.run.user,armora.gst.hsn.validation.run,armora_gst_hsn_validator.group_armora_gst_hsn_validator_user,cru,
+access_armora_gst_hsn_run_manager,armora.gst.hsn.validation.run.manager,armora.gst.hsn.validation.run,armora_gst_hsn_validator.group_armora_gst_hsn_validator_manager,crud,
+armora_gst_hsn_validation_run_comp_rule,HSN Validation Run: multi-company,armora.gst.hsn.validation.run,,crud,"[('company_id', 'in', company_ids)]"
+access_armora_gst_hsn_rule_user,armora.gst.hsn.validation.rule.user,armora.gst.hsn.validation.rule,armora_gst_hsn_validator.group_armora_gst_hsn_validator_user,r,
+access_armora_gst_hsn_rule_manager,armora.gst.hsn.validation.rule.manager,armora.gst.hsn.validation.rule,armora_gst_hsn_validator.group_armora_gst_hsn_validator_manager,cru,
+access_armora_gst_hsn_rule_admin,armora.gst.hsn.validation.rule.admin,armora.gst.hsn.validation.rule,armora_gst_hsn_validator.group_armora_gst_hsn_validator_administrator,crud,
+access_armora_gst_hsn_wizard_user,armora.gst.hsn.validation.wizard.user,armora.gst.hsn.validation.wizard,armora_gst_hsn_validator.group_armora_gst_hsn_validator_user,crud,

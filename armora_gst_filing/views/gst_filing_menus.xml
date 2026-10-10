@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_armora_gst_filing_root"
+              name="Filing"
+              parent="armora_gst_base.menu_armora_gst_root"
+              sequence="20"
+              groups="armora_gst_filing.group_armora_gst_filing_user"/>
+
+    <menuitem id="menu_armora_gst_filing_dashboard"
+              name="Dashboard"
+              parent="menu_armora_gst_filing_root"
+              action="action_armora_gst_filing_dashboard"
+              sequence="10"/>
+
+    <menuitem id="menu_armora_gst_filing_returns"
+              name="GST Returns"
+              parent="menu_armora_gst_filing_root"
+              action="action_armora_gst_filing"
+              sequence="20"/>
+
+    <menuitem id="menu_armora_gst_filing_my"
+              name="My Filings"
+              parent="menu_armora_gst_filing_root"
+              action="action_armora_gst_filing_my"
+              sequence="30"/>
+
+    <menuitem id="menu_armora_gst_filing_new"
+              name="New Filing Wizard"
+              parent="menu_armora_gst_filing_root"
+              action="action_armora_gst_filing_generate_wizard"
+              sequence="40"/>
+
+    <menuitem id="menu_armora_gst_filing_validation"
+              name="Validation"
+              parent="menu_armora_gst_filing_root"
+              action="action_armora_gst_validation"
+              sequence="50"/>
+
+    <menuitem id="menu_armora_gst_filing_templates"
+              name="Offline Tool Templates"
+              parent="menu_armora_gst_filing_root"
+              action="action_armora_gst_excel_template"
+              sequence="60"
+              groups="armora_gst_filing.group_armora_gst_filing_administrator"/>
+
+    <menuitem id="menu_armora_gst_filing_template_import"
+              name="Import Offline Tool Template"
+              parent="menu_armora_gst_filing_templates"
+              action="action_armora_gst_excel_template_import_wizard"
+              sequence="10"
+              groups="armora_gst_filing.group_armora_gst_filing_administrator"/>
+</odoo>

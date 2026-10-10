@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_armora_gst_invoice_validation_list" model="ir.ui.view">
+        <field name="name">armora.gst.invoice.validation.list</field>
+        <field name="model">armora.gst.invoice.validation</field>
+        <field name="arch" type="xml">
+            <list string="GST Validation Runs">
+                <field name="name"/>
+                <field name="validation_date"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="validated_by"/>
+                <field name="total_invoices"/>
+                <field name="valid_invoices"/>
+                <field name="error_count"/>
+                <field name="warning_count"/>
+                <field name="blocking_count"/>
+                <field name="state" widget="badge"
+                         decoration-info="state == 'draft'"
+                         decoration-warning="state == 'running'"
+                         decoration-success="state == 'completed'"
+                         decoration-danger="state in ('failed', 'cancelled')"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_armora_gst_invoice_validation_form" model="ir.ui.view">
+        <field name="name">armora.gst.invoice.validation.form</field>
+        <field name="model">armora.gst.invoice.validation</field>
+        <field name="arch" type="xml">
+            <form string="GST Validation Run">
+                <header>
+                    <button name="action_run_validation" type="object" string="Run Validation"
+                            invisible="state not in ('draft', 'failed')"
+                            class="btn-primary"/>
+                    <button name="action_rerun_validation" type="object" string="Re-run Validation"
+                            invisible="state not in ('completed', 'failed')"
+                            confirm="Clear results on this run and validate again?"/>
+                    <button name="action_view_errors" type="object" string="View Errors"
+                            invisible="error_count == 0"/>
+                    <button name="action_view_warnings" type="object" string="View Warnings"
+                            invisible="warning_count == 0"/>
+                    <button name="action_mark_reviewed" type="object" string="Mark Reviewed"
+                            invisible="state != 'completed'"
+                            groups="armora_gst_invoice_validator.group_armora_gst_validator_manager"/>
+                    <button name="action_cancel" type="object" string="Cancel"
+                            invisible="state in ('cancelled', 'running', 'completed')"
+                            confirm="Cancel this validation run?"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,running,completed"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="validation_date"/>
+                            <field name="validated_by"/>
+                            <field name="sync_move_issues"/>
+                        </group>
+                        <group>
+                            <field name="total_invoices"/>
+                            <field name="valid_invoices"/>
+                            <field name="error_count"/>
+                            <field name="warning_count"/>
+                            <field name="info_count"/>
+                            <field name="blocking_count"/>
+                            <field name="duration"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Invoices" name="invoices">
+                            <field name="invoice_ids"/>
+                        </page>
+                        <page string="Results" name="results">
+                            <field name="result_ids"/>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="notes" nolabel="1" placeholder="Internal notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_armora_gst_invoice_validation_search" model="ir.ui.view">
+        <field name="name">armora.gst.invoice.validation.search</field>
+        <field name="model">armora.gst.invoice.validation</field>
+        <field name="arch" type="xml">
+            <search string="GST Validation Runs">
+                <field name="name"/>
+                <field name="company_id"/>
+                <field name="validated_by"/>
+                <filter name="filter_draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                <filter name="filter_completed" string="Completed" domain="[('state', '=', 'completed')]"/>
+                <filter name="filter_failed" string="Failed" domain="[('state', '=', 'failed')]"/>
+                <group>
+                    <filter name="group_company" string="Company" context="{'group_by': 'company_id'}"/>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_armora_gst_invoice_validation" model="ir.actions.act_window">
+        <field name="name">Validation Runs</field>
+        <field name="res_model">armora.gst.invoice.validation</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_armora_gst_invoice_validation_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Start a GST invoice validation run
+            </p>
+            <p>
+                Validate invoices, bills, credit notes and debit notes before
+                filing or downstream compliance workflows. Validation does not
+                change accounting values.
+            </p>
+        </field>
+    </record>
+</odoo>

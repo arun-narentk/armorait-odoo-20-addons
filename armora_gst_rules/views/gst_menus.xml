@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_armora_gst_rules"
+              name="GST Rules"
+              parent="armora_gst_base.menu_armora_gst_configuration"
+              action="action_armora_gst_rule"
+              sequence="20"
+              groups="armora_gst_base.group_armora_gst_manager"/>
+
+    <menuitem id="menu_armora_gst_api_audit"
+              name="GST API Audit"
+              parent="armora_gst_base.menu_armora_gst_root"
+              action="action_armora_gst_api_audit"
+              sequence="80"
+              groups="armora_gst_base.group_armora_gst_manager"/>
+</odoo>

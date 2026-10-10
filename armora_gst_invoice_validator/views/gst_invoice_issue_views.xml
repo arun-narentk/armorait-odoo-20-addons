@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_armora_gst_invoice_issue_list" model="ir.ui.view">
+        <field name="name">armora.gst.invoice.issue.list</field>
+        <field name="model">armora.gst.invoice.issue</field>
+        <field name="arch" type="xml">
+            <list create="0" edit="0">
+                <field name="move_id"/>
+                <field name="partner_id"/>
+                <field name="severity"
+                          decoration-danger="severity == 'error'"
+                          decoration-warning="severity == 'warning'"/>
+                <field name="error_type"/>
+                <field name="message"/>
+                <field name="hint" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_armora_gst_invoice_issue_search" model="ir.ui.view">
+        <field name="name">armora.gst.invoice.issue.search</field>
+        <field name="model">armora.gst.invoice.issue</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="message"/>
+                <field name="move_id"/>
+                <field name="partner_id"/>
+                <filter string="Errors" name="errors" domain="[('severity', '=', 'error')]"/>
+                <filter string="Warnings" name="warnings" domain="[('severity', '=', 'warning')]"/>
+                <group>
+                    <filter string="Severity" name="group_severity" context="{'group_by': 'severity'}"/>
+                    <filter string="Type" name="group_type" context="{'group_by': 'error_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_armora_gst_invoice_issue" model="ir.actions.act_window">
+        <field name="name">Invoice GST Issues</field>
+        <field name="res_model">armora.gst.invoice.issue</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_errors': 1}</field>
+    </record>
+</odoo>

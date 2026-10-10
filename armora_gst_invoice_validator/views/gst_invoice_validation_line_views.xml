@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_armora_gst_invoice_validation_line_list" model="ir.ui.view">
+        <field name="name">armora.gst.invoice.validation.line.list</field>
+        <field name="model">armora.gst.invoice.validation.line</field>
+        <field name="arch" type="xml">
+            <list string="GST Validation Results" create="0">
+                <field name="invoice_id"/>
+                <field name="partner_id" optional="show"/>
+                <field name="category"/>
+                <field name="rule_code"/>
+                <field name="dedupe_key" optional="hide" groups="base.group_no_one"/>
+                <field name="severity" widget="badge"
+                         decoration-danger="severity == 'error'"
+                         decoration-warning="severity == 'warning'"
+                         decoration-info="severity == 'info'"/>
+                <field name="blocking"/>
+                <field name="message"/>
+                <field name="status"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_armora_gst_invoice_validation_line_form" model="ir.ui.view">
+        <field name="name">armora.gst.invoice.validation.line.form</field>
+        <field name="model">armora.gst.invoice.validation.line</field>
+        <field name="arch" type="xml">
+            <form string="GST Validation Result" create="0">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="validation_id"/>
+                            <field name="invoice_id"/>
+                            <field name="move_line_id"/>
+                            <field name="partner_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="category"/>
+                            <field name="rule_code"/>
+                            <field name="severity"/>
+                            <field name="blocking"/>
+                            <field name="status"/>
+                            <field name="field_name"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="message"/>
+                        <field name="expected_value"/>
+                        <field name="actual_value"/>
+                    </group>
+                    <group string="Resolution">
+                        <field name="resolution_notes"/>
+                        <field name="resolved_by"/>
+                        <field name="resolved_at"/>
+                        <field name="created_at"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_armora_gst_invoice_validation_line_search" model="ir.ui.view">
+        <field name="name">armora.gst.invoice.validation.line.search</field>
+        <field name="model">armora.gst.invoice.validation.line</field>
+        <field name="arch" type="xml">
+            <search string="GST Validation Results">
+                <field name="invoice_id"/>
+                <field name="rule_code"/>
+                <field name="message"/>
+                <field name="partner_id"/>
+                <filter name="filter_error" string="Errors" domain="[('severity', '=', 'error')]"/>
+                <filter name="filter_warning" string="Warnings" domain="[('severity', '=', 'warning')]"/>
+                <filter name="filter_blocking" string="Blocking" domain="[('blocking', '=', True)]"/>
+                <filter name="filter_open" string="Open" domain="[('status', '=', 'open')]"/>
+                <group>
+                    <filter name="group_category" string="Category" context="{'group_by': 'category'}"/>
+                    <filter name="group_severity" string="Severity" context="{'group_by': 'severity'}"/>
+                    <filter name="group_rule" string="Rule" context="{'group_by': 'rule_code'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_armora_gst_invoice_validation_line" model="ir.actions.act_window">
+        <field name="name">Validation Results</field>
+        <field name="res_model">armora.gst.invoice.validation.line</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_armora_gst_invoice_validation_line_search"/>
+        <field name="context">{'search_default_filter_open': 1}</field>
+    </record>
+</odoo>

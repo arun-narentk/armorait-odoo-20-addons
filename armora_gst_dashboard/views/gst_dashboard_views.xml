@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_armora_gst_dashboard_list" model="ir.ui.view">
+        <field name="name">armora.gst.dashboard.list</field>
+        <field name="model">armora.gst.dashboard</field>
+        <field name="arch" type="xml">
+            <list string="GST Dashboards">
+                <field name="name"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="gstin"/>
+                <field name="financial_year"/>
+                <field name="return_period"/>
+                <field name="amount_total_tax"/>
+                <field name="filing_errors"/>
+                <field name="validation_errors"/>
+                <field name="last_refresh"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_armora_gst_dashboard_form" model="ir.ui.view">
+        <field name="name">armora.gst.dashboard.form</field>
+        <field name="model">armora.gst.dashboard</field>
+        <field name="arch" type="xml">
+            <form string="GST Dashboard">
+                <header>
+                    <button name="action_refresh" type="object" string="Refresh"
+                            class="btn-primary"/>
+                    <button name="action_open_filter_wizard" type="object"
+                            string="Filters"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group string="Context">
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="gst_registration_id"/>
+                            <field name="gstin"/>
+                            <field name="financial_year"/>
+                            <field name="return_period"/>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                        <group string="Refresh">
+                            <field name="last_refresh" readonly="1"/>
+                            <field name="refreshed_by" readonly="1"/>
+                            <field name="tax_data_source" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <group string="Documents">
+                        <group>
+                            <field name="total_invoices" readonly="1"/>
+                            <field name="total_vendor_bills" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="total_credit_notes" readonly="1"/>
+                            <field name="total_debit_notes" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <group string="Tax">
+                        <group>
+                            <field name="taxable_value" readonly="1"/>
+                            <field name="amount_cgst" readonly="1"/>
+                            <field name="amount_sgst" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="amount_igst" readonly="1"/>
+                            <field name="amount_cess" readonly="1"/>
+                            <field name="amount_total_tax" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <group string="GST Filing" invisible="not module_filing_available">
+                        <group>
+                            <field name="module_filing_available" invisible="1"/>
+                            <field name="filing_count" readonly="1"/>
+                            <field name="pending_filings" readonly="1"/>
+                            <field name="validated_filings" readonly="1"/>
+                            <field name="generated_filings" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="submitted_filings" readonly="1"/>
+                            <field name="filed_filings" readonly="1"/>
+                            <field name="filing_errors" readonly="1"/>
+                        </group>
+                    </group>
+                    <div class="text-muted" invisible="module_filing_available">
+                        Filing analytics unavailable — install Armora GST Filing.
+                    </div>
+
+                    <group string="GSTR-2B Reconciliation" invisible="not module_2b_available">
+                        <group>
+                            <field name="module_2b_available" invisible="1"/>
+                            <field name="total_2b_records" readonly="1"/>
+                            <field name="exact_matches" readonly="1"/>
+                            <field name="partial_matches" readonly="1"/>
+                            <field name="mismatches" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="missing_in_books" readonly="1"/>
+                            <field name="missing_in_2b" readonly="1"/>
+                            <field name="manual_review" readonly="1"/>
+                        </group>
+                    </group>
+                    <div class="text-muted" invisible="module_2b_available">
+                        GSTR-2B analytics unavailable — install Armora GST 2B Reconciliation.
+                    </div>
+
+                    <group string="Invoice Validation" invisible="not module_validator_available">
+                        <group>
+                            <field name="module_validator_available" invisible="1"/>
+                            <field name="validated_documents" readonly="1"/>
+                            <field name="validation_errors" readonly="1"/>
+                            <field name="validation_warnings" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="blocking_errors" readonly="1"/>
+                            <field name="unvalidated_documents" readonly="1"/>
+                        </group>
+                    </group>
+                    <div class="text-muted" invisible="module_validator_available">
+                        Invoice validation analytics unavailable — install Armora GST Invoice Validator.
+                    </div>
+
+                    <group string="ITC" invisible="not module_itc_available">
+                        <group>
+                            <field name="module_itc_available" invisible="1"/>
+                            <field name="eligible_itc" readonly="1"/>
+                            <field name="reconciled_itc" readonly="1"/>
+                            <field name="unreconciled_itc" readonly="1"/>
+                        </group>
+                    </group>
+                    <div class="text-muted" invisible="module_itc_available">
+                        ITC analytics unavailable — install Armora GST ITC.
+                    </div>
+
+                    <group string="E-Invoice" invisible="not module_einvoice_available">
+                        <group>
+                            <field name="module_einvoice_available" invisible="1"/>
+                            <field name="einvoice_total" readonly="1"/>
+                            <field name="einvoice_generated" readonly="1"/>
+                            <field name="einvoice_pending" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="einvoice_cancelled" readonly="1"/>
+                            <field name="einvoice_failed" readonly="1"/>
+                        </group>
+                    </group>
+                    <div class="text-muted" invisible="module_einvoice_available">
+                        E-Invoice analytics unavailable — install Armora GST E-Invoice modules.
+                    </div>
+
+                    <group string="E-Way Bill" invisible="not module_ewaybill_available">
+                        <group>
+                            <field name="module_ewaybill_available" invisible="1"/>
+                            <field name="ewaybill_total" readonly="1"/>
+                            <field name="ewaybill_generated" readonly="1"/>
+                            <field name="ewaybill_active" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="ewaybill_expired" readonly="1"/>
+                            <field name="ewaybill_cancelled" readonly="1"/>
+                            <field name="ewaybill_pending" readonly="1"/>
+                        </group>
+                    </group>
+                    <div class="text-muted" invisible="module_ewaybill_available">
+                        E-Way Bill analytics unavailable — install Armora GST E-Way Bill modules.
+                    </div>
+
+                    <group string="Exceptions" invisible="not module_exception_available">
+                        <group>
+                            <field name="module_exception_available" invisible="1"/>
+                            <field name="open_exceptions" readonly="1"/>
+                            <field name="critical_exceptions" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="high_exceptions" readonly="1"/>
+                            <field name="resolved_exceptions" readonly="1"/>
+                        </group>
+                    </group>
+                    <div class="text-muted" invisible="module_exception_available">
+                        Exception Center unavailable — install Armora GST Exception Center.
+                    </div>
+
+                    <group>
+                        <field name="notes" placeholder="Internal notes"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_armora_gst_dashboard_filter_wizard_form" model="ir.ui.view">
+        <field name="name">armora.gst.dashboard.filter.wizard.form</field>
+        <field name="model">armora.gst.dashboard.filter.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Dashboard Filters">
+                <group>
+                    <field name="dashboard_id" invisible="1"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="gst_registration_id"/>
+                    <field name="gstin"/>
+                    <field name="financial_year"/>
+                    <field name="return_period"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                </group>
+                <footer>
+                    <button name="action_apply" type="object" string="Apply"
+                            class="btn-primary"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_armora_gst_dashboard_list" model="ir.actions.act_window">
+        <field name="name">GST Dashboards</field>
+        <field name="res_model">armora.gst.dashboard</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_armora_gst_dashboard" model="ir.actions.server">
+        <field name="name">GST Dashboard</field>
+        <field name="model_id" ref="model_armora_gst_dashboard"/>
+        <field name="state">code</field>
+        <field name="code">action = env['armora.gst.dashboard'].action_open_dashboard()</field>
+    </record>
+</odoo>

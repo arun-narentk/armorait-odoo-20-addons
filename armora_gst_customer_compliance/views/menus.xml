@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu placeholder. Actions/views are added when domain models are implemented. -->
+    <menuitem id="menu_armora_gst_customer_compliance_root"
+              name="Customer Compliance"
+              parent="armora_gst_base.menu_armora_gst_root"
+              sequence="50"
+              groups="armora_gst_customer_compliance.group_armora_gst_customer_compliance_user"/>
+</odoo>

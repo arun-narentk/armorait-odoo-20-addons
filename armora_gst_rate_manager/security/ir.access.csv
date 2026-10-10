@@ -1,0 +1,17 @@
+id,name,model_id,group_id/id,operation,domain
+access_armora_gst_rate_user,armora.gst.rate.user,armora.gst.rate,armora_gst_rate_manager.group_armora_gst_rate_manager_user,r,
+access_armora_gst_rate_manager,armora.gst.rate.manager,armora.gst.rate,armora_gst_rate_manager.group_armora_gst_rate_manager_manager,cru,
+access_armora_gst_rate_admin,armora.gst.rate.admin,armora.gst.rate,armora_gst_rate_manager.group_armora_gst_rate_manager_administrator,crud,
+armora_gst_rate_comp_rule,GST Rate: multi-company,armora.gst.rate,,crud,"[('company_id', 'in', company_ids)]"
+access_armora_gst_rate_change_user,armora.gst.rate.change.user,armora.gst.rate.change,armora_gst_rate_manager.group_armora_gst_rate_manager_user,r,
+access_armora_gst_rate_change_manager,armora.gst.rate.change.manager,armora.gst.rate.change,armora_gst_rate_manager.group_armora_gst_rate_manager_manager,cru,
+access_armora_gst_rate_change_admin,armora.gst.rate.change.admin,armora.gst.rate.change,armora_gst_rate_manager.group_armora_gst_rate_manager_administrator,crud,
+armora_gst_rate_change_comp_rule,GST Rate Change: multi-company,armora.gst.rate.change,,crud,"[('company_id', 'in', company_ids)]"
+access_armora_gst_rate_history_user,armora.gst.rate.history.user,armora.gst.rate.history,armora_gst_rate_manager.group_armora_gst_rate_manager_user,r,
+access_armora_gst_rate_history_manager,armora.gst.rate.history.manager,armora.gst.rate.history,armora_gst_rate_manager.group_armora_gst_rate_manager_manager,cr,
+armora_gst_rate_history_comp_rule,GST Rate History: multi-company,armora.gst.rate.history,,crud,"[('company_id', 'in', company_ids)]"
+access_armora_gst_rate_conflict_user,armora.gst.rate.conflict.user,armora.gst.rate.conflict,armora_gst_rate_manager.group_armora_gst_rate_manager_user,r,
+access_armora_gst_rate_conflict_manager,armora.gst.rate.conflict.manager,armora.gst.rate.conflict,armora_gst_rate_manager.group_armora_gst_rate_manager_manager,cru,
+access_armora_gst_rate_conflict_admin,armora.gst.rate.conflict.admin,armora.gst.rate.conflict,armora_gst_rate_manager.group_armora_gst_rate_manager_administrator,crud,
+armora_gst_rate_conflict_comp_rule,GST Rate Conflict: multi-company,armora.gst.rate.conflict,,crud,"[('company_id', 'in', company_ids)]"
+access_armora_gst_rate_bulk_wizard_manager,armora.gst.rate.bulk.update.wizard.manager,armora.gst.rate.bulk.update.wizard,armora_gst_rate_manager.group_armora_gst_rate_manager_manager,crud,

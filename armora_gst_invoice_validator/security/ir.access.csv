@@ -1,0 +1,9 @@
+id,name,model_id,group_id/id,operation,domain
+access_armora_gst_invoice_issue_account,armora.gst.invoice.issue.account,armora.gst.invoice.issue,account.group_account_invoice,crud,
+armora_gst_invoice_issue_comp_rule,GST Invoice Issue: multi-company,armora.gst.invoice.issue,,crud,"[('company_id', 'in', company_ids)]"
+access_armora_gst_invoice_validation_user,armora.gst.invoice.validation.user,armora.gst.invoice.validation,armora_gst_invoice_validator.group_armora_gst_validator_user,cru,
+access_armora_gst_invoice_validation_manager,armora.gst.invoice.validation.manager,armora.gst.invoice.validation,armora_gst_invoice_validator.group_armora_gst_validator_manager,crud,
+armora_gst_invoice_validation_comp_rule,GST Invoice Validation Run: multi-company,armora.gst.invoice.validation,,crud,"[('company_id', 'in', company_ids)]"
+access_armora_gst_invoice_validation_line_user,armora.gst.invoice.validation.line.user,armora.gst.invoice.validation.line,armora_gst_invoice_validator.group_armora_gst_validator_user,crud,
+armora_gst_invoice_validation_line_comp_rule,GST Invoice Validation Result: multi-company,armora.gst.invoice.validation.line,,crud,"[('company_id', 'in', company_ids)]"
+access_armora_gst_invoice_validation_wizard_user,armora.gst.invoice.validation.wizard.user,armora.gst.invoice.validation.wizard,armora_gst_invoice_validator.group_armora_gst_validator_user,crud,

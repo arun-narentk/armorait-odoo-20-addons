@@ -1,0 +1,5 @@
+id,name,model_id,group_id/id,operation,domain
+access_armora_gst_registration_user,armora.gst.registration.user,armora.gst.registration,armora_gst_base.group_armora_gst_user,r,
+access_armora_gst_registration_manager,armora.gst.registration.manager,armora.gst.registration,armora_gst_base.group_armora_gst_manager,cru,
+access_armora_gst_registration_admin,armora.gst.registration.admin,armora.gst.registration,armora_gst_base.group_armora_gst_administrator,crud,
+armora_gst_registration_comp_rule,GST Registration: multi-company,armora.gst.registration,,crud,"[('company_id', 'in', company_ids)]"

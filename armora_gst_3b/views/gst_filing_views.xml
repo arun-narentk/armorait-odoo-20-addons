@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_armora_gst_filing_form_gstr3b" model="ir.ui.view">
+        <field name="name">armora.gst.filing.form.gstr3b</field>
+        <field name="model">armora.gst.filing</field>
+        <field name="inherit_id" ref="armora_gst_filing.view_armora_gst_filing_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_open_gstr3b" type="object" class="oe_stat_button" icon="fa-file-text-o"
+                        invisible="filing_type != 'gstr1'">
+                    <field name="gstr3b_count" widget="statinfo" string="GSTR-3B"/>
+                </button>
+            </xpath>
+            <field name="currency_id" position="before">
+                <field name="gstr3b_id" invisible="1"/>
+            </field>
+        </field>
+    </record>
+</odoo>

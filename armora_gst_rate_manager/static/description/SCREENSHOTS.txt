@@ -1,0 +1,9 @@
+Screenshots for armora_gst_rate_manager
+
+Live Odoo UI (preferred):
+- screenshot_01_rates.png: GST Rate Master
+- screenshot_02_rate_changes.png: GST Rate Changes
+- screenshot_03_rate_conflicts.png: Rate Conflicts
+
+Branding: company_logo.png copied from armora_invoice_credit_notes.
+Do not use real taxpayer GSTINs or fabricated portal responses.

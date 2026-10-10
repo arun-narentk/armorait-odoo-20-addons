@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Demo placeholder for Armora GST Rate Manager.
+
+        Fictional rates / changes / conflicts ship in Prompt 21.
+        Keep empty until then. Enable via __manifest__ demo when ready.
+    -->
+</odoo>

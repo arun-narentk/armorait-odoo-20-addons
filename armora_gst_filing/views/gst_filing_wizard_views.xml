@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_armora_gst_filing_generate_wizard_form" model="ir.ui.view">
+        <field name="name">armora.gst.filing.generate.wizard.form</field>
+        <field name="model">armora.gst.filing.generate.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Generate GST Filing">
+                <group invisible="step != 'period'">
+                    <group>
+                        <field name="company_id"/>
+                        <field name="gst_registration_id"/>
+                        <field name="gstin"/>
+                        <field name="filing_type"/>
+                        <field name="filing_frequency"/>
+                    </group>
+                    <group>
+                        <field name="financial_year" placeholder="2025-26"/>
+                        <field name="return_period" placeholder="04 or Q1"/>
+                        <field name="step" invisible="1"/>
+                        <field name="filing_id" invisible="1"/>
+                    </group>
+                </group>
+                <group string="Extracted Statistics" invisible="step == 'period'">
+                    <group>
+                        <field name="document_count"/>
+                        <field name="count_b2b"/>
+                        <field name="count_b2cl"/>
+                        <field name="count_b2cs"/>
+                        <field name="count_export"/>
+                    </group>
+                    <group>
+                        <field name="count_credit_note"/>
+                        <field name="count_debit_note"/>
+                        <field name="count_nil"/>
+                        <field name="count_hsn"/>
+                        <field name="validation_status"/>
+                        <field name="validation_error_count"/>
+                        <field name="validation_warning_count"/>
+                        <field name="generated_filename"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_create_and_load" type="object" string="Load GST Data"
+                            class="btn-primary" invisible="step != 'period'"/>
+                    <button name="action_validate" type="object" string="Validate"
+                            class="btn-secondary" invisible="step not in ('loaded', 'validated', 'generated')"/>
+                    <button name="action_generate_excel" type="object" string="Generate GST Upload File"
+                            class="btn-primary" invisible="step not in ('loaded', 'validated')"
+                            title="Populate the official GSTN Returns Offline Tool Excel workbook"/>
+                    <button name="action_open_filing" type="object" string="Open Filing"
+                            invisible="not filing_id"/>
+                    <button string="Close" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_armora_gst_filing_generate_wizard" model="ir.actions.act_window">
+        <field name="name">New GST Filing</field>
+        <field name="res_model">armora.gst.filing.generate.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="view_armora_gst_excel_template_import_wizard_form" model="ir.ui.view">
+        <field name="name">armora.gst.excel.template.import.wizard.form</field>
+        <field name="model">armora.gst.excel.template.import.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Import Offline Tool Template">
+                <div class="alert alert-info" role="alert">
+                    Upload the current official GSTR-1/IFF Excel template from the GSTN
+                    Returns Offline Tool. Re-upload when GSTN publishes a new template version.
+                </div>
+                <group>
+                    <field name="name"/>
+                    <field name="filing_type"/>
+                    <field name="version"/>
+                    <field name="financial_year"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="template_filename" invisible="1"/>
+                    <field name="template_file" filename="template_filename"/>
+                    <field name="notes"/>
+                </group>
+                <footer>
+                    <button name="action_import" type="object" string="Import &amp; Inspect" class="btn-primary"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_armora_gst_excel_template_import_wizard" model="ir.actions.act_window">
+        <field name="name">Import Offline Tool Template</field>
+        <field name="res_model">armora.gst.excel.template.import.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

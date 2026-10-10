@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_armora_gst_registration_list" model="ir.ui.view">
+        <field name="name">armora.gst.registration.list</field>
+        <field name="model">armora.gst.registration</field>
+        <field name="arch" type="xml">
+            <list string="GST Registrations">
+                <field name="registration_name"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="gstin"/>
+                <field name="state_id"/>
+                <field name="state_code" optional="hide"/>
+                <field name="registration_type"/>
+                <field name="effective_from"/>
+                <field name="effective_to"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_armora_gst_registration_form" model="ir.ui.view">
+        <field name="name">armora.gst.registration.form</field>
+        <field name="model">armora.gst.registration</field>
+        <field name="arch" type="xml">
+            <form string="GST Registration">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="registration_name"/>
+                        <h1>
+                            <field name="registration_name" placeholder="e.g. Tamil Nadu HO"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="General">
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="gstin"/>
+                            <field name="registration_type"/>
+                            <field name="active"/>
+                            <field name="legal_name"/>
+                            <field name="trade_name"/>
+                        </group>
+                        <group string="Location">
+                            <field name="state_id"/>
+                            <field name="state_code"/>
+                        </group>
+                    </group>
+                    <group string="Validity">
+                        <group>
+                            <field name="effective_from"/>
+                        </group>
+                        <group>
+                            <field name="effective_to"/>
+                        </group>
+                    </group>
+                    <group string="Other">
+                        <field name="notes" colspan="2" nolabel="1" placeholder="Internal notes"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_armora_gst_registration_search" model="ir.ui.view">
+        <field name="name">armora.gst.registration.search</field>
+        <field name="model">armora.gst.registration</field>
+        <field name="arch" type="xml">
+            <search string="GST Registrations">
+                <field name="registration_name"/>
+                <field name="gstin"/>
+                <field name="company_id"/>
+                <field name="state_id"/>
+                <field name="registration_type"/>
+                <filter name="filter_active" string="Active" domain="[('active', '=', True)]"/>
+                <filter name="filter_inactive" string="Inactive" domain="[('active', '=', False)]"/>
+                <separator/>
+                <filter name="filter_company" string="Company" context="{'group_by': 'company_id'}"/>
+                <filter name="group_state" string="State" context="{'group_by': 'state_id'}"/>
+                <filter name="group_type" string="Registration Type" context="{'group_by': 'registration_type'}"/>
+                <searchpanel>
+                    <field name="registration_type" select="multi" enable_counters="1"/>
+                    <field name="state_id" select="multi" enable_counters="1"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_armora_gst_registration" model="ir.actions.act_window">
+        <field name="name">GST Registrations</field>
+        <field name="res_model">armora.gst.registration</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_armora_gst_registration_search"/>
+        <field name="context">{'search_default_filter_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a GST registration
+            </p>
+            <p>
+                Store one or more Indian GSTINs for each company. This is configuration
+                for the Armora GST suite and does not replace the company VAT field.
+            </p>
+        </field>
+    </record>
+</odoo>

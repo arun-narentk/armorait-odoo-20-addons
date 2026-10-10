@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Demo placeholder for Armora GST HSN/SAC Validator.
+
+        Fictional product / result demos ship in Prompt 16.
+        Keep this file empty until then so production installs stay clean.
+        When ready, set '__manifest__.py' demo to include this file.
+    -->
+</odoo>

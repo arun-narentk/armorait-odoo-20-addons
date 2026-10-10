@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_armora_gst_dashboard"
+              name="Dashboard"
+              parent="armora_gst_base.menu_armora_gst_root"
+              action="action_armora_gst_dashboard"
+              sequence="5"
+              groups="armora_gst_dashboard.group_armora_gst_dashboard_user"/>
+
+    <menuitem id="menu_armora_gst_dashboard_list"
+              name="Dashboard Workspaces"
+              parent="armora_gst_base.menu_armora_gst_configuration"
+              action="action_armora_gst_dashboard_list"
+              sequence="90"
+              groups="armora_gst_dashboard.group_armora_gst_dashboard_manager"/>
+
+    <menuitem id="menu_armora_gst_dashboard_filter"
+              name="Dashboard Filter Presets"
+              parent="armora_gst_base.menu_armora_gst_configuration"
+              action="action_armora_gst_dashboard_filter"
+              sequence="91"
+              groups="armora_gst_dashboard.group_armora_gst_dashboard_manager"/>
+</odoo>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_armora_gst_rules_res_config_settings" model="ir.ui.view">
+        <field name="name">armora.gst.rules.res.config.settings</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="armora_gst_base.view_armora_gst_base_res_config_settings"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@name='armora_gst_base_settings']" position="inside">
+                <setting string="GST API Environment" help="Sandbox vs production for Armora GST API extensions.">
+                    <field name="armora_gst_api_environment"/>
+                </setting>
+                <setting string="API Provider / Version">
+                    <div class="content-group">
+                        <div class="row mt16">
+                            <label for="armora_gst_api_provider" class="col-lg-3"/>
+                            <field name="armora_gst_api_provider" class="col-lg-3"/>
+                            <label for="armora_gst_api_version" class="col-lg-3"/>
+                            <field name="armora_gst_api_version" class="col-lg-3"/>
+                        </div>
+                    </div>
+                </setting>
+                <setting string="Enable E-Invoice Extensions">
+                    <field name="armora_gst_enable_einvoice"/>
+                </setting>
+                <setting string="Enable E-Way Bill Extensions">
+                    <field name="armora_gst_enable_ewaybill"/>
+                </setting>
+                <setting string="Enable Voluntary EWB Closure">
+                    <field name="armora_gst_enable_ewaybill_closure"/>
+                </setting>
+                <setting string="Validation Mode">
+                    <field name="armora_gst_validation_mode"/>
+                </setting>
+                <setting string="Allow Post-Closure EWB Actions"
+                         help="Keep transporter/vehicle/extend available after closure during GSTN stabilisation.">
+                    <field name="armora_gst_post_closure_actions_allowed"/>
+                </setting>
+                <setting string="EWB Closure API Path" groups="armora_gst_base.group_armora_gst_administrator">
+                    <field name="armora_gst_ewaybill_close_path"/>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="seq_armora_gst_3b" model="ir.sequence">
+        <field name="name">Armora GSTR-3B</field>
+        <field name="code">armora.gst.3b</field>
+        <field name="prefix">GSTR3B/</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <record id="view_armora_gst_3b_tree" model="ir.ui.view">
+        <field name="name">armora.gst.3b.tree</field>
+        <field name="model">armora.gst.3b</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="company_id"/>
+                <field name="gstin"/>
+                <field name="reporting_period"/>
+                <field name="state"/>
+                <field name="system_minimum_interest"/>
+                <field name="self_assessed_interest"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_armora_gst_3b_form" model="ir.ui.view">
+        <field name="name">armora.gst.3b.form</field>
+        <field name="model">armora.gst.3b</field>
+        <field name="arch" type="xml">
+            <form string="GSTR-3B">
+                <header>
+                    <button name="action_compute_interest" type="object" string="Compute Interest" class="btn-primary" invisible="state == 'filed'"/>
+                    <button name="action_recompute_interest" type="object" string="Recompute Interest" invisible="state == 'filed'"/>
+                    <button name="action_compute_itc_utilization" type="object" string="Compute ITC Utilization" invisible="state == 'filed'"/>
+                    <button name="action_mark_filed" type="object" string="Mark Filed" invisible="state == 'filed'" confirm="Mark this GSTR-3B as filed (read-only)?"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,computed,filed"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" readonly="1"/>
+                            <field name="company_id"/>
+                            <field name="gstin"/>
+                            <field name="financial_year"/>
+                            <field name="return_period"/>
+                            <field name="reporting_period"/>
+                        </group>
+                        <group>
+                            <field name="period_start"/>
+                            <field name="period_end"/>
+                            <field name="due_date"/>
+                            <field name="payment_date"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Interest (Table 5.1)">
+                            <group>
+                                <group>
+                                    <field name="net_tax_liability"/>
+                                    <field name="minimum_ecl_balance"/>
+                                    <field name="interest_rate"/>
+                                </group>
+                                <group>
+                                    <field name="system_minimum_interest" readonly="1"/>
+                                    <field name="computed_interest" readonly="1"/>
+                                    <field name="self_assessed_interest"/>
+                                    <field name="interest_difference" readonly="1"/>
+                                    <field name="interest_calculation_version" readonly="1"/>
+                                    <field name="interest_calculation_date" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Liability Breakup">
+                            <field name="liability_breakup_ids">
+                                <list editable="bottom">
+                                    <field name="source_period"/>
+                                    <field name="reporting_period"/>
+                                    <field name="document_id"/>
+                                    <field name="document_name"/>
+                                    <field name="document_date"/>
+                                    <field name="taxable_value"/>
+                                    <field name="igst"/>
+                                    <field name="cgst"/>
+                                    <field name="sgst"/>
+                                    <field name="cess"/>
+                                    <field name="source_return"/>
+                                    <field name="source_table"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="ITC Utilization">
+                            <group string="Opening / Available / Liability">
+                                <group string="IGST">
+                                    <field name="itc_opening_igst"/>
+                                    <field name="itc_available_igst"/>
+                                    <field name="liability_igst"/>
+                                </group>
+                                <group string="CGST">
+                                    <field name="itc_opening_cgst"/>
+                                    <field name="itc_available_cgst"/>
+                                    <field name="liability_cgst"/>
+                                </group>
+                                <group string="SGST">
+                                    <field name="itc_opening_sgst"/>
+                                    <field name="itc_available_sgst"/>
+                                    <field name="liability_sgst"/>
+                                </group>
+                                <group string="CESS">
+                                    <field name="itc_opening_cess"/>
+                                    <field name="itc_available_cess"/>
+                                    <field name="liability_cess"/>
+                                </group>
+                            </group>
+                            <group string="Results">
+                                <group>
+                                    <field name="itc_utilized_igst" readonly="1"/>
+                                    <field name="itc_utilized_cgst" readonly="1"/>
+                                    <field name="itc_utilized_sgst" readonly="1"/>
+                                    <field name="itc_utilized_cess" readonly="1"/>
+                                    <field name="itc_utilization_version" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="cash_payable_igst" readonly="1"/>
+                                    <field name="cash_payable_cgst" readonly="1"/>
+                                    <field name="cash_payable_sgst" readonly="1"/>
+                                    <field name="cash_payable_cess" readonly="1"/>
+                                </group>
+                            </group>
+                            <group string="Audit Steps">
+                                <field name="itc_utilization_audit" nolabel="1" colspan="2" readonly="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_armora_gst_3b" model="ir.actions.act_window">
+        <field name="name">GSTR-3B</field>
+        <field name="res_model">armora.gst.3b</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

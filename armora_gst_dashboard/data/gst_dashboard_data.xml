@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="seq_armora_gst_dashboard" model="ir.sequence">
+        <field name="name">GST Dashboard</field>
+        <field name="code">armora.gst.dashboard</field>
+        <field name="prefix">GDB/%(year)s/</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+</odoo>

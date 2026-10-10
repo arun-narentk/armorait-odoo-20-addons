@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_armora_gst_gstr2b_line_list" model="ir.ui.view">
+        <field name="name">armora.gst.gstr2b.line.list</field>
+        <field name="model">armora.gst.gstr2b.line</field>
+        <field name="arch" type="xml">
+            <list string="GSTR-2B Lines">
+                <field name="reconciliation_id"/>
+                <field name="source"/>
+                <field name="match_state"
+                          decoration-success="match_state == 'matched'"
+                          decoration-danger="match_state in ('mismatch', 'missing_in_odoo', 'missing_in_2b')"
+                          decoration-muted="match_state in ('ignored', 'disputed')"/>
+                <field name="vendor_gstin"/>
+                <field name="vendor_name"/>
+                <field name="invoice_number"/>
+                <field name="invoice_date"/>
+                <field name="taxable_value"/>
+                <field name="cgst_amount"/>
+                <field name="sgst_amount"/>
+                <field name="igst_amount"/>
+                <field name="cess_amount"/>
+                <field name="move_id"/>
+                <field name="mismatch_detail" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_armora_gst_gstr2b_line_form" model="ir.ui.view">
+        <field name="name">armora.gst.gstr2b.line.form</field>
+        <field name="model">armora.gst.gstr2b.line</field>
+        <field name="arch" type="xml">
+            <form string="GSTR-2B Line">
+                <header>
+                    <button name="action_create_vendor_bill" type="object" string="Create Vendor Bill"
+                            invisible="source != 'gstr2b' or move_id or match_state not in ('missing_in_odoo', 'pending', 'mismatch')"
+                            class="btn-primary"/>
+                    <button name="action_open_bill" type="object" string="Open Bill"
+                            invisible="not move_id"/>
+                    <button name="action_mark_matched" type="object" string="Mark Matched"
+                            invisible="not move_id or match_state == 'matched'"/>
+                    <button name="action_mark_ignored" type="object" string="Ignore"/>
+                    <button name="action_mark_disputed" type="object" string="Mark Disputed"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="reconciliation_id"/>
+                            <field name="source"/>
+                            <field name="match_state"/>
+                            <field name="vendor_gstin"/>
+                            <field name="vendor_name"/>
+                            <field name="partner_id"/>
+                        </group>
+                        <group>
+                            <field name="invoice_number"/>
+                            <field name="invoice_date"/>
+                            <field name="document_type"/>
+                            <field name="move_id"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <group string="Amounts">
+                        <field name="taxable_value"/>
+                        <field name="cgst_amount"/>
+                        <field name="sgst_amount"/>
+                        <field name="igst_amount"/>
+                        <field name="cess_amount"/>
+                        <field name="invoice_value"/>
+                    </group>
+                    <group string="Differences (2B - Bill)">
+                        <field name="diff_taxable_value"/>
+                        <field name="diff_cgst"/>
+                        <field name="diff_sgst"/>
+                        <field name="diff_igst"/>
+                        <field name="diff_cess"/>
+                    </group>
+                    <group string="Details">
+                        <field name="mismatch_detail"/>
+                        <field name="notes"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_armora_gst_gstr2b_line_search" model="ir.ui.view">
+        <field name="name">armora.gst.gstr2b.line.search</field>
+        <field name="model">armora.gst.gstr2b.line</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="invoice_number"/>
+                <field name="vendor_gstin"/>
+                <field name="vendor_name"/>
+                <filter string="Matched" name="matched" domain="[('match_state', '=', 'matched')]"/>
+                <filter string="Mismatch" name="mismatch" domain="[('match_state', '=', 'mismatch')]"/>
+                <filter string="Missing in Odoo" name="missing_odoo" domain="[('match_state', '=', 'missing_in_odoo')]"/>
+                <filter string="Missing in 2B" name="missing_2b" domain="[('match_state', '=', 'missing_in_2b')]"/>
+                <filter string="Disputed" name="disputed" domain="[('match_state', '=', 'disputed')]"/>
+                <group>
+                    <filter string="Match State" name="group_match" context="{'group_by': 'match_state'}"/>
+                    <filter string="Source" name="group_source" context="{'group_by': 'source'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

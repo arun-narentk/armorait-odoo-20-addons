@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_armora_gst_invoice_validator_root"
+              name="Invoice Validator"
+              parent="armora_gst_base.menu_armora_gst_root"
+              sequence="15"
+              groups="armora_gst_invoice_validator.group_armora_gst_validator_user"/>
+
+    <menuitem id="menu_armora_gst_invoice_validation_runs"
+              name="Validation Runs"
+              parent="menu_armora_gst_invoice_validator_root"
+              action="action_armora_gst_invoice_validation"
+              sequence="5"/>
+
+    <menuitem id="menu_armora_gst_invoice_validation_results"
+              name="Validation Results"
+              parent="menu_armora_gst_invoice_validator_root"
+              action="action_armora_gst_invoice_validation_line"
+              sequence="8"/>
+
+    <menuitem id="menu_armora_gst_invoice_issues"
+              name="GST Issues"
+              parent="menu_armora_gst_invoice_validator_root"
+              action="action_armora_gst_invoice_issue"
+              sequence="10"/>
+
+    <menuitem id="menu_armora_gst_invoice_validation_wizard"
+              name="Batch Validate"
+              parent="menu_armora_gst_invoice_validator_root"
+              action="action_armora_gst_invoice_validation_wizard"
+              sequence="20"/>
+</odoo>

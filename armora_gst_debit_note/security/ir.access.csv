@@ -1,0 +1,9 @@
+id,name,model_id,group_id/id,operation,domain
+access_armora_gst_dn_reason_user,armora.gst.debit.note.reason.user,armora.gst.debit.note.reason,armora_gst_debit_note.group_armora_gst_debit_note_user,r,
+access_armora_gst_dn_reason_manager,armora.gst.debit.note.reason.manager,armora.gst.debit.note.reason,armora_gst_debit_note.group_armora_gst_debit_note_manager,cru,
+access_armora_gst_dn_reason_admin,armora.gst.debit.note.reason.admin,armora.gst.debit.note.reason,armora_gst_debit_note.group_armora_gst_debit_note_administrator,crud,
+access_armora_gst_dn_validation_user,armora.gst.debit.note.validation.user,armora.gst.debit.note.validation,armora_gst_debit_note.group_armora_gst_debit_note_user,r,
+access_armora_gst_dn_validation_manager,armora.gst.debit.note.validation.manager,armora.gst.debit.note.validation,armora_gst_debit_note.group_armora_gst_debit_note_manager,cru,
+access_armora_gst_dn_validation_admin,armora.gst.debit.note.validation.admin,armora.gst.debit.note.validation,armora_gst_debit_note.group_armora_gst_debit_note_administrator,crud,
+armora_gst_debit_note_validation_comp_rule,GST Debit Note Validation: multi-company,armora.gst.debit.note.validation,,crud,"[('company_id', 'in', company_ids)]"
+access_armora_gst_dn_review_wizard_user,armora.gst.debit.note.review.wizard.user,armora.gst.debit.note.review.wizard,armora_gst_debit_note.group_armora_gst_debit_note_user,crud,

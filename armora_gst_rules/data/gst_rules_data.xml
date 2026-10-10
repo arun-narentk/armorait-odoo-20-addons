@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="rule_einv_ship_to_gstin_required" model="armora.gst.rule">
+        <field name="name">Ship-to GSTIN required with ShipDtls + EWB</field>
+        <field name="rule_code">EINV_SHIP_TO_GSTIN_REQUIRED</field>
+        <field name="rule_type">einvoice</field>
+        <field name="effective_from">2026-08-01</field>
+        <field name="version">2026.08</field>
+        <field name="source_reference">GSTN Advisory 17.06.2026</field>
+        <field name="description">ShipDtls.Gstin conditionally mandatory when ship details are provided and EWB is required.</field>
+        <field name="configuration">{"severity": "error", "allow_urp": true}</field>
+    </record>
+
+    <record id="rule_einv_pin_validation" model="armora.gst.rule">
+        <field name="name">E-Invoice PIN validation</field>
+        <field name="rule_code">EINV_PIN_VALIDATION</field>
+        <field name="rule_type">einvoice</field>
+        <field name="effective_from">2026-08-01</field>
+        <field name="version">2026.08</field>
+        <field name="source_reference">GSTN Advisory 17.06.2026 (error 3039)</field>
+        <field name="configuration">{"format": "6digit", "aggressive_master_check": false}</field>
+    </record>
+
+    <record id="rule_einv_state_validation" model="armora.gst.rule">
+        <field name="name">E-Invoice state code validation</field>
+        <field name="rule_code">EINV_STATE_VALIDATION</field>
+        <field name="rule_type">einvoice</field>
+        <field name="effective_from">2026-08-01</field>
+        <field name="version">2026.08</field>
+        <field name="source_reference">GSTN Advisory 17.06.2026 (errors 2325/4074)</field>
+        <field name="configuration">{"match_gstin_prefix": true}</field>
+    </record>
+
+    <record id="rule_einv_export_ship_gstin" model="armora.gst.rule">
+        <field name="name">ExpShipDtls.Gstin mandatory for EWB by IRN</field>
+        <field name="rule_code">EINV_EXPORT_SHIP_GSTIN</field>
+        <field name="rule_type">einvoice</field>
+        <field name="effective_from">2026-08-01</field>
+        <field name="version">2026.08</field>
+        <field name="source_reference">GSTN Advisory 17.06.2026</field>
+        <field name="configuration">{"mandatory": true, "allow_urp": true, "optional_trdnm": true}</field>
+    </record>
+
+    <record id="rule_einv_billto_ne_shipto" model="armora.gst.rule">
+        <field name="name">Distinct Bill-to and Ship-to GSTIN</field>
+        <field name="rule_code">EINV_BILLTO_NE_SHIPTO</field>
+        <field name="rule_type">einvoice</field>
+        <field name="effective_from">2026-08-01</field>
+        <field name="version">2026.08</field>
+        <field name="source_reference">GSTN Advisory 17.06.2026 (error 2323)</field>
+        <field name="description">Bill-to GSTIN and Ship-to GSTIN must be distinct in Bill-to/Ship-to transactions.</field>
+        <field name="configuration">{"severity": "error", "gstn_error_code": "2323"}</field>
+    </record>
+
+    <record id="rule_einv_b2b_ship_lock" model="armora.gst.rule">
+        <field name="name">B2B/SEZ ship details locked after IRN</field>
+        <field name="rule_code">EINV_B2B_SHIP_LOCK</field>
+        <field name="rule_type">einvoice</field>
+        <field name="effective_from">2026-08-01</field>
+        <field name="version">2026.08</field>
+        <field name="source_reference">GSTN Advisory 17.06.2026 (error 2324)</field>
+        <field name="configuration">{"lock_after_irn": true, "allow_export_replace": true}</field>
+    </record>
+
+    <record id="rule_ewb_closure" model="armora.gst.rule">
+        <field name="name">Voluntary E-Way Bill closure</field>
+        <field name="rule_code">EWB_CLOSURE</field>
+        <field name="rule_type">ewaybill</field>
+        <field name="effective_from">2026-08-01</field>
+        <field name="version">2026.08</field>
+        <field name="source_reference">GSTN Advisory 17.06.2026</field>
+        <field name="configuration">{"voluntary": true, "require_remarks": true, "post_expiry_window_days": 0, "closed_status_proposed": true}</field>
+    </record>
+
+    <record id="rule_gstr3b_interest" model="armora.gst.rule">
+        <field name="name">GSTR-3B interest with minimum ECL balance</field>
+        <field name="rule_code">GSTR3B_INTEREST</field>
+        <field name="rule_type">gstr3b</field>
+        <field name="effective_from">2026-01-01</field>
+        <field name="version">2026.01</field>
+        <field name="source_reference">GSTN Interest Calculator Advisory Jan 2026 / Rule 88B(1)</field>
+        <field name="configuration">{"applicable_from_period": "202601", "formula": "ecl_minimum", "default_rate": 0.18, "day_basis": 365, "system_interest_is_minimum": true}</field>
+    </record>
+
+    <record id="rule_gstr3b_interest_recompute" model="armora.gst.rule">
+        <field name="name">GSTR-3B interest recompute (Table 5.1)</field>
+        <field name="rule_code">GSTR3B_INTEREST_RECOMPUTE</field>
+        <field name="rule_type">gstr3b</field>
+        <field name="effective_from">2026-01-01</field>
+        <field name="version">2026.01</field>
+        <field name="source_reference">GSTN Re-Computation of Interest advisory Mar 2026</field>
+        <field name="description">Portal RE-COMPUTE INTEREST parity. Self-assessed interest cannot fall below recomputed system minimum.</field>
+        <field name="configuration">{"applicable_from_period": "202601", "allow_recompute": true, "self_assessed_floor_is_system_minimum": true}</field>
+    </record>
+
+    <record id="rule_gstr3b_liability_breakup" model="armora.gst.rule">
+        <field name="name">GSTR-3B tax liability breakup</field>
+        <field name="rule_code">GSTR3B_LIABILITY_BREAKUP</field>
+        <field name="rule_type">gstr3b</field>
+        <field name="effective_from">2026-01-01</field>
+        <field name="version">2026.01</field>
+        <field name="source_reference">GSTN Interest / Liability Breakup Advisory Jan 2026</field>
+        <field name="configuration">{"applicable_from_period": "202601", "source_returns": ["gstr1", "gstr1a", "iff"]}</field>
+    </record>
+
+    <record id="rule_itc_utilization" model="armora.gst.rule">
+        <field name="name">ITC utilization (period-versioned)</field>
+        <field name="rule_code">ITC_UTILIZATION</field>
+        <field name="rule_type">itc</field>
+        <field name="effective_from">2017-07-01</field>
+        <field name="version">2017.07</field>
+        <field name="source_reference">CGST Act s.49 / Rules (baseline)</field>
+        <field name="description">Baseline ITC set-off. Later periods may add versioned rules; do not hard-code Jan 2026 as the only logic.</field>
+        <field name="configuration">{"priority": ["igst_itc_to_igst", "igst_itc_to_cgst", "igst_itc_to_sgst", "cgst_itc_to_cgst", "sgst_itc_to_sgst", "cess_itc_to_cess"], "allow_cgst_sgst_to_igst_after_igst_itc": false}</field>
+    </record>
+
+    <record id="rule_itc_utilization_202601" model="armora.gst.rule">
+        <field name="name">ITC utilization from Jan 2026 (flexible IGST cash set-off)</field>
+        <field name="rule_code">ITC_UTILIZATION</field>
+        <field name="rule_type">itc</field>
+        <field name="effective_from">2026-01-01</field>
+        <field name="version">2026.01</field>
+        <field name="source_reference">GSTN GSTR-3B advisory Jan 2026 Table 6.1</field>
+        <field name="description">After IGST ITC is exhausted, portal allows CGST/SGST ITC against IGST liability in any sequence. Exact statutory set-off remains governed by law; this version mirrors the portal enhancement.</field>
+        <field name="configuration">{"applicable_from_period": "202601", "priority": ["igst_itc_to_igst", "igst_itc_to_cgst", "igst_itc_to_sgst", "cgst_itc_to_cgst", "sgst_itc_to_sgst", "cgst_itc_to_igst", "sgst_itc_to_igst", "cess_itc_to_cess"], "allow_cgst_sgst_to_igst_after_igst_itc": true, "cgst_sgst_to_igst_any_order": true}</field>
+    </record>
+</odoo>

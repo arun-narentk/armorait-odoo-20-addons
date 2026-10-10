@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Demo placeholder for Armora GST Filing.
+
+        Meaningful GSTR-1 demo needs Indian CoA, taxes, products and posted
+        invoices. Ship fictional records in a later prompt (Prompt 14).
+
+        Keep this file empty until then so production installs stay clean.
+        When ready, set '__manifest__.py' demo to include this file.
+    -->
+</odoo>

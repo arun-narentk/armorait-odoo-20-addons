@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_move_form_armora_gst_ewaybill" model="ir.ui.view">
+        <field name="name">account.move.form.armora.gst.ewaybill</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="armora_gst_einvoice.view_move_form_armora_gst_einvoice"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='armora_gst_einvoice']" position="inside">
+                <group string="E-Way Bill Lifecycle">
+                    <group>
+                        <field name="armora_ewb_number"/>
+                        <field name="armora_ewb_irn"/>
+                        <field name="armora_ewb_status"/>
+                        <field name="armora_ewb_generation_date"/>
+                        <field name="armora_ewb_validity_date"/>
+                        <field name="armora_ewb_vehicle_no"/>
+                        <field name="armora_ewb_transporter_id"/>
+                        <field name="armora_ewb_delivery_status"/>
+                    </group>
+                    <group string="Closure">
+                        <field name="armora_ewb_closure_status"/>
+                        <field name="armora_ewb_closure_requested"/>
+                        <field name="armora_ewb_closure_date"/>
+                        <field name="armora_ewb_closure_remarks"/>
+                        <field name="armora_ewb_closure_user_id"/>
+                        <field name="armora_ewb_closure_timestamp"/>
+                        <field name="armora_ewb_closure_api_reference"/>
+                        <field name="armora_ewb_closure_error"/>
+                    </group>
+                </group>
+                <div class="oe_button_box">
+                    <button name="action_armora_open_close_ewaybill_wizard"
+                            type="object"
+                            string="Close E-Way Bill"
+                            class="btn-secondary"
+                            invisible="not armora_ewb_number or armora_ewb_closure_status == 'closed' or armora_ewb_status in ('cancelled', 'discarded')"
+                            groups="armora_gst_base.group_armora_gst_user"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
