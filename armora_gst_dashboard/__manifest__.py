@@ -64,6 +64,6 @@ Email:   info@armorait.com
     'application': False,
     'auto_install': False,
     'license': 'OPL-1',
-    'price': 9.00,
+    'price': 12.00,
     'currency': 'USD',
 }
