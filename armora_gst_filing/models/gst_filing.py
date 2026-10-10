@@ -192,19 +192,32 @@ class ArmoraGstFiling(models.Model):
             rec.count_debit_note = len(lines.filtered(lambda l: l.document_type == 'debit_note').mapped('move_id'))
             rec.count_nil = len(lines.filtered(lambda l: l.gst_table == 'nil'))
             rec.count_hsn = len(set(filter(None, lines.mapped('hsn_code'))))
-            rec.amount_taxable = sum(lines.mapped('taxable_value'))
-            rec.amount_cgst = sum(lines.mapped('cgst_amount'))
-            rec.amount_sgst = sum(lines.mapped('sgst_amount'))
-            rec.amount_igst = sum(lines.mapped('igst_amount'))
-            rec.amount_cess = sum(lines.mapped('cess_amount'))
-            rec.amount_total_tax = sum(lines.mapped('total_tax'))
+
+            # Snapshot lines keep credit-note amounts positive (as the Offline Tool
+            # expects); period totals must net them off against invoices.
+            def _net(field_name):
+                return sum(
+                    -(line[field_name] or 0.0) if line.document_type == 'credit_note' else (line[field_name] or 0.0)
+                    for line in lines
+                )
+
+            rec.amount_taxable = _net('taxable_value')
+            rec.amount_cgst = _net('cgst_amount')
+            rec.amount_sgst = _net('sgst_amount')
+            rec.amount_igst = _net('igst_amount')
+            rec.amount_cess = _net('cess_amount')
+            rec.amount_total_tax = _net('total_tax')
             if moves:
-                rec.amount_invoice = sum(abs(m.amount_total_signed) for m in moves)
+                rec.amount_invoice = sum(
+                    -abs(m.amount_total_signed) if m.move_type == 'out_refund' else abs(m.amount_total_signed)
+                    for m in moves
+                )
             else:
                 seen = {}
                 for line in lines:
                     if line.invoice_number not in seen:
-                        seen[line.invoice_number] = line.invoice_value or 0.0
+                        value = line.invoice_value or 0.0
+                        seen[line.invoice_number] = -value if line.document_type == 'credit_note' else value
                 rec.amount_invoice = sum(seen.values())
 
     def _compute_summary_from_lines(self):
@@ -297,7 +310,10 @@ class ArmoraGstFiling(models.Model):
                     'generated_at', 'generated_by',
                 }
                 extra = protected - allowed_submitted
-                if extra and not self.env.su:
+                # Reset to draft clears validation/generation fields; the manager
+                # check for the state change itself follows below.
+                resetting = vals.get('state') == 'draft'
+                if extra and not self.env.su and not resetting:
                     raise UserError(_(
                         'Submitted filings cannot alter snapshot or validation fields. '
                         'Reset to draft (manager) to regenerate.'

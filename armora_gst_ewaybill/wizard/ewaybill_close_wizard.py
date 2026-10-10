@@ -32,15 +32,24 @@ class ArmoraGstEwaybillCloseWizard(models.TransientModel):
             delivery_date=self.delivery_date,
         )
         if not result.get('success'):
-            if result.get('retryable'):
-                raise UserError(_(
-                    'Closure failed (%(code)s): %(msg)s\nYou can retry this request.',
-                    code=result.get('error_code'),
-                    msg=result.get('error'),
-                ))
-            raise UserError(_(
+            # Do not raise here: that would roll back the failed status, the
+            # chatter note and the API audit row written by the service.
+            message = _(
                 'Closure failed (%(code)s): %(msg)s',
                 code=result.get('error_code'),
                 msg=result.get('error'),
-            ))
+            )
+            if result.get('retryable'):
+                message = _('%s\nYou can retry this request.', message)
+            return {
+                'type': 'ir.actions.client',
+                'tag': 'display_notification',
+                'params': {
+                    'title': _('E-Way Bill Closure Failed'),
+                    'message': message,
+                    'type': 'danger',
+                    'sticky': True,
+                    'next': {'type': 'ir.actions.act_window_close'},
+                },
+            }
         return {'type': 'ir.actions.act_window_close'}

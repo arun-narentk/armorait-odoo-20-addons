@@ -164,6 +164,11 @@ class ArmoraGstEwaybillCloseService(models.AbstractModel):
     @api.model
     def action_close_ewaybill(self, record, ewb_number, closure_date, remarks, delivery_date=None):
         """Validate and submit voluntary EWB closure. Idempotent against duplicate requests."""
+        if delivery_date and hasattr(record, 'armora_ewb_delivery_status'):
+            # Do not flip stock delivery; only EWB operational marker if still pending.
+            # Applied before validation, which requires a delivered EWB in blocking mode.
+            if record.armora_ewb_delivery_status == 'pending':
+                record.armora_ewb_delivery_status = 'delivered'
         self.validate_closure(record, ewb_number, closure_date, remarks)
         company = record.company_id
         payload = self._build_payload(ewb_number, closure_date, remarks)
@@ -176,10 +181,6 @@ class ArmoraGstEwaybillCloseService(models.AbstractModel):
             'armora_ewb_closure_user_id': self.env.user.id,
             'armora_ewb_closure_error': False,
         })
-        if delivery_date and hasattr(record, 'armora_ewb_delivery_status'):
-            # Do not flip stock delivery; only EWB operational marker if still pending
-            if record.armora_ewb_delivery_status == 'pending':
-                record.armora_ewb_delivery_status = 'delivered'
 
         result = self._call_close_api(company, payload)
         audit_vals = {

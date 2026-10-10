@@ -16,7 +16,10 @@ class ArmoraGst2bMatching(models.AbstractModel):
         reconciliation.line_ids.filtered(lambda l: l.source == 'odoo').unlink()
 
         bills = self._period_vendor_bills(reconciliation)
-        bill_map = self._index_bills(bills)
+        # GSTR-2B also carries supplier invoices dated before the period (filed
+        # late by the supplier), so match against those bills too. Only period
+        # bills are reported as missing in 2B below.
+        bill_map = self._index_bills(bills | self._earlier_vendor_bills(reconciliation))
         used_bill_ids = set()
 
         company = reconciliation.company_id
@@ -114,8 +117,31 @@ class ArmoraGst2bMatching(models.AbstractModel):
         ])
 
     @api.model
+    def _earlier_vendor_bills(self, reconciliation):
+        """Posted bills dated before the period from suppliers present in the 2B data."""
+        gstins = {
+            (gstin or '').upper().strip()
+            for gstin in reconciliation.line_ids.filtered(lambda l: l.source == 'gstr2b').mapped('vendor_gstin')
+        } - {''}
+        if not gstins:
+            return self.env['account.move']
+        return self.env['account.move'].search([
+            ('company_id', '=', reconciliation.company_id.id),
+            ('state', '=', 'posted'),
+            ('move_type', 'in', ('in_invoice', 'in_refund')),
+            ('invoice_date', '<', reconciliation.period_start),
+            ('country_code', '=', 'IN'),
+            ('partner_id.vat', 'in', list(gstins)),
+        ])
+
+    @api.model
     def _index_bills(self, bills):
-        """Index by normalized GSTIN + invoice number."""
+        """Index by normalized GSTIN + invoice number.
+
+        Bills whose vendor has no GSTIN go under an empty GSTIN key so a 2B line
+        can still find them; bills of a known vendor are never offered to a
+        different supplier GSTIN.
+        """
         Line = self.env['armora.gst.gstr2b.line']
         index = {}
         for bill in bills:
@@ -124,10 +150,6 @@ class ArmoraGst2bMatching(models.AbstractModel):
             key = (gstin, number)
             index.setdefault(key, self.env['account.move'])
             index[key] |= bill
-            # Also index without GSTIN for fallback
-            key2 = ('', number)
-            index.setdefault(key2, self.env['account.move'])
-            index[key2] |= bill
         return index
 
     @api.model

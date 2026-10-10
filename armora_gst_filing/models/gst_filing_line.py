@@ -184,7 +184,8 @@ class ArmoraGstFilingLine(models.Model):
         if float_compare(expected_tax, self.total_tax or 0.0, precision_digits=prec) != 0:
             issues.append(('error', 'tax_mismatch', 'Total tax does not match CGST+SGST+IGST+CESS.'))
 
-        if self.is_export or self.gst_table == 'exp':
+        # is_export is also set for SEZ supplies (B2B table), which have no shipping bill.
+        if self.gst_table == 'exp':
             if not self.shipping_bill_number:
                 issues.append(('error', 'missing_export_info', 'Shipping bill number is missing for export.'))
             if not self.shipping_bill_date:

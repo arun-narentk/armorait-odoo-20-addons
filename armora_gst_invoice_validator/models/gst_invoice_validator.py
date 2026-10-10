@@ -192,6 +192,10 @@ class ArmoraGstInvoiceValidator(models.AbstractModel):
     def _check_pos_vs_gstin(self, move):
         """Detect GSTIN state vs place of supply mismatches for registered parties."""
         issues = []
+        # On vendor bills Odoo sets place of supply to the company state, so a
+        # supplier GSTIN from another state is normal (interstate purchase).
+        if not move.is_sale_document(include_receipts=True):
+            return issues
         gstin = (move.l10n_in_gstin or move.partner_id.vat or '').strip().upper()
         pos = move.l10n_in_state_id
         if not gstin or len(gstin) < 2 or not pos or not pos.l10n_in_tin:
@@ -259,6 +263,10 @@ class ArmoraGstInvoiceValidator(models.AbstractModel):
         interstate = bool(pos and company_state and pos.id != company_state.id)
         if pos and pos.l10n_in_tin == '96':
             interstate = True
+        if move.is_purchase_document(include_receipts=True):
+            # Bill place of supply is always the company state; the supplier
+            # state decides whether IGST or CGST+SGST applies.
+            interstate = self._is_interstate_purchase(move)
         min_hsn = int(company.l10n_in_hsn_code_digit or 0) if company.l10n_in_hsn_code_digit else 0
 
         for line in self._product_lines(move):
@@ -341,6 +349,16 @@ class ArmoraGstInvoiceValidator(models.AbstractModel):
         return issues
 
     @api.model
+    def _is_interstate_purchase(self, move):
+        company_tin = move.company_id.state_id.l10n_in_tin
+        gstin = (move.l10n_in_gstin or move.partner_id.vat or '').strip().upper()
+        if len(gstin) >= 2 and gstin[:2].isdigit():
+            supplier_tin = gstin[:2]
+        else:
+            supplier_tin = move.partner_id.commercial_partner_id.state_id.l10n_in_tin
+        return bool(company_tin and supplier_tin and supplier_tin != company_tin)
+
+    @api.model
     def _check_export(self, move):
         issues = []
         if move.l10n_in_gst_treatment != 'overseas' and not (
@@ -373,8 +391,11 @@ class ArmoraGstInvoiceValidator(models.AbstractModel):
         if move.move_type not in ('out_refund', 'in_refund'):
             return issues
         if not move.reversed_entry_id:
+            # Vendor credit notes are often keyed in directly from the supplier's
+            # document, so only customer credit notes block posting.
+            severity = 'error' if move.move_type == 'out_refund' else 'warning'
             issues.append(self._issue(
-                'error', 'missing_cdn_reference',
+                severity, 'missing_cdn_reference',
                 _('Credit/debit note has no original invoice reference (reversed entry).'),
                 _('Create the credit note from the original invoice so GST CDNR/CDNUR reporting stays auditable.'),
             ))
