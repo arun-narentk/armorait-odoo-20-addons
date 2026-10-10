@@ -37,7 +37,7 @@ Email:   info@armorait.com
     'images': [
         'static/description/icon.png',
     ],
-    'installable': True,
+    'installable': False,
     'application': False,
     'auto_install': False,
     'license': 'OPL-1',
