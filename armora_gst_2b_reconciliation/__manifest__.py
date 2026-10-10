@@ -43,6 +43,7 @@ Email:   info@armorait.com
         'views/gst_gstr2b_line_views.xml',
         'views/gst_2b_wizard_views.xml',
         'views/gst_2b_menus.xml',
+        'views/gst_2b_report_views.xml',
         'security/ir.access.csv',
     ],
     'images': [

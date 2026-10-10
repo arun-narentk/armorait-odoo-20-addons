@@ -71,10 +71,10 @@
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="action_view_lines" type="object" class="oe_stat_button" icon="fa-list">
+                        <button name="action_view_lines" type="object" class="oe_stat_button" icon="format_list_bulleted">
                             <field name="document_count" widget="statinfo" string="Documents"/>
                         </button>
-                        <button name="action_view_validation" type="object" class="oe_stat_button" icon="fa-exclamation-triangle">
+                        <button name="action_view_validation" type="object" class="oe_stat_button" icon="warning">
                             <div class="o_stat_info">
                                 <span class="o_stat_value">
                                     <field name="validation_error_count"/> / <field name="validation_warning_count"/>
@@ -82,16 +82,16 @@
                                 <span class="o_stat_text">Errors / Warnings</span>
                             </div>
                         </button>
-                        <button class="oe_stat_button" icon="fa-inr" disabled="1">
+                        <button class="oe_stat_button" icon="payments" disabled="1">
                             <field name="amount_taxable" widget="statinfo" string="Taxable"/>
                         </button>
-                        <button class="oe_stat_button" icon="fa-inr" disabled="1">
+                        <button class="oe_stat_button" icon="payments" disabled="1">
                             <field name="amount_cgst" widget="statinfo" string="CGST"/>
                         </button>
-                        <button class="oe_stat_button" icon="fa-inr" disabled="1">
+                        <button class="oe_stat_button" icon="payments" disabled="1">
                             <field name="amount_sgst" widget="statinfo" string="SGST"/>
                         </button>
-                        <button class="oe_stat_button" icon="fa-inr" disabled="1">
+                        <button class="oe_stat_button" icon="payments" disabled="1">
                             <field name="amount_igst" widget="statinfo" string="IGST"/>
                         </button>
                     </div>
@@ -178,7 +178,7 @@
                                     <field name="message"/>
                                     <field name="hint" optional="show"/>
                                     <button name="action_open_invoice" type="object" string="Invoice"
-                                            icon="fa-external-link" invisible="not move_id"/>
+                                            icon="open_in_new" invisible="not move_id"/>
                                 </list>
                             </field>
                         </page>

@@ -27,6 +27,7 @@ Developed by ARMORA IT Technologies
         'mail',
     ],
     'data': [
+        'report/gstr3b_summary_report.xml',
         'views/gst_3b_views.xml',
         'views/gst_filing_views.xml',
         'views/gst_menus.xml',

@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="armora_gst_dashboard.GstKpiChart">
+        <div class="o_armora_gst_kpi_chart">
+            <canvas t-ref="this.chart.ref"/>
+        </div>
+    </t>
+
+    <t t-name="armora_gst_dashboard.GstKpiDashboard">
+        <div class="o_action o_armora_gst_kpi">
+          <div class="o_armora_gst_kpi_scroll">
+            <div t-if="!this.state.data" class="o_armora_gst_kpi_loading">
+                <i class="oi oi-spin oi-lg" data-icon="progress_activity"/>
+            </div>
+            <t t-else="">
+                <t t-set="data" t-value="this.state.data"/>
+
+                <div class="o_armora_gst_kpi_hero">
+                    <div class="o_armora_gst_kpi_hero_text">
+                        <div class="o_armora_gst_kpi_eyebrow">GST compliance dashboard</div>
+                        <h1 t-out="data.company.name"/>
+                        <div class="o_armora_gst_kpi_meta">
+                            <span t-if="data.company.gstin"><i class="oi me-1" data-icon="badge"/>GSTIN <t t-out="data.company.gstin"/></span>
+                            <span><i class="oi me-1" data-icon="calendar_today"/><t t-out="this.periodLabel()"/></span>
+                            <span t-if="this.state.loading"><i class="oi oi-spin" data-icon="progress_activity"/></span>
+                        </div>
+                    </div>
+                    <div class="o_armora_gst_kpi_filters">
+                        <label>
+                            <span>Financial year</span>
+                            <select class="form-select" t-on-change="(ev) => this.onFinancialYearChange(ev)">
+                                <option t-foreach="data.filters.fy_options" t-as="fy" t-key="fy"
+                                        t-att-value="fy" t-att-selected="fy === data.filters.financial_year" t-out="fy"/>
+                            </select>
+                        </label>
+                        <label>
+                            <span>Month</span>
+                            <select class="form-select" t-on-change="(ev) => this.onPeriodChange(ev)">
+                                <option t-foreach="data.filters.period_options" t-as="period" t-key="period"
+                                        t-att-value="period" t-att-selected="period === data.filters.return_period"
+                                        t-out="this.monthLabel(period)"/>
+                            </select>
+                        </label>
+                        <button class="btn btn-light" title="Refresh" t-on-click="() => this.load(data.filters.financial_year, data.filters.return_period)">
+                            <i class="oi" data-icon="refresh"/>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="o_armora_gst_kpi_body">
+                    <!-- Money KPIs -->
+                    <div class="o_armora_gst_kpi_grid o_armora_gst_kpi_grid_4">
+                        <div t-foreach="this.kpiCards()" t-as="card" t-key="card.key"
+                             t-attf-class="o_armora_gst_kpi_card o_armora_gst_kpi_tone_{{card.tone}} {{card.open ? 'o_armora_gst_kpi_clickable' : ''}}"
+                             t-att-title="card.hint"
+                             t-on-click="() => card.open and card.open()">
+                            <div class="o_armora_gst_kpi_card_top">
+                                <span class="o_armora_gst_kpi_card_label" t-out="card.label"/>
+                                <span class="o_armora_gst_kpi_card_icon"><i class="oi" t-att-data-icon="card.icon"/></span>
+                            </div>
+                            <div class="o_armora_gst_kpi_card_value" t-att-title="this.formatAmount(card.value)" t-out="this.formatCompact(card.value)"/>
+                            <t t-set="delta" t-value="this.change(card.key)"/>
+                            <div class="o_armora_gst_kpi_card_foot">
+                                <t t-if="delta">
+                                    <span t-attf-class="o_armora_gst_kpi_delta {{delta.up ? 'o_armora_gst_kpi_delta_up' : 'o_armora_gst_kpi_delta_down'}}">
+                                        <i class="oi" t-att-data-icon="delta.up ? 'arrow_drop_up' : 'arrow_drop_down'"/> <t t-out="delta.pct"/>%
+                                    </span>
+                                    <span class="text-muted">vs last month</span>
+                                </t>
+                                <span t-else="" class="text-muted">No data last month</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Counts -->
+                    <div class="o_armora_gst_kpi_grid o_armora_gst_kpi_grid_4">
+                        <div t-foreach="this.countCards()" t-as="count" t-key="count_index"
+                             class="o_armora_gst_kpi_mini o_armora_gst_kpi_clickable"
+                             t-on-click="() => this.openMoves(count.types, count.label)">
+                            <span class="o_armora_gst_kpi_mini_icon"><i class="oi" t-att-data-icon="count.icon"/></span>
+                            <div>
+                                <div class="o_armora_gst_kpi_mini_value" t-out="count.value"/>
+                                <div class="o_armora_gst_kpi_mini_label" t-out="count.label"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trend + health -->
+                    <div class="o_armora_gst_kpi_grid o_armora_gst_kpi_grid_main">
+                        <div class="o_armora_gst_kpi_panel">
+                            <div class="o_armora_gst_kpi_panel_head">
+                                <h3>GST trend, last 6 months</h3>
+                                <span class="text-muted">From posted invoices and bills</span>
+                            </div>
+                            <GstKpiChart t-if="this.hasTrend()" config="this.trendConfig()"/>
+                            <div t-else="" class="o_armora_gst_kpi_empty">No posted invoices or bills in the last 6 months.</div>
+                        </div>
+                        <div class="o_armora_gst_kpi_panel">
+                            <div class="o_armora_gst_kpi_panel_head">
+                                <h3>Compliance health</h3>
+                            </div>
+                            <t t-if="data.health.score !== null">
+                                <div class="o_armora_gst_kpi_ring" t-att-style="this.healthRingStyle()">
+                                    <div class="o_armora_gst_kpi_ring_inner">
+                                        <span t-out="data.health.score"/>
+                                        <small>out of 100</small>
+                                    </div>
+                                </div>
+                                <div t-foreach="data.health.parts" t-as="part" t-key="part_index" class="o_armora_gst_kpi_bar_row">
+                                    <div class="d-flex justify-content-between">
+                                        <span t-out="part.label"/>
+                                        <strong><t t-out="part.value"/>%</strong>
+                                    </div>
+                                    <div class="o_armora_gst_kpi_bar">
+                                        <div t-att-style="'width: ' + part.value + '%; background: ' + this.colors.blue"/>
+                                    </div>
+                                </div>
+                            </t>
+                            <div t-else="" class="o_armora_gst_kpi_empty">
+                                Install Armora GST Filing, GSTR-3B or 2B Reconciliation to see a health score.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Deadlines, tax split, top customers -->
+                    <div class="o_armora_gst_kpi_grid o_armora_gst_kpi_grid_3">
+                        <div class="o_armora_gst_kpi_panel">
+                            <div class="o_armora_gst_kpi_panel_head">
+                                <h3>Due dates</h3>
+                                <span class="text-muted">Monthly filer</span>
+                            </div>
+                            <div t-foreach="data.deadlines" t-as="deadline" t-key="deadline.code"
+                                 t-attf-class="o_armora_gst_kpi_deadline {{deadline.res_id ? 'o_armora_gst_kpi_clickable' : ''}}"
+                                 t-on-click="() => deadline.res_id and this.openRecord(deadline.res_model, deadline.res_id)">
+                                <div class="o_armora_gst_kpi_deadline_code" t-out="deadline.code"/>
+                                <div class="flex-grow-1">
+                                    <div class="fw-semibold" t-out="this.formatDate(deadline.due_date)"/>
+                                    <div class="small text-muted">
+                                        <t t-if="deadline.state_label" t-out="deadline.state_label"/>
+                                        <t t-elif="deadline.tracked">Not started in Odoo</t>
+                                        <t t-else="">Module not installed</t>
+                                    </div>
+                                </div>
+                                <span t-attf-class="badge rounded-pill text-bg-{{this.deadlineTone(deadline)}}" t-out="this.deadlineText(deadline)"/>
+                            </div>
+                        </div>
+
+                        <div class="o_armora_gst_kpi_panel">
+                            <div class="o_armora_gst_kpi_panel_head">
+                                <h3>Tax by head</h3>
+                                <span class="text-muted">Output GST</span>
+                            </div>
+                            <GstKpiChart t-if="this.hasOutputSplit()" config="this.splitConfig()"/>
+                            <div t-else="" class="o_armora_gst_kpi_empty">No output GST in this month.</div>
+                            <table class="table table-sm o_armora_gst_kpi_table mt-2">
+                                <thead>
+                                    <tr><th>Head</th><th class="text-end">Output</th><th class="text-end">Input</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="this.taxHeadRows()" t-as="row" t-key="row.key">
+                                        <td><span class="o_armora_gst_kpi_dot" t-att-style="'background: ' + row.color"/><t t-out="row.label"/></td>
+                                        <td class="text-end" t-out="this.formatAmount(row.output)"/>
+                                        <td class="text-end" t-out="this.formatAmount(row.input)"/>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="o_armora_gst_kpi_panel">
+                            <div class="o_armora_gst_kpi_panel_head">
+                                <h3>Top customers</h3>
+                                <span class="text-muted">By taxable value</span>
+                            </div>
+                            <div t-if="!data.top_customers.length" class="o_armora_gst_kpi_empty">No sales in this month.</div>
+                            <div t-foreach="data.top_customers" t-as="customer" t-key="customer.id"
+                                 class="o_armora_gst_kpi_rank o_armora_gst_kpi_clickable"
+                                 t-on-click="() => this.openPartner(customer.id)">
+                                <span class="o_armora_gst_kpi_rank_no" t-out="customer_index + 1"/>
+                                <div class="flex-grow-1 text-truncate">
+                                    <div class="fw-semibold text-truncate" t-out="customer.name"/>
+                                    <div class="small text-muted" t-out="customer.gstin or 'No GSTIN'"/>
+                                </div>
+                                <div class="text-end">
+                                    <div class="fw-semibold" t-out="this.formatCompact(customer.taxable)"/>
+                                    <div class="small text-muted">Tax <t t-out="this.formatCompact(customer.tax)"/></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Suite modules -->
+                    <div class="o_armora_gst_kpi_grid o_armora_gst_kpi_grid_3">
+                        <div class="o_armora_gst_kpi_panel">
+                            <div class="o_armora_gst_kpi_panel_head">
+                                <h3>Return pipeline</h3>
+                                <a t-if="data.availability.filing" href="#" t-on-click.prevent="() => this.openAction('armora_gst_filing.action_armora_gst_filing')">Open</a>
+                            </div>
+                            <t t-if="data.availability.filing">
+                                <div class="o_armora_gst_kpi_steps">
+                                    <div t-foreach="this.filingSteps()" t-as="step" t-key="step_index" class="o_armora_gst_kpi_step">
+                                        <span class="o_armora_gst_kpi_step_value" t-out="step.value"/>
+                                        <span class="o_armora_gst_kpi_step_label" t-out="step.label"/>
+                                    </div>
+                                </div>
+                                <div class="small mt-2">
+                                    <i class="oi text-warning me-1" data-icon="warning"/>
+                                    <t t-out="data.filing.kpis.filing_errors or 0"/> validation errors in this month's filings
+                                </div>
+                                <div t-foreach="data.filing.rows" t-as="row" t-key="row.id"
+                                     class="o_armora_gst_kpi_list_row o_armora_gst_kpi_clickable"
+                                     t-on-click="() => this.openRecord('armora.gst.filing', row.id)">
+                                    <span class="text-truncate" t-out="row.name"/>
+                                    <span class="badge text-bg-light" t-out="row.state"/>
+                                </div>
+                            </t>
+                            <div t-else="" class="o_armora_gst_kpi_empty">Install Armora GST Filing to track returns.</div>
+                        </div>
+
+                        <div class="o_armora_gst_kpi_panel">
+                            <div class="o_armora_gst_kpi_panel_head">
+                                <h3>GSTR-2B match</h3>
+                                <a t-if="data.availability.reconciliation_2b" href="#" t-on-click.prevent="() => this.openAction('armora_gst_2b_reconciliation.action_armora_gst_gstr2b')">Open</a>
+                            </div>
+                            <t t-if="data.availability.reconciliation_2b">
+                                <div class="o_armora_gst_kpi_stack">
+                                    <t t-foreach="this.reconBars()" t-as="bar" t-key="bar_index">
+                                        <div t-if="bar.pct" t-att-style="'width: ' + bar.pct + '%; background: ' + bar.color" t-att-title="bar.label"/>
+                                    </t>
+                                </div>
+                                <div t-foreach="this.reconBars()" t-as="bar" t-key="bar_index" class="o_armora_gst_kpi_legend_row">
+                                    <span><span class="o_armora_gst_kpi_dot" t-att-style="'background: ' + bar.color"/><t t-out="bar.label"/></span>
+                                    <strong><t t-out="bar.value"/> <small class="text-muted">(<t t-out="bar.pct"/>%)</small></strong>
+                                </div>
+                                <div class="o_armora_gst_kpi_legend_row border-top pt-2 mt-1">
+                                    <span>ITC at risk</span>
+                                    <strong class="text-danger" t-out="this.formatAmount((data.reconciliation_2b.kpis.amount_mismatch || 0) + (data.reconciliation_2b.kpis.amount_missing_odoo || 0))"/>
+                                </div>
+                            </t>
+                            <div t-else="" class="o_armora_gst_kpi_empty">Install Armora GST 2B Reconciliation to match ITC.</div>
+                        </div>
+
+                        <div class="o_armora_gst_kpi_panel">
+                            <div class="o_armora_gst_kpi_panel_head">
+                                <h3>E-invoice and e-way bill</h3>
+                            </div>
+                            <div class="o_armora_gst_kpi_tiles">
+                                <t t-if="data.availability.einvoice">
+                                    <div class="o_armora_gst_kpi_tile"><span t-out="data.einvoice.kpis.generated or 0"/><small>IRN generated</small></div>
+                                    <div class="o_armora_gst_kpi_tile o_armora_gst_kpi_tile_warn"><span t-out="data.einvoice.kpis.pending or 0"/><small>IRN pending</small></div>
+                                    <div class="o_armora_gst_kpi_tile o_armora_gst_kpi_tile_bad"><span t-out="data.einvoice.kpis.failed or 0"/><small>IRN failed</small></div>
+                                </t>
+                                <t t-if="data.availability.ewaybill">
+                                    <div class="o_armora_gst_kpi_tile"><span t-out="data.ewaybill.kpis.active or 0"/><small>EWB active</small></div>
+                                    <div class="o_armora_gst_kpi_tile o_armora_gst_kpi_tile_warn"><span t-out="data.ewaybill.kpis.pending or 0"/><small>EWB pending</small></div>
+                                    <div class="o_armora_gst_kpi_tile o_armora_gst_kpi_tile_bad"><span t-out="data.ewaybill.kpis.expired or 0"/><small>EWB expired</small></div>
+                                </t>
+                            </div>
+                            <div t-if="!data.availability.einvoice and !data.availability.ewaybill" class="o_armora_gst_kpi_empty">
+                                Install Armora GST E-Invoice or E-Way Bill to see these numbers.
+                            </div>
+                            <t t-if="data.availability.invoice_validation">
+                                <div class="o_armora_gst_kpi_legend_row border-top pt-2 mt-2">
+                                    <span>Invoice check errors</span>
+                                    <strong class="text-danger" t-out="data.invoice_validation.kpis.validation_errors or 0"/>
+                                </div>
+                                <div class="o_armora_gst_kpi_legend_row">
+                                    <span>Warnings</span>
+                                    <strong class="text-warning" t-out="data.invoice_validation.kpis.validation_warnings or 0"/>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </t>
+          </div>
+        </div>
+    </t>
+</templates>

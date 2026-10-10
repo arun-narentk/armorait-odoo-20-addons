@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from datetime import date
+
 from odoo import _, api, fields, models
 from odoo.tools.float_utils import float_compare
 
@@ -125,14 +127,27 @@ class ArmoraGst2bMatching(models.AbstractModel):
         } - {''}
         if not gstins:
             return self.env['account.move']
-        return self.env['account.move'].search([
+        # ITC on an invoice can be claimed until the year after its financial
+        # year, and suppliers restart invoice numbers every year: older bills
+        # would only produce false matches.
+        start_year = self.env['armora.gst.period'].fy_start_year(reconciliation.financial_year)
+        bills = self.env['account.move'].search([
             ('company_id', '=', reconciliation.company_id.id),
             ('state', '=', 'posted'),
             ('move_type', 'in', ('in_invoice', 'in_refund')),
+            ('invoice_date', '>=', date(start_year - 1, 4, 1)),
             ('invoice_date', '<', reconciliation.period_start),
             ('country_code', '=', 'IN'),
             ('partner_id.vat', 'in', list(gstins)),
         ])
+        # A bill already matched in another period's GSTR-2B was claimed there.
+        claimed = self.env['armora.gst.gstr2b.line'].search([
+            ('move_id', 'in', bills.ids),
+            ('match_state', 'in', ('matched', 'mismatch')),
+            ('reconciliation_id', '!=', reconciliation.id),
+            ('reconciliation_id.state', '!=', 'cancelled'),
+        ]).move_id
+        return bills - claimed
 
     @api.model
     def _index_bills(self, bills):

@@ -51,12 +51,18 @@ Email:   info@armorait.com
         'data/gst_dashboard_data.xml',
         'views/gst_dashboard_views.xml',
         'views/gst_dashboard_config_views.xml',
+        'views/gst_kpi_dashboard_views.xml',
         'views/gst_dashboard_menus.xml',
         'security/ir.access.csv',
     ],
     'demo': [
         'demo/gst_dashboard_demo.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'armora_gst_dashboard/static/src/kpi_dashboard/**/*',
+        ],
+    },
     'images': [
         'static/description/icon.png',
     ],

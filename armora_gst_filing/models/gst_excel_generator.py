@@ -450,12 +450,14 @@ class ArmoraGstExcelGenerator(models.AbstractModel):
                 'igst': 0.0,
                 'cess': 0.0,
             })
-            bucket['qty'] += line.quantity or 0.0
-            bucket['taxable'] += line.taxable_value or 0.0
-            bucket['cgst'] += line.cgst_amount or 0.0
-            bucket['sgst'] += line.sgst_amount or 0.0
-            bucket['igst'] += line.igst_amount or 0.0
-            bucket['cess'] += line.cess_amount or 0.0
+            # HSN summary is net of credit notes, which snapshot lines keep positive.
+            sign = -1 if line.document_type == 'credit_note' else 1
+            bucket['qty'] += sign * (line.quantity or 0.0)
+            bucket['taxable'] += sign * (line.taxable_value or 0.0)
+            bucket['cgst'] += sign * (line.cgst_amount or 0.0)
+            bucket['sgst'] += sign * (line.sgst_amount or 0.0)
+            bucket['igst'] += sign * (line.igst_amount or 0.0)
+            bucket['cess'] += sign * (line.cess_amount or 0.0)
         row = header_row + 1
         for data in buckets.values():
             values = {

@@ -4,6 +4,7 @@ import time
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
+from odoo.sql_db import PG_CONCURRENCY_EXCEPTIONS_TO_RETRY
 
 from .gst_validation_constants import VALIDATION_RUN_STATE_SELECTION
 
@@ -277,41 +278,52 @@ class ArmoraGstInvoiceValidation(models.Model):
         seen_keys = set()
 
         try:
-            invoices = self.invoice_ids.filtered(
-                lambda m: m.company_id == self.company_id
-            )
-            # Prefetch related data for the batch.
-            invoices.mapped('invoice_line_ids.tax_ids')
-            invoices.mapped('partner_id')
-            invoices.mapped('l10n_in_state_id')
-
-            for move in invoices:
-                engine = Validator.validate_move(
-                    move,
-                    persist=bool(self.sync_move_issues),
+            # Savepoint: a crash undoes only this run's partial results, so the
+            # 'failed' state and error note below are kept instead of being
+            # rolled back with the whole request.
+            with self.env.cr.savepoint():
+                invoices = self.invoice_ids.filtered(
+                    lambda m: m.company_id == self.company_id
                 )
-                for issue in engine.get('issues') or []:
-                    vals = self._issue_to_result_vals(move, issue)
-                    key = vals['dedupe_key']
-                    if key in seen_keys:
-                        continue
-                    seen_keys.add(key)
-                    result_vals.append(vals)
+                # Prefetch related data for the batch.
+                invoices.mapped('invoice_line_ids.tax_ids')
+                invoices.mapped('partner_id')
+                invoices.mapped('l10n_in_state_id')
 
-            if result_vals:
-                Line.create(result_vals)
+                for move in invoices:
+                    engine = Validator.validate_move(
+                        move,
+                        persist=bool(self.sync_move_issues),
+                    )
+                    for issue in engine.get('issues') or []:
+                        vals = self._issue_to_result_vals(move, issue)
+                        key = vals['dedupe_key']
+                        if key in seen_keys:
+                            continue
+                        seen_keys.add(key)
+                        result_vals.append(vals)
+
+                if result_vals:
+                    Line.create(result_vals)
 
             self.write({
                 'state': 'completed',
                 'duration': time.monotonic() - started,
             })
-        except Exception:
+        except PG_CONCURRENCY_EXCEPTIONS_TO_RETRY:
+            # Let the request retry instead of recording a failed run.
+            raise
+        except Exception as err:
             _logger.exception('GST invoice validation run %s failed', self.name)
+            self.invalidate_recordset()
             self.write({
                 'state': 'failed',
                 'duration': time.monotonic() - started,
+                'notes': '\n'.join(filter(None, [
+                    self.notes,
+                    _('Run failed: %s', err),
+                ])),
             })
-            raise
 
     def _issue_to_result_vals(self, move, issue):
         """Convert a legacy validator issue dict into a run result vals dict."""

@@ -16,12 +16,13 @@ class ArmoraGstFiling(models.Model):
     )
     gstr3b_count = fields.Integer(compute='_compute_gstr3b_link')
 
-    @api.depends('company_id', 'financial_year', 'return_period')
+    @api.depends('company_id', 'gstin', 'financial_year', 'return_period')
     def _compute_gstr3b_link(self):
         Gstr3b = self.env['armora.gst.3b']
         for rec in self:
             gstr3b = Gstr3b.search([
                 ('company_id', '=', rec.company_id.id),
+                ('gstin', '=', rec.gstin),
                 ('financial_year', '=', rec.financial_year),
                 ('return_period', '=', rec.return_period),
             ], limit=1)
@@ -58,6 +59,7 @@ class ArmoraGstFiling(models.Model):
         Gstr3b = self.env['armora.gst.3b']
         existing = Gstr3b.search([
             ('company_id', '=', self.company_id.id),
+            ('gstin', '=', self.gstin),
             ('financial_year', '=', self.financial_year),
             ('return_period', '=', self.return_period),
         ], limit=1)

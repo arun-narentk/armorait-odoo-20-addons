@@ -51,6 +51,8 @@ Email:   info@armorait.com
         'views/gst_filing_views.xml',
         'views/gst_filing_wizard_views.xml',
         'views/gst_filing_menus.xml',
+        'report/gstr1_summary_report.xml',
+        'views/gst_filing_report_views.xml',
         'security/ir.access.csv',
     ],
     'demo': [

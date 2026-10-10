@@ -66,6 +66,7 @@ class ArmoraGstDashboard(models.Model):
     # TAX
     taxable_value = fields.Monetary(
         currency_field='currency_id', readonly=True, copy=False,
+        help='Outward supplies: customer invoices less customer credit notes.',
     )
     amount_cgst = fields.Monetary(
         string='CGST', currency_field='currency_id', readonly=True, copy=False,

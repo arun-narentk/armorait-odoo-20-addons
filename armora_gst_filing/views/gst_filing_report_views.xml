@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_armora_gst_filing_form_report" model="ir.ui.view">
+        <field name="name">armora.gst.filing.form.inherit.report</field>
+        <field name="model">armora.gst.filing</field>
+        <field name="inherit_id" ref="view_armora_gst_filing_form"/>
+        <field name="arch" type="xml">
+            <button name="action_download_excel" position="after">
+                <button name="%(armora_gst_filing_action_report_gstr1_summary)d" type="action"
+                        string="Print GSTR-1 Summary" icon="print"
+                        invisible="state == 'draft' or filing_type not in ('gstr1', 'gstr1a')"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="armora_gst_filing_line_view_search" model="ir.ui.view">
+        <field name="name">armora.gst.filing.line.search</field>
+        <field name="model">armora.gst.filing.line</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="filing_id"/>
+                <field name="partner_name"/>
+                <field name="partner_gstin"/>
+                <field name="invoice_number"/>
+                <field name="hsn_code"/>
+                <filter string="Invoices" name="invoices" domain="[('document_type', '=', 'invoice')]"/>
+                <filter string="Credit Notes" name="credit_notes" domain="[('document_type', '=', 'credit_note')]"/>
+                <filter string="Debit Notes" name="debit_notes" domain="[('document_type', '=', 'debit_note')]"/>
+                <separator/>
+                <filter string="With Errors" name="errors" domain="[('validation_state', '=', 'error')]"/>
+                <separator/>
+                <filter string="Invoice Date" name="invoice_date" date="invoice_date"/>
+                <group>
+                    <filter string="GSTR-1 Table" name="group_gst_table" context="{'group_by': 'gst_table'}"/>
+                    <filter string="GST Rate" name="group_gst_rate" context="{'group_by': 'gst_rate'}"/>
+                    <filter string="HSN/SAC" name="group_hsn" context="{'group_by': 'hsn_code'}"/>
+                    <filter string="Place of Supply" name="group_pos" context="{'group_by': 'place_of_supply'}"/>
+                    <filter string="Customer" name="group_partner" context="{'group_by': 'partner_name'}"/>
+                    <filter string="Filing" name="group_filing" context="{'group_by': 'filing_id'}"/>
+                    <filter string="Month" name="group_month" context="{'group_by': 'invoice_date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="armora_gst_filing_line_view_pivot" model="ir.ui.view">
+        <field name="name">armora.gst.filing.line.pivot</field>
+        <field name="model">armora.gst.filing.line</field>
+        <field name="arch" type="xml">
+            <pivot string="GSTR-1 Analysis" sample="1">
+                <field name="gst_table" type="row"/>
+                <field name="gst_rate" type="col"/>
+                <field name="taxable_value" type="measure"/>
+                <field name="igst_amount" type="measure"/>
+                <field name="cgst_amount" type="measure"/>
+                <field name="sgst_amount" type="measure"/>
+                <field name="total_tax" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="armora_gst_filing_line_view_graph" model="ir.ui.view">
+        <field name="name">armora.gst.filing.line.graph</field>
+        <field name="model">armora.gst.filing.line</field>
+        <field name="arch" type="xml">
+            <graph string="GSTR-1 Analysis" type="bar" stacked="1" sample="1">
+                <field name="gst_table"/>
+                <field name="gst_rate"/>
+                <field name="total_tax" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="armora_gst_filing_line_action_analysis" model="ir.actions.act_window">
+        <field name="name">GSTR-1 Analysis</field>
+        <field name="res_model">armora.gst.filing.line</field>
+        <field name="view_mode">pivot,graph,list</field>
+        <field name="search_view_id" ref="armora_gst_filing_line_view_search"/>
+        <field name="context">{'search_default_group_gst_table': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No GSTR-1 lines yet</p>
+            <p>Load GST data on a filing. Its lines show up here by table, rate, HSN and customer.</p>
+        </field>
+    </record>
+
+    <menuitem id="armora_gst_filing_line_menu_analysis"
+              name="GSTR-1 Analysis"
+              parent="menu_armora_gst_filing_root"
+              action="armora_gst_filing_line_action_analysis"
+              sequence="45"/>
+</odoo>

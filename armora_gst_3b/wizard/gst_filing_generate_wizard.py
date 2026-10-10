@@ -23,6 +23,7 @@ class ArmoraGstFilingGenerateWizard(models.TransientModel):
         )
         existing = Gstr3b.search([
             ('company_id', '=', self.company_id.id),
+            ('gstin', '=', self.gstin),
             ('financial_year', '=', self.financial_year),
             ('return_period', '=', self.return_period),
         ], limit=1)
@@ -35,6 +36,7 @@ class ArmoraGstFilingGenerateWizard(models.TransientModel):
             due_date = date(year, month, min(20, calendar.monthrange(year, month)[1]))
             gstr1 = self.env['armora.gst.filing'].search([
                 ('company_id', '=', self.company_id.id),
+                ('gstin', '=', self.gstin),
                 ('filing_type', '=', 'gstr1'),
                 ('financial_year', '=', self.financial_year),
                 ('return_period', '=', self.return_period),

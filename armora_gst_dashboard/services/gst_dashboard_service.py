@@ -124,19 +124,21 @@ def _overview_from_moves(env, filters):
     ):
         untaxed = untaxed or 0.0
         tax = tax or 0.0
+        # Taxable value / tax are outward supply figures (the GSTR-1 side), so
+        # vendor bills and vendor credit notes are counted but not summed in.
         if move_type == 'out_invoice':
             kpis['total_invoices'] += count
             kpis['taxable_value'] += untaxed
             kpis['total_tax'] += tax
         elif move_type == 'in_invoice':
             kpis['total_vendor_bills'] += count
-            kpis['taxable_value'] += untaxed
-            kpis['total_tax'] += tax
-        elif move_type in ('out_refund', 'in_refund'):
+        elif move_type == 'out_refund':
             kpis['total_credit_notes'] += count
             # Credits reduce period taxable / tax totals (unsigned read_group sums).
             kpis['taxable_value'] -= untaxed
             kpis['total_tax'] -= tax
+        elif move_type == 'in_refund':
+            kpis['total_credit_notes'] += count
     # Debit notes: only when account_debit_note marks them; keep 0 without that module field.
     if 'debit_origin_id' in Move._fields:
         kpis['total_debit_notes'] = Move.search_count(domain + [('debit_origin_id', '!=', False)])

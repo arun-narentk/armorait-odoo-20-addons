@@ -49,28 +49,28 @@
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="action_view_lines" type="object" class="oe_stat_button" icon="fa-list">
+                        <button name="action_view_lines" type="object" class="oe_stat_button" icon="format_list_bulleted">
                             <field name="line_count" widget="statinfo" string="Lines"/>
                         </button>
-                        <button name="action_view_matched" type="object" class="oe_stat_button" icon="fa-check">
+                        <button name="action_view_matched" type="object" class="oe_stat_button" icon="check_circle">
                             <div class="o_stat_info">
                                 <span class="o_stat_value"><field name="count_matched"/></span>
                                 <span class="o_stat_text">Matched</span>
                             </div>
                         </button>
-                        <button name="action_view_mismatch" type="object" class="oe_stat_button" icon="fa-exchange">
+                        <button name="action_view_mismatch" type="object" class="oe_stat_button" icon="swap_horiz">
                             <div class="o_stat_info">
                                 <span class="o_stat_value"><field name="count_mismatch"/></span>
                                 <span class="o_stat_text">Mismatch</span>
                             </div>
                         </button>
-                        <button name="action_view_missing_odoo" type="object" class="oe_stat_button" icon="fa-exclamation-triangle">
+                        <button name="action_view_missing_odoo" type="object" class="oe_stat_button" icon="warning">
                             <div class="o_stat_info">
                                 <span class="o_stat_value"><field name="count_missing_odoo"/></span>
                                 <span class="o_stat_text">Missing Odoo</span>
                             </div>
                         </button>
-                        <button name="action_view_missing_2b" type="object" class="oe_stat_button" icon="fa-question-circle">
+                        <button name="action_view_missing_2b" type="object" class="oe_stat_button" icon="help">
                             <div class="o_stat_info">
                                 <span class="o_stat_value"><field name="count_missing_2b"/></span>
                                 <span class="o_stat_text">Missing 2B</span>
@@ -130,7 +130,7 @@
                                     <button name="action_create_vendor_bill" type="object" string="Create Bill"
                                             invisible="source != 'gstr2b' or match_state not in ('missing_in_odoo', 'pending', 'mismatch') or move_id"/>
                                     <button name="action_open_bill" type="object" string="Bill"
-                                            icon="fa-external-link" invisible="not move_id"/>
+                                            icon="open_in_new" invisible="not move_id"/>
                                 </list>
                             </field>
                         </page>

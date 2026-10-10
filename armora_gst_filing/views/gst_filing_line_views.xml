@@ -81,7 +81,7 @@
                 <field name="message"/>
                 <field name="hint" optional="show"/>
                 <button name="action_open_invoice" type="object" string="Invoice"
-                        icon="fa-external-link" invisible="not move_id"/>
+                        icon="open_in_new" invisible="not move_id"/>
             </list>
         </field>
     </record>

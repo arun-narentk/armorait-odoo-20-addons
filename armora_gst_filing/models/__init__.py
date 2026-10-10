@@ -6,3 +6,4 @@ from . import gst_validation
 from . import gst_excel_generator
 from . import gst_filing_line
 from . import gst_filing
+from . import gst_filing_report

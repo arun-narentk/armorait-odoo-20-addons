@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="armora_gst_3b_action_report_summary" model="ir.actions.report">
+        <field name="name">GSTR-3B Summary</field>
+        <field name="model">armora.gst.3b</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">armora_gst_3b.report_gstr3b_summary</field>
+        <field name="print_report_name">'GSTR-3B Summary - %s - %s' % (object.gstin, object.reporting_period or object.return_period)</field>
+        <field name="binding_model_id" ref="model_armora_gst_3b"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_gstr3b_summary_document">
+        <t t-call="web.external_layout">
+            <t t-set="cur" t-value="doc.currency_id"/>
+            <t t-set="money" t-value="{'widget': 'monetary', 'display_currency': cur}"/>
+            <t t-set="heads" t-value="[('Integrated Tax (IGST)', 'igst'), ('Central Tax (CGST)', 'cgst'), ('State/UT Tax (SGST)', 'sgst'), ('Cess', 'cess')]"/>
+            <div class="page o_armora_gst_report">
+                <h3 class="mb-1">GSTR-3B Summary</h3>
+                <p class="text-muted mb-3">Figures as recorded in Odoo. Check against the GST Portal before you file.</p>
+
+                <table class="table table-sm table-borderless mb-4">
+                    <tr>
+                        <td class="w-25"><strong>GSTIN</strong></td>
+                        <td class="w-25" t-out="doc.gstin"/>
+                        <td class="w-25"><strong>Reference</strong></td>
+                        <td class="w-25" t-out="doc.name"/>
+                    </tr>
+                    <tr>
+                        <td><strong>Legal name</strong></td>
+                        <td t-out="doc.company_id.name"/>
+                        <td><strong>Status</strong></td>
+                        <td><span t-field="doc.state"/></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Financial year</strong></td>
+                        <td t-out="doc.financial_year"/>
+                        <td><strong>Return period</strong></td>
+                        <td><span t-out="doc.return_period"/> (<span t-field="doc.period_start"/> to <span t-field="doc.period_end"/>)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Due date</strong></td>
+                        <td><span t-field="doc.due_date"/></td>
+                        <td><strong>Payment / offset date</strong></td>
+                        <td><span t-field="doc.payment_date"/></td>
+                    </tr>
+                </table>
+
+                <h5>Payment of tax (Table 6.1)</h5>
+                <table class="table table-sm table-bordered mb-1">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Tax head</th>
+                            <th class="text-end">Tax payable</th>
+                            <th class="text-end">ITC opening</th>
+                            <th class="text-end">ITC available</th>
+                            <th class="text-end">Paid through ITC</th>
+                            <th class="text-end">ITC balance</th>
+                            <th class="text-end">Paid in cash</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="heads" t-as="head">
+                            <td t-out="head[0]"/>
+                            <td class="text-end" t-out="doc['liability_' + head[1]]" t-options="money"/>
+                            <td class="text-end" t-out="doc['itc_opening_' + head[1]]" t-options="money"/>
+                            <td class="text-end" t-out="doc['itc_available_' + head[1]]" t-options="money"/>
+                            <td class="text-end" t-out="doc['itc_utilized_' + head[1]]" t-options="money"/>
+                            <td class="text-end" t-out="doc['itc_remaining_' + head[1]]" t-options="money"/>
+                            <td class="text-end" t-out="doc['cash_payable_' + head[1]]" t-options="money"/>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr class="fw-bold">
+                            <td>Total</td>
+                            <td class="text-end" t-out="sum(doc['liability_' + h[1]] for h in heads)" t-options="money"/>
+                            <td class="text-end" t-out="sum(doc['itc_opening_' + h[1]] for h in heads)" t-options="money"/>
+                            <td class="text-end" t-out="sum(doc['itc_available_' + h[1]] for h in heads)" t-options="money"/>
+                            <td class="text-end" t-out="sum(doc['itc_utilized_' + h[1]] for h in heads)" t-options="money"/>
+                            <td class="text-end" t-out="sum(doc['itc_remaining_' + h[1]] for h in heads)" t-options="money"/>
+                            <td class="text-end" t-out="sum(doc['cash_payable_' + h[1]] for h in heads)" t-options="money"/>
+                        </tr>
+                    </tfoot>
+                </table>
+                <p class="small text-muted mb-4">
+                    ITC set-off rule version: <span t-out="doc.itc_utilization_version or 'not computed yet'"/>
+                </p>
+
+                <h5>Interest (Table 5.1)</h5>
+                <table class="table table-sm table-bordered mb-4">
+                    <tbody>
+                        <tr>
+                            <td class="w-50">Net tax liability (paid in cash)</td>
+                            <td class="text-end" t-out="doc.net_tax_liability" t-options="money"/>
+                        </tr>
+                        <tr>
+                            <td>Minimum cash ledger balance (Rule 88B)</td>
+                            <td class="text-end" t-out="doc.minimum_ecl_balance" t-options="money"/>
+                        </tr>
+                        <tr>
+                            <td>Interest rate</td>
+                            <td class="text-end"><span t-out="doc.interest_rate * 100" t-options="{'widget': 'float', 'precision': 2}"/> % a year</td>
+                        </tr>
+                        <tr>
+                            <td>System minimum interest</td>
+                            <td class="text-end" t-out="doc.system_minimum_interest" t-options="money"/>
+                        </tr>
+                        <tr class="fw-bold">
+                            <td>Self-assessed interest</td>
+                            <td class="text-end" t-out="doc.self_assessed_interest" t-options="money"/>
+                        </tr>
+                        <tr>
+                            <td>Calculation version and date</td>
+                            <td class="text-end">
+                                <span t-out="doc.interest_calculation_version or '-'"/>,
+                                <span t-field="doc.interest_calculation_date"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h5>Tax liability breakup: previous-period supplies</h5>
+                <table class="table table-sm table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Source period</th>
+                            <th>Document</th>
+                            <th>Return / table</th>
+                            <th class="text-end">Taxable value</th>
+                            <th class="text-end">IGST</th>
+                            <th class="text-end">CGST</th>
+                            <th class="text-end">SGST</th>
+                            <th class="text-end">Cess</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-if="not doc.liability_breakup_ids">
+                            <td colspan="8" class="text-center text-muted">No previous-period supplies in this return.</td>
+                        </tr>
+                        <tr t-foreach="doc.liability_breakup_ids" t-as="line">
+                            <td t-out="line.source_period"/>
+                            <td><span t-out="line.document_name or line.document_id.name or ''"/> <span t-field="line.document_date"/></td>
+                            <td><span t-field="line.source_return"/> <span t-out="line.source_table or ''"/></td>
+                            <td class="text-end" t-out="line.taxable_value" t-options="money"/>
+                            <td class="text-end" t-out="line.igst" t-options="money"/>
+                            <td class="text-end" t-out="line.cgst" t-options="money"/>
+                            <td class="text-end" t-out="line.sgst" t-options="money"/>
+                            <td class="text-end" t-out="line.cess" t-options="money"/>
+                        </tr>
+                    </tbody>
+                    <tfoot t-if="doc.liability_breakup_ids">
+                        <tr class="fw-bold">
+                            <td colspan="3">Total</td>
+                            <td class="text-end" t-out="sum(doc.liability_breakup_ids.mapped('taxable_value'))" t-options="money"/>
+                            <td class="text-end" t-out="sum(doc.liability_breakup_ids.mapped('igst'))" t-options="money"/>
+                            <td class="text-end" t-out="sum(doc.liability_breakup_ids.mapped('cgst'))" t-options="money"/>
+                            <td class="text-end" t-out="sum(doc.liability_breakup_ids.mapped('sgst'))" t-options="money"/>
+                            <td class="text-end" t-out="sum(doc.liability_breakup_ids.mapped('cess'))" t-options="money"/>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_gstr3b_summary">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="armora_gst_3b.report_gstr3b_summary_document"/>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -34,6 +34,7 @@
                     <button name="action_recompute_interest" type="object" string="Recompute Interest" invisible="state == 'filed'"/>
                     <button name="action_compute_itc_utilization" type="object" string="Compute ITC Utilization" invisible="state == 'filed'"/>
                     <button name="action_mark_filed" type="object" string="Mark Filed" invisible="state == 'filed'" confirm="Mark this GSTR-3B as filed (read-only)?"/>
+                    <button name="%(armora_gst_3b_action_report_summary)d" type="action" string="Print GSTR-3B Summary" icon="print"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,computed,filed"/>
                 </header>
                 <sheet>
