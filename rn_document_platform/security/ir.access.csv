@@ -1,0 +1,20 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_doc_template_user,rn.doc.platform.template user,rn.doc.platform.template,rn_document_platform.group_rn_doc_platform_user,r,
+access_rn_doc_template_mgr,rn.doc.platform.template manager,rn.doc.platform.template,rn_document_platform.group_rn_doc_platform_manager,crud,
+access_rn_doc_sign_request_user,rn.doc.sign.request user,rn.doc.sign.request,rn_document_platform.group_rn_doc_platform_user,cru,
+access_rn_doc_sign_request_mgr,rn.doc.sign.request manager,rn.doc.sign.request,rn_document_platform.group_rn_doc_platform_manager,crud,
+rule_rn_doc_sign_request_company,Sign Request multi-company,rn.doc.sign.request,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_doc_sign_signer_user,rn.doc.sign.signer user,rn.doc.sign.signer,rn_document_platform.group_rn_doc_platform_user,cru,
+access_rn_doc_sign_signer_mgr,rn.doc.sign.signer manager,rn.doc.sign.signer,rn_document_platform.group_rn_doc_platform_manager,crud,
+rule_rn_doc_sign_signer_company,Signer multi-company,rn.doc.sign.signer,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_doc_sign_field_user,rn.doc.sign.field user,rn.doc.sign.field,rn_document_platform.group_rn_doc_platform_user,cru,
+access_rn_doc_sign_field_mgr,rn.doc.sign.field manager,rn.doc.sign.field,rn_document_platform.group_rn_doc_platform_manager,crud,
+access_rn_doc_sign_audit_user,rn.doc.sign.audit user,rn.doc.sign.audit,rn_document_platform.group_rn_doc_platform_user,r,
+access_rn_doc_sign_audit_mgr,rn.doc.sign.audit manager,rn.doc.sign.audit,rn_document_platform.group_rn_doc_platform_manager,cru,
+rule_rn_doc_sign_audit_company,Sign Audit multi-company,rn.doc.sign.audit,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_doc_ai_analysis_user,rn.doc.ai.analysis user,rn.doc.ai.analysis,rn_document_platform.group_rn_doc_platform_user,r,
+access_rn_doc_ai_analysis_mgr,rn.doc.ai.analysis manager,rn.doc.ai.analysis,rn_document_platform.group_rn_doc_platform_manager,crud,
+rule_rn_doc_ai_analysis_company,AI Analysis multi-company,rn.doc.ai.analysis,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_doc_send_wizard_user,rn.doc.send.signature.wizard user,rn.doc.send.signature.wizard,rn_document_platform.group_rn_doc_platform_user,crud,
+access_rn_doc_platform_settings_mgr,rn.doc.platform.settings manager,rn.doc.platform.settings,rn_document_platform.group_rn_doc_platform_manager,crud,
+rule_rn_doc_platform_settings_company,Platform Settings multi-company,rn.doc.platform.settings,,crud,"[('company_id', 'in', company_ids)]"

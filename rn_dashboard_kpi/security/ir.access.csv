@@ -1,0 +1,15 @@
+id,name,model_id,group_id/id,operation,domain
+rule_rn_kpi_dashboard_user,KPI Dashboard: user visibility,rn.kpi.dashboard,rn_dashboard_kpi.group_rn_dashboard_kpi_user,crud,"[
+            '|', '|', '|',
+            ('user_id', '=', user.id),
+            ('is_public', '=', True),
+            ('group_ids', 'in', user.all_group_ids.ids),
+            ('create_uid', '=', user.id)
+        ]"
+rule_rn_kpi_dashboard_manager,KPI Dashboard: manager all,rn.kpi.dashboard,rn_dashboard_kpi.group_rn_dashboard_kpi_manager,crud,
+rule_rn_kpi_dashboard_company,KPI Dashboard multi-company,rn.kpi.dashboard,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+access_rn_kpi_dashboard_item_user,rn.kpi.dashboard.item user,rn.kpi.dashboard.item,rn_dashboard_kpi.group_rn_dashboard_kpi_user,crud,
+rule_rn_kpi_dashboard_item_company,KPI Dashboard Item multi-company,rn.kpi.dashboard.item,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+access_rn_kpi_dashboard_filter_user,rn.kpi.dashboard.filter user,rn.kpi.dashboard.filter,rn_dashboard_kpi.group_rn_dashboard_kpi_user,crud,
+rule_rn_kpi_dashboard_bookmark_own,KPI Dashboard Bookmark own records,rn.kpi.dashboard.bookmark,rn_dashboard_kpi.group_rn_dashboard_kpi_user,crud,"[('user_id', '=', user.id)]"
+access_rn_kpi_dashboard_item_filter_user,rn.kpi.dashboard.item.filter user,rn.kpi.dashboard.item.filter,rn_dashboard_kpi.group_rn_dashboard_kpi_user,crud,

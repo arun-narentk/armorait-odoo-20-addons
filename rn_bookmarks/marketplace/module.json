@@ -1,0 +1,72 @@
+{
+  "technical_name": "rn_bookmarks",
+  "app_name": "Universal Bookmark",
+  "tagline": "Bookmark any Odoo record and open it instantly from a personal sidebar",
+  "category_type": "productivity",
+  "price": 9.99,
+  "accent": "#f59e0b",
+  "git_url": "ssh://git@github.com/arun-narentk/armorait-odoo-20-addons.git#20.0",
+  "problem": "Odoo has no universal bookmark system. Users juggle browser tabs, stars, and copy-paste links to reopen the same records every day.",
+  "solution": "Universal Bookmark adds one-click stars on form, list, and Kanban views, a searchable personal sidebar with drag-and-drop ordering, folders, pins, favorites, recent history, and Ctrl+B navigation.",
+  "benefits": [
+    "Bookmark any record on any model with one click",
+    "List and Kanban star columns for fast marking",
+    "Personal sidebar with search, pins, favorites, and recent",
+    "Drag-and-drop ordering and color-coded folders",
+    "Ctrl+B hotkey and duplicate-safe toggling"
+  ],
+  "features": [
+    {
+      "title": "Bookmark anywhere",
+      "text": "Star records from form headers, list rows, Kanban cards, or Ctrl+B."
+    },
+    {
+      "title": "Personal sidebar",
+      "text": "Search and reopen bookmarks from the systray panel without leaving your screen."
+    },
+    {
+      "title": "Pins, favorites, recent",
+      "text": "Keep urgent records on top and revisit recent work quickly."
+    },
+    {
+      "title": "Drag-and-drop ordering",
+      "text": "Reorder pinned, folder, and unfiled bookmarks in the sidebar."
+    },
+    {
+      "title": "Folders and colors",
+      "text": "Group customers, sales, invoices, and projects with color labels."
+    },
+    {
+      "title": "List and menu bookmarks",
+      "text": "Save filtered list views, menus, and reports for one-click reopen."
+    }
+  ],
+  "workflow": [
+    "Open any record",
+    "Click the star or press Ctrl+B",
+    "Find it in the sidebar",
+    "Drag to reorder or pin",
+    "Reopen in one click"
+  ],
+  "seo_keywords": "Odoo 20 universal bookmark, record bookmarks, productivity sidebar, list view star, kanban bookmark, ARMORA",
+  "has_dashboard": true,
+  "has_reports": true,
+  "has_mobile": true,
+  "live_test_url": "https://www.armorait.com",
+  "version": "20.0.1.2.0",
+  "branch": "20.0",
+  "screenshot_labels": {
+    "overview.png": "Universal Bookmark Overview",
+    "list.png": "Bookmark List",
+    "form.png": "Form Star Button",
+    "dashboard.png": "Bookmark Dashboard",
+    "wizard.png": "Create Bookmark Wizard",
+    "settings.png": "Folder Settings",
+    "report.png": "Report Bookmarks",
+    "search.png": "Sidebar Search",
+    "kanban.png": "Kanban Star",
+    "mobile.png": "Mobile Sidebar",
+    "workflow.png": "Bookmark Workflow",
+    "designer.png": "Folder Designer"
+  }
+}

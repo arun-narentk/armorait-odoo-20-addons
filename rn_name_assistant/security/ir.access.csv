@@ -1,0 +1,12 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_name_template_user,rn.name.template user,rn.name.template,rn_name_assistant.group_rn_name_assistant_user,r,
+access_rn_name_template_manager,rn.name.template manager,rn.name.template,rn_name_assistant.group_rn_name_assistant_manager,crud,
+rule_rn_name_template_company,Name Template multi-company,rn.name.template,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_name_template_variant_manager,rn.name.template.variant manager,rn.name.template.variant,rn_name_assistant.group_rn_name_assistant_manager,crud,
+access_rn_name_abbreviation_user,rn.name.abbreviation user,rn.name.abbreviation,rn_name_assistant.group_rn_name_assistant_user,r,
+access_rn_name_abbreviation_manager,rn.name.abbreviation manager,rn.name.abbreviation,rn_name_assistant.group_rn_name_assistant_manager,crud,
+rule_rn_name_abbreviation_company,Name Abbreviation multi-company,rn.name.abbreviation,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_name_generator_wizard_user,rn.name.generator.wizard user,rn.name.generator.wizard,rn_name_assistant.group_rn_name_assistant_user,crud,
+access_rn_name_generator_wizard_line_user,rn.name.generator.wizard.line user,rn.name.generator.wizard.line,rn_name_assistant.group_rn_name_assistant_user,crud,
+access_rn_name_batch_wizard_user,rn.name.batch.wizard user,rn.name.batch.wizard,rn_name_assistant.group_rn_name_assistant_user,crud,
+access_rn_name_batch_wizard_line_user,rn.name.batch.wizard.line user,rn.name.batch.wizard.line,rn_name_assistant.group_rn_name_assistant_user,crud,

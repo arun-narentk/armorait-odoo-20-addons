@@ -1,0 +1,28 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_school_student_staff,rn.school.student staff,rn.school.student,rn_school_core.group_rn_school_staff,cru,
+access_rn_school_student_admin,rn.school.student admin,rn.school.student,rn_school_core.group_rn_school_admin,crud,
+rule_rn_school_student_company,Student multi-company,rn.school.student,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_school_parent_staff,rn.school.parent.guardian staff,rn.school.parent.guardian,rn_school_core.group_rn_school_staff,cru,
+access_rn_school_enquiry_staff,rn.school.admission.enquiry staff,rn.school.admission.enquiry,rn_school_core.group_rn_school_staff,cru,
+access_rn_school_application_staff,rn.school.admission.application staff,rn.school.admission.application,rn_school_core.group_rn_school_staff,cru,
+rule_rn_school_admission_company,Admission multi-company,rn.school.admission.application,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_school_class_staff,rn.school.class staff,rn.school.class,rn_school_core.group_rn_school_staff,r,
+access_rn_school_admin_all,rn.school.admin manager,rn.school.class,rn_school_core.group_rn_school_admin,crud,
+rule_rn_school_class_company,Class multi-company,rn.school.class,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_school_year_staff,rn.school.academic.year staff,rn.school.academic.year,rn_school_core.group_rn_school_staff,r,
+access_rn_school_year_admin,rn.school.academic.year admin,rn.school.academic.year,rn_school_core.group_rn_school_admin,crud,
+access_rn_school_fee_staff,rn.school.fee.installment staff,rn.school.fee.installment,rn_school_core.group_rn_school_staff,cru,
+rule_rn_school_fee_company,Fee Installment multi-company,rn.school.fee.installment,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_school_attendance_staff,rn.school.attendance.session staff,rn.school.attendance.session,rn_school_core.group_rn_school_staff,cru,
+access_rn_school_att_line_staff,rn.school.attendance.line staff,rn.school.attendance.line,rn_school_core.group_rn_school_staff,cru,
+access_rn_school_teacher_hw,rn.school.homework teacher,rn.school.homework,rn_school_core.group_rn_school_teacher,cru,
+access_rn_school_teacher_exam,rn.school.exam teacher,rn.school.exam,rn_school_core.group_rn_school_teacher,cru,
+access_rn_school_teacher_result,rn.school.exam.result teacher,rn.school.exam.result,rn_school_core.group_rn_school_teacher,cru,
+access_rn_school_teacher_tt,rn.school.timetable teacher,rn.school.timetable,rn_school_core.group_rn_school_teacher,cru,
+access_rn_school_teacher_sub,rn.school.homework.submission teacher,rn.school.homework.submission,rn_school_core.group_rn_school_teacher,cru,
+access_rn_school_notice_staff,rn.school.notice staff,rn.school.notice,rn_school_core.group_rn_school_staff,r,
+access_rn_school_notice_admin,rn.school.notice admin,rn.school.notice,rn_school_core.group_rn_school_admin,crud,
+access_rn_school_fee_struct_admin,rn.school.fee.structure admin,rn.school.fee.structure,rn_school_core.group_rn_school_admin,crud,
+access_rn_school_settings_admin,rn.school.settings admin,rn.school.settings,rn_school_core.group_rn_school_admin,crud,
+rule_rn_school_settings_company,School Settings multi-company,rn.school.settings,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_school_approve_wizard,rn.school.admission.approve.wizard admin,rn.school.admission.approve.wizard,rn_school_core.group_rn_school_admin,crud,

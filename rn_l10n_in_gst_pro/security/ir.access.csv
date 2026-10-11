@@ -1,0 +1,37 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_gst_period_readonly,rn.gst.period readonly,rn.gst.period,rn_l10n_in_gst_pro.group_rn_gst_readonly,r,
+access_rn_gst_period_accountant,rn.gst.period accountant,rn.gst.period,rn_l10n_in_gst_pro.group_rn_gst_accountant,cru,
+access_rn_gst_period_manager,rn.gst.period manager,rn.gst.period,rn_l10n_in_gst_pro.group_rn_gst_manager,crud,
+rule_rn_gst_period_company,GST Period multi-company,rn.gst.period,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_return_readonly,rn.gst.return readonly,rn.gst.return,rn_l10n_in_gst_pro.group_rn_gst_readonly,r,
+access_rn_gst_return_accountant,rn.gst.return accountant,rn.gst.return,rn_l10n_in_gst_pro.group_rn_gst_accountant,cru,
+access_rn_gst_return_manager,rn.gst.return manager,rn.gst.return,rn_l10n_in_gst_pro.group_rn_gst_manager,crud,
+rule_rn_gst_return_company,GST Return multi-company,rn.gst.return,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_invoice_line_readonly,rn.gst.invoice.line readonly,rn.gst.invoice.line,rn_l10n_in_gst_pro.group_rn_gst_readonly,r,
+access_rn_gst_invoice_line_accountant,rn.gst.invoice.line accountant,rn.gst.invoice.line,rn_l10n_in_gst_pro.group_rn_gst_accountant,cru,
+access_rn_gst_summary_readonly,rn.gst.summary readonly,rn.gst.summary,rn_l10n_in_gst_pro.group_rn_gst_readonly,r,
+access_rn_gst_summary_accountant,rn.gst.summary accountant,rn.gst.summary,rn_l10n_in_gst_pro.group_rn_gst_accountant,cru,
+access_rn_gst_hsn_line_readonly,rn.gst.hsn.line readonly,rn.gst.hsn.line,rn_l10n_in_gst_pro.group_rn_gst_readonly,r,
+access_rn_gst_hsn_line_accountant,rn.gst.hsn.line accountant,rn.gst.hsn.line,rn_l10n_in_gst_pro.group_rn_gst_accountant,cru,
+access_rn_gst_document_readonly,rn.gst.document.summary readonly,rn.gst.document.summary,rn_l10n_in_gst_pro.group_rn_gst_readonly,r,
+access_rn_gst_document_accountant,rn.gst.document.summary accountant,rn.gst.document.summary,rn_l10n_in_gst_pro.group_rn_gst_accountant,cru,
+access_rn_gst_validation_readonly,rn.gst.validation readonly,rn.gst.validation,rn_l10n_in_gst_pro.group_rn_gst_readonly,r,
+access_rn_gst_validation_accountant,rn.gst.validation accountant,rn.gst.validation,rn_l10n_in_gst_pro.group_rn_gst_accountant,cru,
+access_rn_gst_validation_manager,rn.gst.validation manager,rn.gst.validation,rn_l10n_in_gst_pro.group_rn_gst_manager,crud,
+rule_rn_gst_validation_company,GST Validation multi-company,rn.gst.validation,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_reconciliation_readonly,rn.gst.reconciliation readonly,rn.gst.reconciliation,rn_l10n_in_gst_pro.group_rn_gst_readonly,r,
+access_rn_gst_reconciliation_accountant,rn.gst.reconciliation accountant,rn.gst.reconciliation,rn_l10n_in_gst_pro.group_rn_gst_accountant,cru,
+access_rn_gst_reconciliation_manager,rn.gst.reconciliation manager,rn.gst.reconciliation,rn_l10n_in_gst_pro.group_rn_gst_manager,crud,
+rule_rn_gst_reconciliation_company,GST Reconciliation multi-company,rn.gst.reconciliation,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_reconciliation_line_readonly,rn.gst.reconciliation.line readonly,rn.gst.reconciliation.line,rn_l10n_in_gst_pro.group_rn_gst_readonly,r,
+access_rn_gst_reconciliation_line_accountant,rn.gst.reconciliation.line accountant,rn.gst.reconciliation.line,rn_l10n_in_gst_pro.group_rn_gst_accountant,cru,
+access_rn_gst_settings_readonly,rn.gst.settings readonly,rn.gst.settings,rn_l10n_in_gst_pro.group_rn_gst_readonly,r,
+access_rn_gst_settings_manager,rn.gst.settings manager,rn.gst.settings,rn_l10n_in_gst_pro.group_rn_gst_manager,crud,
+rule_rn_gst_settings_company,GST Settings multi-company,rn.gst.settings,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_export_readonly,rn.gst.export readonly,rn.gst.export,rn_l10n_in_gst_pro.group_rn_gst_readonly,r,
+access_rn_gst_export_accountant,rn.gst.export accountant,rn.gst.export,rn_l10n_in_gst_pro.group_rn_gst_accountant,cru,
+access_rn_gst_export_manager,rn.gst.export manager,rn.gst.export,rn_l10n_in_gst_pro.group_rn_gst_manager,crud,
+access_rn_gst_gstr1_wizard_accountant,rn.gst.gstr1.wizard accountant,rn.gst.gstr1.wizard,rn_l10n_in_gst_pro.group_rn_gst_accountant,crud,
+access_rn_gst_gstr3b_wizard_accountant,rn.gst.gstr3b.wizard accountant,rn.gst.gstr3b.wizard,rn_l10n_in_gst_pro.group_rn_gst_accountant,crud,
+access_rn_gst_gstr9_wizard_accountant,rn.gst.gstr9.wizard accountant,rn.gst.gstr9.wizard,rn_l10n_in_gst_pro.group_rn_gst_accountant,crud,
+access_rn_gst_reconciliation_wizard_accountant,rn.gst.reconciliation.wizard accountant,rn.gst.reconciliation.wizard,rn_l10n_in_gst_pro.group_rn_gst_accountant,crud,

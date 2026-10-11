@@ -1,0 +1,27 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_rental_category_ro,rn.rental.category readonly,rn.rental.category,rn_rental_core.group_rn_rental_readonly,r,
+access_rn_rental_category_mgr,rn.rental.category manager,rn.rental.category,rn_rental_core.group_rn_rental_manager,crud,
+rule_rn_rental_category_company,Rental Category multi-company,rn.rental.category,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_rental_asset_ro,rn.rental.asset readonly,rn.rental.asset,rn_rental_core.group_rn_rental_readonly,r,
+access_rn_rental_asset_user,rn.rental.asset user,rn.rental.asset,rn_rental_core.group_rn_rental_user,cru,
+access_rn_rental_asset_mgr,rn.rental.asset manager,rn.rental.asset,rn_rental_core.group_rn_rental_manager,crud,
+rule_rn_rental_asset_company,Rental Asset multi-company,rn.rental.asset,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_rental_pricing_ro,rn.rental.pricing readonly,rn.rental.pricing,rn_rental_core.group_rn_rental_readonly,r,
+access_rn_rental_pricing_user,rn.rental.pricing user,rn.rental.pricing,rn_rental_core.group_rn_rental_user,cru,
+access_rn_rental_pricing_mgr,rn.rental.pricing manager,rn.rental.pricing,rn_rental_core.group_rn_rental_manager,crud,
+rule_rn_rental_pricing_company,Rental Pricing multi-company,rn.rental.pricing,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_rental_booking_ro,rn.rental.booking readonly,rn.rental.booking,rn_rental_core.group_rn_rental_readonly,r,
+access_rn_rental_booking_user,rn.rental.booking user,rn.rental.booking,rn_rental_core.group_rn_rental_user,cru,
+access_rn_rental_booking_mgr,rn.rental.booking manager,rn.rental.booking,rn_rental_core.group_rn_rental_manager,crud,
+rule_rn_rental_booking_company,Rental Booking multi-company,rn.rental.booking,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_rental_booking_line_ro,rn.rental.booking.line readonly,rn.rental.booking.line,rn_rental_core.group_rn_rental_readonly,r,
+access_rn_rental_booking_line_user,rn.rental.booking.line user,rn.rental.booking.line,rn_rental_core.group_rn_rental_user,cru,
+access_rn_rental_booking_line_mgr,rn.rental.booking.line manager,rn.rental.booking.line,rn_rental_core.group_rn_rental_manager,crud,
+access_rn_rental_settings_ro,rn.rental.settings readonly,rn.rental.settings,rn_rental_core.group_rn_rental_readonly,r,
+access_rn_rental_settings_mgr,rn.rental.settings manager,rn.rental.settings,rn_rental_core.group_rn_rental_manager,crud,
+rule_rn_rental_settings_company,Rental Settings multi-company,rn.rental.settings,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_rental_subscription_ro,rn.rental.subscription readonly,rn.rental.subscription,rn_rental_core.group_rn_rental_readonly,r,
+access_rn_rental_subscription_mgr,rn.rental.subscription manager,rn.rental.subscription,rn_rental_core.group_rn_rental_manager,crud,
+rule_rn_rental_subscription_company,Rental Subscription multi-company,rn.rental.subscription,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_rental_wiz_avail_user,rn.rental.availability.check.wizard user,rn.rental.availability.check.wizard,rn_rental_core.group_rn_rental_user,crud,
+access_rn_rental_wiz_quick_user,rn.rental.quick.booking.wizard user,rn.rental.quick.booking.wizard,rn_rental_core.group_rn_rental_user,crud,

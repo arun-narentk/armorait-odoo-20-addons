@@ -1,0 +1,13 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_qr_record_user,rn.qr.record user,rn.qr.record,rn_universal_qr.group_rn_universal_qr_user,cru,
+access_rn_qr_record_manager,rn.qr.record manager,rn.qr.record,rn_universal_qr.group_rn_universal_qr_manager,crud,
+rule_rn_qr_record_company,QR Record multi-company,rn.qr.record,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_qr_scan_log_user,rn.qr.scan.log user,rn.qr.scan.log,rn_universal_qr.group_rn_universal_qr_user,r,
+access_rn_qr_scan_log_manager,rn.qr.scan.log manager,rn.qr.scan.log,rn_universal_qr.group_rn_universal_qr_manager,crud,
+rule_rn_qr_scan_log_company,QR Scan Log multi-company,rn.qr.scan.log,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_qr_template_user,rn.qr.template user,rn.qr.template,rn_universal_qr.group_rn_universal_qr_user,r,
+access_rn_qr_template_manager,rn.qr.template manager,rn.qr.template,rn_universal_qr.group_rn_universal_qr_manager,crud,
+access_rn_qr_model_config_user,rn.qr.model.config user,rn.qr.model.config,rn_universal_qr.group_rn_universal_qr_user,r,
+access_rn_qr_model_config_manager,rn.qr.model.config manager,rn.qr.model.config,rn_universal_qr.group_rn_universal_qr_manager,crud,
+rule_rn_qr_model_config_company,QR Model Config multi-company,rn.qr.model.config,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_qr_bulk_wizard_user,rn.qr.bulk.generate.wizard user,rn.qr.bulk.generate.wizard,rn_universal_qr.group_rn_universal_qr_user,crud,

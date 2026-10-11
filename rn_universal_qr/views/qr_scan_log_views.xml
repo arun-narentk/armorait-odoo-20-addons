@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rn_qr_scan_log_list" model="ir.ui.view">
+        <field name="name">rn.qr.scan.log.list</field>
+        <field name="model">rn.qr.scan.log</field>
+        <field name="arch" type="xml">
+            <list create="0" edit="0" delete="0">
+                <field name="scan_datetime"/>
+                <field name="token"/>
+                <field name="res_model"/>
+                <field name="res_id"/>
+                <field name="source"/>
+                <field name="ip_address"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+</odoo>

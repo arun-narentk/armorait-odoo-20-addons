@@ -1,0 +1,26 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_realestate_developer_ro,rn.realestate.developer readonly,rn.realestate.developer,rn_realestate_base.group_rn_realestate_readonly,r,
+access_rn_realestate_developer_admin,rn.realestate.developer admin,rn.realestate.developer,rn_realestate_base.group_rn_realestate_admin,crud,
+rule_rn_realestate_developer_company,Real Estate Developer multi-company,rn.realestate.developer,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_realestate_project_ro,rn.realestate.project readonly,rn.realestate.project,rn_realestate_base.group_rn_realestate_readonly,r,
+access_rn_realestate_project_mgr,rn.realestate.project manager,rn.realestate.project,rn_realestate_base.group_rn_realestate_manager,cru,
+access_rn_realestate_project_admin,rn.realestate.project admin,rn.realestate.project,rn_realestate_base.group_rn_realestate_admin,crud,
+rule_rn_realestate_project_company,Real Estate Project multi-company,rn.realestate.project,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_realestate_block_ro,rn.realestate.block readonly,rn.realestate.block,rn_realestate_base.group_rn_realestate_readonly,r,
+access_rn_realestate_block_admin,rn.realestate.block admin,rn.realestate.block,rn_realestate_base.group_rn_realestate_admin,crud,
+rule_rn_realestate_block_company,Real Estate Block multi-company,rn.realestate.block,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_realestate_unit_ro,rn.realestate.unit readonly,rn.realestate.unit,rn_realestate_base.group_rn_realestate_readonly,r,
+access_rn_realestate_unit_sales,rn.realestate.unit sales,rn.realestate.unit,rn_realestate_base.group_rn_realestate_sales,ru,
+access_rn_realestate_unit_mgr,rn.realestate.unit manager,rn.realestate.unit,rn_realestate_base.group_rn_realestate_manager,cru,
+access_rn_realestate_unit_admin,rn.realestate.unit admin,rn.realestate.unit,rn_realestate_base.group_rn_realestate_admin,crud,
+rule_rn_realestate_unit_company,Real Estate Unit multi-company,rn.realestate.unit,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_realestate_lead_ro,rn.realestate.lead readonly,rn.realestate.lead,rn_realestate_base.group_rn_realestate_readonly,r,
+access_rn_realestate_lead_sales,rn.realestate.lead sales,rn.realestate.lead,rn_realestate_base.group_rn_realestate_sales,cru,
+access_rn_realestate_lead_mgr,rn.realestate.lead manager,rn.realestate.lead,rn_realestate_base.group_rn_realestate_manager,crud,
+rule_rn_realestate_lead_company,Real Estate Lead multi-company,rn.realestate.lead,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_realestate_settings_ro,rn.realestate.settings readonly,rn.realestate.settings,rn_realestate_base.group_rn_realestate_readonly,r,
+access_rn_realestate_settings_admin,rn.realestate.settings admin,rn.realestate.settings,rn_realestate_base.group_rn_realestate_admin,crud,
+rule_rn_realestate_settings_company,Real Estate Settings multi-company,rn.realestate.settings,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_realestate_subscription_ro,rn.realestate.subscription readonly,rn.realestate.subscription,rn_realestate_base.group_rn_realestate_readonly,r,
+access_rn_realestate_subscription_admin,rn.realestate.subscription admin,rn.realestate.subscription,rn_realestate_base.group_rn_realestate_admin,crud,
+rule_rn_realestate_subscription_company,Real Estate Subscription multi-company,rn.realestate.subscription,,crud,"[('company_id', 'in', company_ids)]"

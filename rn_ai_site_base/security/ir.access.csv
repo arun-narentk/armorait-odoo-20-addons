@@ -1,0 +1,24 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_ai_site_brief_user,rn.ai.site.brief user,rn.ai.site.brief,rn_ai_site_base.group_rn_ai_site_user,cru,
+access_rn_ai_site_brief_mgr,rn.ai.site.brief manager,rn.ai.site.brief,rn_ai_site_base.group_rn_ai_site_manager,crud,
+rule_rn_ai_site_brief_company,AI Site Brief multi-company,rn.ai.site.brief,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_ai_site_site_user,rn.ai.site.site user,rn.ai.site.site,rn_ai_site_base.group_rn_ai_site_user,r,
+access_rn_ai_site_site_editor,rn.ai.site.site editor,rn.ai.site.site,rn_ai_site_base.group_rn_ai_site_editor,cru,
+access_rn_ai_site_site_mgr,rn.ai.site.site manager,rn.ai.site.site,rn_ai_site_base.group_rn_ai_site_manager,crud,
+rule_rn_ai_site_site_company,AI Site multi-company,rn.ai.site.site,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_ai_site_page_user,rn.ai.site.page user,rn.ai.site.page,rn_ai_site_base.group_rn_ai_site_user,r,
+access_rn_ai_site_page_editor,rn.ai.site.page editor,rn.ai.site.page,rn_ai_site_base.group_rn_ai_site_editor,cru,
+access_rn_ai_site_page_mgr,rn.ai.site.page manager,rn.ai.site.page,rn_ai_site_base.group_rn_ai_site_manager,crud,
+rule_rn_ai_site_page_company,AI Site Page multi-company,rn.ai.site.page,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_ai_site_block_user,rn.ai.site.block user,rn.ai.site.block,rn_ai_site_base.group_rn_ai_site_user,r,
+access_rn_ai_site_block_editor,rn.ai.site.block editor,rn.ai.site.block,rn_ai_site_base.group_rn_ai_site_editor,cru,
+access_rn_ai_site_block_mgr,rn.ai.site.block manager,rn.ai.site.block,rn_ai_site_base.group_rn_ai_site_manager,crud,
+rule_rn_ai_site_block_company,AI Site Block multi-company,rn.ai.site.block,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_ai_site_theme_user,rn.ai.site.theme user,rn.ai.site.theme,rn_ai_site_base.group_rn_ai_site_user,r,
+access_rn_ai_site_theme_mgr,rn.ai.site.theme manager,rn.ai.site.theme,rn_ai_site_base.group_rn_ai_site_manager,crud,
+access_rn_ai_site_settings_mgr,rn.ai.site.settings manager,rn.ai.site.settings,rn_ai_site_base.group_rn_ai_site_manager,crud,
+access_rn_ai_site_settings_ro,rn.ai.site.settings readonly,rn.ai.site.settings,rn_ai_site_base.group_rn_ai_site_user,r,
+rule_rn_ai_site_settings_company,AI Site Settings multi-company,rn.ai.site.settings,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_ai_site_subscription_mgr,rn.ai.site.subscription manager,rn.ai.site.subscription,rn_ai_site_base.group_rn_ai_site_manager,crud,
+access_rn_ai_site_subscription_ro,rn.ai.site.subscription readonly,rn.ai.site.subscription,rn_ai_site_base.group_rn_ai_site_user,r,
+rule_rn_ai_site_subscription_company,AI Site Subscription multi-company,rn.ai.site.subscription,,crud,"[('company_id', 'in', company_ids)]"

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_saleorder_document_inherit_rn_qr" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//div[@id='total']" position="before">
+            <div t-if="doc.rn_qr_image" class="mb-3">
+                <img t-att-src="image_data_uri(doc.rn_qr_image)" style="max-height:120px;"/>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="report_purchaseorder_document_inherit_rn_qr" inherit_id="purchase.report_purchaseorder_document">
+        <xpath expr="//div[hasclass('page')]" position="inside">
+            <div t-if="o.rn_qr_image" class="mb-3">
+                <img t-att-src="image_data_uri(o.rn_qr_image)" style="max-height:120px;"/>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="report_invoice_document_inherit_rn_qr" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[hasclass('page')]" position="inside">
+            <div t-if="o.rn_qr_image" class="mb-3">
+                <img t-att-src="image_data_uri(o.rn_qr_image)" style="max-height:120px;"/>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="report_delivery_document_inherit_rn_qr" inherit_id="stock.report_delivery_document">
+        <xpath expr="//div[hasclass('page')]" position="inside">
+            <div t-if="o.rn_qr_image" class="mb-3">
+                <img t-att-src="image_data_uri(o.rn_qr_image)" style="max-height:120px;"/>
+            </div>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,14 @@
+id,name,model_id,group_id/id,operation,domain
+rule_rn_smart_note_user_visibility,Smart Note user visibility,rn.smart.note,rn_smart_notes.group_rn_smart_notes_user,crud,"[
+            '|', '|', '|',
+            ('visibility', '=', 'everyone'),
+            ('user_id', '=', user.id),
+            ('mention_user_ids', 'in', user.id),
+            '&', ('visibility', '=', 'only_me'), ('user_id', '=', user.id)
+        ]"
+rule_rn_smart_note_sales_team_visibility,Smart Note sales team visibility,rn.smart.note,rn_smart_notes.group_rn_smart_notes_sales_team,crud,"[('visibility', '=', 'sales_team')]"
+rule_rn_smart_note_manager_all,Smart Note manager access,rn.smart.note,rn_smart_notes.group_rn_smart_notes_manager,crud,
+rule_rn_smart_note_company,Smart Note multi-company,rn.smart.note,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_smart_note_template_user,rn.smart.note.template user,rn.smart.note.template,rn_smart_notes.group_rn_smart_notes_user,r,
+access_rn_smart_note_template_manager,rn.smart.note.template manager,rn.smart.note.template,rn_smart_notes.group_rn_smart_notes_manager,crud,
+rule_rn_smart_note_template_company,Smart Note Template multi-company,rn.smart.note.template,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"

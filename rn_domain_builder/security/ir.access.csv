@@ -1,0 +1,8 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_domain_dictionary_user,rn.domain.dictionary user,rn.domain.dictionary,rn_domain_builder.group_rn_domain_builder_user,r,
+access_rn_domain_dictionary_manager,rn.domain.dictionary manager,rn.domain.dictionary,rn_domain_builder.group_rn_domain_builder_manager,crud,
+rule_rn_domain_dictionary_company,Domain Dictionary multi-company,rn.domain.dictionary,,crud,"[('company_id', 'in', company_ids)]"
+rule_rn_domain_history_user,Domain History own records,rn.domain.history,rn_domain_builder.group_rn_domain_builder_user,cru,"[('user_id', '=', user.id)]"
+rule_rn_domain_history_user_1,Domain History own records,rn.domain.history,rn_domain_builder.group_rn_domain_builder_manager,crud,"[('user_id', '=', user.id)]"
+rule_rn_domain_history_company,Domain History multi-company,rn.domain.history,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_domain_builder_user,rn.domain.builder user,rn.domain.builder,rn_domain_builder.group_rn_domain_builder_user,crud,

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="portal_entry_experience" model="portal.entry">
+        <field name="name">My Experience</field>
+        <field name="description">Orders, invoices, payments, downloads, and support in one place.</field>
+        <field name="url">/my/experience</field>
+        <field name="image" type="bytes" file="rn_customer_experience/static/description/icon.png"/>
+        <field name="category">client_category</field>
+        <field name="is_config_card" eval="True"/>
+    </record>
+</odoo>

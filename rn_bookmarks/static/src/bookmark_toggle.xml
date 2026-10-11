@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="rn_bookmarks.BookmarkToggle">
+        <button type="button"
+                class="btn btn-link o_rn_bookmark_toggle"
+                t-att-class="{'text-warning': this.state.bookmarked, 'is-loading': this.state.loading, 'o_rn_bookmark_star_pop': this.state.bookmarked and !this.state.loading}"
+                t-att-title="this.state.bookmarked ? 'Remove bookmark' : 'Bookmark (Ctrl+B)'"
+                t-on-click="this.onToggle">
+            <i t-att-class="(this.state.bookmarked ? 'fa fa-star' : 'fa fa-star-o') + ' o_rn_bookmark_star_icon'"/>
+            <span class="ms-1">Bookmark</span>
+        </button>
+    </t>
+</templates>

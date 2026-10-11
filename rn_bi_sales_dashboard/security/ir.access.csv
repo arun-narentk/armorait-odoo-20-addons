@@ -1,0 +1,24 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_bi_dashboard_readonly,rn.bi.sales.dashboard readonly,rn.bi.sales.dashboard,rn_bi_sales_dashboard.group_rn_bi_readonly,r,
+access_rn_bi_dashboard_manager,rn.bi.sales.dashboard manager,rn.bi.sales.dashboard,rn_bi_sales_dashboard.group_rn_bi_sales_manager,crud,
+rule_rn_bi_dashboard_company,BI Dashboard multi-company,rn.bi.sales.dashboard,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_bi_filter_readonly,rn.bi.dashboard.filter readonly,rn.bi.dashboard.filter,rn_bi_sales_dashboard.group_rn_bi_readonly,r,
+access_rn_bi_filter_user,rn.bi.dashboard.filter user,rn.bi.dashboard.filter,rn_bi_sales_dashboard.group_rn_bi_sales_user,cru,
+access_rn_bi_filter_manager,rn.bi.dashboard.filter manager,rn.bi.dashboard.filter,rn_bi_sales_dashboard.group_rn_bi_sales_manager,crud,
+access_rn_bi_kpi_readonly,rn.bi.sales.kpi readonly,rn.bi.sales.kpi,rn_bi_sales_dashboard.group_rn_bi_readonly,r,
+access_rn_bi_kpi_manager,rn.bi.sales.kpi manager,rn.bi.sales.kpi,rn_bi_sales_dashboard.group_rn_bi_sales_manager,crud,
+access_rn_bi_target_readonly,rn.bi.sales.target readonly,rn.bi.sales.target,rn_bi_sales_dashboard.group_rn_bi_readonly,r,
+access_rn_bi_target_manager,rn.bi.sales.target manager,rn.bi.sales.target,rn_bi_sales_dashboard.group_rn_bi_sales_manager,crud,
+rule_rn_bi_target_company,BI Target multi-company,rn.bi.sales.target,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_bi_snapshot_readonly,rn.bi.sales.snapshot readonly,rn.bi.sales.snapshot,rn_bi_sales_dashboard.group_rn_bi_readonly,r,
+access_rn_bi_snapshot_manager,rn.bi.sales.snapshot manager,rn.bi.sales.snapshot,rn_bi_sales_dashboard.group_rn_bi_sales_manager,crud,
+rule_rn_bi_snapshot_company,BI Snapshot multi-company,rn.bi.sales.snapshot,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_bi_widget_readonly,rn.bi.dashboard.widget readonly,rn.bi.dashboard.widget,rn_bi_sales_dashboard.group_rn_bi_readonly,r,
+access_rn_bi_widget_manager,rn.bi.dashboard.widget manager,rn.bi.dashboard.widget,rn_bi_sales_dashboard.group_rn_bi_sales_manager,crud,
+access_rn_bi_favorite_readonly,rn.bi.dashboard.favorite readonly,rn.bi.dashboard.favorite,rn_bi_sales_dashboard.group_rn_bi_readonly,r,
+access_rn_bi_favorite_user,rn.bi.dashboard.favorite user,rn.bi.dashboard.favorite,rn_bi_sales_dashboard.group_rn_bi_sales_user,crud,
+access_rn_bi_settings_readonly,rn.bi.dashboard.settings readonly,rn.bi.dashboard.settings,rn_bi_sales_dashboard.group_rn_bi_readonly,r,
+access_rn_bi_settings_manager,rn.bi.dashboard.settings manager,rn.bi.dashboard.settings,rn_bi_sales_dashboard.group_rn_bi_dashboard_manager,crud,
+rule_rn_bi_settings_company,BI Settings multi-company,rn.bi.dashboard.settings,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_bi_filter_wizard_user,rn.bi.sales.filter.wizard user,rn.bi.sales.filter.wizard,rn_bi_sales_dashboard.group_rn_bi_sales_user,crud,
+access_rn_bi_compare_wizard_user,rn.bi.compare.period.wizard user,rn.bi.compare.period.wizard,rn_bi_sales_dashboard.group_rn_bi_sales_user,crud,

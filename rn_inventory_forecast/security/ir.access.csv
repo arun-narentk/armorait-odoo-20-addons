@@ -1,0 +1,26 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_inv_forecast_run_ro,rn.inv.forecast.run readonly,rn.inv.forecast.run,rn_inventory_forecast.group_rn_inv_forecast_readonly,r,
+access_rn_inv_forecast_run_user,rn.inv.forecast.run user,rn.inv.forecast.run,rn_inventory_forecast.group_rn_inv_forecast_user,cru,
+access_rn_inv_forecast_run_mgr,rn.inv.forecast.run manager,rn.inv.forecast.run,rn_inventory_forecast.group_rn_inv_forecast_manager,crud,
+rule_rn_inv_forecast_run_company,Forecast Run multi-company,rn.inv.forecast.run,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_inv_forecast_line_ro,rn.inv.forecast.line readonly,rn.inv.forecast.line,rn_inventory_forecast.group_rn_inv_forecast_readonly,r,
+access_rn_inv_forecast_line_user,rn.inv.forecast.line user,rn.inv.forecast.line,rn_inventory_forecast.group_rn_inv_forecast_user,cru,
+access_rn_inv_forecast_line_mgr,rn.inv.forecast.line manager,rn.inv.forecast.line,rn_inventory_forecast.group_rn_inv_forecast_manager,crud,
+access_rn_inv_analysis_ro,rn.inv.analysis readonly,rn.inv.analysis,rn_inventory_forecast.group_rn_inv_forecast_readonly,r,
+access_rn_inv_analysis_mgr,rn.inv.analysis manager,rn.inv.analysis,rn_inventory_forecast.group_rn_inv_forecast_manager,crud,
+rule_rn_inv_analysis_company,Analysis multi-company,rn.inv.analysis,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_inv_safety_ro,rn.inv.safety.stock readonly,rn.inv.safety.stock,rn_inventory_forecast.group_rn_inv_forecast_readonly,r,
+access_rn_inv_safety_mgr,rn.inv.safety.stock manager,rn.inv.safety.stock,rn_inventory_forecast.group_rn_inv_forecast_manager,crud,
+access_rn_inv_reorder_ro,rn.inv.reorder.suggestion readonly,rn.inv.reorder.suggestion,rn_inventory_forecast.group_rn_inv_forecast_readonly,r,
+access_rn_inv_reorder_user,rn.inv.reorder.suggestion user,rn.inv.reorder.suggestion,rn_inventory_forecast.group_rn_inv_forecast_user,ru,
+access_rn_inv_reorder_mgr,rn.inv.reorder.suggestion manager,rn.inv.reorder.suggestion,rn_inventory_forecast.group_rn_inv_forecast_manager,crud,
+rule_rn_inv_reorder_company,Reorder Suggestion multi-company,rn.inv.reorder.suggestion,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_inv_alert_ro,rn.inv.stock.alert readonly,rn.inv.stock.alert,rn_inventory_forecast.group_rn_inv_forecast_readonly,r,
+access_rn_inv_alert_user,rn.inv.stock.alert user,rn.inv.stock.alert,rn_inventory_forecast.group_rn_inv_forecast_user,ru,
+access_rn_inv_alert_mgr,rn.inv.stock.alert manager,rn.inv.stock.alert,rn_inventory_forecast.group_rn_inv_forecast_manager,crud,
+rule_rn_inv_alert_company,Alert multi-company,rn.inv.stock.alert,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_inv_settings_ro,rn.inv.forecast.settings readonly,rn.inv.forecast.settings,rn_inventory_forecast.group_rn_inv_forecast_readonly,r,
+access_rn_inv_settings_admin,rn.inv.forecast.settings admin,rn.inv.forecast.settings,rn_inventory_forecast.group_rn_inv_forecast_admin,crud,
+rule_rn_inv_settings_company,Forecast Settings multi-company,rn.inv.forecast.settings,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_inv_wiz_forecast_user,rn.inv.generate.forecast.wizard user,rn.inv.generate.forecast.wizard,rn_inventory_forecast.group_rn_inv_forecast_user,crud,
+access_rn_inv_wiz_analysis_user,rn.inv.run.analysis.wizard user,rn.inv.run.analysis.wizard,rn_inventory_forecast.group_rn_inv_forecast_user,crud,

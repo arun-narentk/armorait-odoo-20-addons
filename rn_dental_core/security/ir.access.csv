@@ -1,0 +1,22 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_dental_patient_reception,rn.dental.patient reception,rn.dental.patient,rn_dental_core.group_rn_dental_reception,cru,
+access_rn_dental_patient_mgr,rn.dental.patient manager,rn.dental.patient,rn_dental_core.group_rn_dental_manager,crud,
+rule_rn_dental_patient_company,Patient multi-company,rn.dental.patient,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_dental_appointment_reception,rn.dental.appointment reception,rn.dental.appointment,rn_dental_core.group_rn_dental_reception,cru,
+access_rn_dental_appointment_mgr,rn.dental.appointment manager,rn.dental.appointment,rn_dental_core.group_rn_dental_manager,crud,
+rule_rn_dental_appointment_company,Appointment multi-company,rn.dental.appointment,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_dental_chair_reception,rn.dental.chair reception,rn.dental.chair,rn_dental_core.group_rn_dental_reception,r,
+access_rn_dental_chair_mgr,rn.dental.chair manager,rn.dental.chair,rn_dental_core.group_rn_dental_manager,crud,
+access_rn_dental_procedure_reception,rn.dental.procedure reception,rn.dental.procedure,rn_dental_core.group_rn_dental_reception,r,
+access_rn_dental_procedure_mgr,rn.dental.procedure manager,rn.dental.procedure,rn_dental_core.group_rn_dental_manager,crud,
+access_rn_dental_tooth_record_dentist,rn.dental.tooth.record dentist,rn.dental.tooth.record,rn_dental_core.group_rn_dental_dentist,cru,
+access_rn_dental_treatment_plan_dentist,rn.dental.treatment.plan dentist,rn.dental.treatment.plan,rn_dental_core.group_rn_dental_dentist,cru,
+rule_rn_dental_treatment_plan_company,Treatment Plan multi-company,rn.dental.treatment.plan,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_dental_treatment_plan_line_dentist,rn.dental.treatment.plan.line dentist,rn.dental.treatment.plan.line,rn_dental_core.group_rn_dental_dentist,cru,
+access_rn_dental_lab_request_dentist,rn.dental.lab.request dentist,rn.dental.lab.request,rn_dental_core.group_rn_dental_dentist,cru,
+access_rn_dental_lab_request_mgr,rn.dental.lab.request manager,rn.dental.lab.request,rn_dental_core.group_rn_dental_manager,crud,
+access_rn_dental_imaging_dentist,rn.dental.imaging dentist,rn.dental.imaging,rn_dental_core.group_rn_dental_dentist,cru,
+access_rn_dental_recall_reception,rn.dental.recall reception,rn.dental.recall,rn_dental_core.group_rn_dental_reception,cru,
+access_rn_dental_settings_mgr,rn.dental.settings manager,rn.dental.settings,rn_dental_core.group_rn_dental_manager,crud,
+rule_rn_dental_settings_company,Dental Settings multi-company,rn.dental.settings,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_dental_appointment_wizard,rn.dental.appointment.wizard reception,rn.dental.appointment.wizard,rn_dental_core.group_rn_dental_reception,crud,

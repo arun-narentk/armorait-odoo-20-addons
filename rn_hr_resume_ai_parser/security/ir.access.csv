@@ -1,0 +1,5 @@
+id,name,model_id,group_id/id,operation,domain
+access_hr_resume_skill_normalization_user,hr.resume.skill.normalization.user,hr.resume.skill.normalization,hr_recruitment.group_hr_recruitment_user,crud,
+access_hr_resume_similarity_user,hr.resume.similarity.user,hr.resume.similarity,hr_recruitment.group_hr_recruitment_user,r,
+access_hr_resume_similarity_manager,hr.resume.similarity.manager,hr.resume.similarity,hr_recruitment.group_hr_recruitment_manager,crud,
+access_hr_resume_bulk_upload_wizard_user,hr.resume.bulk.upload.wizard.user,hr.resume.bulk.upload.wizard,hr_recruitment.group_hr_recruitment_user,crud,

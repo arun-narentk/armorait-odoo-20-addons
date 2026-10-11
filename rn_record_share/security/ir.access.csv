@@ -1,0 +1,4 @@
+id,name,model_id,group_id/id,operation,domain
+rule_rn_share_log_user,Share log per user,rn.share.log,rn_record_share.group_rn_record_share_user,cr,"[('user_id', '=', user.id)]"
+rule_rn_share_log_user_1,Share log per user,rn.share.log,rn_record_share.group_rn_record_share_manager,crud,"[('user_id', '=', user.id)]"
+access_rn_record_share_wizard_user,rn.record.share.wizard user,rn.record.share.wizard,rn_record_share.group_rn_record_share_user,crud,

@@ -1,0 +1,31 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_hms_department_ro,rn.hms.department readonly,rn.hms.department,rn_hms_core.group_rn_hms_readonly,r,
+access_rn_hms_department_mgr,rn.hms.department manager,rn.hms.department,rn_hms_core.group_rn_hms_manager,crud,
+rule_rn_hms_department_company,HMS Department multi-company,rn.hms.department,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_hms_doctor_ro,rn.hms.doctor readonly,rn.hms.doctor,rn_hms_core.group_rn_hms_readonly,r,
+access_rn_hms_doctor_mgr,rn.hms.doctor manager,rn.hms.doctor,rn_hms_core.group_rn_hms_manager,crud,
+rule_rn_hms_doctor_company,HMS Doctor multi-company,rn.hms.doctor,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_hms_patient_ro,rn.hms.patient readonly,rn.hms.patient,rn_hms_core.group_rn_hms_readonly,r,
+access_rn_hms_patient_rec,rn.hms.patient receptionist,rn.hms.patient,rn_hms_core.group_rn_hms_receptionist,cru,
+access_rn_hms_patient_mgr,rn.hms.patient manager,rn.hms.patient,rn_hms_core.group_rn_hms_manager,crud,
+rule_rn_hms_patient_company,HMS Patient multi-company,rn.hms.patient,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_hms_ward_ro,rn.hms.ward readonly,rn.hms.ward,rn_hms_core.group_rn_hms_readonly,r,
+access_rn_hms_ward_mgr,rn.hms.ward manager,rn.hms.ward,rn_hms_core.group_rn_hms_manager,crud,
+rule_rn_hms_ward_company,HMS Ward multi-company,rn.hms.ward,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_hms_bed_ro,rn.hms.bed readonly,rn.hms.bed,rn_hms_core.group_rn_hms_readonly,r,
+access_rn_hms_bed_rec,rn.hms.bed receptionist,rn.hms.bed,rn_hms_core.group_rn_hms_receptionist,ru,
+access_rn_hms_bed_mgr,rn.hms.bed manager,rn.hms.bed,rn_hms_core.group_rn_hms_manager,crud,
+rule_rn_hms_bed_company,HMS Bed multi-company,rn.hms.bed,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_hms_appointment_ro,rn.hms.appointment readonly,rn.hms.appointment,rn_hms_core.group_rn_hms_readonly,r,
+access_rn_hms_appointment_rec,rn.hms.appointment receptionist,rn.hms.appointment,rn_hms_core.group_rn_hms_receptionist,cru,
+access_rn_hms_appointment_mgr,rn.hms.appointment manager,rn.hms.appointment,rn_hms_core.group_rn_hms_manager,crud,
+rule_rn_hms_appointment_company,HMS Appointment multi-company,rn.hms.appointment,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_hms_settings_ro,rn.hms.settings readonly,rn.hms.settings,rn_hms_core.group_rn_hms_readonly,r,
+access_rn_hms_settings_mgr,rn.hms.settings manager,rn.hms.settings,rn_hms_core.group_rn_hms_manager,crud,
+rule_rn_hms_settings_company,HMS Settings multi-company,rn.hms.settings,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_hms_subscription_ro,rn.hms.subscription readonly,rn.hms.subscription,rn_hms_core.group_rn_hms_readonly,r,
+access_rn_hms_subscription_mgr,rn.hms.subscription manager,rn.hms.subscription,rn_hms_core.group_rn_hms_manager,crud,
+rule_rn_hms_subscription_company,HMS Subscription multi-company,rn.hms.subscription,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_hms_wiz_patient_rec,rn.hms.register.patient.wizard receptionist,rn.hms.register.patient.wizard,rn_hms_core.group_rn_hms_receptionist,crud,
+access_rn_hms_wiz_appt_rec,rn.hms.quick.appointment.wizard receptionist,rn.hms.quick.appointment.wizard,rn_hms_core.group_rn_hms_receptionist,crud,
+access_rn_hms_wiz_admit_rec,rn.hms.admit.patient.wizard receptionist,rn.hms.admit.patient.wizard,rn_hms_core.group_rn_hms_receptionist,crud,

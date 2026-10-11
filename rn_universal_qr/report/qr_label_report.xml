@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="paperformat_rn_qr_label" model="report.paperformat">
+        <field name="name">Universal QR Label</field>
+        <field name="default" eval="False"/>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">10</field>
+        <field name="margin_bottom">10</field>
+        <field name="margin_left">8</field>
+        <field name="margin_right">8</field>
+    </record>
+
+    <record id="action_report_rn_qr_label" model="ir.actions.report">
+        <field name="name">QR Label</field>
+        <field name="model">rn.qr.record</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">rn_universal_qr.report_rn_qr_label</field>
+        <field name="binding_model_id" ref="model_rn_qr_record"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="paperformat_rn_qr_label"/>
+    </record>
+
+    <record id="action_report_rn_qr_a4" model="ir.actions.report">
+        <field name="name">QR A4 Sheet</field>
+        <field name="model">rn.qr.record</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">rn_universal_qr.report_rn_qr_a4</field>
+        <field name="binding_model_id" ref="model_rn_qr_record"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_rn_qr_label">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <t t-foreach="docs" t-as="o">
+                    <div class="mb-4 p-2 border">
+                        <h4 t-out="o.name"/>
+                        <p>
+                            <strong>Model:</strong> <span t-out="o.res_model"/>
+                            <strong class="ms-2">ID:</strong> <span t-out="o.res_id"/>
+                        </p>
+                        <img t-if="o.qr_image" t-att-src="image_data_uri(o.qr_image)" style="max-height:160px;"/>
+                    </div>
+                </t>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_rn_qr_a4">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <h3>Universal QR A4 Sheet</h3>
+                <div class="row">
+                    <t t-foreach="docs" t-as="o">
+                        <div class="col-4 mb-4">
+                            <div class="text-center border p-2">
+                                <div><strong t-out="o.name"/></div>
+                                <img t-if="o.qr_image" t-att-src="image_data_uri(o.qr_image)" style="max-width:100%;max-height:120px;"/>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

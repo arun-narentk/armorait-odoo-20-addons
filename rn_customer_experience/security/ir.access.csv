@@ -1,0 +1,15 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_customer_experience_config_admin,rn.customer.experience.config admin,rn.customer.experience.config,rn_customer_experience.group_rn_customer_experience_admin,crud,
+access_rn_customer_experience_widget_admin,rn.customer.experience.widget admin,rn.customer.experience.widget,rn_customer_experience.group_rn_customer_experience_admin,crud,
+access_rn_customer_experience_page_admin,rn.customer.experience.page admin,rn.customer.experience.page,rn_customer_experience.group_rn_customer_experience_admin,crud,
+access_rn_customer_experience_page_widget_admin,rn.customer.experience.page.widget admin,rn.customer.experience.page.widget,rn_customer_experience.group_rn_customer_experience_admin,crud,
+access_rn_customer_experience_download_admin,rn.customer.experience.download admin,rn.customer.experience.download,rn_customer_experience.group_rn_customer_experience_admin,crud,
+access_rn_customer_experience_download_portal,rn.customer.experience.download portal,rn.customer.experience.download,base.group_portal,r,
+access_rn_customer_experience_ticket_user,rn.customer.experience.ticket user,rn.customer.experience.ticket,rn_customer_experience.group_rn_customer_experience_user,cru,
+rule_rn_customer_experience_ticket_portal,Portal users own tickets,rn.customer.experience.ticket,base.group_portal,cru,"[('partner_id', 'child_of', user.partner_id.commercial_partner_id.id)]"
+rule_rn_customer_experience_ticket_company,Experience Ticket multi-company,rn.customer.experience.ticket,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_customer_experience_warranty_admin,rn.customer.experience.warranty admin,rn.customer.experience.warranty,rn_customer_experience.group_rn_customer_experience_admin,crud,
+access_rn_customer_experience_warranty_portal,rn.customer.experience.warranty portal,rn.customer.experience.warranty,base.group_portal,r,
+access_rn_customer_experience_amc_admin,rn.customer.experience.amc admin,rn.customer.experience.amc,rn_customer_experience.group_rn_customer_experience_admin,crud,
+access_rn_customer_experience_amc_portal,rn.customer.experience.amc portal,rn.customer.experience.amc,base.group_portal,r,
+access_rn_customer_experience_analytics_user,rn.customer.experience.analytics user,rn.customer.experience.analytics,rn_customer_experience.group_rn_customer_experience_user,r,

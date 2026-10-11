@@ -1,0 +1,18 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_mrp_shift_user,rn.mrp.shift user,rn.mrp.shift,rn_mrp_intelligence.group_rn_mrp_intel_user,r,
+access_rn_mrp_shift_mgr,rn.mrp.shift manager,rn.mrp.shift,rn_mrp_intelligence.group_rn_mrp_intel_manager,crud,
+rule_rn_mrp_shift_company,MRP Shift multi-company,rn.mrp.shift,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_mrp_downtime_user,rn.mrp.downtime.log user,rn.mrp.downtime.log,rn_mrp_intelligence.group_rn_mrp_intel_user,r,
+access_rn_mrp_downtime_mgr,rn.mrp.downtime.log manager,rn.mrp.downtime.log,rn_mrp_intelligence.group_rn_mrp_intel_manager,crud,
+rule_rn_mrp_downtime_company,Downtime Log multi-company,rn.mrp.downtime.log,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_mrp_oee_user,rn.mrp.oee.record user,rn.mrp.oee.record,rn_mrp_intelligence.group_rn_mrp_intel_user,r,
+access_rn_mrp_oee_mgr,rn.mrp.oee.record manager,rn.mrp.oee.record,rn_mrp_intelligence.group_rn_mrp_intel_manager,crud,
+rule_rn_mrp_oee_company,OEE Record multi-company,rn.mrp.oee.record,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_mrp_insight_user,rn.mrp.ai.insight user,rn.mrp.ai.insight,rn_mrp_intelligence.group_rn_mrp_intel_user,r,
+access_rn_mrp_insight_mgr,rn.mrp.ai.insight manager,rn.mrp.ai.insight,rn_mrp_intelligence.group_rn_mrp_intel_manager,crud,
+rule_rn_mrp_insight_company,AI Insight multi-company,rn.mrp.ai.insight,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_mrp_wc_status_user,rn.mrp.workcenter.status user,rn.mrp.workcenter.status,rn_mrp_intelligence.group_rn_mrp_intel_user,r,
+access_rn_mrp_wc_status_mgr,rn.mrp.workcenter.status manager,rn.mrp.workcenter.status,rn_mrp_intelligence.group_rn_mrp_intel_manager,crud,
+rule_rn_mrp_wc_status_company,Workcenter Status multi-company,rn.mrp.workcenter.status,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_mrp_intel_settings_mgr,rn.mrp.intelligence.settings manager,rn.mrp.intelligence.settings,rn_mrp_intelligence.group_rn_mrp_intel_manager,crud,
+rule_rn_mrp_intel_settings_company,Intelligence Settings multi-company,rn.mrp.intelligence.settings,,crud,"[('company_id', 'in', company_ids)]"

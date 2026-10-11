@@ -1,0 +1,48 @@
+# -*- coding: utf-8 -*-
+{
+    'name': 'Resume AI Parser',
+    'version': '20.0.1.0.0',
+    'category': 'Human Resources/Recruitment',
+    'summary': 'Parse CVs into skills, experience, and applicant records',
+    'description': """
+        Async resume parsing: PDF extraction, AI-structured JSON, skill normalization,
+        experience calculation, and job match score. Uses queue_job when available.
+    """,
+    'depends': [
+        'hr_recruitment',
+        'hr_skills',
+        'mail',
+        'web',
+        'base',
+    ],
+    # Use 'pdfminer' (import name) so dependency works even when 'packaging' is not installed
+    'external_dependencies': {
+        'python': ['pdfminer'],
+    },
+    'data': [
+        'data/resume_parser_cron.xml',
+        'data/skill_normalization_data.xml',
+        'views/hr_applicant_views.xml',
+        'views/res_config_settings_views.xml',
+        'wizard/hr_resume_bulk_upload_wizard_views.xml',
+        'views/rn_hr_resume_ai_parser_menus_views.xml',
+        'security/ir.access.csv',
+    ],
+    'author': 'ARMORA IT Technologies',
+    'maintainer': 'ARMORA IT Technologies',
+                    'images': [
+        'static/description/banner.png',
+        'static/description/icon.png',
+        'static/description/company_logo.png',
+        'static/description/screenshot_hr_resume_ai_parser_form.png',
+        'static/description/screenshot_hr_resume_ai_parser_list.png',
+        'static/description/screenshot_hr_resume_ai_parser_dashboard.png',
+        'static/description/screenshot_hr_resume_ai_parser_back.png',
+    ],
+    'installable': True,
+    'application': False,
+    'license': 'OPL-1',
+    'currency': 'USD',
+    'price': 9.99,
+    'live_test_url': 'https://www.armorait.com',
+}

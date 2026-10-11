@@ -1,0 +1,53 @@
+# -*- coding: utf-8 -*-
+{
+    'name': 'Universal QR Generator',
+    'version': '20.0.1.0.0',
+    'category': 'Productivity',
+    'summary': 'Generate secure QR codes for any Odoo record with scan tracking and print options',
+    'description': """
+Universal QR Generator for Odoo 20 Community
+============================================
+Generic QR engine for any Odoo model with token URLs, scan tracking, templates,
+bulk ZIP export, and report integration.
+    """,
+    'author': 'ARMORA IT Technologies',
+    'maintainer': 'ARMORA IT Technologies',
+    'website': 'https://www.armorait.com',
+    'support': 'info@armorait.com',
+    'license': 'OPL-1',
+    'currency': 'USD',
+    'price': 8.99,
+    'live_test_url': 'https://www.armorait.com',
+    'sequence': 52,
+    'depends': ['base', 'mail', 'web', 'sale', 'purchase', 'account', 'crm', 'contacts', 'product', 'stock'],
+    'data': [
+        'security/security.xml',
+        'data/ir_config_parameter.xml',
+        'data/qr_template_data.xml',
+        'views/qr_template_views.xml',
+        'views/qr_model_config_views.xml',
+        'views/qr_record_views.xml',
+        'views/qr_scan_log_views.xml',
+        'views/settings_views.xml',
+        'views/inherited_form_views.xml',
+        'views/menu.xml',
+        'wizard/bulk_generate_wizard_views.xml',
+        'report/qr_label_report.xml',
+        'report/report_inherit.xml',
+        'security/ir.access.csv',
+    ],
+    'demo': ['demo/demo.xml'],
+    'external_dependencies': {'python': ['qrcode', 'Pillow']},
+                        'images': [
+        'static/description/banner.png',
+        'static/description/icon.png',
+        'static/description/company_logo.png',
+        'static/description/screenshot_universal_qr_form.png',
+        'static/description/screenshot_universal_qr_list.png',
+        'static/description/screenshot_universal_qr_dashboard.png',
+        'static/description/screenshot_universal_qr_back.png',
+    ],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+}

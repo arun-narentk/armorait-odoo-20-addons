@@ -1,0 +1,24 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_textile_factory_ro,rn.textile.factory readonly,rn.textile.factory,rn_textile_base.group_rn_textile_readonly,r,
+access_rn_textile_factory_supervisor,rn.textile.factory supervisor,rn.textile.factory,rn_textile_base.group_rn_textile_supervisor,cru,
+access_rn_textile_factory_mgr,rn.textile.factory manager,rn.textile.factory,rn_textile_base.group_rn_textile_manager,crud,
+rule_rn_textile_factory_company,Textile Factory multi-company,rn.textile.factory,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_textile_department_ro,rn.textile.department readonly,rn.textile.department,rn_textile_base.group_rn_textile_readonly,r,
+access_rn_textile_department_supervisor,rn.textile.department supervisor,rn.textile.department,rn_textile_base.group_rn_textile_supervisor,cru,
+access_rn_textile_department_mgr,rn.textile.department manager,rn.textile.department,rn_textile_base.group_rn_textile_manager,crud,
+rule_rn_textile_department_company,Textile Department multi-company,rn.textile.department,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_textile_machine_ro,rn.textile.machine readonly,rn.textile.machine,rn_textile_base.group_rn_textile_readonly,r,
+access_rn_textile_machine_operator,rn.textile.machine operator,rn.textile.machine,rn_textile_base.group_rn_textile_operator,ru,
+access_rn_textile_machine_supervisor,rn.textile.machine supervisor,rn.textile.machine,rn_textile_base.group_rn_textile_supervisor,cru,
+access_rn_textile_machine_mgr,rn.textile.machine manager,rn.textile.machine,rn_textile_base.group_rn_textile_manager,crud,
+rule_rn_textile_machine_company,Textile Machine multi-company,rn.textile.machine,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_textile_yarn_spec_ro,rn.textile.yarn.spec readonly,rn.textile.yarn.spec,rn_textile_base.group_rn_textile_readonly,r,
+access_rn_textile_yarn_spec_supervisor,rn.textile.yarn.spec supervisor,rn.textile.yarn.spec,rn_textile_base.group_rn_textile_supervisor,cru,
+access_rn_textile_yarn_spec_mgr,rn.textile.yarn.spec manager,rn.textile.yarn.spec,rn_textile_base.group_rn_textile_manager,crud,
+rule_rn_textile_yarn_spec_company,Textile Yarn Spec multi-company,rn.textile.yarn.spec,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_textile_settings_ro,rn.textile.settings readonly,rn.textile.settings,rn_textile_base.group_rn_textile_readonly,r,
+access_rn_textile_settings_mgr,rn.textile.settings manager,rn.textile.settings,rn_textile_base.group_rn_textile_manager,crud,
+rule_rn_textile_settings_company,Textile Settings multi-company,rn.textile.settings,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_textile_subscription_ro,rn.textile.subscription readonly,rn.textile.subscription,rn_textile_base.group_rn_textile_readonly,r,
+access_rn_textile_subscription_mgr,rn.textile.subscription manager,rn.textile.subscription,rn_textile_base.group_rn_textile_manager,crud,
+rule_rn_textile_subscription_company,Textile Subscription multi-company,rn.textile.subscription,,crud,"[('company_id', 'in', company_ids)]"

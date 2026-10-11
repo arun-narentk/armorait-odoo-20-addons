@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rn_qr_bulk_generate_wizard_form" model="ir.ui.view">
+        <field name="name">rn.qr.bulk.generate.wizard.form</field>
+        <field name="model">rn.qr.bulk.generate.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Bulk Generate QR">
+                <group>
+                    <field name="model_id"/>
+                    <field name="limit"/>
+                    <field name="include_archived"/>
+                </group>
+                <group>
+                    <field name="zip_filename" readonly="1"/>
+                    <field name="zip_file" filename="zip_filename" readonly="1"/>
+                </group>
+                <footer>
+                    <button name="action_generate" type="object" class="btn-primary" string="Generate ZIP"/>
+                    <button string="Close" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

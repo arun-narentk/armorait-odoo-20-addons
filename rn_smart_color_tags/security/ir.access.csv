@@ -1,0 +1,5 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_color_rule_user,rn.color.rule user,rn.color.rule,rn_smart_color_tags.group_rn_color_tags_user,r,
+access_rn_color_rule_manager,rn.color.rule manager,rn.color.rule,rn_smart_color_tags.group_rn_color_tags_manager,crud,
+rule_rn_color_rule_company,Color rules multi-company,rn.color.rule,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_color_rule_service_user,rn.color.rule.service user,rn.color.rule.service,rn_smart_color_tags.group_rn_color_tags_user,r,

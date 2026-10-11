@@ -1,0 +1,23 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_workflow_user,rn.workflow user,rn.workflow,rn_workflow_builder.group_rn_workflow_user,r,
+access_rn_workflow_designer,rn.workflow designer,rn.workflow,rn_workflow_builder.group_rn_workflow_designer,cru,
+access_rn_workflow_mgr,rn.workflow manager,rn.workflow,rn_workflow_builder.group_rn_workflow_manager,crud,
+rule_rn_workflow_company,Workflow multi-company,rn.workflow,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_workflow_node_user,rn.workflow.node user,rn.workflow.node,rn_workflow_builder.group_rn_workflow_user,r,
+access_rn_workflow_node_designer,rn.workflow.node designer,rn.workflow.node,rn_workflow_builder.group_rn_workflow_designer,crud,
+rule_rn_workflow_node_company,Workflow Node multi-company,rn.workflow.node,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_workflow_run_user,rn.workflow.run user,rn.workflow.run,rn_workflow_builder.group_rn_workflow_user,r,
+access_rn_workflow_run_designer,rn.workflow.run designer,rn.workflow.run,rn_workflow_builder.group_rn_workflow_designer,cru,
+access_rn_workflow_run_mgr,rn.workflow.run manager,rn.workflow.run,rn_workflow_builder.group_rn_workflow_manager,crud,
+rule_rn_workflow_run_company,Workflow Run multi-company,rn.workflow.run,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_workflow_run_log_user,rn.workflow.run.log user,rn.workflow.run.log,rn_workflow_builder.group_rn_workflow_user,r,
+access_rn_workflow_run_log_mgr,rn.workflow.run.log manager,rn.workflow.run.log,rn_workflow_builder.group_rn_workflow_manager,crud,
+rule_rn_workflow_run_log_company,Workflow Run Log multi-company,rn.workflow.run.log,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_workflow_connector_user,rn.workflow.connector user,rn.workflow.connector,rn_workflow_builder.group_rn_workflow_user,r,
+access_rn_workflow_connector_mgr,rn.workflow.connector manager,rn.workflow.connector,rn_workflow_builder.group_rn_workflow_manager,crud,
+access_rn_workflow_template_user,rn.workflow.template user,rn.workflow.template,rn_workflow_builder.group_rn_workflow_user,r,
+access_rn_workflow_template_designer,rn.workflow.template designer,rn.workflow.template,rn_workflow_builder.group_rn_workflow_designer,ru,
+access_rn_workflow_template_mgr,rn.workflow.template manager,rn.workflow.template,rn_workflow_builder.group_rn_workflow_manager,crud,
+access_rn_workflow_settings_mgr,rn.workflow.settings manager,rn.workflow.settings,rn_workflow_builder.group_rn_workflow_manager,crud,
+rule_rn_workflow_settings_company,Workflow Settings multi-company,rn.workflow.settings,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_workflow_build_wizard,rn.workflow.build.from.text.wizard designer,rn.workflow.build.from.text.wizard,rn_workflow_builder.group_rn_workflow_designer,crud,

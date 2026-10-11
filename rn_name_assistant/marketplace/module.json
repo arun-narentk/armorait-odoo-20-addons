@@ -1,0 +1,68 @@
+{
+  "technical_name": "rn_name_assistant",
+  "app_name": "Name Assistant",
+  "tagline": "Generate professional, consistent names using configurable naming rules",
+  "category_type": "productivity",
+  "price": 7.99,
+  "accent": "#16a34a",
+  "problem": "Teams running Odoo 20 need a reliable way to manage name assistant without spreadsheets or disconnected tools.",
+  "solution": "Generate professional, consistent names using configurable naming rules",
+  "benefits": [
+    "Streamline name assistant workflows in Odoo",
+    "Built for Odoo 20 Community",
+    "Production-ready ARMORA architecture",
+    "Multi-company aware where applicable",
+    "Support from ARMORA IT Technologies"
+  ],
+  "features": [
+    {
+      "title": "Odoo-native",
+      "text": "Name Assistant extends standard Odoo models and views."
+    },
+    {
+      "title": "Configurable",
+      "text": "Settings, security groups, and menus included."
+    },
+    {
+      "title": "Documented",
+      "text": "README, INSTALL, USER_GUIDE, FAQ, and SECURITY docs."
+    },
+    {
+      "title": "Commercial support",
+      "text": "Contact info@armorait.com for rollout help."
+    }
+  ],
+  "workflow": [
+    "Install Name Assistant",
+    "Configure naming templates and abbreviations",
+    "Assign manager and user groups",
+    "Open a product, contact, or project record",
+    "Click Suggest Name and pick a ranked option",
+    "Run batch generation from list views when needed"
+  ],
+  "screenshot_labels": {
+    "dashboard.png": "Naming Templates",
+    "wizard.png": "Suggest Name Wizard",
+    "settings.png": "Abbreviation Rules",
+    "report.png": "Product Catalog",
+    "mobile.png": "Mobile Product Form",
+    "workflow.png": "Product Naming Fields",
+    "designer.png": "Template Designer"
+  },
+  "gif_labels": {
+    "hero.gif": "Suggest and apply a product name",
+    "workflow.gif": "Templates to product wizard",
+    "dashboard.gif": "Browse naming templates",
+    "settings.gif": "Manage abbreviations",
+    "reports.gif": "Product list and naming",
+    "mobile.gif": "Mobile naming workflow"
+  },
+  "seo_keywords": "Odoo 20, Odoo Community, Name Assistant, product naming, rn_name_assistant, ARMORA IT Technologies",
+  "has_dashboard": true,
+  "has_reports": true,
+  "has_mobile": true,
+  "live_test_url": "https://www.armorait.com",
+  "version": "20.0.1.0.0",
+  "branch": "20.0",
+  "git_url": "ssh://git@github.com/arun-narentk/armorait-odoo-20-addons.git#20.0"
+}

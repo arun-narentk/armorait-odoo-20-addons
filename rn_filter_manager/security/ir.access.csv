@@ -1,0 +1,8 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_filter_folder_user,rn.filter.folder user,rn.filter.folder,rn_filter_manager.group_rn_filter_manager_user,cru,
+access_rn_filter_folder_manager,rn.filter.folder manager,rn.filter.folder,rn_filter_manager.group_rn_filter_manager_manager,crud,
+rule_rn_filter_folder_company,Filter Folder multi-company,rn.filter.folder,,crud,"[('company_id', 'in', company_ids)]"
+rule_rn_filter_history_user,Filter History own records,rn.filter.history,rn_filter_manager.group_rn_filter_manager_user,cr,"[('user_id', '=', user.id)]"
+rule_rn_filter_history_user_1,Filter History own records,rn.filter.history,rn_filter_manager.group_rn_filter_manager_manager,crud,"[('user_id', '=', user.id)]"
+rule_rn_filter_history_company,Filter History multi-company,rn.filter.history,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_filter_import_export_wizard,rn.filter.import.export.wizard,rn.filter.import.export.wizard,rn_filter_manager.group_rn_filter_manager_user,crud,

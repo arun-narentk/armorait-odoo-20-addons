@@ -1,0 +1,27 @@
+<odoo>
+    <record model="res.groups.privilege" id="res_groups_privilege_rn_hospital">
+        <field name="name">ARMORA Hospital ERP</field>
+        <field name="category_id" ref="base.module_category_services"/>
+    </record>
+    <record id="group_rn_hospital_reception" model="res.groups">
+        <field name="name">Reception / Front Desk</field>
+        <field name="privilege_id" ref="res_groups_privilege_rn_hospital"/>
+    </record>
+    <record id="group_rn_hospital_nurse" model="res.groups">
+        <field name="name">Nurse</field>
+        <field name="privilege_id" ref="res_groups_privilege_rn_hospital"/>
+        <field name="implied_ids" eval="[(4, ref('group_rn_hospital_reception'))]"/>
+    </record>
+    <record id="group_rn_hospital_doctor" model="res.groups">
+        <field name="name">Doctor</field>
+        <field name="privilege_id" ref="res_groups_privilege_rn_hospital"/>
+        <field name="implied_ids" eval="[(4, ref('group_rn_hospital_nurse'))]"/>
+    </record>
+    <record id="group_rn_hospital_manager" model="res.groups">
+        <field name="name">Hospital Manager</field>
+        <field name="privilege_id" ref="res_groups_privilege_rn_hospital"/>
+        <field name="implied_ids" eval="[(4, ref('group_rn_hospital_doctor'))]"/>
+        <field name="user_ids" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    </record>
+
+    </odoo>

@@ -1,0 +1,8 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_color_rule_user,rn.color.rule user,rn.color.rule,rn_visual_enhancer.group_rn_color_tags_user,r,
+access_rn_color_rule_manager,rn.color.rule manager,rn.color.rule,rn_visual_enhancer.group_rn_color_tags_manager,crud,
+rule_rn_color_rule_company,Color rules multi-company,rn.color.rule,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_color_rule_service_user,rn.color.rule.service user,rn.color.rule.service,rn_visual_enhancer.group_rn_color_tags_user,r,
+access_rn_visual_status_user,rn.visual.status user,rn.visual.status,rn_visual_enhancer.group_rn_color_tags_user,r,
+access_rn_visual_status_manager,rn.visual.status manager,rn.visual.status,rn_visual_enhancer.group_rn_color_tags_manager,crud,
+rule_rn_visual_status_company,Visual status maps multi-company,rn.visual.status,,crud,"[('company_id', 'in', company_ids)]"

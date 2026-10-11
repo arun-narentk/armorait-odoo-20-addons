@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rn_qr_template_list" model="ir.ui.view">
+        <field name="name">rn.qr.template.list</field>
+        <field name="model">rn.qr.template</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="sequence"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="template_type"/>
+                <field name="size"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_rn_qr_template_form" model="ir.ui.view">
+        <field name="name">rn.qr.template.form</field>
+        <field name="model">rn.qr.template</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="sequence"/>
+                            <field name="active"/>
+                        </group>
+                        <group>
+                            <field name="template_type"/>
+                            <field name="size"/>
+                            <field name="include_company"/>
+                            <field name="include_model"/>
+                            <field name="include_record_name"/>
+                            <field name="include_reference"/>
+                        </group>
+                    </group>
+                    <field name="note"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

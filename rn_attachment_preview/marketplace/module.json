@@ -1,0 +1,64 @@
+{
+  "technical_name": "rn_attachment_preview",
+  "app_name": "Attachment Preview",
+  "tagline": "Preview PDFs, Office files, images, and media inside Odoo without downloading",
+  "category_type": "productivity",
+  "price": 9.99,
+  "accent": "#2563eb",
+  "problem": "Users must download attachments to see what is inside invoices, products, and documents.",
+  "solution": "Preview supported files directly in Odoo with thumbnails, OCR search, Office HTML preview, PDF annotations, and a full-screen gallery viewer.",
+  "benefits": [
+    "Instant PDF and image preview in forms",
+    "Generated thumbnails via scheduled jobs",
+    "Search attachment text with OCR indexing",
+    "Preview Word, Excel, and PowerPoint in the browser",
+    "Annotate PDFs with page notes",
+    "Respects Odoo document access rights"
+  ],
+  "features": [
+    {"title": "Thumbnail Cron", "text": "Background jobs generate stored thumbnails for images, PDF, and Office files."},
+    {"title": "OCR Search", "text": "Find attachments by text inside PDF, TXT, and Office documents."},
+    {"title": "Office Preview", "text": "Read DOCX, XLSX, and PPTX as HTML without an Office license."},
+    {"title": "PDF Annotations", "text": "Add page notes while previewing PDF files."},
+    {"title": "Gallery Viewer", "text": "Full-screen preview for PDF, image, video, audio, and text."}
+  ],
+  "workflow": [
+    "Upload attachments on any supported record",
+    "Cron jobs build thumbnails and OCR text",
+    "Browse the visual thumbnail strip",
+    "Preview Office files or PDFs in the V2 dialog",
+    "Search globally with OCR Search"
+  ],
+  "screenshots": {
+    "workflow": "screenshots/workflow.png",
+    "dashboard": "screenshots/dashboard.png",
+    "designer": "screenshots/designer.png",
+    "mobile": "screenshots/mobile.png"
+  },
+  "screenshot_labels": {
+    "workflow": "Thumbnail Strip",
+    "dashboard": "OCR Search",
+    "designer": "Office Preview",
+    "mobile": "PDF Annotations"
+  },
+  "gif_labels": {
+    "hero": "Preview Without Download",
+    "workflow": "Thumbnail Cron",
+    "dashboard": "OCR Search",
+    "settings": "Office Preview",
+    "reports": "PDF Annotations",
+    "mobile": "Mobile Full Screen"
+  },
+  "faq": [
+    {"q": "Which file types are supported?", "a": "PDF, images, video, audio, text, and Office files (DOCX, XLSX, PPTX)."},
+    {"q": "How does OCR search work?", "a": "A scheduled job extracts text from supported files and stores it for global search."},
+    {"q": "Is preview access secure?", "a": "Yes. Users can only preview attachments they are allowed to read in Odoo."}
+  ],
+  "seo_keywords": "Odoo 20 attachment preview, PDF preview Odoo, Office preview Odoo, OCR search attachments, document preview without download",
+  "has_dashboard": true,
+  "has_reports": false,
+  "has_mobile": true,
+  "live_test_url": "https://www.armorait.com",
+  "version": "20.0.2.0.0",
+  "branch": null
+}

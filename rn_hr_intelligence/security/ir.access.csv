@@ -1,0 +1,18 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_hr_payroll_snapshot_user,rn.hr.payroll.snapshot user,rn.hr.payroll.snapshot,rn_hr_intelligence.group_rn_hr_intel_user,r,
+access_rn_hr_payroll_snapshot_mgr,rn.hr.payroll.snapshot manager,rn.hr.payroll.snapshot,rn_hr_intelligence.group_rn_hr_intel_manager,crud,
+rule_rn_hr_payroll_snapshot_company,Payroll Snapshot multi-company,rn.hr.payroll.snapshot,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_hr_overtime_user,rn.hr.overtime.log user,rn.hr.overtime.log,rn_hr_intelligence.group_rn_hr_intel_user,r,
+access_rn_hr_overtime_mgr,rn.hr.overtime.log manager,rn.hr.overtime.log,rn_hr_intelligence.group_rn_hr_intel_manager,crud,
+rule_rn_hr_overtime_company,Overtime Log multi-company,rn.hr.overtime.log,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_hr_attrition_user,rn.hr.attrition.record user,rn.hr.attrition.record,rn_hr_intelligence.group_rn_hr_intel_user,r,
+access_rn_hr_attrition_mgr,rn.hr.attrition.record manager,rn.hr.attrition.record,rn_hr_intelligence.group_rn_hr_intel_manager,crud,
+rule_rn_hr_attrition_company,Attrition Record multi-company,rn.hr.attrition.record,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_hr_insight_user,rn.hr.ai.insight user,rn.hr.ai.insight,rn_hr_intelligence.group_rn_hr_intel_user,r,
+access_rn_hr_insight_mgr,rn.hr.ai.insight manager,rn.hr.ai.insight,rn_hr_intelligence.group_rn_hr_intel_manager,crud,
+rule_rn_hr_insight_company,HR Insight multi-company,rn.hr.ai.insight,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_hr_quality_user,rn.hr.data.quality.check user,rn.hr.data.quality.check,rn_hr_intelligence.group_rn_hr_intel_user,r,
+access_rn_hr_quality_mgr,rn.hr.data.quality.check manager,rn.hr.data.quality.check,rn_hr_intelligence.group_rn_hr_intel_manager,crud,
+rule_rn_hr_quality_company,Data Quality multi-company,rn.hr.data.quality.check,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_hr_intel_settings_mgr,rn.hr.intelligence.settings manager,rn.hr.intelligence.settings,rn_hr_intelligence.group_rn_hr_intel_manager,crud,
+rule_rn_hr_intel_settings_company,HR Intelligence Settings multi-company,rn.hr.intelligence.settings,,crud,"[('company_id', 'in', company_ids)]"

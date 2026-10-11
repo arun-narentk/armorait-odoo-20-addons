@@ -1,0 +1,24 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_jewellery_item_sales,rn.jewellery.item.spec sales,rn.jewellery.item.spec,rn_jewellery_core.group_rn_jewellery_sales,cru,
+access_rn_jewellery_item_mgr,rn.jewellery.item.spec manager,rn.jewellery.item.spec,rn_jewellery_core.group_rn_jewellery_manager,crud,
+rule_rn_jewellery_item_company,Jewellery Item multi-company,rn.jewellery.item.spec,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_jewellery_rate_sales,rn.jewellery.metal.rate sales,rn.jewellery.metal.rate,rn_jewellery_core.group_rn_jewellery_sales,r,
+access_rn_jewellery_rate_mgr,rn.jewellery.metal.rate manager,rn.jewellery.metal.rate,rn_jewellery_core.group_rn_jewellery_manager,crud,
+rule_rn_jewellery_rate_company,Metal Rate multi-company,rn.jewellery.metal.rate,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_jewellery_purity_sales,rn.jewellery.metal.purity sales,rn.jewellery.metal.purity,rn_jewellery_core.group_rn_jewellery_sales,r,
+access_rn_jewellery_purity_mgr,rn.jewellery.metal.purity manager,rn.jewellery.metal.purity,rn_jewellery_core.group_rn_jewellery_manager,crud,
+access_rn_jewellery_karigar_prod,rn.jewellery.karigar production,rn.jewellery.karigar,rn_jewellery_core.group_rn_jewellery_production,cru,
+access_rn_jewellery_karigar_mgr,rn.jewellery.karigar manager,rn.jewellery.karigar,rn_jewellery_core.group_rn_jewellery_manager,crud,
+access_rn_jewellery_job_card_prod,rn.jewellery.job.card production,rn.jewellery.job.card,rn_jewellery_core.group_rn_jewellery_production,cru,
+access_rn_jewellery_job_card_mgr,rn.jewellery.job.card manager,rn.jewellery.job.card,rn_jewellery_core.group_rn_jewellery_manager,crud,
+rule_rn_jewellery_job_card_company,Job Card multi-company,rn.jewellery.job.card,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_jewellery_job_work_prod,rn.jewellery.job.work production,rn.jewellery.job.work,rn_jewellery_core.group_rn_jewellery_production,cru,
+access_rn_jewellery_order_sales,rn.jewellery.customer.order sales,rn.jewellery.customer.order,rn_jewellery_core.group_rn_jewellery_sales,cru,
+access_rn_jewellery_order_mgr,rn.jewellery.customer.order manager,rn.jewellery.customer.order,rn_jewellery_core.group_rn_jewellery_manager,crud,
+rule_rn_jewellery_order_company,Customer Order multi-company,rn.jewellery.customer.order,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_jewellery_repair_sales,rn.jewellery.repair.order sales,rn.jewellery.repair.order,rn_jewellery_core.group_rn_jewellery_sales,cru,
+access_rn_jewellery_repair_mgr,rn.jewellery.repair.order manager,rn.jewellery.repair.order,rn_jewellery_core.group_rn_jewellery_manager,crud,
+access_rn_jewellery_profile_sales,rn.jewellery.customer.profile sales,rn.jewellery.customer.profile,rn_jewellery_core.group_rn_jewellery_sales,cru,
+access_rn_jewellery_settings_mgr,rn.jewellery.settings manager,rn.jewellery.settings,rn_jewellery_core.group_rn_jewellery_manager,crud,
+rule_rn_jewellery_settings_company,Jewellery Settings multi-company,rn.jewellery.settings,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_jewellery_job_issue_wizard,rn.jewellery.job.issue.wizard production,rn.jewellery.job.issue.wizard,rn_jewellery_core.group_rn_jewellery_production,crud,

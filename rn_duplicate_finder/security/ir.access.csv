@@ -1,0 +1,16 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_dup_rule_user,rn.dup.rule user,rn.dup.rule,rn_duplicate_finder.group_rn_dup_finder_user,r,
+access_rn_dup_rule_manager,rn.dup.rule manager,rn.dup.rule,rn_duplicate_finder.group_rn_dup_finder_manager,crud,
+rule_rn_dup_rule_company,Duplicate Rule multi-company,rn.dup.rule,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_dup_rule_field_user,rn.dup.rule.field user,rn.dup.rule.field,rn_duplicate_finder.group_rn_dup_finder_user,r,
+access_rn_dup_rule_field_manager,rn.dup.rule.field manager,rn.dup.rule.field,rn_duplicate_finder.group_rn_dup_finder_manager,crud,
+access_rn_dup_scan_user,rn.dup.scan user,rn.dup.scan,rn_duplicate_finder.group_rn_dup_finder_user,r,
+access_rn_dup_scan_manager,rn.dup.scan manager,rn.dup.scan,rn_duplicate_finder.group_rn_dup_finder_manager,crud,
+rule_rn_dup_scan_company,Duplicate Scan multi-company,rn.dup.scan,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_dup_result_user,rn.dup.result user,rn.dup.result,rn_duplicate_finder.group_rn_dup_finder_user,r,
+access_rn_dup_result_manager,rn.dup.result manager,rn.dup.result,rn_duplicate_finder.group_rn_dup_finder_manager,crud,
+rule_rn_dup_result_company,Duplicate Result multi-company,rn.dup.result,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_dup_ignore_user,rn.dup.ignore user,rn.dup.ignore,rn_duplicate_finder.group_rn_dup_finder_user,r,
+access_rn_dup_ignore_manager,rn.dup.ignore manager,rn.dup.ignore,rn_duplicate_finder.group_rn_dup_finder_manager,crud,
+rule_rn_dup_ignore_company,Duplicate Ignore multi-company,rn.dup.ignore,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_dup_merge_wizard_user,rn.dup.merge.wizard user,rn.dup.merge.wizard,rn_duplicate_finder.group_rn_dup_finder_user,crud,

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="rn_qr_template_small" model="rn.qr.template">
+        <field name="name">Small</field>
+        <field name="code">small</field>
+        <field name="size">small</field>
+        <field name="template_type">small</field>
+    </record>
+    <record id="rn_qr_template_large" model="rn.qr.template">
+        <field name="name">Large</field>
+        <field name="code">large</field>
+        <field name="size">large</field>
+        <field name="template_type">large</field>
+    </record>
+    <record id="rn_qr_template_warehouse" model="rn.qr.template">
+        <field name="name">Warehouse</field>
+        <field name="code">warehouse</field>
+        <field name="size">small</field>
+        <field name="template_type">warehouse</field>
+    </record>
+    <record id="rn_qr_template_office" model="rn.qr.template">
+        <field name="name">Office</field>
+        <field name="code">office</field>
+        <field name="size">small</field>
+        <field name="template_type">office</field>
+    </record>
+    <record id="rn_qr_template_customer" model="rn.qr.template">
+        <field name="name">Customer</field>
+        <field name="code">customer</field>
+        <field name="size">small</field>
+        <field name="template_type">customer</field>
+    </record>
+    <record id="rn_qr_template_manufacturing" model="rn.qr.template">
+        <field name="name">Manufacturing</field>
+        <field name="code">manufacturing</field>
+        <field name="size">large</field>
+        <field name="template_type">manufacturing</field>
+    </record>
+</odoo>

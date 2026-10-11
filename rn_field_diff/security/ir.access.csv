@@ -1,0 +1,6 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_field_diff_user,rn.field.diff user,rn.field.diff,rn_field_diff.group_rn_field_diff_user,r,
+access_rn_field_diff_manager,rn.field.diff manager,rn.field.diff,rn_field_diff.group_rn_field_diff_manager,crud,
+rule_rn_field_diff_company,Field diff multi-company,rn.field.diff,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+access_rn_field_diff_service_user,rn.field.diff.service user,rn.field.diff.service,rn_field_diff.group_rn_field_diff_user,r,
+access_rn_field_diff_export_wizard_user,rn.field.diff.export.wizard user,rn.field.diff.export.wizard,rn_field_diff.group_rn_field_diff_user,crud,

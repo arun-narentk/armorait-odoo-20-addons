@@ -1,0 +1,41 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_fleet_gps_device_ro,rn.fleet.gps.device readonly,rn.fleet.gps.device,rn_fleet_gps.group_rn_fleet_gps_readonly,r,
+access_rn_fleet_gps_device_user,rn.fleet.gps.device user,rn.fleet.gps.device,rn_fleet_gps.group_rn_fleet_gps_user,cru,
+access_rn_fleet_gps_device_mgr,rn.fleet.gps.device manager,rn.fleet.gps.device,rn_fleet_gps.group_rn_fleet_gps_manager,crud,
+rule_rn_fleet_device_company,GPS Device multi-company,rn.fleet.gps.device,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_fleet_gps_location_ro,rn.fleet.gps.location readonly,rn.fleet.gps.location,rn_fleet_gps.group_rn_fleet_gps_readonly,r,
+access_rn_fleet_gps_location_user,rn.fleet.gps.location user,rn.fleet.gps.location,rn_fleet_gps.group_rn_fleet_gps_user,cru,
+access_rn_fleet_gps_location_mgr,rn.fleet.gps.location manager,rn.fleet.gps.location,rn_fleet_gps.group_rn_fleet_gps_manager,crud,
+rule_rn_fleet_location_company,GPS Location multi-company,rn.fleet.gps.location,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_fleet_trip_ro,rn.fleet.trip readonly,rn.fleet.trip,rn_fleet_gps.group_rn_fleet_gps_readonly,r,
+access_rn_fleet_trip_user,rn.fleet.trip user,rn.fleet.trip,rn_fleet_gps.group_rn_fleet_gps_user,cru,
+access_rn_fleet_trip_mgr,rn.fleet.trip manager,rn.fleet.trip,rn_fleet_gps.group_rn_fleet_gps_manager,crud,
+rule_rn_fleet_trip_company,Fleet Trip multi-company,rn.fleet.trip,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_fleet_geofence_ro,rn.fleet.geofence readonly,rn.fleet.geofence,rn_fleet_gps.group_rn_fleet_gps_readonly,r,
+access_rn_fleet_geofence_user,rn.fleet.geofence user,rn.fleet.geofence,rn_fleet_gps.group_rn_fleet_gps_user,cru,
+access_rn_fleet_geofence_mgr,rn.fleet.geofence manager,rn.fleet.geofence,rn_fleet_gps.group_rn_fleet_gps_manager,crud,
+rule_rn_fleet_geofence_company,Geofence multi-company,rn.fleet.geofence,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_fleet_alert_ro,rn.fleet.alert readonly,rn.fleet.alert,rn_fleet_gps.group_rn_fleet_gps_readonly,r,
+access_rn_fleet_alert_user,rn.fleet.alert user,rn.fleet.alert,rn_fleet_gps.group_rn_fleet_gps_user,cru,
+access_rn_fleet_alert_mgr,rn.fleet.alert manager,rn.fleet.alert,rn_fleet_gps.group_rn_fleet_gps_manager,crud,
+rule_rn_fleet_alert_company,Fleet Alert multi-company,rn.fleet.alert,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_fleet_driver_assignment_ro,rn.fleet.driver.assignment readonly,rn.fleet.driver.assignment,rn_fleet_gps.group_rn_fleet_gps_readonly,r,
+access_rn_fleet_driver_assignment_user,rn.fleet.driver.assignment user,rn.fleet.driver.assignment,rn_fleet_gps.group_rn_fleet_gps_user,cru,
+access_rn_fleet_driver_assignment_mgr,rn.fleet.driver.assignment manager,rn.fleet.driver.assignment,rn_fleet_gps.group_rn_fleet_gps_manager,crud,
+rule_rn_fleet_driver_company,Driver Assignment multi-company,rn.fleet.driver.assignment,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_fleet_fuel_log_ro,rn.fleet.fuel.log readonly,rn.fleet.fuel.log,rn_fleet_gps.group_rn_fleet_gps_readonly,r,
+access_rn_fleet_fuel_log_user,rn.fleet.fuel.log user,rn.fleet.fuel.log,rn_fleet_gps.group_rn_fleet_gps_user,cru,
+access_rn_fleet_fuel_log_mgr,rn.fleet.fuel.log manager,rn.fleet.fuel.log,rn_fleet_gps.group_rn_fleet_gps_manager,crud,
+rule_rn_fleet_fuel_company,Fuel Log multi-company,rn.fleet.fuel.log,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_fleet_expense_log_ro,rn.fleet.expense.log readonly,rn.fleet.expense.log,rn_fleet_gps.group_rn_fleet_gps_readonly,r,
+access_rn_fleet_expense_log_user,rn.fleet.expense.log user,rn.fleet.expense.log,rn_fleet_gps.group_rn_fleet_gps_user,cru,
+access_rn_fleet_expense_log_mgr,rn.fleet.expense.log manager,rn.fleet.expense.log,rn_fleet_gps.group_rn_fleet_gps_manager,crud,
+rule_rn_fleet_expense_company,Expense Log multi-company,rn.fleet.expense.log,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_fleet_settings_ro,rn.fleet.settings readonly,rn.fleet.settings,rn_fleet_gps.group_rn_fleet_gps_readonly,r,
+access_rn_fleet_settings_mgr,rn.fleet.settings manager,rn.fleet.settings,rn_fleet_gps.group_rn_fleet_gps_manager,crud,
+rule_rn_fleet_settings_company,Fleet Settings multi-company,rn.fleet.settings,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_fleet_subscription_ro,rn.fleet.subscription readonly,rn.fleet.subscription,rn_fleet_gps.group_rn_fleet_gps_readonly,r,
+access_rn_fleet_subscription_mgr,rn.fleet.subscription manager,rn.fleet.subscription,rn_fleet_gps.group_rn_fleet_gps_manager,crud,
+rule_rn_fleet_subscription_company,Fleet Subscription multi-company,rn.fleet.subscription,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_fleet_wiz_loc_user,rn.fleet.ingest.location.wizard user,rn.fleet.ingest.location.wizard,rn_fleet_gps.group_rn_fleet_gps_user,crud,
+access_rn_fleet_wiz_export_user,rn.fleet.export.trips.wizard user,rn.fleet.export.trips.wizard,rn_fleet_gps.group_rn_fleet_gps_user,crud,

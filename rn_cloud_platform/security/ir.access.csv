@@ -1,0 +1,19 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_cloud_provider_user,rn.cloud.provider user,rn.cloud.provider,rn_cloud_platform.group_rn_cloud_platform_user,cru,
+access_rn_cloud_provider_manager,rn.cloud.provider manager,rn.cloud.provider,rn_cloud_platform.group_rn_cloud_platform_manager,crud,
+rule_rn_cloud_provider_company,Cloud provider multi-company,rn.cloud.provider,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_cloud_instance_user,rn.cloud.instance user,rn.cloud.instance,rn_cloud_platform.group_rn_cloud_platform_user,cru,
+access_rn_cloud_instance_manager,rn.cloud.instance manager,rn.cloud.instance,rn_cloud_platform.group_rn_cloud_platform_manager,crud,
+rule_rn_cloud_instance_company,Cloud instance multi-company,rn.cloud.instance,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_cloud_environment_user,rn.cloud.environment user,rn.cloud.environment,rn_cloud_platform.group_rn_cloud_platform_user,cru,
+access_rn_cloud_environment_manager,rn.cloud.environment manager,rn.cloud.environment,rn_cloud_platform.group_rn_cloud_platform_manager,crud,
+rule_rn_cloud_environment_company,Cloud environment multi-company,rn.cloud.environment,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_cloud_backup_user,rn.cloud.backup user,rn.cloud.backup,rn_cloud_platform.group_rn_cloud_platform_user,cru,
+access_rn_cloud_backup_manager,rn.cloud.backup manager,rn.cloud.backup,rn_cloud_platform.group_rn_cloud_platform_manager,crud,
+rule_rn_cloud_backup_company,Cloud backup multi-company,rn.cloud.backup,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_cloud_monitoring_user,rn.cloud.monitoring user,rn.cloud.monitoring,rn_cloud_platform.group_rn_cloud_platform_user,cru,
+access_rn_cloud_monitoring_manager,rn.cloud.monitoring manager,rn.cloud.monitoring,rn_cloud_platform.group_rn_cloud_platform_manager,crud,
+rule_rn_cloud_monitoring_company,Cloud monitoring multi-company,rn.cloud.monitoring,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_cloud_recommendation_user,rn.cloud.recommendation user,rn.cloud.recommendation,rn_cloud_platform.group_rn_cloud_platform_user,cru,
+access_rn_cloud_recommendation_manager,rn.cloud.recommendation manager,rn.cloud.recommendation,rn_cloud_platform.group_rn_cloud_platform_manager,crud,
+rule_rn_cloud_recommendation_company,Cloud recommendation multi-company,rn.cloud.recommendation,,crud,"[('company_id', 'in', company_ids)]"

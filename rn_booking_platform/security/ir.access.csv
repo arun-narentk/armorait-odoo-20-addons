@@ -1,0 +1,26 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_booking_industry_ro,rn.booking.industry readonly,rn.booking.industry,rn_booking_platform.group_rn_booking_readonly,r,
+access_rn_booking_industry_mgr,rn.booking.industry manager,rn.booking.industry,rn_booking_platform.group_rn_booking_manager,crud,
+access_rn_booking_location_ro,rn.booking.location readonly,rn.booking.location,rn_booking_platform.group_rn_booking_readonly,r,
+access_rn_booking_location_mgr,rn.booking.location manager,rn.booking.location,rn_booking_platform.group_rn_booking_manager,crud,
+rule_rn_booking_location_company,Location multi-company,rn.booking.location,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_booking_service_ro,rn.booking.service readonly,rn.booking.service,rn_booking_platform.group_rn_booking_readonly,r,
+access_rn_booking_service_mgr,rn.booking.service manager,rn.booking.service,rn_booking_platform.group_rn_booking_manager,crud,
+rule_rn_booking_service_company,Service multi-company,rn.booking.service,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_booking_staff_ro,rn.booking.staff readonly,rn.booking.staff,rn_booking_platform.group_rn_booking_readonly,r,
+access_rn_booking_staff_mgr,rn.booking.staff manager,rn.booking.staff,rn_booking_platform.group_rn_booking_manager,crud,
+rule_rn_booking_staff_company,Staff multi-company,rn.booking.staff,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_booking_resource_ro,rn.booking.resource readonly,rn.booking.resource,rn_booking_platform.group_rn_booking_readonly,r,
+access_rn_booking_resource_mgr,rn.booking.resource manager,rn.booking.resource,rn_booking_platform.group_rn_booking_manager,crud,
+access_rn_booking_hours_ro,rn.booking.working.hour readonly,rn.booking.working.hour,rn_booking_platform.group_rn_booking_readonly,r,
+access_rn_booking_hours_user,rn.booking.working.hour user,rn.booking.working.hour,rn_booking_platform.group_rn_booking_user,cru,
+access_rn_booking_hours_mgr,rn.booking.working.hour manager,rn.booking.working.hour,rn_booking_platform.group_rn_booking_manager,crud,
+access_rn_booking_appt_ro,rn.booking.appointment readonly,rn.booking.appointment,rn_booking_platform.group_rn_booking_readonly,r,
+access_rn_booking_appt_user,rn.booking.appointment user,rn.booking.appointment,rn_booking_platform.group_rn_booking_user,cru,
+access_rn_booking_appt_mgr,rn.booking.appointment manager,rn.booking.appointment,rn_booking_platform.group_rn_booking_manager,crud,
+rule_rn_booking_appointment_company,Appointment multi-company,rn.booking.appointment,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_booking_settings_ro,rn.booking.settings readonly,rn.booking.settings,rn_booking_platform.group_rn_booking_readonly,r,
+access_rn_booking_settings_mgr,rn.booking.settings manager,rn.booking.settings,rn_booking_platform.group_rn_booking_manager,crud,
+rule_rn_booking_settings_company,Booking Settings multi-company,rn.booking.settings,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_booking_wiz_quick_user,rn.booking.quick.create.wizard user,rn.booking.quick.create.wizard,rn_booking_platform.group_rn_booking_user,crud,
+access_rn_booking_wiz_cancel_user,rn.booking.cancel.wizard user,rn.booking.cancel.wizard,rn_booking_platform.group_rn_booking_user,crud,

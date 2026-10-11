@@ -1,0 +1,28 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_face_employee_readonly,rn.hr.employee.face readonly,rn.hr.employee.face,rn_hr_attendance_face.group_rn_face_readonly,r,
+access_rn_face_employee_officer,rn.hr.employee.face officer,rn.hr.employee.face,rn_hr_attendance_face.group_rn_face_officer,cru,
+access_rn_face_employee_manager,rn.hr.employee.face manager,rn.hr.employee.face,rn_hr_attendance_face.group_rn_face_manager,crud,
+rule_rn_face_employee_company,Employee Face: multi-company,rn.hr.employee.face,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_face_log_readonly,rn.hr.attendance.log readonly,rn.hr.attendance.log,rn_hr_attendance_face.group_rn_face_readonly,r,
+access_rn_face_log_officer,rn.hr.attendance.log officer,rn.hr.attendance.log,rn_hr_attendance_face.group_rn_face_officer,cru,
+access_rn_face_log_manager,rn.hr.attendance.log manager,rn.hr.attendance.log,rn_hr_attendance_face.group_rn_face_manager,crud,
+rule_rn_face_log_company,Attendance Log: multi-company,rn.hr.attendance.log,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_face_camera_readonly,rn.hr.camera.device readonly,rn.hr.camera.device,rn_hr_attendance_face.group_rn_face_readonly,r,
+access_rn_face_camera_officer,rn.hr.camera.device officer,rn.hr.camera.device,rn_hr_attendance_face.group_rn_face_officer,cru,
+access_rn_face_camera_manager,rn.hr.camera.device manager,rn.hr.camera.device,rn_hr_attendance_face.group_rn_face_manager,crud,
+rule_rn_face_camera_company,Camera: multi-company,rn.hr.camera.device,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_face_history_readonly,rn.hr.recognition.history readonly,rn.hr.recognition.history,rn_hr_attendance_face.group_rn_face_readonly,r,
+access_rn_face_history_manager,rn.hr.recognition.history manager,rn.hr.recognition.history,rn_hr_attendance_face.group_rn_face_manager,crud,
+access_rn_face_settings_readonly,rn.hr.recognition.settings readonly,rn.hr.recognition.settings,rn_hr_attendance_face.group_rn_face_readonly,r,
+access_rn_face_settings_manager,rn.hr.recognition.settings manager,rn.hr.recognition.settings,rn_hr_attendance_face.group_rn_face_manager,crud,
+rule_rn_face_settings_company,Recognition Settings: multi-company,rn.hr.recognition.settings,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_face_session_readonly,rn.hr.attendance.session readonly,rn.hr.attendance.session,rn_hr_attendance_face.group_rn_face_readonly,r,
+access_rn_face_session_officer,rn.hr.attendance.session officer,rn.hr.attendance.session,rn_hr_attendance_face.group_rn_face_officer,cru,
+access_rn_face_session_manager,rn.hr.attendance.session manager,rn.hr.attendance.session,rn_hr_attendance_face.group_rn_face_manager,crud,
+rule_rn_face_session_company,Attendance Session: multi-company,rn.hr.attendance.session,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_face_device_readonly,rn.hr.recognition.device readonly,rn.hr.recognition.device,rn_hr_attendance_face.group_rn_face_readonly,r,
+access_rn_face_device_officer,rn.hr.recognition.device officer,rn.hr.recognition.device,rn_hr_attendance_face.group_rn_face_officer,cru,
+access_rn_face_device_manager,rn.hr.recognition.device manager,rn.hr.recognition.device,rn_hr_attendance_face.group_rn_face_manager,crud,
+rule_rn_face_device_company,Recognition Device: multi-company,rn.hr.recognition.device,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_face_register_wizard_officer,rn.hr.register.face.wizard officer,rn.hr.register.face.wizard,rn_hr_attendance_face.group_rn_face_officer,crud,
+access_rn_face_verify_wizard_officer,rn.hr.verify.face.wizard officer,rn.hr.verify.face.wizard,rn_hr_attendance_face.group_rn_face_officer,crud,

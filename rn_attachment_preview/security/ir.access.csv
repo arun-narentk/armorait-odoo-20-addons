@@ -1,0 +1,3 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_attachment_annotation_user,rn.attachment.annotation user,rn.attachment.annotation,rn_attachment_preview.group_rn_attachment_preview_user,crud,
+access_rn_attachment_search_wizard_user,rn.attachment.search.wizard user,rn.attachment.search.wizard,rn_attachment_preview.group_rn_attachment_preview_user,crud,

@@ -1,0 +1,34 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_hospital_patient_rec,rn.hospital.patient reception,rn.hospital.patient,rn_hospital_core.group_rn_hospital_reception,cru,
+access_rn_hospital_patient_mgr,rn.hospital.patient manager,rn.hospital.patient,rn_hospital_core.group_rn_hospital_manager,crud,
+rule_rn_hospital_patient_company,Patient multi-company,rn.hospital.patient,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_hospital_allergy_rec,rn.hospital.patient.allergy reception,rn.hospital.patient.allergy,rn_hospital_core.group_rn_hospital_reception,cru,
+access_rn_hospital_condition_rec,rn.hospital.patient.condition reception,rn.hospital.patient.condition,rn_hospital_core.group_rn_hospital_reception,cru,
+access_rn_hospital_family_rec,rn.hospital.family.member reception,rn.hospital.family.member,rn_hospital_core.group_rn_hospital_reception,cru,
+access_rn_hospital_insurance_rec,rn.hospital.insurance.policy reception,rn.hospital.insurance.policy,rn_hospital_core.group_rn_hospital_reception,cru,
+access_rn_hospital_consent_rec,rn.hospital.consent.record reception,rn.hospital.consent.record,rn_hospital_core.group_rn_hospital_reception,cru,
+access_rn_hospital_appointment_rec,rn.hospital.appointment reception,rn.hospital.appointment,rn_hospital_core.group_rn_hospital_reception,cru,
+access_rn_hospital_appointment_mgr,rn.hospital.appointment manager,rn.hospital.appointment,rn_hospital_core.group_rn_hospital_manager,crud,
+rule_rn_hospital_appointment_company,Appointment multi-company,rn.hospital.appointment,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_hospital_department_rec,rn.hospital.department reception,rn.hospital.department,rn_hospital_core.group_rn_hospital_reception,r,
+access_rn_hospital_department_mgr,rn.hospital.department manager,rn.hospital.department,rn_hospital_core.group_rn_hospital_manager,crud,
+access_rn_hospital_schedule_rec,rn.hospital.doctor.schedule reception,rn.hospital.doctor.schedule,rn_hospital_core.group_rn_hospital_reception,r,
+access_rn_hospital_schedule_mgr,rn.hospital.doctor.schedule manager,rn.hospital.doctor.schedule,rn_hospital_core.group_rn_hospital_manager,crud,
+access_rn_hospital_encounter_doc,rn.hospital.emr.encounter doctor,rn.hospital.emr.encounter,rn_hospital_core.group_rn_hospital_doctor,cru,
+access_rn_hospital_encounter_mgr,rn.hospital.emr.encounter manager,rn.hospital.emr.encounter,rn_hospital_core.group_rn_hospital_manager,crud,
+rule_rn_hospital_encounter_company,EMR Encounter multi-company,rn.hospital.emr.encounter,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_hospital_diagnosis_doc,rn.hospital.emr.diagnosis doctor,rn.hospital.emr.diagnosis,rn_hospital_core.group_rn_hospital_doctor,crud,
+access_rn_hospital_prescription_doc,rn.hospital.emr.prescription doctor,rn.hospital.emr.prescription,rn_hospital_core.group_rn_hospital_doctor,crud,
+access_rn_hospital_ward_nurse,rn.hospital.ward nurse,rn.hospital.ward,rn_hospital_core.group_rn_hospital_nurse,cru,
+access_rn_hospital_ward_mgr,rn.hospital.ward manager,rn.hospital.ward,rn_hospital_core.group_rn_hospital_manager,crud,
+access_rn_hospital_bed_nurse,rn.hospital.bed nurse,rn.hospital.bed,rn_hospital_core.group_rn_hospital_nurse,cru,
+access_rn_hospital_bed_mgr,rn.hospital.bed manager,rn.hospital.bed,rn_hospital_core.group_rn_hospital_manager,crud,
+access_rn_hospital_admission_nurse,rn.hospital.admission nurse,rn.hospital.admission,rn_hospital_core.group_rn_hospital_nurse,cru,
+access_rn_hospital_admission_mgr,rn.hospital.admission manager,rn.hospital.admission,rn_hospital_core.group_rn_hospital_manager,crud,
+rule_rn_hospital_admission_company,Admission multi-company,rn.hospital.admission,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_hospital_billing_rec,rn.hospital.billing.line reception,rn.hospital.billing.line,rn_hospital_core.group_rn_hospital_reception,cru,
+access_rn_hospital_billing_mgr,rn.hospital.billing.line manager,rn.hospital.billing.line,rn_hospital_core.group_rn_hospital_manager,crud,
+rule_rn_hospital_billing_company,Billing Line multi-company,rn.hospital.billing.line,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_hospital_settings_mgr,rn.hospital.settings manager,rn.hospital.settings,rn_hospital_core.group_rn_hospital_manager,crud,
+rule_rn_hospital_settings_company,Hospital Settings multi-company,rn.hospital.settings,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_hospital_book_wizard,rn.hospital.appointment.book.wizard reception,rn.hospital.appointment.book.wizard,rn_hospital_core.group_rn_hospital_reception,crud,

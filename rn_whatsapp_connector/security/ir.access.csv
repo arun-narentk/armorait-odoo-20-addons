@@ -1,0 +1,28 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_whatsapp_account_readonly,rn.whatsapp.account readonly,rn.whatsapp.account,rn_whatsapp_connector.group_rn_whatsapp_readonly,r,
+access_rn_whatsapp_account_user,rn.whatsapp.account user,rn.whatsapp.account,rn_whatsapp_connector.group_rn_whatsapp_user,cru,
+access_rn_whatsapp_account_manager,rn.whatsapp.account manager,rn.whatsapp.account,rn_whatsapp_connector.group_rn_whatsapp_manager,crud,
+rule_rn_whatsapp_account_company,WhatsApp Account: multi-company,rn.whatsapp.account,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_whatsapp_message_readonly,rn.whatsapp.message readonly,rn.whatsapp.message,rn_whatsapp_connector.group_rn_whatsapp_readonly,r,
+access_rn_whatsapp_message_user,rn.whatsapp.message user,rn.whatsapp.message,rn_whatsapp_connector.group_rn_whatsapp_user,cru,
+access_rn_whatsapp_message_manager,rn.whatsapp.message manager,rn.whatsapp.message,rn_whatsapp_connector.group_rn_whatsapp_manager,crud,
+rule_rn_whatsapp_message_company,WhatsApp Message: multi-company,rn.whatsapp.message,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_whatsapp_template_readonly,rn.whatsapp.template readonly,rn.whatsapp.template,rn_whatsapp_connector.group_rn_whatsapp_readonly,r,
+access_rn_whatsapp_template_user,rn.whatsapp.template user,rn.whatsapp.template,rn_whatsapp_connector.group_rn_whatsapp_user,cru,
+access_rn_whatsapp_template_manager,rn.whatsapp.template manager,rn.whatsapp.template,rn_whatsapp_connector.group_rn_whatsapp_manager,crud,
+rule_rn_whatsapp_template_company,WhatsApp Template: multi-company,rn.whatsapp.template,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_whatsapp_attachment_readonly,rn.whatsapp.attachment readonly,rn.whatsapp.attachment,rn_whatsapp_connector.group_rn_whatsapp_readonly,r,
+access_rn_whatsapp_attachment_user,rn.whatsapp.attachment user,rn.whatsapp.attachment,rn_whatsapp_connector.group_rn_whatsapp_user,cru,
+access_rn_whatsapp_attachment_manager,rn.whatsapp.attachment manager,rn.whatsapp.attachment,rn_whatsapp_connector.group_rn_whatsapp_manager,crud,
+access_rn_whatsapp_webhook_readonly,rn.whatsapp.webhook readonly,rn.whatsapp.webhook,rn_whatsapp_connector.group_rn_whatsapp_readonly,r,
+access_rn_whatsapp_webhook_manager,rn.whatsapp.webhook manager,rn.whatsapp.webhook,rn_whatsapp_connector.group_rn_whatsapp_manager,crud,
+rule_rn_whatsapp_webhook_company,WhatsApp Webhook: multi-company,rn.whatsapp.webhook,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_whatsapp_history_readonly,rn.whatsapp.history readonly,rn.whatsapp.history,rn_whatsapp_connector.group_rn_whatsapp_readonly,r,
+access_rn_whatsapp_history_manager,rn.whatsapp.history manager,rn.whatsapp.history,rn_whatsapp_connector.group_rn_whatsapp_manager,crud,
+access_rn_whatsapp_send_wizard_user,rn.whatsapp.send.message.wizard user,rn.whatsapp.send.message.wizard,rn_whatsapp_connector.group_rn_whatsapp_user,crud,
+access_rn_whatsapp_automation_readonly,rn.whatsapp.automation.rule readonly,rn.whatsapp.automation.rule,rn_whatsapp_connector.group_rn_whatsapp_readonly,r,
+access_rn_whatsapp_automation_manager,rn.whatsapp.automation.rule manager,rn.whatsapp.automation.rule,rn_whatsapp_connector.group_rn_whatsapp_manager,crud,
+rule_rn_whatsapp_automation_company,WhatsApp Automation: multi-company,rn.whatsapp.automation.rule,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_whatsapp_subscription_readonly,rn.whatsapp.subscription readonly,rn.whatsapp.subscription,rn_whatsapp_connector.group_rn_whatsapp_readonly,r,
+access_rn_whatsapp_subscription_manager,rn.whatsapp.subscription manager,rn.whatsapp.subscription,rn_whatsapp_connector.group_rn_whatsapp_manager,crud,
+rule_rn_whatsapp_subscription_company,WhatsApp Subscription: multi-company,rn.whatsapp.subscription,,crud,"[('company_id', 'in', company_ids)]"

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="rn_hotel_core.RoomBoard">
+        <div class="o_rn_hotel_room_board o_action p-3">
+            <div class="d-flex justify-content-between mb-3">
+                <h2>Room Board</h2>
+                <button class="btn btn-secondary" t-on-click="this.refresh">Refresh</button>
+            </div>
+            <div t-if="this.state.loading">Loading...</div>
+            <div t-else="" class="d-flex flex-wrap gap-2">
+                <div t-foreach="this.state.rooms" t-as="room" t-key="room.id"
+                     class="o_rn_room_tile card p-2 text-white" t-att-class="this.statusClass(room.status)">
+                    <strong t-out="room.name"/>
+                    <div class="small" t-out="room.type"/>
+                    <div class="small text-capitalize" t-out="room.status"/>
+                    <div class="small" t-if="room.guest" t-out="room.guest"/>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

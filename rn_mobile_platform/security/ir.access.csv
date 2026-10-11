@@ -1,0 +1,13 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_mobile_app_user,rn.mobile.app user,rn.mobile.app,rn_mobile_platform.group_rn_mobile_platform_user,cru,
+access_rn_mobile_app_manager,rn.mobile.app manager,rn.mobile.app,rn_mobile_platform.group_rn_mobile_platform_manager,crud,
+rule_rn_mobile_app_company,Mobile app multi-company,rn.mobile.app,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_mobile_screen_user,rn.mobile.screen user,rn.mobile.screen,rn_mobile_platform.group_rn_mobile_platform_user,cru,
+access_rn_mobile_screen_manager,rn.mobile.screen manager,rn.mobile.screen,rn_mobile_platform.group_rn_mobile_platform_manager,crud,
+rule_rn_mobile_screen_company,Mobile screen multi-company,rn.mobile.screen,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_mobile_sync_user,rn.mobile.sync.profile user,rn.mobile.sync.profile,rn_mobile_platform.group_rn_mobile_platform_user,cru,
+access_rn_mobile_sync_manager,rn.mobile.sync.profile manager,rn.mobile.sync.profile,rn_mobile_platform.group_rn_mobile_platform_manager,crud,
+rule_rn_mobile_sync_company,Mobile sync multi-company,rn.mobile.sync.profile,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_mobile_theme_user,rn.mobile.theme user,rn.mobile.theme,rn_mobile_platform.group_rn_mobile_platform_user,cru,
+access_rn_mobile_theme_manager,rn.mobile.theme manager,rn.mobile.theme,rn_mobile_platform.group_rn_mobile_platform_manager,crud,
+rule_rn_mobile_theme_company,Mobile theme multi-company,rn.mobile.theme,,crud,"[('company_id', 'in', company_ids)]"

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="rn_jewellery_core.ManufacturingDashboard">
+        <div class="o_rn_jewellery_dashboard p-3">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                    <h1 class="h3 mb-0">Manufacturing Dashboard</h1>
+                    <div class="text-muted small">Job cards, orders in production and wastage</div>
+                </div>
+                <button class="btn btn-primary btn-sm" t-on-click="this.refresh">Refresh</button>
+            </div>
+            <t t-if="this.state.loading"><div class="text-muted">Loading dashboard...</div></t>
+            <t t-else="">
+                <div class="row g-3">
+                    <div class="col-6 col-md-3"><div class="o_rn_jewellery_card"><div class="label">Active Job Cards</div><div class="value" t-out="this.state.data.job_cards_active || 0"/></div></div>
+                    <div class="col-6 col-md-3"><div class="o_rn_jewellery_card"><div class="label">Pending Orders</div><div class="value" t-out="this.state.data.pending_orders || 0"/></div></div>
+                    <div class="col-6 col-md-3"><div class="o_rn_jewellery_card"><div class="label">QC Pending</div><div class="value" t-out="this.state.data.qc_pending || 0"/></div></div>
+                    <div class="col-6 col-md-3"><div class="o_rn_jewellery_card"><div class="label">Total Wastage (g)</div><div class="value" t-out="this.formatNumber(this.state.data.total_wastage_g)"/></div></div>
+                </div>
+                <div class="text-muted small mt-3">Updated: <t t-out="this.state.data.updated_at"/></div>
+            </t>
+        </div>
+    </t>
+</templates>

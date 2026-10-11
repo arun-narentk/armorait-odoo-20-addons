@@ -1,0 +1,14 @@
+id,name,model_id,group_id/id,operation,domain
+rule_rn_ai_employee_chat_user,AI Copilot Chat: own conversations,rn.ai.employee.chat,rn_ai_employee.group_rn_ai_employee_user,cru,"[('user_id', '=', user.id)]"
+rule_rn_ai_employee_chat_manager,AI Copilot Chat: manager sees all,rn.ai.employee.chat,rn_ai_employee.group_rn_ai_employee_manager,crud,
+rule_rn_ai_employee_message_user,AI Copilot Message: own conversations,rn.ai.employee.message,rn_ai_employee.group_rn_ai_employee_user,cru,"[('user_id', '=', user.id)]"
+rule_rn_ai_employee_message_manager,AI Copilot Message: manager sees all,rn.ai.employee.message,rn_ai_employee.group_rn_ai_employee_manager,crud,
+access_rn_ai_employee_tool_user,rn.ai.employee.tool user,rn.ai.employee.tool,rn_ai_employee.group_rn_ai_employee_user,r,
+access_rn_ai_employee_tool_manager,rn.ai.employee.tool manager,rn.ai.employee.tool,rn_ai_employee.group_rn_ai_employee_manager,crud,
+access_rn_ai_employee_suggestion_user,rn.ai.employee.suggestion user,rn.ai.employee.suggestion,rn_ai_employee.group_rn_ai_employee_user,r,
+access_rn_ai_employee_suggestion_manager,rn.ai.employee.suggestion manager,rn.ai.employee.suggestion,rn_ai_employee.group_rn_ai_employee_manager,crud,
+access_rn_ai_employee_message_action_user,rn.ai.employee.message.action user,rn.ai.employee.message.action,rn_ai_employee.group_rn_ai_employee_user,r,
+access_rn_ai_employee_message_action_manager,rn.ai.employee.message.action manager,rn.ai.employee.message.action,rn_ai_employee.group_rn_ai_employee_manager,crud,
+access_rn_ai_employee_audit_log_user,rn.ai.employee.audit.log user,rn.ai.employee.audit.log,rn_ai_employee.group_rn_ai_employee_user,r,
+access_rn_ai_employee_pending_action_user,rn.ai.employee.pending.action user,rn.ai.employee.pending.action,rn_ai_employee.group_rn_ai_employee_user,cru,
+access_rn_ai_employee_pending_action_manager,rn.ai.employee.pending.action manager,rn.ai.employee.pending.action,rn_ai_employee.group_rn_ai_employee_manager,crud,

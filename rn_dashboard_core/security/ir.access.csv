@@ -1,0 +1,35 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_dashboard_ro,rn.dashboard readonly,rn.dashboard,rn_dashboard_core.group_rn_dashboard_readonly,r,
+access_rn_dashboard_user,rn.dashboard user,rn.dashboard,rn_dashboard_core.group_rn_dashboard_user,cru,
+access_rn_dashboard_mgr,rn.dashboard manager,rn.dashboard,rn_dashboard_core.group_rn_dashboard_manager,crud,
+rule_rn_dashboard_company,Dashboard multi-company,rn.dashboard,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_dashboard_widget_ro,rn.dashboard.widget readonly,rn.dashboard.widget,rn_dashboard_core.group_rn_dashboard_readonly,r,
+access_rn_dashboard_widget_user,rn.dashboard.widget user,rn.dashboard.widget,rn_dashboard_core.group_rn_dashboard_user,cru,
+access_rn_dashboard_widget_mgr,rn.dashboard.widget manager,rn.dashboard.widget,rn_dashboard_core.group_rn_dashboard_manager,crud,
+rule_rn_dashboard_widget_company,Dashboard Widget multi-company,rn.dashboard.widget,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_dashboard_filter_ro,rn.dashboard.filter readonly,rn.dashboard.filter,rn_dashboard_core.group_rn_dashboard_readonly,r,
+access_rn_dashboard_filter_user,rn.dashboard.filter user,rn.dashboard.filter,rn_dashboard_core.group_rn_dashboard_user,cru,
+access_rn_dashboard_filter_mgr,rn.dashboard.filter manager,rn.dashboard.filter,rn_dashboard_core.group_rn_dashboard_manager,crud,
+rule_rn_dashboard_filter_company,Dashboard Filter multi-company,rn.dashboard.filter,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_dashboard_alert_rule_ro,rn.dashboard.alert.rule readonly,rn.dashboard.alert.rule,rn_dashboard_core.group_rn_dashboard_readonly,r,
+access_rn_dashboard_alert_rule_user,rn.dashboard.alert.rule user,rn.dashboard.alert.rule,rn_dashboard_core.group_rn_dashboard_user,ru,
+access_rn_dashboard_alert_rule_mgr,rn.dashboard.alert.rule manager,rn.dashboard.alert.rule,rn_dashboard_core.group_rn_dashboard_manager,crud,
+rule_rn_dashboard_alert_rule_company,Dashboard Alert Rule multi-company,rn.dashboard.alert.rule,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_dashboard_alert_ro,rn.dashboard.alert readonly,rn.dashboard.alert,rn_dashboard_core.group_rn_dashboard_readonly,r,
+access_rn_dashboard_alert_user,rn.dashboard.alert user,rn.dashboard.alert,rn_dashboard_core.group_rn_dashboard_user,cru,
+access_rn_dashboard_alert_mgr,rn.dashboard.alert manager,rn.dashboard.alert,rn_dashboard_core.group_rn_dashboard_manager,crud,
+rule_rn_dashboard_alert_company,Dashboard Alert multi-company,rn.dashboard.alert,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_dashboard_kpi_ro,rn.dashboard.kpi readonly,rn.dashboard.kpi,rn_dashboard_core.group_rn_dashboard_readonly,r,
+access_rn_dashboard_kpi_mgr,rn.dashboard.kpi manager,rn.dashboard.kpi,rn_dashboard_core.group_rn_dashboard_manager,crud,
+rule_rn_dashboard_kpi_company,Dashboard KPI multi-company,rn.dashboard.kpi,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+access_rn_dashboard_kpi_snap_ro,rn.dashboard.kpi.snapshot readonly,rn.dashboard.kpi.snapshot,rn_dashboard_core.group_rn_dashboard_readonly,r,
+access_rn_dashboard_kpi_snap_mgr,rn.dashboard.kpi.snapshot manager,rn.dashboard.kpi.snapshot,rn_dashboard_core.group_rn_dashboard_manager,crud,
+rule_rn_dashboard_kpi_snapshot_company,Dashboard KPI Snapshot multi-company,rn.dashboard.kpi.snapshot,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_dashboard_settings_ro,rn.dashboard.settings readonly,rn.dashboard.settings,rn_dashboard_core.group_rn_dashboard_readonly,r,
+access_rn_dashboard_settings_mgr,rn.dashboard.settings manager,rn.dashboard.settings,rn_dashboard_core.group_rn_dashboard_manager,crud,
+rule_rn_dashboard_settings_company,Dashboard Settings multi-company,rn.dashboard.settings,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_dashboard_sub_ro,rn.dashboard.subscription readonly,rn.dashboard.subscription,rn_dashboard_core.group_rn_dashboard_readonly,r,
+access_rn_dashboard_sub_mgr,rn.dashboard.subscription manager,rn.dashboard.subscription,rn_dashboard_core.group_rn_dashboard_manager,crud,
+rule_rn_dashboard_subscription_company,Dashboard Subscription multi-company,rn.dashboard.subscription,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_dashboard_wiz_filter_user,rn.dashboard.apply.filter.wizard user,rn.dashboard.apply.filter.wizard,rn_dashboard_core.group_rn_dashboard_user,crud,
+access_rn_dashboard_wiz_export_user,rn.dashboard.export.wizard user,rn.dashboard.export.wizard,rn_dashboard_core.group_rn_dashboard_user,crud,

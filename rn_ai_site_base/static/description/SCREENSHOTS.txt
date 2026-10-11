@@ -1,0 +1,39 @@
+SCREENSHOTS for Odoo Apps listing
+=================================
+
+Module: AI Business Launch Core (rn_ai_site_base)
+Company: ARMORA IT Technologies
+Website: https://www.armorait.com
+Support: info@armorait.com
+
+Files in this folder (static/description/):
+
+Filename           | Purpose in index.html
+-------------------|------------------------------------------
+company_logo.png   | Official ARMORA logo in hero / contact
+icon.png           | App icon
+banner.png         | Store banner in hero
+dashboard.png      | Screenshot 01 - Operations dashboard
+overview.png       | Screenshot 02 - Module overview
+form.png           | Screenshot 03 - Brief / project form
+list.png           | Screenshot 04 - Projects list
+kanban.png         | Screenshot 05 - Kanban pipeline
+wizard.png         | Screenshot 06 - Generate wizard
+designer.png       | Screenshot 07 - Theme / designer presets
+search.png         | Screenshot 08 - SEO / search fields
+settings.png       | Screenshot 09 - Configuration settings
+report.png         | Screenshot 10 - Reports
+workflow.png       | Screenshot 11 - Process workflow
+mobile.png         | Screenshot 12 - Mobile workspace
+
+Brand colors:
+  Primary indigo: #4f46e5
+  Accent teal:    #0d9488
+  Secondary:      #0f172a
+
+index.html uses the rich Apps Store layout (hero, feature tiles,
+problem/solution, numbered steps, screenshot cards) similar to
+ceres_invoice_credit_notes / rn_workflow_builder.
+
+Replace placeholder screenshots with live Odoo 20 captures before
+publish when possible. Recommended width: about 1280 px (16:9).

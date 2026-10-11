@@ -1,0 +1,21 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_messaging_connector_user,rn.messaging.connector user,rn.messaging.connector,rn_messaging_bot.group_rn_messaging_user,r,
+access_rn_messaging_connector_manager,rn.messaging.connector manager,rn.messaging.connector,rn_messaging_bot.group_rn_messaging_manager,cru,
+access_rn_messaging_connector_admin,rn.messaging.connector admin,rn.messaging.connector,rn_messaging_bot.group_rn_messaging_admin,crud,
+rule_rn_messaging_connector_company,Messaging Connector: multi-company,rn.messaging.connector,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_messaging_conversation_user,rn.messaging.conversation user,rn.messaging.conversation,rn_messaging_bot.group_rn_messaging_user,cru,
+access_rn_messaging_conversation_manager,rn.messaging.conversation manager,rn.messaging.conversation,rn_messaging_bot.group_rn_messaging_manager,crud,
+rule_rn_messaging_conversation_company,Messaging Conversation: multi-company,rn.messaging.conversation,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_messaging_message_user,rn.messaging.message user,rn.messaging.message,rn_messaging_bot.group_rn_messaging_user,cru,
+access_rn_messaging_message_manager,rn.messaging.message manager,rn.messaging.message,rn_messaging_bot.group_rn_messaging_manager,crud,
+rule_rn_messaging_message_company,Messaging Message: multi-company,rn.messaging.message,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_messaging_bot_manager,rn.messaging.bot manager,rn.messaging.bot,rn_messaging_bot.group_rn_messaging_manager,crud,
+rule_rn_messaging_bot_company,Messaging Bot: multi-company,rn.messaging.bot,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+access_rn_messaging_bot_node_manager,rn.messaging.bot.node manager,rn.messaging.bot.node,rn_messaging_bot.group_rn_messaging_manager,crud,
+access_rn_messaging_bot_node_option_manager,rn.messaging.bot.node.option manager,rn.messaging.bot.node.option,rn_messaging_bot.group_rn_messaging_manager,crud,
+access_rn_messaging_bot_session_user,rn.messaging.bot.session user,rn.messaging.bot.session,rn_messaging_bot.group_rn_messaging_user,r,
+access_rn_messaging_bot_session_manager,rn.messaging.bot.session manager,rn.messaging.bot.session,rn_messaging_bot.group_rn_messaging_manager,crud,
+access_rn_messaging_compose_wizard_user,rn.messaging.compose.reply.wizard user,rn.messaging.compose.reply.wizard,rn_messaging_bot.group_rn_messaging_user,crud,
+access_rn_messaging_template_manager,rn.messaging.template manager,rn.messaging.template,rn_messaging_bot.group_rn_messaging_manager,crud,
+access_rn_messaging_campaign_manager,rn.messaging.campaign manager,rn.messaging.campaign,rn_messaging_bot.group_rn_messaging_manager,crud,
+access_rn_messaging_campaign_line_manager,rn.messaging.campaign.line manager,rn.messaging.campaign.line,rn_messaging_bot.group_rn_messaging_manager,crud,

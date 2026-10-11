@@ -1,0 +1,19 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_customer_engagement_channel_user,rn.customer.engagement.channel user,rn.customer.engagement.channel,rn_customer_engagement_platform.group_rn_customer_engagement_user,cru,
+access_rn_customer_engagement_channel_manager,rn.customer.engagement.channel manager,rn.customer.engagement.channel,rn_customer_engagement_platform.group_rn_customer_engagement_manager,crud,
+rule_rn_customer_engagement_channel_company,Customer engagement channel multi-company,rn.customer.engagement.channel,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_customer_engagement_session_user,rn.customer.engagement.session user,rn.customer.engagement.session,rn_customer_engagement_platform.group_rn_customer_engagement_user,cru,
+access_rn_customer_engagement_session_manager,rn.customer.engagement.session manager,rn.customer.engagement.session,rn_customer_engagement_platform.group_rn_customer_engagement_manager,crud,
+rule_rn_customer_engagement_session_company,Customer engagement session multi-company,rn.customer.engagement.session,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_customer_engagement_knowledge_user,rn.customer.engagement.knowledge user,rn.customer.engagement.knowledge,rn_customer_engagement_platform.group_rn_customer_engagement_user,cru,
+access_rn_customer_engagement_knowledge_manager,rn.customer.engagement.knowledge manager,rn.customer.engagement.knowledge,rn_customer_engagement_platform.group_rn_customer_engagement_manager,crud,
+rule_rn_customer_engagement_knowledge_company,Customer engagement knowledge multi-company,rn.customer.engagement.knowledge,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_customer_engagement_conversation_user,rn.customer.engagement.conversation user,rn.customer.engagement.conversation,rn_customer_engagement_platform.group_rn_customer_engagement_user,cru,
+access_rn_customer_engagement_conversation_manager,rn.customer.engagement.conversation manager,rn.customer.engagement.conversation,rn_customer_engagement_platform.group_rn_customer_engagement_manager,crud,
+rule_rn_customer_engagement_conversation_company,Customer engagement conversation multi-company,rn.customer.engagement.conversation,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_customer_engagement_line_user,rn.customer.engagement.line user,rn.customer.engagement.line,rn_customer_engagement_platform.group_rn_customer_engagement_user,cru,
+access_rn_customer_engagement_line_manager,rn.customer.engagement.line manager,rn.customer.engagement.line,rn_customer_engagement_platform.group_rn_customer_engagement_manager,crud,
+rule_rn_customer_engagement_line_company,Customer engagement line multi-company,rn.customer.engagement.line,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_customer_engagement_escalation_user,rn.customer.engagement.escalation user,rn.customer.engagement.escalation,rn_customer_engagement_platform.group_rn_customer_engagement_user,cru,
+access_rn_customer_engagement_escalation_manager,rn.customer.engagement.escalation manager,rn.customer.engagement.escalation,rn_customer_engagement_platform.group_rn_customer_engagement_manager,crud,
+rule_rn_customer_engagement_escalation_company,Customer engagement escalation multi-company,rn.customer.engagement.escalation,,crud,"[('company_id', 'in', company_ids)]"

@@ -1,0 +1,8 @@
+id,name,model_id,group_id/id,operation,domain
+rule_rn_bookmark_user,Bookmark own records,rn.bookmark,rn_bookmarks.group_rn_bookmarks_user,crud,"[('user_id', '=', user.id)]"
+rule_rn_bookmark_company,Bookmark multi-company,rn.bookmark,,crud,"[('company_id', 'in', company_ids)]"
+rule_rn_bookmark_folder_user,Bookmark Folder own records,rn.bookmark.folder,rn_bookmarks.group_rn_bookmarks_user,crud,"[('user_id', '=', user.id)]"
+rule_rn_bookmark_folder_company,Bookmark Folder multi-company,rn.bookmark.folder,,crud,"[('company_id', 'in', company_ids)]"
+rule_rn_bookmark_tag_user,Bookmark Tag own records,rn.bookmark.tag,rn_bookmarks.group_rn_bookmarks_user,crud,"[('user_id', '=', user.id)]"
+access_rn_bookmark_service_user,rn.bookmark.service user,rn.bookmark.service,rn_bookmarks.group_rn_bookmarks_user,r,
+access_rn_bookmark_create_wizard,rn.bookmark.create.wizard,rn.bookmark.create.wizard,rn_bookmarks.group_rn_bookmarks_user,crud,

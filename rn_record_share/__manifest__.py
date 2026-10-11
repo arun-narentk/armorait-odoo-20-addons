@@ -1,0 +1,76 @@
+# -*- coding: utf-8 -*-
+{
+    'name': 'Record Share',
+    'version': '20.0.1.1.1',
+    'category': 'Productivity',
+    'summary': 'Share Odoo records with secure links, copy formats, QR bridge, and share history',
+    'description': """
+Record Share for Odoo 20 Community
+==================================
+
+Instantly share any Odoo record with secure links, multiple copy formats,
+email and WhatsApp helpers, optional QR integration, and share history.
+
+Features
+--------
+
+* Copy Link on sale orders, contacts, CRM leads, invoices, products, projects, and tasks
+* Keyboard shortcut Ctrl+Shift+C on any supported form view
+* Share wizard with URL, Markdown, HTML, JSON, and record name formats
+* Permission checks before any link is exposed
+* Share history and analytics per user
+* Optional bridge to Universal QR Generator when installed
+* Configurable default format and log retention
+    """,
+    'author': 'ARMORA IT Technologies',
+    'maintainer': 'ARMORA IT Technologies',
+    'website': 'https://www.armorait.com',
+    'support': 'info@armorait.com',
+    'license': 'OPL-1',
+    'currency': 'USD',
+    'price': 9.99,
+    'live_test_url': 'https://www.armorait.com',
+    'sequence': 54,
+    'depends': [
+        'base',
+        'mail',
+        'web',
+        'sale',
+        'account',
+        'crm',
+        'contacts',
+        'product',
+        'project',
+    ],
+    'data': [
+        'security/security.xml',
+        'data/cron.xml',
+        'views/share_log_views.xml',
+        'views/settings_views.xml',
+        'wizard/record_share_wizard_views.xml',
+        'views/inherited_form_views.xml',
+        'views/menu.xml',
+        'security/ir.access.csv',
+    ],
+    'demo': [
+        'demo/demo.xml',
+    ],
+    'assets': {
+        'web.assets_backend': [
+            'rn_record_share/static/src/js/record_share_clipboard.js',
+            'rn_record_share/static/src/js/record_share_hotkey.js',
+        ],
+    },
+                        'images': [
+        'static/description/banner.png',
+        'static/description/icon.png',
+        'static/description/company_logo.png',
+        'static/description/screenshot_record_share_form.png',
+        'static/description/screenshot_record_share_list.png',
+        'static/description/screenshot_record_share_dashboard.png',
+        'static/description/screenshot_record_share_back.png',
+    ],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+}

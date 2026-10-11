@@ -1,0 +1,22 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_vet_owner_reception,rn.vet.owner reception,rn.vet.owner,rn_veterinary_core.group_rn_vet_reception,cru,
+access_rn_vet_owner_mgr,rn.vet.owner manager,rn.vet.owner,rn_veterinary_core.group_rn_vet_manager,crud,
+rule_rn_vet_owner_company,Owner multi-company,rn.vet.owner,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_vet_pet_reception,rn.vet.pet reception,rn.vet.pet,rn_veterinary_core.group_rn_vet_reception,cru,
+access_rn_vet_pet_mgr,rn.vet.pet manager,rn.vet.pet,rn_veterinary_core.group_rn_vet_manager,crud,
+rule_rn_vet_pet_company,Pet multi-company,rn.vet.pet,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_vet_appointment_reception,rn.vet.appointment reception,rn.vet.appointment,rn_veterinary_core.group_rn_vet_reception,cru,
+rule_rn_vet_appointment_company,Appointment multi-company,rn.vet.appointment,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_vet_vaccine_type_reception,rn.vet.vaccine.type reception,rn.vet.vaccine.type,rn_veterinary_core.group_rn_vet_reception,r,
+access_rn_vet_vaccine_type_mgr,rn.vet.vaccine.type manager,rn.vet.vaccine.type,rn_veterinary_core.group_rn_vet_manager,crud,
+access_rn_vet_vaccination_reception,rn.vet.vaccination reception,rn.vet.vaccination,rn_veterinary_core.group_rn_vet_reception,cru,
+access_rn_vet_medical_record_vet,rn.vet.medical.record vet,rn.vet.medical.record,rn_veterinary_core.group_rn_vet_veterinarian,cru,
+access_rn_vet_lab_result_vet,rn.vet.lab.result vet,rn.vet.lab.result,rn_veterinary_core.group_rn_vet_veterinarian,cru,
+access_rn_vet_surgery_vet,rn.vet.surgery vet,rn.vet.surgery,rn_veterinary_core.group_rn_vet_veterinarian,cru,
+access_rn_vet_grooming_reception,rn.vet.grooming reception,rn.vet.grooming,rn_veterinary_core.group_rn_vet_reception,cru,
+access_rn_vet_kennel_reception,rn.vet.kennel reception,rn.vet.kennel,rn_veterinary_core.group_rn_vet_reception,r,
+access_rn_vet_kennel_mgr,rn.vet.kennel manager,rn.vet.kennel,rn_veterinary_core.group_rn_vet_manager,crud,
+access_rn_vet_boarding_reception,rn.vet.boarding reception,rn.vet.boarding,rn_veterinary_core.group_rn_vet_reception,cru,
+access_rn_vet_settings_mgr,rn.veterinary.settings manager,rn.veterinary.settings,rn_veterinary_core.group_rn_vet_manager,crud,
+rule_rn_vet_settings_company,Vet Settings multi-company,rn.veterinary.settings,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_vet_appointment_wizard,rn.vet.appointment.wizard reception,rn.vet.appointment.wizard,rn_veterinary_core.group_rn_vet_reception,crud,

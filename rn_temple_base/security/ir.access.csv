@@ -1,0 +1,35 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_temple_temple_ro,rn.temple.temple readonly,rn.temple.temple,rn_temple_base.group_rn_temple_readonly,r,
+access_rn_temple_temple_office,rn.temple.temple office,rn.temple.temple,rn_temple_base.group_rn_temple_office,cru,
+access_rn_temple_temple_mgr,rn.temple.temple manager,rn.temple.temple,rn_temple_base.group_rn_temple_manager,crud,
+rule_rn_temple_temple_company,Temple multi-company,rn.temple.temple,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_temple_branch_ro,rn.temple.branch readonly,rn.temple.branch,rn_temple_base.group_rn_temple_readonly,r,
+access_rn_temple_branch_office,rn.temple.branch office,rn.temple.branch,rn_temple_base.group_rn_temple_office,cru,
+access_rn_temple_branch_mgr,rn.temple.branch manager,rn.temple.branch,rn_temple_base.group_rn_temple_manager,crud,
+rule_rn_temple_branch_company,Temple Branch multi-company,rn.temple.branch,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_temple_trustee_ro,rn.temple.trustee readonly,rn.temple.trustee,rn_temple_base.group_rn_temple_readonly,r,
+access_rn_temple_trustee_office,rn.temple.trustee office,rn.temple.trustee,rn_temple_base.group_rn_temple_office,cru,
+access_rn_temple_trustee_mgr,rn.temple.trustee manager,rn.temple.trustee,rn_temple_base.group_rn_temple_manager,crud,
+rule_rn_temple_trustee_company,Temple Trustee multi-company,rn.temple.trustee,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_temple_priest_ro,rn.temple.priest readonly,rn.temple.priest,rn_temple_base.group_rn_temple_readonly,r,
+access_rn_temple_priest_office,rn.temple.priest office,rn.temple.priest,rn_temple_base.group_rn_temple_office,cru,
+access_rn_temple_priest_mgr,rn.temple.priest manager,rn.temple.priest,rn_temple_base.group_rn_temple_manager,crud,
+rule_rn_temple_priest_company,Temple Priest multi-company,rn.temple.priest,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_temple_department_ro,rn.temple.department readonly,rn.temple.department,rn_temple_base.group_rn_temple_readonly,r,
+access_rn_temple_department_office,rn.temple.department office,rn.temple.department,rn_temple_base.group_rn_temple_office,cru,
+access_rn_temple_department_mgr,rn.temple.department manager,rn.temple.department,rn_temple_base.group_rn_temple_manager,crud,
+rule_rn_temple_department_company,Temple Department multi-company,rn.temple.department,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_temple_timing_ro,rn.temple.timing readonly,rn.temple.timing,rn_temple_base.group_rn_temple_readonly,r,
+access_rn_temple_timing_office,rn.temple.timing office,rn.temple.timing,rn_temple_base.group_rn_temple_office,cru,
+access_rn_temple_timing_mgr,rn.temple.timing manager,rn.temple.timing,rn_temple_base.group_rn_temple_manager,crud,
+rule_rn_temple_timing_company,Temple Timing multi-company,rn.temple.timing,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_temple_festival_ro,rn.temple.festival readonly,rn.temple.festival,rn_temple_base.group_rn_temple_readonly,r,
+access_rn_temple_festival_counter,rn.temple.festival counter,rn.temple.festival,rn_temple_base.group_rn_temple_counter,cru,
+access_rn_temple_festival_office,rn.temple.festival office,rn.temple.festival,rn_temple_base.group_rn_temple_office,crud,
+rule_rn_temple_festival_company,Temple Festival multi-company,rn.temple.festival,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_temple_settings_ro,rn.temple.settings readonly,rn.temple.settings,rn_temple_base.group_rn_temple_readonly,r,
+access_rn_temple_settings_mgr,rn.temple.settings manager,rn.temple.settings,rn_temple_base.group_rn_temple_manager,crud,
+rule_rn_temple_settings_company,Temple Settings multi-company,rn.temple.settings,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_temple_subscription_ro,rn.temple.subscription readonly,rn.temple.subscription,rn_temple_base.group_rn_temple_readonly,r,
+access_rn_temple_subscription_mgr,rn.temple.subscription manager,rn.temple.subscription,rn_temple_base.group_rn_temple_manager,crud,
+rule_rn_temple_subscription_company,Temple Subscription multi-company,rn.temple.subscription,,crud,"[('company_id', 'in', company_ids)]"

@@ -1,0 +1,5 @@
+id,name,model_id,group_id/id,operation,domain
+rn_timeline_event_company_rule,Timeline events: multi-company,rn.timeline.event,rn_record_timeline.group_rn_timeline_user,r,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+rn_timeline_event_company_rule_1,Timeline events: multi-company,rn.timeline.event,rn_record_timeline.group_rn_timeline_manager,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+rn_timeline_template_company_rule,Timeline templates: multi-company,rn.timeline.template,rn_record_timeline.group_rn_timeline_user,r,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+rn_timeline_template_company_rule_1,Timeline templates: multi-company,rn.timeline.template,rn_record_timeline.group_rn_timeline_manager,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"

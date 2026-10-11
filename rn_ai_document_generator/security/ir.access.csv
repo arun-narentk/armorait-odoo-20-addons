@@ -1,0 +1,26 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_ai_doc_type_ro,rn.ai.document.type readonly,rn.ai.document.type,rn_ai_document_generator.group_rn_ai_doc_readonly,r,
+access_rn_ai_doc_type_mgr,rn.ai.document.type manager,rn.ai.document.type,rn_ai_document_generator.group_rn_ai_doc_manager,crud,
+rule_rn_ai_doc_type_company,AI Doc Type multi-company,rn.ai.document.type,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+access_rn_ai_doc_template_ro,rn.ai.document.template readonly,rn.ai.document.template,rn_ai_document_generator.group_rn_ai_doc_readonly,r,
+access_rn_ai_doc_template_mgr,rn.ai.document.template manager,rn.ai.document.template,rn_ai_document_generator.group_rn_ai_doc_manager,crud,
+rule_rn_ai_doc_template_company,AI Doc Template multi-company,rn.ai.document.template,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_ai_doc_document_ro,rn.ai.document readonly,rn.ai.document,rn_ai_document_generator.group_rn_ai_doc_readonly,r,
+access_rn_ai_doc_document_user,rn.ai.document user,rn.ai.document,rn_ai_document_generator.group_rn_ai_doc_user,cru,
+access_rn_ai_doc_document_mgr,rn.ai.document manager,rn.ai.document,rn_ai_document_generator.group_rn_ai_doc_manager,crud,
+rule_rn_ai_doc_document_company,AI Document multi-company,rn.ai.document,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_ai_doc_version_ro,rn.ai.document.version readonly,rn.ai.document.version,rn_ai_document_generator.group_rn_ai_doc_readonly,r,
+access_rn_ai_doc_version_mgr,rn.ai.document.version manager,rn.ai.document.version,rn_ai_document_generator.group_rn_ai_doc_manager,crud,
+rule_rn_ai_doc_version_company,AI Doc Version multi-company,rn.ai.document.version,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_ai_doc_approval_ro,rn.ai.document.approval readonly,rn.ai.document.approval,rn_ai_document_generator.group_rn_ai_doc_readonly,r,
+access_rn_ai_doc_approval_user,rn.ai.document.approval user,rn.ai.document.approval,rn_ai_document_generator.group_rn_ai_doc_user,ru,
+access_rn_ai_doc_approval_mgr,rn.ai.document.approval manager,rn.ai.document.approval,rn_ai_document_generator.group_rn_ai_doc_manager,crud,
+rule_rn_ai_doc_approval_company,AI Doc Approval multi-company,rn.ai.document.approval,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_ai_doc_settings_ro,rn.ai.document.settings readonly,rn.ai.document.settings,rn_ai_document_generator.group_rn_ai_doc_readonly,r,
+access_rn_ai_doc_settings_mgr,rn.ai.document.settings manager,rn.ai.document.settings,rn_ai_document_generator.group_rn_ai_doc_manager,crud,
+rule_rn_ai_doc_settings_company,AI Doc Settings multi-company,rn.ai.document.settings,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_ai_doc_sub_ro,rn.ai.document.subscription readonly,rn.ai.document.subscription,rn_ai_document_generator.group_rn_ai_doc_readonly,r,
+access_rn_ai_doc_sub_mgr,rn.ai.document.subscription manager,rn.ai.document.subscription,rn_ai_document_generator.group_rn_ai_doc_manager,crud,
+rule_rn_ai_doc_subscription_company,AI Doc Subscription multi-company,rn.ai.document.subscription,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_ai_doc_wiz_gen_user,rn.ai.document.generate.wizard user,rn.ai.document.generate.wizard,rn_ai_document_generator.group_rn_ai_doc_user,crud,
+access_rn_ai_doc_wiz_exp_user,rn.ai.document.export.wizard user,rn.ai.document.export.wizard,rn_ai_document_generator.group_rn_ai_doc_user,crud,

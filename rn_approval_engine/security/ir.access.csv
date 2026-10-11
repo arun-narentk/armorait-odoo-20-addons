@@ -1,0 +1,23 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_approval_workflow_user,rn.approval.workflow user,rn.approval.workflow,rn_approval_engine.group_rn_approval_user,r,
+access_rn_approval_workflow_mgr,rn.approval.workflow manager,rn.approval.workflow,rn_approval_engine.group_rn_approval_manager,crud,
+rule_rn_approval_workflow_company,Approval Workflow multi-company,rn.approval.workflow,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_approval_workflow_stage_user,rn.approval.workflow.stage user,rn.approval.workflow.stage,rn_approval_engine.group_rn_approval_user,r,
+access_rn_approval_workflow_stage_mgr,rn.approval.workflow.stage manager,rn.approval.workflow.stage,rn_approval_engine.group_rn_approval_manager,crud,
+access_rn_approval_rule_user,rn.approval.rule user,rn.approval.rule,rn_approval_engine.group_rn_approval_user,r,
+access_rn_approval_rule_mgr,rn.approval.rule manager,rn.approval.rule,rn_approval_engine.group_rn_approval_manager,crud,
+access_rn_approval_request_user,rn.approval.request user,rn.approval.request,rn_approval_engine.group_rn_approval_user,cru,
+access_rn_approval_request_mgr,rn.approval.request manager,rn.approval.request,rn_approval_engine.group_rn_approval_manager,crud,
+rule_rn_approval_request_company,Approval Request multi-company,rn.approval.request,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_approval_request_line_user,rn.approval.request.line user,rn.approval.request.line,rn_approval_engine.group_rn_approval_user,ru,
+access_rn_approval_request_line_approver,rn.approval.request.line approver,rn.approval.request.line,rn_approval_engine.group_rn_approval_approver,cru,
+access_rn_approval_request_line_mgr,rn.approval.request.line manager,rn.approval.request.line,rn_approval_engine.group_rn_approval_manager,crud,
+rule_rn_approval_request_line_company,Approval Request Line multi-company,rn.approval.request.line,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_approval_history_user,rn.approval.history user,rn.approval.history,rn_approval_engine.group_rn_approval_user,r,
+access_rn_approval_history_mgr,rn.approval.history manager,rn.approval.history,rn_approval_engine.group_rn_approval_manager,cru,
+access_rn_approval_delegation_user,rn.approval.delegation user,rn.approval.delegation,rn_approval_engine.group_rn_approval_user,r,
+access_rn_approval_delegation_mgr,rn.approval.delegation manager,rn.approval.delegation,rn_approval_engine.group_rn_approval_manager,crud,
+rule_rn_approval_delegation_company,Approval Delegation multi-company,rn.approval.delegation,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_approval_submit_wizard_user,rn.approval.submit.wizard user,rn.approval.submit.wizard,rn_approval_engine.group_rn_approval_user,crud,
+access_rn_approval_settings_mgr,rn.approval.settings manager,rn.approval.settings,rn_approval_engine.group_rn_approval_manager,crud,
+rule_rn_approval_settings_company,Approval Settings multi-company,rn.approval.settings,,crud,"[('company_id', 'in', company_ids)]"

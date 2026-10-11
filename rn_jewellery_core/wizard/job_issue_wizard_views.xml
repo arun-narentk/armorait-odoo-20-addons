@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rn_jewellery_job_issue_wizard_form" model="ir.ui.view">
+        <field name="name">rn.jewellery.job.issue.wizard.form</field>
+        <field name="model">rn.jewellery.job.issue.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Issue Gold to Karigar">
+                <group>
+                    <field name="job_card_id"/>
+                    <field name="karigar_id"/>
+                    <field name="issue_weight"/>
+                </group>
+                <footer>
+                    <button name="action_issue" type="object" string="Issue" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_rn_jewellery_job_issue_wizard" model="ir.actions.act_window">
+        <field name="name">Issue Gold to Karigar</field>
+        <field name="res_model">rn.jewellery.job.issue.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_job_card_id': active_id}</field>
+        <field name="binding_model_id" ref="model_rn_jewellery_job_card"/>
+        <field name="binding_view_types">form</field>
+    </record>
+</odoo>

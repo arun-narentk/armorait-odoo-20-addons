@@ -1,0 +1,9 @@
+id,name,model_id,group_id/id,operation,domain
+rule_ai_biz_promotion_company,AI BIZ Promotion multi-company,ai.biz.promotion,rn_ai_biz_promotion.group_rn_ai_biz_promotion_user,r,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+rule_ai_biz_promotion_company_1,AI BIZ Promotion multi-company,ai.biz.promotion,rn_ai_biz_promotion.group_rn_ai_biz_promotion_manager,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+access_ai_biz_promotion_public,ai.biz.promotion public,ai.biz.promotion,base.group_public,r,
+access_ai_biz_promotion_portal,ai.biz.promotion portal,ai.biz.promotion,base.group_portal,r,
+rule_ai_biz_benefit_company,AI BIZ Benefit multi-company,ai.biz.benefit,rn_ai_biz_promotion.group_rn_ai_biz_promotion_user,r,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+rule_ai_biz_benefit_company_1,AI BIZ Benefit multi-company,ai.biz.benefit,rn_ai_biz_promotion.group_rn_ai_biz_promotion_manager,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+access_ai_biz_benefit_public,ai.biz.benefit public,ai.biz.benefit,base.group_public,r,
+access_ai_biz_benefit_portal,ai.biz.benefit portal,ai.biz.benefit,base.group_portal,r,

@@ -1,0 +1,18 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_ai_invoice_scan_user,rn.ai.invoice.scan user,rn.ai.invoice.scan,rn_ai_invoice_ocr.group_rn_invoice_ocr_user,cru,
+access_rn_ai_invoice_scan_mgr,rn.ai.invoice.scan manager,rn.ai.invoice.scan,rn_ai_invoice_ocr.group_rn_invoice_ocr_manager,crud,
+rule_rn_ai_invoice_scan_company,Invoice Scan multi-company,rn.ai.invoice.scan,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_ai_invoice_scan_line_user,rn.ai.invoice.scan.line user,rn.ai.invoice.scan.line,rn_ai_invoice_ocr.group_rn_invoice_ocr_user,cru,
+access_rn_ai_invoice_scan_line_mgr,rn.ai.invoice.scan.line manager,rn.ai.invoice.scan.line,rn_ai_invoice_ocr.group_rn_invoice_ocr_manager,crud,
+rule_rn_ai_invoice_scan_line_company,Invoice Scan Line multi-company,rn.ai.invoice.scan.line,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_ai_invoice_vendor_mapping_user,rn.ai.invoice.vendor.mapping user,rn.ai.invoice.vendor.mapping,rn_ai_invoice_ocr.group_rn_invoice_ocr_user,cru,
+access_rn_ai_invoice_vendor_mapping_mgr,rn.ai.invoice.vendor.mapping manager,rn.ai.invoice.vendor.mapping,rn_ai_invoice_ocr.group_rn_invoice_ocr_manager,crud,
+rule_rn_ai_invoice_vendor_mapping_company,Vendor Mapping multi-company,rn.ai.invoice.vendor.mapping,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_ai_invoice_product_mapping_user,rn.ai.invoice.product.mapping user,rn.ai.invoice.product.mapping,rn_ai_invoice_ocr.group_rn_invoice_ocr_user,cru,
+access_rn_ai_invoice_product_mapping_mgr,rn.ai.invoice.product.mapping manager,rn.ai.invoice.product.mapping,rn_ai_invoice_ocr.group_rn_invoice_ocr_manager,crud,
+rule_rn_ai_invoice_product_mapping_company,Product Mapping multi-company,rn.ai.invoice.product.mapping,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_ai_invoice_create_bill_wizard_user,rn.ai.invoice.create.bill.wizard user,rn.ai.invoice.create.bill.wizard,rn_ai_invoice_ocr.group_rn_invoice_ocr_user,crud,
+access_rn_ai_invoice_ocr_settings_mgr,rn.ai.invoice.ocr.settings manager,rn.ai.invoice.ocr.settings,rn_ai_invoice_ocr.group_rn_invoice_ocr_manager,crud,
+rule_rn_ai_invoice_ocr_settings_company,OCR Settings multi-company,rn.ai.invoice.ocr.settings,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_ai_invoice_ocr_subscription_mgr,rn.ai.invoice.ocr.subscription manager,rn.ai.invoice.ocr.subscription,rn_ai_invoice_ocr.group_rn_invoice_ocr_manager,crud,
+rule_rn_ai_invoice_ocr_subscription_company,OCR Subscription multi-company,rn.ai.invoice.ocr.subscription,,crud,"[('company_id', 'in', company_ids)]"

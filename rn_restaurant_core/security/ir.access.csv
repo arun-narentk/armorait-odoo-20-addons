@@ -1,0 +1,38 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_restaurant_ro,rn.restaurant readonly,rn.restaurant,rn_restaurant_core.group_rn_restaurant_readonly,r,
+access_rn_restaurant_mgr,rn.restaurant manager,rn.restaurant,rn_restaurant_core.group_rn_restaurant_manager,crud,
+rule_rn_restaurant_company,Restaurant multi-company,rn.restaurant,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_restaurant_branch_ro,rn.restaurant.branch readonly,rn.restaurant.branch,rn_restaurant_core.group_rn_restaurant_readonly,r,
+access_rn_restaurant_branch_user,rn.restaurant.branch user,rn.restaurant.branch,rn_restaurant_core.group_rn_restaurant_user,cru,
+access_rn_restaurant_branch_mgr,rn.restaurant.branch manager,rn.restaurant.branch,rn_restaurant_core.group_rn_restaurant_manager,crud,
+rule_rn_restaurant_branch_company,Restaurant Branch multi-company,rn.restaurant.branch,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_restaurant_floor_ro,rn.restaurant.floor readonly,rn.restaurant.floor,rn_restaurant_core.group_rn_restaurant_readonly,r,
+access_rn_restaurant_floor_user,rn.restaurant.floor user,rn.restaurant.floor,rn_restaurant_core.group_rn_restaurant_user,cru,
+access_rn_restaurant_floor_mgr,rn.restaurant.floor manager,rn.restaurant.floor,rn_restaurant_core.group_rn_restaurant_manager,crud,
+rule_rn_restaurant_floor_company,Restaurant Floor multi-company,rn.restaurant.floor,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_restaurant_table_ro,rn.restaurant.table readonly,rn.restaurant.table,rn_restaurant_core.group_rn_restaurant_readonly,r,
+access_rn_restaurant_table_user,rn.restaurant.table user,rn.restaurant.table,rn_restaurant_core.group_rn_restaurant_user,cru,
+access_rn_restaurant_table_mgr,rn.restaurant.table manager,rn.restaurant.table,rn_restaurant_core.group_rn_restaurant_manager,crud,
+rule_rn_restaurant_table_company,Restaurant Table multi-company,rn.restaurant.table,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_restaurant_menu_cat_ro,rn.restaurant.menu.category readonly,rn.restaurant.menu.category,rn_restaurant_core.group_rn_restaurant_readonly,r,
+access_rn_restaurant_menu_cat_user,rn.restaurant.menu.category user,rn.restaurant.menu.category,rn_restaurant_core.group_rn_restaurant_user,cru,
+access_rn_restaurant_menu_cat_mgr,rn.restaurant.menu.category manager,rn.restaurant.menu.category,rn_restaurant_core.group_rn_restaurant_manager,crud,
+rule_rn_restaurant_menu_category_company,Menu Category multi-company,rn.restaurant.menu.category,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_restaurant_menu_item_ro,rn.restaurant.menu.item readonly,rn.restaurant.menu.item,rn_restaurant_core.group_rn_restaurant_readonly,r,
+access_rn_restaurant_menu_item_user,rn.restaurant.menu.item user,rn.restaurant.menu.item,rn_restaurant_core.group_rn_restaurant_user,cru,
+access_rn_restaurant_menu_item_mgr,rn.restaurant.menu.item manager,rn.restaurant.menu.item,rn_restaurant_core.group_rn_restaurant_manager,crud,
+rule_rn_restaurant_menu_item_company,Menu Item multi-company,rn.restaurant.menu.item,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_restaurant_tax_ro,rn.restaurant.tax readonly,rn.restaurant.tax,rn_restaurant_core.group_rn_restaurant_readonly,r,
+access_rn_restaurant_tax_mgr,rn.restaurant.tax manager,rn.restaurant.tax,rn_restaurant_core.group_rn_restaurant_manager,crud,
+rule_rn_restaurant_tax_company,Restaurant Tax multi-company,rn.restaurant.tax,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_restaurant_pay_ro,rn.restaurant.payment.method readonly,rn.restaurant.payment.method,rn_restaurant_core.group_rn_restaurant_readonly,r,
+access_rn_restaurant_pay_mgr,rn.restaurant.payment.method manager,rn.restaurant.payment.method,rn_restaurant_core.group_rn_restaurant_manager,crud,
+rule_rn_restaurant_payment_company,Restaurant Payment multi-company,rn.restaurant.payment.method,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_restaurant_settings_ro,rn.restaurant.settings readonly,rn.restaurant.settings,rn_restaurant_core.group_rn_restaurant_readonly,r,
+access_rn_restaurant_settings_mgr,rn.restaurant.settings manager,rn.restaurant.settings,rn_restaurant_core.group_rn_restaurant_manager,crud,
+rule_rn_restaurant_settings_company,Restaurant Settings multi-company,rn.restaurant.settings,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_restaurant_sub_ro,rn.restaurant.subscription readonly,rn.restaurant.subscription,rn_restaurant_core.group_rn_restaurant_readonly,r,
+access_rn_restaurant_sub_mgr,rn.restaurant.subscription manager,rn.restaurant.subscription,rn_restaurant_core.group_rn_restaurant_manager,crud,
+rule_rn_restaurant_subscription_company,Restaurant Subscription multi-company,rn.restaurant.subscription,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_restaurant_wiz_setup_user,rn.restaurant.setup.wizard user,rn.restaurant.setup.wizard,rn_restaurant_core.group_rn_restaurant_user,crud,
+access_rn_restaurant_wiz_export_user,rn.restaurant.export.menu.wizard user,rn.restaurant.export.menu.wizard,rn_restaurant_core.group_rn_restaurant_user,crud,

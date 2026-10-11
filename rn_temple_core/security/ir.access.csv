@@ -1,0 +1,26 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_temple_devotee_office,rn.temple.devotee office,rn.temple.devotee,rn_temple_core.group_rn_temple_office,cru,
+access_rn_temple_devotee_mgr,rn.temple.devotee manager,rn.temple.devotee,rn_temple_core.group_rn_temple_manager,crud,
+rule_rn_temple_devotee_company,Devotee multi-company,rn.temple.devotee,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_temple_donation_office,rn.temple.donation office,rn.temple.donation,rn_temple_core.group_rn_temple_office,cru,
+access_rn_temple_donation_mgr,rn.temple.donation manager,rn.temple.donation,rn_temple_core.group_rn_temple_manager,crud,
+rule_rn_temple_donation_company,Donation multi-company,rn.temple.donation,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_temple_seva_type_office,rn.temple.seva.type office,rn.temple.seva.type,rn_temple_core.group_rn_temple_office,r,
+access_rn_temple_seva_type_mgr,rn.temple.seva.type manager,rn.temple.seva.type,rn_temple_core.group_rn_temple_manager,crud,
+access_rn_temple_seva_booking_office,rn.temple.seva.booking office,rn.temple.seva.booking,rn_temple_core.group_rn_temple_office,cru,
+access_rn_temple_seva_booking_mgr,rn.temple.seva.booking manager,rn.temple.seva.booking,rn_temple_core.group_rn_temple_manager,crud,
+rule_rn_temple_seva_booking_company,Seva Booking multi-company,rn.temple.seva.booking,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_temple_festival_office,rn.temple.festival office,rn.temple.festival,rn_temple_core.group_rn_temple_office,cru,
+access_rn_temple_festival_mgr,rn.temple.festival manager,rn.temple.festival,rn_temple_core.group_rn_temple_manager,crud,
+rule_rn_temple_festival_company,Festival multi-company,rn.temple.festival,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_temple_annadhanam_office,rn.temple.annadhanam office,rn.temple.annadhanam,rn_temple_core.group_rn_temple_office,cru,
+access_rn_temple_annadhanam_mgr,rn.temple.annadhanam manager,rn.temple.annadhanam,rn_temple_core.group_rn_temple_manager,crud,
+access_rn_temple_hundi_office,rn.temple.hundi.collection office,rn.temple.hundi.collection,rn_temple_core.group_rn_temple_office,cru,
+access_rn_temple_hundi_mgr,rn.temple.hundi.collection manager,rn.temple.hundi.collection,rn_temple_core.group_rn_temple_manager,crud,
+access_rn_temple_volunteer_office,rn.temple.volunteer office,rn.temple.volunteer,rn_temple_core.group_rn_temple_office,cru,
+access_rn_temple_volunteer_mgr,rn.temple.volunteer manager,rn.temple.volunteer,rn_temple_core.group_rn_temple_manager,crud,
+access_rn_temple_asset_office,rn.temple.asset office,rn.temple.asset,rn_temple_core.group_rn_temple_office,cru,
+access_rn_temple_asset_mgr,rn.temple.asset manager,rn.temple.asset,rn_temple_core.group_rn_temple_manager,crud,
+access_rn_temple_settings_mgr,rn.temple.settings manager,rn.temple.settings,rn_temple_core.group_rn_temple_manager,crud,
+rule_rn_temple_settings_company,Temple Settings multi-company,rn.temple.settings,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_temple_donation_wizard,rn.temple.donation.wizard office,rn.temple.donation.wizard,rn_temple_core.group_rn_temple_office,crud,

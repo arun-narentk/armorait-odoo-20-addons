@@ -1,0 +1,3 @@
+id,name,model_id,group_id/id,operation,domain
+rule_rn_search_history_user,Smart Search history: own entries,rn.search.history,rn_smart_search.group_rn_smart_search_user,crud,"[('user_id', '=', user.id)]"
+access_rn_smart_search_service_user,rn.smart.search.service user,rn.smart.search.service,rn_smart_search.group_rn_smart_search_user,r,

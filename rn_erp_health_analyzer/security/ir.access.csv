@@ -1,0 +1,10 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_erp_health_target_user,rn.erp.health.target user,rn.erp.health.target,rn_erp_health_analyzer.group_rn_erp_health_analyzer_user,cru,
+access_rn_erp_health_target_manager,rn.erp.health.target manager,rn.erp.health.target,rn_erp_health_analyzer.group_rn_erp_health_analyzer_manager,crud,
+rule_rn_erp_health_target_company,ERP Health target multi-company,rn.erp.health.target,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_erp_health_scan_user,rn.erp.health.scan user,rn.erp.health.scan,rn_erp_health_analyzer.group_rn_erp_health_analyzer_user,r,
+access_rn_erp_health_scan_manager,rn.erp.health.scan manager,rn.erp.health.scan,rn_erp_health_analyzer.group_rn_erp_health_analyzer_manager,crud,
+rule_rn_erp_health_scan_company,ERP Health scan multi-company,rn.erp.health.scan,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_erp_health_finding_user,rn.erp.health.finding user,rn.erp.health.finding,rn_erp_health_analyzer.group_rn_erp_health_analyzer_user,ru,
+access_rn_erp_health_finding_manager,rn.erp.health.finding manager,rn.erp.health.finding,rn_erp_health_analyzer.group_rn_erp_health_analyzer_manager,crud,
+rule_rn_erp_health_finding_company,ERP Health finding multi-company,rn.erp.health.finding,,crud,"[('company_id', 'in', company_ids)]"

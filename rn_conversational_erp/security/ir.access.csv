@@ -1,0 +1,16 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_conversational_channel_user,rn.conversational.erp.channel user,rn.conversational.erp.channel,rn_conversational_erp.group_rn_conversational_erp_user,cru,
+access_rn_conversational_channel_manager,rn.conversational.erp.channel manager,rn.conversational.erp.channel,rn_conversational_erp.group_rn_conversational_erp_manager,crud,
+rule_rn_conversational_channel_company,Conversational channel multi-company,rn.conversational.erp.channel,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_conversational_assistant_user,rn.conversational.erp.assistant user,rn.conversational.erp.assistant,rn_conversational_erp.group_rn_conversational_erp_user,cru,
+access_rn_conversational_assistant_manager,rn.conversational.erp.assistant manager,rn.conversational.erp.assistant,rn_conversational_erp.group_rn_conversational_erp_manager,crud,
+rule_rn_conversational_assistant_company,Conversational assistant multi-company,rn.conversational.erp.assistant,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_conversational_conversation_user,rn.conversational.erp.conversation user,rn.conversational.erp.conversation,rn_conversational_erp.group_rn_conversational_erp_user,cru,
+access_rn_conversational_conversation_manager,rn.conversational.erp.conversation manager,rn.conversational.erp.conversation,rn_conversational_erp.group_rn_conversational_erp_manager,crud,
+rule_rn_conversational_conversation_company,Conversational conversation multi-company,rn.conversational.erp.conversation,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_conversational_message_user,rn.conversational.erp.message user,rn.conversational.erp.message,rn_conversational_erp.group_rn_conversational_erp_user,cru,
+access_rn_conversational_message_manager,rn.conversational.erp.message manager,rn.conversational.erp.message,rn_conversational_erp.group_rn_conversational_erp_manager,crud,
+rule_rn_conversational_message_company,Conversational message multi-company,rn.conversational.erp.message,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_conversational_approval_user,rn.conversational.erp.approval user,rn.conversational.erp.approval,rn_conversational_erp.group_rn_conversational_erp_user,cru,
+access_rn_conversational_approval_manager,rn.conversational.erp.approval manager,rn.conversational.erp.approval,rn_conversational_erp.group_rn_conversational_erp_manager,crud,
+rule_rn_conversational_approval_company,Conversational approval multi-company,rn.conversational.erp.approval,,crud,"[('company_id', 'in', company_ids)]"

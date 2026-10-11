@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="ir_config_parameter_rn_qr_default_expiration_days" model="ir.config_parameter">
+        <field name="key">rn_universal_qr.default_expiration_days</field>
+        <field name="value">0</field>
+    </record>
+    <record id="ir_config_parameter_rn_qr_default_scan_action" model="ir.config_parameter">
+        <field name="key">rn_universal_qr.default_scan_action</field>
+        <field name="value">open_record</field>
+    </record>
+</odoo>

@@ -1,0 +1,49 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_mes_terminal_op,rn.mes.terminal operator,rn.mes.terminal,rn_mes_core.group_rn_mes_operator,r,
+access_rn_mes_terminal_sup,rn.mes.terminal supervisor,rn.mes.terminal,rn_mes_core.group_rn_mes_supervisor,cru,
+access_rn_mes_terminal_mgr,rn.mes.terminal manager,rn.mes.terminal,rn_mes_core.group_rn_mes_manager,crud,
+rule_rn_mes_terminal_company,MES Terminal multi-company,rn.mes.terminal,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_mes_session_op,rn.mes.production.session operator,rn.mes.production.session,rn_mes_core.group_rn_mes_operator,cru,
+access_rn_mes_session_mgr,rn.mes.production.session manager,rn.mes.production.session,rn_mes_core.group_rn_mes_manager,crud,
+rule_rn_mes_session_company,MES Session multi-company,rn.mes.production.session,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_mes_event_op,rn.mes.production.event operator,rn.mes.production.event,rn_mes_core.group_rn_mes_operator,cru,
+access_rn_mes_event_mgr,rn.mes.production.event manager,rn.mes.production.event,rn_mes_core.group_rn_mes_manager,crud,
+rule_rn_mes_event_company,MES Event multi-company,rn.mes.production.event,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_mes_scrap_op,rn.mes.scrap.record operator,rn.mes.scrap.record,rn_mes_core.group_rn_mes_operator,cru,
+access_rn_mes_scrap_mgr,rn.mes.scrap.record manager,rn.mes.scrap.record,rn_mes_core.group_rn_mes_manager,crud,
+rule_rn_mes_scrap_company,MES Scrap multi-company,rn.mes.scrap.record,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_mes_checklist_op,rn.mes.quality.checklist operator,rn.mes.quality.checklist,rn_mes_core.group_rn_mes_operator,r,
+access_rn_mes_checklist_sup,rn.mes.quality.checklist supervisor,rn.mes.quality.checklist,rn_mes_core.group_rn_mes_supervisor,cru,
+access_rn_mes_checklist_mgr,rn.mes.quality.checklist manager,rn.mes.quality.checklist,rn_mes_core.group_rn_mes_manager,crud,
+rule_rn_mes_checklist_company,MES Checklist multi-company,rn.mes.quality.checklist,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_mes_checklist_line_op,rn.mes.quality.checklist.line operator,rn.mes.quality.checklist.line,rn_mes_core.group_rn_mes_operator,r,
+access_rn_mes_checklist_line_sup,rn.mes.quality.checklist.line supervisor,rn.mes.quality.checklist.line,rn_mes_core.group_rn_mes_supervisor,crud,
+access_rn_mes_inspection_op,rn.mes.quality.inspection operator,rn.mes.quality.inspection,rn_mes_core.group_rn_mes_operator,cru,
+access_rn_mes_inspection_mgr,rn.mes.quality.inspection manager,rn.mes.quality.inspection,rn_mes_core.group_rn_mes_manager,crud,
+rule_rn_mes_inspection_company,MES Inspection multi-company,rn.mes.quality.inspection,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_mes_inspection_line_op,rn.mes.quality.inspection.line operator,rn.mes.quality.inspection.line,rn_mes_core.group_rn_mes_operator,cru,
+access_rn_mes_inspection_line_mgr,rn.mes.quality.inspection.line manager,rn.mes.quality.inspection.line,rn_mes_core.group_rn_mes_manager,crud,
+access_rn_mes_downtime_reason_op,rn.mes.downtime.reason operator,rn.mes.downtime.reason,rn_mes_core.group_rn_mes_operator,r,
+access_rn_mes_downtime_reason_sup,rn.mes.downtime.reason supervisor,rn.mes.downtime.reason,rn_mes_core.group_rn_mes_supervisor,cru,
+access_rn_mes_downtime_reason_mgr,rn.mes.downtime.reason manager,rn.mes.downtime.reason,rn_mes_core.group_rn_mes_manager,crud,
+access_rn_mes_downtime_op,rn.mes.downtime.event operator,rn.mes.downtime.event,rn_mes_core.group_rn_mes_operator,cru,
+access_rn_mes_downtime_mgr,rn.mes.downtime.event manager,rn.mes.downtime.event,rn_mes_core.group_rn_mes_manager,crud,
+rule_rn_mes_downtime_company,MES Downtime multi-company,rn.mes.downtime.event,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_mes_device_op,rn.mes.machine.device operator,rn.mes.machine.device,rn_mes_core.group_rn_mes_operator,r,
+access_rn_mes_device_sup,rn.mes.machine.device supervisor,rn.mes.machine.device,rn_mes_core.group_rn_mes_supervisor,cru,
+access_rn_mes_device_mgr,rn.mes.machine.device manager,rn.mes.machine.device,rn_mes_core.group_rn_mes_manager,crud,
+rule_rn_mes_device_company,MES Device multi-company,rn.mes.machine.device,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_mes_reading_op,rn.mes.machine.reading operator,rn.mes.machine.reading,rn_mes_core.group_rn_mes_operator,r,
+access_rn_mes_reading_sup,rn.mes.machine.reading supervisor,rn.mes.machine.reading,rn_mes_core.group_rn_mes_supervisor,cru,
+access_rn_mes_reading_mgr,rn.mes.machine.reading manager,rn.mes.machine.reading,rn_mes_core.group_rn_mes_manager,crud,
+rule_rn_mes_reading_company,MES Reading multi-company,rn.mes.machine.reading,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_mes_barcode_op,rn.mes.barcode.scan operator,rn.mes.barcode.scan,rn_mes_core.group_rn_mes_operator,cru,
+access_rn_mes_barcode_mgr,rn.mes.barcode.scan manager,rn.mes.barcode.scan,rn_mes_core.group_rn_mes_manager,crud,
+rule_rn_mes_barcode_company,MES Barcode Scan multi-company,rn.mes.barcode.scan,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_mes_oee_op,rn.mes.oee.snapshot operator,rn.mes.oee.snapshot,rn_mes_core.group_rn_mes_operator,r,
+access_rn_mes_oee_sup,rn.mes.oee.snapshot supervisor,rn.mes.oee.snapshot,rn_mes_core.group_rn_mes_supervisor,cru,
+access_rn_mes_oee_mgr,rn.mes.oee.snapshot manager,rn.mes.oee.snapshot,rn_mes_core.group_rn_mes_manager,crud,
+rule_rn_mes_oee_company,MES OEE multi-company,rn.mes.oee.snapshot,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_mes_settings_mgr,rn.mes.settings manager,rn.mes.settings,rn_mes_core.group_rn_mes_manager,crud,
+rule_rn_mes_settings_company,MES Settings multi-company,rn.mes.settings,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_mes_barcode_wizard_mgr,rn.mes.barcode.scan.wizard manager,rn.mes.barcode.scan.wizard,rn_mes_core.group_rn_mes_operator,crud,

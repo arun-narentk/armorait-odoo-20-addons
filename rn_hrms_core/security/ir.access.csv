@@ -1,0 +1,32 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_hrms_branch_ro,rn.hrms.branch readonly,rn.hrms.branch,rn_hrms_core.group_rn_hrms_readonly,r,
+access_rn_hrms_branch_officer,rn.hrms.branch officer,rn.hrms.branch,rn_hrms_core.group_rn_hrms_officer,cru,
+access_rn_hrms_branch_manager,rn.hrms.branch manager,rn.hrms.branch,rn_hrms_core.group_rn_hrms_manager,crud,
+rule_rn_hrms_branch_company,HRMS Branch multi-company,rn.hrms.branch,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_hrms_designation_ro,rn.hrms.designation readonly,rn.hrms.designation,rn_hrms_core.group_rn_hrms_readonly,r,
+access_rn_hrms_designation_officer,rn.hrms.designation officer,rn.hrms.designation,rn_hrms_core.group_rn_hrms_officer,cru,
+access_rn_hrms_designation_manager,rn.hrms.designation manager,rn.hrms.designation,rn_hrms_core.group_rn_hrms_manager,crud,
+rule_rn_hrms_designation_company,HRMS Designation multi-company,rn.hrms.designation,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_hrms_skill_ro,rn.hrms.skill readonly,rn.hrms.skill,rn_hrms_core.group_rn_hrms_readonly,r,
+access_rn_hrms_skill_officer,rn.hrms.skill officer,rn.hrms.skill,rn_hrms_core.group_rn_hrms_officer,cru,
+access_rn_hrms_skill_manager,rn.hrms.skill manager,rn.hrms.skill,rn_hrms_core.group_rn_hrms_manager,crud,
+access_rn_hrms_document_ro,rn.hrms.document readonly,rn.hrms.document,rn_hrms_core.group_rn_hrms_readonly,r,
+access_rn_hrms_document_officer,rn.hrms.document officer,rn.hrms.document,rn_hrms_core.group_rn_hrms_officer,cru,
+access_rn_hrms_document_manager,rn.hrms.document manager,rn.hrms.document,rn_hrms_core.group_rn_hrms_manager,crud,
+rule_rn_hrms_document_company,HRMS Document multi-company,rn.hrms.document,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_hrms_announcement_ro,rn.hrms.announcement readonly,rn.hrms.announcement,rn_hrms_core.group_rn_hrms_readonly,r,
+access_rn_hrms_announcement_officer,rn.hrms.announcement officer,rn.hrms.announcement,rn_hrms_core.group_rn_hrms_officer,cru,
+access_rn_hrms_announcement_manager,rn.hrms.announcement manager,rn.hrms.announcement,rn_hrms_core.group_rn_hrms_manager,crud,
+rule_rn_hrms_announcement_company,HRMS Announcement multi-company,rn.hrms.announcement,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_hrms_approval_ro,rn.hrms.approval readonly,rn.hrms.approval,rn_hrms_core.group_rn_hrms_readonly,r,
+access_rn_hrms_approval_officer,rn.hrms.approval officer,rn.hrms.approval,rn_hrms_core.group_rn_hrms_officer,cru,
+access_rn_hrms_approval_manager,rn.hrms.approval manager,rn.hrms.approval,rn_hrms_core.group_rn_hrms_manager,crud,
+rule_rn_hrms_approval_company,HRMS Approval multi-company,rn.hrms.approval,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_hrms_settings_ro,rn.hrms.settings readonly,rn.hrms.settings,rn_hrms_core.group_rn_hrms_readonly,r,
+access_rn_hrms_settings_manager,rn.hrms.settings manager,rn.hrms.settings,rn_hrms_core.group_rn_hrms_manager,crud,
+rule_rn_hrms_settings_company,HRMS Settings multi-company,rn.hrms.settings,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_hrms_subscription_ro,rn.hrms.subscription readonly,rn.hrms.subscription,rn_hrms_core.group_rn_hrms_readonly,r,
+access_rn_hrms_subscription_manager,rn.hrms.subscription manager,rn.hrms.subscription,rn_hrms_core.group_rn_hrms_manager,crud,
+rule_rn_hrms_subscription_company,HRMS Subscription multi-company,rn.hrms.subscription,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_hrms_wiz_approval_officer,rn.hrms.approval.action.wizard officer,rn.hrms.approval.action.wizard,rn_hrms_core.group_rn_hrms_officer,crud,
+access_rn_hrms_wiz_onboard_officer,rn.hrms.employee.onboarding.wizard officer,rn.hrms.employee.onboarding.wizard,rn_hrms_core.group_rn_hrms_officer,crud,
