@@ -1,7 +1,0 @@
-Screenshots for armora_gst_sales_reconciliation
-
-Live Odoo UI (preferred):
-- (none yet; product panels under screenshots/ are used)
-
-Branding: company_logo.png copied from armora_invoice_credit_notes.
-Do not use real taxpayer GSTINs or fabricated portal responses.
