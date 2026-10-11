@@ -116,8 +116,10 @@ class RnGstSalesRecon(models.Model):
         ):
             books[move]['taxable'] -= balance
         for move, balance in self.env['account.move.line']._read_group(
+            # GST on the output tax accounts only: an export with IGST paid books +100% to IGST payable and
+            # -100% to a refund asset, a reverse charge sale books both to the RCM control account.
             domain + [('display_type', '=', 'tax'), ('tax_line_id', 'in', self._rn_gst_taxes().ids),
-                      ('tax_repartition_line_id.factor_percent', '>', 0)],
+                      ('account_id', 'in', self._rn_output_tax_accounts().ids)],
             ['move_id'], ['balance:sum'],
         ):
             books[move]['tax'] -= balance

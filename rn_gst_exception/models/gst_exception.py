@@ -189,7 +189,7 @@ class RnGstException(models.Model):
     # ------------------------------------------------------------------
 
     @api.model
-    def _rn_sync_findings(self, source, findings, company_ids):
+    def _rn_sync_findings(self, source, findings, company_ids, fingerprint_prefix=None):
         """Create or refresh the problems an app finds, and close the ones it no longer finds.
 
         :param source: value of the ``source`` field
@@ -197,17 +197,22 @@ class RnGstException(models.Model):
             other keys are field values (``message``, ``hint``, ``severity``, ``move_id``, ...)
         :param company_ids: companies that were scanned; only their open problems of this
             source can be closed
+        :param fingerprint_prefix: when set, only problems whose fingerprint starts with it
+            are updated or closed (for apps that share a source)
         :return: dict with the number of ``created``, ``updated``, ``reopened`` and ``closed`` problems
         """
         now = fields.Datetime.now()
         by_key = {}
         for finding in findings:
             by_key[(finding['company_id'], finding['fingerprint'])] = finding
-        existing = self.with_context(active_test=False).search([
+        domain = [
             ('source', '=', source),
             ('company_id', 'in', company_ids),
             ('fingerprint', '!=', False),
-        ])
+        ]
+        if fingerprint_prefix:
+            domain.append(('fingerprint', '=like', fingerprint_prefix + '%'))
+        existing = self.with_context(active_test=False).search(domain)
         stats = dict.fromkeys(('created', 'updated', 'reopened', 'closed'), 0)
         seen = set()
         for rec in existing:

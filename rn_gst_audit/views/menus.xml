@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="rn_gst_audit_menu"
+              name="Audit"
+              parent="rn_gst_base.menu_rn_gst_root"
+              action="rn_gst_audit_action"
+              sequence="80"
+              groups="rn_gst_audit.group_rn_gst_audit_user"/>
+</odoo>

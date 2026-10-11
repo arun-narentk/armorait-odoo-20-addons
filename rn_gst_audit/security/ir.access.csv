@@ -1,0 +1,6 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_gst_audit_user,rn.gst.audit.user,rn.gst.audit,rn_gst_audit.group_rn_gst_audit_user,cru,
+access_rn_gst_audit_reviewer,rn.gst.audit.reviewer,rn.gst.audit,rn_gst_audit.group_rn_gst_audit_reviewer,crud,
+rn_gst_audit_comp_rule,rn.gst.audit: multi-company,rn.gst.audit,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_audit_check_user,rn.gst.audit.check.user,rn.gst.audit.check,rn_gst_audit.group_rn_gst_audit_user,crud,
+rn_gst_audit_check_comp_rule,rn.gst.audit.check: multi-company,rn.gst.audit.check,,crud,"[('company_id', 'in', company_ids)]"

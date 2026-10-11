@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rn_gst_audit_view_list" model="ir.ui.view">
+        <field name="name">rn.gst.audit.list</field>
+        <field name="model">rn.gst.audit</field>
+        <field name="arch" type="xml">
+            <list string="GST Audits">
+                <field name="name"/>
+                <field name="gstin"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="pass_count"/>
+                <field name="warning_count"/>
+                <field name="fail_count"/>
+                <field name="unknown_count" optional="hide"/>
+                <field name="reviewed_by_id" optional="show"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+                <field name="state" widget="badge" decoration-info="state == 'checked'" decoration-success="state == 'signed'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="rn_gst_audit_view_form" model="ir.ui.view">
+        <field name="name">rn.gst.audit.form</field>
+        <field name="model">rn.gst.audit</field>
+        <field name="arch" type="xml">
+            <form string="GST Audit">
+                <header>
+                    <button name="action_run" type="object" string="Run Checklist" class="btn-primary"
+                            invisible="state == 'signed'"/>
+                    <button name="action_export_pack" type="object" string="Audit Pack (Excel)" invisible="state == 'draft'"/>
+                    <button name="action_send_to_exceptions" type="object" string="Send to Exceptions"
+                            invisible="state == 'draft' or not (fail_count or warning_count)"/>
+                    <button name="action_sign" type="object" string="Sign as Reviewer" invisible="state != 'checked'"
+                            groups="rn_gst_audit.group_rn_gst_audit_reviewer"
+                            confirm="Sign this GST audit? It will be locked."/>
+                    <button name="action_reopen" type="object" string="Reopen" invisible="state != 'signed'"
+                            groups="rn_gst_audit.group_rn_gst_audit_reviewer"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Signed" bg_color="text-bg-success" invisible="state != 'signed'"/>
+                    <div class="oe_title"><h1><field name="name" readonly="1"/></h1></div>
+                    <group>
+                        <group>
+                            <field name="gstin" readonly="state == 'signed'"/>
+                            <field name="date_from" readonly="state == 'signed'"/>
+                            <field name="date_to" readonly="state == 'signed'"/>
+                            <field name="company_id" groups="base.group_multi_company" readonly="state == 'signed'"/>
+                        </group>
+                        <group>
+                            <field name="pass_count"/>
+                            <field name="warning_count"/>
+                            <field name="fail_count"/>
+                            <field name="unknown_count"/>
+                            <field name="pack_id" invisible="not pack_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Checklist" name="checklist">
+                            <field name="check_ids" readonly="state == 'signed'">
+                                <list editable="bottom" create="false" delete="false"
+                                      decoration-danger="result == 'fail'" decoration-warning="result == 'warning'"
+                                      decoration-muted="result == 'unknown'">
+                                    <field name="area" readonly="1"/>
+                                    <field name="name" readonly="1"/>
+                                    <field name="count" readonly="1"/>
+                                    <field name="message" readonly="1"/>
+                                    <field name="note"/>
+                                    <field name="model" column_invisible="1"/>
+                                    <field name="result" widget="badge" readonly="1"
+                                           decoration-success="result == 'pass'" decoration-warning="result == 'warning'"
+                                           decoration-danger="result == 'fail'"/>
+                                    <button name="action_open" type="object" string="Open" invisible="not model"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Sign-off" name="signoff">
+                            <group>
+                                <group>
+                                    <field name="prepared_by_id"/>
+                                    <field name="prepared_on"/>
+                                </group>
+                                <group>
+                                    <field name="reviewed_by_id"/>
+                                    <field name="reviewed_on"/>
+                                </group>
+                            </group>
+                            <field name="review_note" placeholder="Reviewer's note on the warnings and failures"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="rn_gst_audit_action" model="ir.actions.act_window">
+        <field name="name">GST Audits</field>
+        <field name="res_model">rn.gst.audit</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Start a GST audit of a period</p>
+            <p>Pick the dates and run the checklist. It reads the installed Armora GST apps; checks of apps that are
+               not installed show as Not Checked.</p>
+        </field>
+    </record>
+</odoo>

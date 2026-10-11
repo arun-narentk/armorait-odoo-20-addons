@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="seq_rn_gst_audit" model="ir.sequence">
+        <field name="name">GST Audit</field>
+        <field name="code">rn.gst.audit</field>
+        <field name="prefix">GSTAUD/%(year)s/</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+</odoo>
