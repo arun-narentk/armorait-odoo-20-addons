@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rn_gst_invoice_validation_wizard_form" model="ir.ui.view">
+        <field name="name">rn.gst.invoice.validation.wizard.form</field>
+        <field name="model">rn.gst.invoice.validation.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Batch GST Validation">
+                <group>
+                    <group>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                        <field name="move_type"/>
+                        <field name="partner_id"/>
+                    </group>
+                    <group>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                        <field name="sync_move_issues"/>
+                    </group>
+                </group>
+                <group string="Documents">
+                    <field name="invoice_ids" nolabel="1"
+                             domain="[('company_id', '=', company_id), ('move_type', 'in', ('out_invoice','out_refund','in_invoice','in_refund'))]"/>
+                </group>
+                <footer>
+                    <button name="action_validate" type="object" string="Validate"
+                            class="btn-primary"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_rn_gst_invoice_validation_wizard" model="ir.actions.act_window">
+        <field name="name">Batch Validate</field>
+        <field name="res_model">rn.gst.invoice.validation.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

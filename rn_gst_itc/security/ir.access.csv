@@ -1,0 +1,10 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_gst_itc_ledger_user,rn.gst.itc.ledger.user,rn.gst.itc.ledger,rn_gst_itc.group_rn_gst_itc_user,r,
+access_rn_gst_itc_ledger_manager,rn.gst.itc.ledger.manager,rn.gst.itc.ledger,rn_gst_itc.group_rn_gst_itc_manager,crud,
+rn_gst_itc_ledger_comp_rule,rn.gst.itc.ledger: multi-company,rn.gst.itc.ledger,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_itc_bill_user,rn.gst.itc.bill.user,rn.gst.itc.bill,rn_gst_itc.group_rn_gst_itc_user,r,
+access_rn_gst_itc_bill_manager,rn.gst.itc.bill.manager,rn.gst.itc.bill,rn_gst_itc.group_rn_gst_itc_manager,crud,
+rn_gst_itc_bill_comp_rule,rn.gst.itc.bill: multi-company,rn.gst.itc.bill,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_itc_entry_user,rn.gst.itc.entry.user,rn.gst.itc.entry,rn_gst_itc.group_rn_gst_itc_user,r,
+access_rn_gst_itc_entry_manager,rn.gst.itc.entry.manager,rn.gst.itc.entry,rn_gst_itc.group_rn_gst_itc_manager,crud,
+rn_gst_itc_entry_comp_rule,rn.gst.itc.entry: multi-company,rn.gst.itc.entry,,crud,"[('company_id', 'in', company_ids)]"

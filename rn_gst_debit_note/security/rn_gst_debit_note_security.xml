@@ -1,0 +1,27 @@
+<odoo>
+    <record id="res_groups_privilege_rn_gst_debit_note" model="res.groups.privilege">
+        <field name="name">GST Debit Note</field>
+        <field name="category_id" ref="rn_gst_base.module_category_rn_gst"/>
+    </record>
+
+    <record id="group_rn_gst_debit_note_user" model="res.groups">
+        <field name="name">GST Debit Note User</field>
+        <field name="privilege_id" ref="res_groups_privilege_rn_gst_debit_note"/>
+        <field name="implied_ids" eval="[(4, ref('rn_gst_base.group_rn_gst_user'))]"/>
+    </record>
+
+    <record id="group_rn_gst_debit_note_manager" model="res.groups">
+        <field name="name">GST Debit Note Manager</field>
+        <field name="privilege_id" ref="res_groups_privilege_rn_gst_debit_note"/>
+        <field name="implied_ids" eval="[(4, ref('group_rn_gst_debit_note_user')), (4, ref('rn_gst_base.group_rn_gst_manager'))]"/>
+        <field name="user_ids" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    </record>
+
+    <record id="group_rn_gst_debit_note_administrator" model="res.groups">
+        <field name="name">GST Debit Note Administrator</field>
+        <field name="privilege_id" ref="res_groups_privilege_rn_gst_debit_note"/>
+        <field name="implied_ids" eval="[(4, ref('group_rn_gst_debit_note_manager')), (4, ref('rn_gst_base.group_rn_gst_administrator'))]"/>
+        <field name="user_ids" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    </record>
+
+    </odoo>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_rn_gst_root"
+              name="Armora GST"
+              web_icon="rn_gst_base,static/description/icon.png"
+              sequence="44"
+              groups="rn_gst_base.group_rn_gst_user"/>
+
+    <menuitem id="menu_rn_gst_registration"
+              name="GST Registrations"
+              parent="menu_rn_gst_root"
+              action="action_rn_gst_registration"
+              sequence="10"
+              groups="rn_gst_base.group_rn_gst_user"/>
+
+    <menuitem id="menu_rn_gst_configuration"
+              name="Configuration"
+              parent="menu_rn_gst_root"
+              sequence="90"
+              groups="rn_gst_base.group_rn_gst_manager"/>
+
+    <menuitem id="menu_rn_gst_settings"
+              name="Settings"
+              parent="menu_rn_gst_configuration"
+              action="action_rn_gst_base_configuration"
+              sequence="10"
+              groups="rn_gst_base.group_rn_gst_manager"/>
+</odoo>

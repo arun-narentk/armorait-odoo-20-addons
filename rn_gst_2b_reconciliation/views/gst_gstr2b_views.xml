@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rn_gst_gstr2b_list" model="ir.ui.view">
+        <field name="name">rn.gst.gstr2b.list</field>
+        <field name="model">rn.gst.gstr2b</field>
+        <field name="arch" type="xml">
+            <list string="GSTR-2A / 2B Reconciliations">
+                <field name="name"/>
+                <field name="statement_type"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="gstin"/>
+                <field name="return_period"/>
+                <field name="financial_year"/>
+                <field name="amount_itc_total"/>
+                <field name="count_matched"/>
+                <field name="count_mismatch"/>
+                <field name="count_missing_odoo"/>
+                <field name="count_missing_2b"/>
+                <field name="state" widget="badge"
+                        decoration-info="state == 'draft'"
+                        decoration-warning="state in ('imported', 'matched')"
+                        decoration-success="state == 'closed'"
+                        decoration-danger="state == 'cancelled'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_rn_gst_gstr2b_form" model="ir.ui.view">
+        <field name="name">rn.gst.gstr2b.form</field>
+        <field name="model">rn.gst.gstr2b</field>
+        <field name="arch" type="xml">
+            <form string="GSTR-2B Reconciliation">
+                <header>
+                    <button name="action_open_import_wizard" type="object" string="Import GSTR-2B"
+                            invisible="state in ('closed', 'cancelled')"
+                            class="btn-primary"/>
+                    <button name="action_run_matching" type="object" string="Run Matching"
+                            invisible="state in ('draft', 'closed', 'cancelled')"
+                            class="btn-primary"/>
+                    <button name="action_mark_closed" type="object" string="Close"
+                            invisible="state not in ('imported', 'matched')"
+                            groups="rn_gst_2b_reconciliation.group_rn_gst_2b_manager"/>
+                    <button name="action_reset_to_draft" type="object" string="Reset"
+                            invisible="state in ('draft', 'closed', 'cancelled')"/>
+                    <button name="action_cancel" type="object" string="Cancel"
+                            invisible="state in ('closed', 'cancelled')"
+                            confirm="Cancel this reconciliation?"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,imported,matched,closed"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_lines" type="object" class="oe_stat_button" icon="format_list_bulleted">
+                            <field name="line_count" widget="statinfo" string="Lines"/>
+                        </button>
+                        <button name="action_view_matched" type="object" class="oe_stat_button" icon="check_circle">
+                            <div class="o_stat_info">
+                                <span class="o_stat_value"><field name="count_matched"/></span>
+                                <span class="o_stat_text">Matched</span>
+                            </div>
+                        </button>
+                        <button name="action_view_mismatch" type="object" class="oe_stat_button" icon="swap_horiz">
+                            <div class="o_stat_info">
+                                <span class="o_stat_value"><field name="count_mismatch"/></span>
+                                <span class="o_stat_text">Mismatch</span>
+                            </div>
+                        </button>
+                        <button name="action_view_missing_odoo" type="object" class="oe_stat_button" icon="warning">
+                            <div class="o_stat_info">
+                                <span class="o_stat_value"><field name="count_missing_odoo"/></span>
+                                <span class="o_stat_text">Missing Odoo</span>
+                            </div>
+                        </button>
+                        <button name="action_view_missing_2b" type="object" class="oe_stat_button" icon="help">
+                            <div class="o_stat_info">
+                                <span class="o_stat_value"><field name="count_missing_2b"/></span>
+                                <span class="o_stat_text">Missing 2B</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="company_id" groups="base.group_multi_company"
+                                     readonly="state != 'draft'"/>
+                            <field name="statement_type" readonly="state != 'draft'"/>
+                            <field name="gstin" readonly="state != 'draft'"/>
+                            <field name="filing_frequency" readonly="state != 'draft'"/>
+                        </group>
+                        <group>
+                            <field name="financial_year" readonly="state != 'draft'"/>
+                            <field name="return_period" readonly="state != 'draft'"/>
+                            <field name="period_start" readonly="1"/>
+                            <field name="period_end" readonly="1"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <group string="ITC Dashboard">
+                        <group>
+                            <field name="amount_itc_total"/>
+                            <field name="amount_matched"/>
+                            <field name="amount_mismatch"/>
+                        </group>
+                        <group>
+                            <field name="amount_missing_odoo"/>
+                            <field name="amount_missing_2b"/>
+                            <field name="matched_at" readonly="1"/>
+                            <field name="matched_by" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Lines" name="lines">
+                            <field name="line_ids">
+                                <list>
+                                    <field name="source"/>
+                                    <field name="match_state"
+                                              decoration-success="match_state == 'matched'"
+                                              decoration-danger="match_state in ('mismatch', 'missing_in_odoo', 'missing_in_2b')"
+                                              decoration-muted="match_state in ('ignored', 'disputed')"/>
+                                    <field name="vendor_gstin"/>
+                                    <field name="vendor_name"/>
+                                    <field name="invoice_number"/>
+                                    <field name="invoice_date"/>
+                                    <field name="taxable_value"/>
+                                    <field name="cgst_amount"/>
+                                    <field name="sgst_amount"/>
+                                    <field name="igst_amount"/>
+                                    <field name="move_id"/>
+                                    <button name="action_create_vendor_bill" type="object" string="Create Bill"
+                                            invisible="source != 'gstr2b' or match_state not in ('missing_in_odoo', 'pending', 'mismatch') or move_id"/>
+                                    <button name="action_open_bill" type="object" string="Bill"
+                                            icon="open_in_new" invisible="not move_id"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="notes" placeholder="Accountant notes..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_rn_gst_gstr2b_search" model="ir.ui.view">
+        <field name="name">rn.gst.gstr2b.search</field>
+        <field name="model">rn.gst.gstr2b</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="gstin"/>
+                <field name="return_period"/>
+                <filter string="GSTR-2B" name="gstr2b" domain="[('statement_type', '=', 'gstr2b')]"/>
+                <filter string="GSTR-2A" name="gstr2a" domain="[('statement_type', '=', 'gstr2a')]"/>
+                <separator/>
+                <filter string="Draft" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Matched" name="matched" domain="[('state', '=', 'matched')]"/>
+                <filter string="Closed" name="closed" domain="[('state', '=', 'closed')]"/>
+                <group>
+                    <filter string="Statement" name="group_statement" context="{'group_by': 'statement_type'}"/>
+                    <filter string="Period" name="group_period" context="{'group_by': 'return_period'}"/>
+                    <filter string="State" name="group_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_rn_gst_gstr2b" model="ir.actions.act_window">
+        <field name="name">GSTR-2B Reconciliations</field>
+        <field name="res_model">rn.gst.gstr2b</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('statement_type', '=', 'gstr2b')]</field>
+        <field name="context">{'default_statement_type': 'gstr2b'}</field>
+    </record>
+
+    <record id="rn_gst_gstr2b_action_gstr2a" model="ir.actions.act_window">
+        <field name="name">GSTR-2A Reconciliations</field>
+        <field name="res_model">rn.gst.gstr2b</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('statement_type', '=', 'gstr2a')]</field>
+        <field name="context">{'default_statement_type': 'gstr2a'}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Reconcile GSTR-2A with your vendor bills</p>
+            <p>Download GSTR-2A from the GST Portal and import it. Each invoice shows whether the supplier
+               filed GSTR-1 and GSTR-3B, so you can follow up before claiming credit.</p>
+        </field>
+    </record>
+
+    <record id="action_rn_gst_gstr2b_lines" model="ir.actions.act_window">
+        <field name="name">GSTR-2A / 2B Lines</field>
+        <field name="res_model">rn.gst.gstr2b.line</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{}</field>
+    </record>
+</odoo>

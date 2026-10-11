@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="seq_rn_gst_gstr2b" model="ir.sequence">
+        <field name="name">GSTR-2B Reconciliation</field>
+        <field name="code">rn.gst.gstr2b</field>
+        <field name="prefix">2B/%(year)s/</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+    <record id="seq_rn_gst_gstr2a" model="ir.sequence">
+        <field name="name">GSTR-2A Reconciliation</field>
+        <field name="code">rn.gst.gstr2a</field>
+        <field name="prefix">2A/%(year)s/</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+</odoo>

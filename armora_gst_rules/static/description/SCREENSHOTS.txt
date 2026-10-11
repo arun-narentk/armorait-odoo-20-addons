@@ -1,8 +1,0 @@
-Screenshots for armora_gst_rules
-
-Live Odoo UI (preferred):
-- screenshot_01_rules_list.png: GST Rules List
-- screenshot_02_api_audit.png: GST API Audit Trail
-
-Branding: company_logo.png copied from armora_invoice_credit_notes.
-Do not use real taxpayer GSTINs or fabricated portal responses.

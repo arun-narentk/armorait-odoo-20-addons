@@ -1,0 +1,11 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_gst_hsn_result_user,rn.gst.hsn.validation.result.user,rn.gst.hsn.validation.result,rn_gst_hsn_validator.group_rn_gst_hsn_validator_user,r,
+access_rn_gst_hsn_result_manager,rn.gst.hsn.validation.result.manager,rn.gst.hsn.validation.result,rn_gst_hsn_validator.group_rn_gst_hsn_validator_manager,crud,
+rn_gst_hsn_validation_result_comp_rule,HSN Validation Result: multi-company,rn.gst.hsn.validation.result,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_hsn_run_user,rn.gst.hsn.validation.run.user,rn.gst.hsn.validation.run,rn_gst_hsn_validator.group_rn_gst_hsn_validator_user,cru,
+access_rn_gst_hsn_run_manager,rn.gst.hsn.validation.run.manager,rn.gst.hsn.validation.run,rn_gst_hsn_validator.group_rn_gst_hsn_validator_manager,crud,
+rn_gst_hsn_validation_run_comp_rule,HSN Validation Run: multi-company,rn.gst.hsn.validation.run,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_hsn_rule_user,rn.gst.hsn.validation.rule.user,rn.gst.hsn.validation.rule,rn_gst_hsn_validator.group_rn_gst_hsn_validator_user,r,
+access_rn_gst_hsn_rule_manager,rn.gst.hsn.validation.rule.manager,rn.gst.hsn.validation.rule,rn_gst_hsn_validator.group_rn_gst_hsn_validator_manager,cru,
+access_rn_gst_hsn_rule_admin,rn.gst.hsn.validation.rule.admin,rn.gst.hsn.validation.rule,rn_gst_hsn_validator.group_rn_gst_hsn_validator_administrator,crud,
+access_rn_gst_hsn_wizard_user,rn.gst.hsn.validation.wizard.user,rn.gst.hsn.validation.wizard,rn_gst_hsn_validator.group_rn_gst_hsn_validator_user,crud,

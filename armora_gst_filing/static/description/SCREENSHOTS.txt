@@ -1,9 +1,0 @@
-Screenshots for armora_gst_filing
-
-Live Odoo UI (preferred):
-- screenshot_01_returns_list.png: GST Returns Workspace
-- screenshot_02_validation.png: Filing Validation Results
-- screenshot_03_templates.png: Offline Tool Templates
-
-Branding: company_logo.png copied from armora_invoice_credit_notes.
-Do not use real taxpayer GSTINs or fabricated portal responses.

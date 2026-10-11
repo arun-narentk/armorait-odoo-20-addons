@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_rn_gst_tds_tcs_root"
+              name="TDS/TCS"
+              parent="rn_gst_base.menu_rn_gst_root"
+              sequence="60"
+              groups="rn_gst_tds_tcs.group_rn_gst_tds_tcs_user"/>
+
+    <menuitem id="rn_gst_tds_tcs_period_menu"
+              name="Monthly Credits"
+              parent="menu_rn_gst_tds_tcs_root"
+              action="rn_gst_tds_tcs_period_action"
+              sequence="10"/>
+
+    <menuitem id="rn_gst_tds_tcs_credit_menu"
+              name="All Credits"
+              parent="menu_rn_gst_tds_tcs_root"
+              action="rn_gst_tds_tcs_credit_action"
+              sequence="20"/>
+</odoo>

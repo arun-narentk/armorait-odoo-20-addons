@@ -1,0 +1,11 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_gst_dashboard_user,rn.gst.dashboard.user,rn.gst.dashboard,rn_gst_dashboard.group_rn_gst_dashboard_user,cru,
+access_rn_gst_dashboard_manager,rn.gst.dashboard.manager,rn.gst.dashboard,rn_gst_dashboard.group_rn_gst_dashboard_manager,crud,
+rn_gst_dashboard_comp_rule,GST Dashboard: multi-company,rn.gst.dashboard,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_dashboard_snapshot_user,rn.gst.dashboard.snapshot.user,rn.gst.dashboard.snapshot,rn_gst_dashboard.group_rn_gst_dashboard_user,r,
+access_rn_gst_dashboard_snapshot_manager,rn.gst.dashboard.snapshot.manager,rn.gst.dashboard.snapshot,rn_gst_dashboard.group_rn_gst_dashboard_manager,crud,
+rn_gst_dashboard_snapshot_comp_rule,GST Dashboard Snapshot: multi-company,rn.gst.dashboard.snapshot,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_dashboard_filter_user,rn.gst.dashboard.filter.user,rn.gst.dashboard.filter,rn_gst_dashboard.group_rn_gst_dashboard_user,r,
+access_rn_gst_dashboard_filter_manager,rn.gst.dashboard.filter.manager,rn.gst.dashboard.filter,rn_gst_dashboard.group_rn_gst_dashboard_manager,crud,
+rn_gst_dashboard_filter_comp_rule,GST Dashboard Filter: multi-company,rn.gst.dashboard.filter,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_dashboard_filter_wizard_user,rn.gst.dashboard.filter.wizard.user,rn.gst.dashboard.filter.wizard,rn_gst_dashboard.group_rn_gst_dashboard_user,crud,

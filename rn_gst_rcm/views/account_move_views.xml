@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="name">account.move.form.inherit.rn.gst.rcm</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_rn_issue_self_invoice" type="object" string="Issue Self-Invoice"
+                        invisible="not rn_self_invoice_required or state != 'posted' or rn_self_invoice_number"/>
+                <button name="%(rn_gst_rcm_action_report_self_invoice)d" type="action" string="Print Self-Invoice"
+                        icon="print" invisible="not rn_self_invoice_number"/>
+            </xpath>
+            <div name="button_box" position="after">
+                <div class="alert alert-warning d-flex align-items-center gap-2" role="alert" invisible="not rn_rcm_missing">
+                    <span>Reverse charge applies to: <field name="rn_rcm_missing_note" class="oe_inline"/></span>
+                    <button name="action_rn_apply_rcm" type="object" string="Apply RCM Taxes" class="btn-sm btn-warning"/>
+                </div>
+                <div class="alert alert-info" role="alert"
+                     invisible="not rn_self_invoice_required or rn_self_invoice_number or state != 'posted'">
+                    Reverse charge on a supplier without GSTIN: issue a self-invoice by <field name="rn_self_invoice_due" class="oe_inline"/>.
+                </div>
+            </div>
+            <xpath expr="//page[@id='other_tab']" position="inside">
+                <group string="Reverse Charge" invisible="not rn_is_rcm">
+                    <group>
+                        <field name="rn_is_rcm" invisible="1"/>
+                        <field name="rn_rcm_missing" invisible="1"/>
+                        <field name="rn_self_invoice_required" invisible="1"/>
+                        <field name="rn_rcm_supply_type"/>
+                        <field name="rn_rcm_tax"/>
+                        <field name="rn_rcm_payment_date"/>
+                        <field name="rn_rcm_tos_date"/>
+                        <field name="rn_rcm_tos_period"/>
+                    </group>
+                    <group invisible="not rn_self_invoice_required">
+                        <field name="rn_self_invoice_number"/>
+                        <field name="rn_self_invoice_date"/>
+                        <field name="rn_self_invoice_due"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="rn_gst_rcm_register_view_list" model="ir.ui.view">
+        <field name="name">account.move.list.rn.gst.rcm.register</field>
+        <field name="model">account.move</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <list string="RCM Register" create="0">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="invoice_date"/>
+                <field name="l10n_in_gst_treatment" optional="show"/>
+                <field name="rn_rcm_supply_type"/>
+                <field name="rn_rcm_tax" sum="Total"/>
+                <field name="rn_rcm_payment_date"/>
+                <field name="rn_rcm_tos_date"/>
+                <field name="rn_rcm_tos_period"/>
+                <field name="rn_self_invoice_number"/>
+                <field name="rn_self_invoice_due" optional="show"/>
+                <field name="payment_state" widget="badge" optional="show"/>
+                <field name="company_currency_id" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="rn_gst_rcm_register_view_search" model="ir.ui.view">
+        <field name="name">account.move.search.rn.gst.rcm.register</field>
+        <field name="model">account.move</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <filter string="Unregistered Suppliers" name="unregistered"
+                        domain="[('l10n_in_gst_treatment', 'in', ('unregistered', 'consumer'))]"/>
+                <filter string="Self-Invoice Not Issued" name="self_invoice_missing"
+                        domain="[('l10n_in_gst_treatment', 'in', ('unregistered', 'consumer')), ('move_type', '=', 'in_invoice'), ('rn_self_invoice_number', '=', False)]"/>
+                <filter string="Not Paid" name="not_paid" domain="[('payment_state', 'not in', ('paid', 'in_payment', 'reversed'))]"/>
+                <separator/>
+                <filter string="Invoice Date" name="invoice_date" date="invoice_date"/>
+                <group>
+                    <filter string="Supplier" name="group_partner" context="{'group_by': 'partner_id'}"/>
+                    <filter string="Invoice Month" name="group_month" context="{'group_by': 'invoice_date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="rn_gst_rcm_register_action" model="ir.actions.act_window">
+        <field name="name">RCM Register</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('rn_is_rcm', '=', True), ('state', '=', 'posted')]</field>
+        <field name="context">{'create': False}</field>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('rn_gst_rcm_register_view_list')}), (0, 0, {'view_mode': 'form', 'view_id': ref('account.view_move_form')})]"/>
+        <field name="search_view_id" ref="rn_gst_rcm_register_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No reverse charge bills yet</p>
+            <p>Posted vendor bills with a reverse charge tax show here, with the month the tax falls due.</p>
+        </field>
+    </record>
+</odoo>

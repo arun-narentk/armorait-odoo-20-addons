@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_rn_gst_hsn_validator_root"
+              name="HSN/SAC Validator"
+              parent="rn_gst_base.menu_rn_gst_root"
+              sequence="50"
+              groups="rn_gst_hsn_validator.group_rn_gst_hsn_validator_user"/>
+
+    <menuitem id="menu_rn_gst_hsn_validation"
+              name="Validation"
+              parent="menu_rn_gst_hsn_validator_root"
+              sequence="10"
+              groups="rn_gst_hsn_validator.group_rn_gst_hsn_validator_user"/>
+
+    <menuitem id="menu_rn_gst_hsn_validation_result"
+              name="Validation Results"
+              parent="menu_rn_gst_hsn_validation"
+              action="action_rn_gst_hsn_validation_result"
+              sequence="10"/>
+
+    <menuitem id="menu_rn_gst_hsn_validation_run"
+              name="Validation Runs"
+              parent="menu_rn_gst_hsn_validation"
+              action="action_rn_gst_hsn_validation_run"
+              sequence="20"/>
+
+    <menuitem id="menu_rn_gst_hsn_validation_wizard"
+              name="Bulk Validation"
+              parent="menu_rn_gst_hsn_validation"
+              action="action_rn_gst_hsn_validation_wizard"
+              sequence="30"
+              groups="rn_gst_hsn_validator.group_rn_gst_hsn_validator_manager"/>
+
+    <menuitem id="menu_rn_gst_hsn_configuration"
+              name="Configuration"
+              parent="menu_rn_gst_hsn_validator_root"
+              sequence="90"
+              groups="rn_gst_hsn_validator.group_rn_gst_hsn_validator_manager"/>
+
+    <menuitem id="menu_rn_gst_hsn_validation_rule"
+              name="Validation Rules"
+              parent="menu_rn_gst_hsn_configuration"
+              action="action_rn_gst_hsn_validation_rule"
+              sequence="10"
+              groups="rn_gst_hsn_validator.group_rn_gst_hsn_validator_administrator"/>
+</odoo>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rn_gst_ewaybill_close_wizard" model="ir.ui.view">
+        <field name="name">rn.gst.ewaybill.close.wizard.form</field>
+        <field name="model">rn.gst.ewaybill.close.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Close E-Way Bill">
+                <group>
+                    <field name="res_model" invisible="1"/>
+                    <field name="res_id" invisible="1"/>
+                    <field name="ewb_number"/>
+                    <field name="delivery_date"/>
+                    <field name="closure_date"/>
+                    <field name="remarks"/>
+                </group>
+                <footer>
+                    <button name="action_confirm_closure" type="object" string="Confirm Closure" class="btn-primary"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

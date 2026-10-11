@@ -1,0 +1,17 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_gst_rate_user,rn.gst.rate.user,rn.gst.rate,rn_gst_rate_manager.group_rn_gst_rate_manager_user,r,
+access_rn_gst_rate_manager,rn.gst.rate.manager,rn.gst.rate,rn_gst_rate_manager.group_rn_gst_rate_manager_manager,cru,
+access_rn_gst_rate_admin,rn.gst.rate.admin,rn.gst.rate,rn_gst_rate_manager.group_rn_gst_rate_manager_administrator,crud,
+rn_gst_rate_comp_rule,GST Rate: multi-company,rn.gst.rate,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_rate_change_user,rn.gst.rate.change.user,rn.gst.rate.change,rn_gst_rate_manager.group_rn_gst_rate_manager_user,r,
+access_rn_gst_rate_change_manager,rn.gst.rate.change.manager,rn.gst.rate.change,rn_gst_rate_manager.group_rn_gst_rate_manager_manager,cru,
+access_rn_gst_rate_change_admin,rn.gst.rate.change.admin,rn.gst.rate.change,rn_gst_rate_manager.group_rn_gst_rate_manager_administrator,crud,
+rn_gst_rate_change_comp_rule,GST Rate Change: multi-company,rn.gst.rate.change,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_rate_history_user,rn.gst.rate.history.user,rn.gst.rate.history,rn_gst_rate_manager.group_rn_gst_rate_manager_user,r,
+access_rn_gst_rate_history_manager,rn.gst.rate.history.manager,rn.gst.rate.history,rn_gst_rate_manager.group_rn_gst_rate_manager_manager,cr,
+rn_gst_rate_history_comp_rule,GST Rate History: multi-company,rn.gst.rate.history,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_rate_conflict_user,rn.gst.rate.conflict.user,rn.gst.rate.conflict,rn_gst_rate_manager.group_rn_gst_rate_manager_user,r,
+access_rn_gst_rate_conflict_manager,rn.gst.rate.conflict.manager,rn.gst.rate.conflict,rn_gst_rate_manager.group_rn_gst_rate_manager_manager,cru,
+access_rn_gst_rate_conflict_admin,rn.gst.rate.conflict.admin,rn.gst.rate.conflict,rn_gst_rate_manager.group_rn_gst_rate_manager_administrator,crud,
+rn_gst_rate_conflict_comp_rule,GST Rate Conflict: multi-company,rn.gst.rate.conflict,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_rate_bulk_wizard_manager,rn.gst.rate.bulk.update.wizard.manager,rn.gst.rate.bulk.update.wizard,rn_gst_rate_manager.group_rn_gst_rate_manager_manager,crud,

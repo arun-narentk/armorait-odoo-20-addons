@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rn_gst_rcm_action_report_self_invoice" model="ir.actions.report">
+        <field name="name">RCM Self-Invoice</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">rn_gst_rcm.report_self_invoice</field>
+        <field name="print_report_name">'Self-Invoice - %s' % (object.rn_self_invoice_number or object.name)</field>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="binding_type">report</field>
+        <field name="domain">[('rn_self_invoice_number', '!=', False)]</field>
+    </record>
+
+    <template id="report_self_invoice_document">
+        <t t-call="web.external_layout">
+            <t t-set="money" t-value="{'widget': 'monetary', 'display_currency': doc.company_currency_id}"/>
+            <t t-set="taxes" t-value="doc._rn_self_invoice_taxes()"/>
+            <div class="page">
+                <h3 class="mb-1">Self-Invoice (Reverse Charge)</h3>
+                <p class="text-muted mb-3">Issued under section 31(3)(f) of the CGST Act for supplies received from an unregistered supplier.</p>
+                <table class="table table-sm table-borderless mb-3">
+                    <tr>
+                        <td class="w-25"><strong>Self-invoice number</strong></td>
+                        <td class="w-25" t-out="doc.rn_self_invoice_number"/>
+                        <td class="w-25"><strong>Self-invoice date</strong></td>
+                        <td class="w-25"><span t-field="doc.rn_self_invoice_date"/></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Recipient</strong></td>
+                        <td><span t-out="doc.company_id.name"/><br/>GSTIN <span t-out="doc.company_id.vat"/></td>
+                        <td><strong>Supplier (unregistered)</strong></td>
+                        <td><span t-out="doc.commercial_partner_id.name"/><br/><span t-out="doc.commercial_partner_id.state_id.name or ''"/></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Supplier bill</strong></td>
+                        <td><span t-out="doc.ref or doc.name"/>, <span t-field="doc.invoice_date"/></td>
+                        <td><strong>Place of supply</strong></td>
+                        <td t-out="doc.l10n_in_state_id.name or doc.company_id.state_id.name"/>
+                    </tr>
+                </table>
+                <table class="table table-sm table-bordered mb-3">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Description</th>
+                            <th>HSN/SAC</th>
+                            <th class="text-end">Quantity</th>
+                            <th class="text-end">Taxable value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="doc.invoice_line_ids.filtered(lambda l: l.display_type == 'product')" t-as="line">
+                            <td t-out="line.name or line.product_id.display_name or '-'"/>
+                            <td t-out="line.l10n_in_hsn_code or '-'"/>
+                            <td class="text-end" t-out="line.quantity" t-options="{'widget': 'float', 'precision': 2}"/>
+                            <td class="text-end" t-out="abs(line.balance)" t-options="money"/>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-sm table-bordered w-50 ms-auto">
+                    <tr><td>IGST</td><td class="text-end" t-out="taxes['igst']" t-options="money"/></tr>
+                    <tr><td>CGST</td><td class="text-end" t-out="taxes['cgst']" t-options="money"/></tr>
+                    <tr><td>SGST/UTGST</td><td class="text-end" t-out="taxes['sgst']" t-options="money"/></tr>
+                    <tr><td>Cess</td><td class="text-end" t-out="taxes['cess']" t-options="money"/></tr>
+                    <tr class="fw-bold"><td>Tax payable on reverse charge</td><td class="text-end" t-out="doc.rn_rcm_tax" t-options="money"/></tr>
+                </table>
+                <p class="small text-muted mt-4">Tax on this self-invoice is payable by the recipient under reverse charge.</p>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_self_invoice">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="rn_gst_rcm.report_self_invoice_document"/>
+            </t>
+        </t>
+    </template>
+</odoo>

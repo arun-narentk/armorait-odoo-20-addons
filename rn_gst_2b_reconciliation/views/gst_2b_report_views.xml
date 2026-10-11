@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rn_gst_gstr2b_form_report" model="ir.ui.view">
+        <field name="name">rn.gst.gstr2b.form.inherit.report</field>
+        <field name="model">rn.gst.gstr2b</field>
+        <field name="inherit_id" ref="view_rn_gst_gstr2b_form"/>
+        <field name="arch" type="xml">
+            <button name="action_run_matching" position="after">
+                <button name="action_export_excel" type="object" string="Export to Excel"
+                        icon="download" invisible="state == 'draft'"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="rn_gst_gstr2b_line_view_pivot" model="ir.ui.view">
+        <field name="name">rn.gst.gstr2b.line.pivot</field>
+        <field name="model">rn.gst.gstr2b.line</field>
+        <field name="arch" type="xml">
+            <pivot string="GSTR-2B Analysis" sample="1">
+                <field name="match_state" type="row"/>
+                <field name="source" type="col"/>
+                <field name="taxable_value" type="measure"/>
+                <field name="igst_amount" type="measure"/>
+                <field name="cgst_amount" type="measure"/>
+                <field name="sgst_amount" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="rn_gst_gstr2b_line_view_graph" model="ir.ui.view">
+        <field name="name">rn.gst.gstr2b.line.graph</field>
+        <field name="model">rn.gst.gstr2b.line</field>
+        <field name="arch" type="xml">
+            <graph string="GSTR-2B Analysis" type="pie" sample="1">
+                <field name="match_state"/>
+                <field name="taxable_value" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_rn_gst_gstr2b_line_search_report" model="ir.ui.view">
+        <field name="name">rn.gst.gstr2b.line.search.inherit.report</field>
+        <field name="model">rn.gst.gstr2b.line</field>
+        <field name="inherit_id" ref="view_rn_gst_gstr2b_line_search"/>
+        <field name="arch" type="xml">
+            <filter name="group_source" position="after">
+                <filter string="Vendor" name="group_vendor" context="{'group_by': 'vendor_name'}"/>
+                <filter string="Reconciliation" name="group_reconciliation" context="{'group_by': 'reconciliation_id'}"/>
+                <filter string="ITC Available" name="group_itc" context="{'group_by': 'itc_availability'}"/>
+                <filter string="Invoice Month" name="group_month" context="{'group_by': 'invoice_date:month'}"/>
+            </filter>
+        </field>
+    </record>
+
+    <record id="rn_gst_gstr2b_line_action_analysis" model="ir.actions.act_window">
+        <field name="name">GSTR-2B Analysis</field>
+        <field name="res_model">rn.gst.gstr2b.line</field>
+        <field name="view_mode">pivot,graph,list</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No GSTR-2B lines yet</p>
+            <p>Import a GSTR-2B file and run matching. The results show up here by status, vendor and month.</p>
+        </field>
+    </record>
+
+    <menuitem id="rn_gst_gstr2b_line_menu_analysis"
+              name="2B Analysis"
+              parent="menu_rn_gst_2b_root"
+              action="rn_gst_gstr2b_line_action_analysis"
+              sequence="30"/>
+</odoo>

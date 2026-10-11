@@ -1,0 +1,9 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_gst_3b_user,rn.gst.3b user,rn.gst.3b,rn_gst_base.group_rn_gst_user,r,
+access_rn_gst_3b_manager,rn.gst.3b manager,rn.gst.3b,rn_gst_base.group_rn_gst_manager,cru,
+access_rn_gst_3b_admin,rn.gst.3b admin,rn.gst.3b,rn_gst_base.group_rn_gst_administrator,crud,
+access_rn_gst_3b_liability_user,rn.gst.3b.liability.breakup user,rn.gst.3b.liability.breakup,rn_gst_base.group_rn_gst_user,r,
+access_rn_gst_3b_liability_manager,rn.gst.3b.liability.breakup manager,rn.gst.3b.liability.breakup,rn_gst_base.group_rn_gst_manager,crud,
+access_rn_gst_3b_interstate_user,rn.gst.3b.interstate.line user,rn.gst.3b.interstate.line,rn_gst_base.group_rn_gst_user,r,
+access_rn_gst_3b_interstate_manager,rn.gst.3b.interstate.line manager,rn.gst.3b.interstate.line,rn_gst_base.group_rn_gst_manager,crud,
+rn_gst_3b_interstate_comp_rule,GSTR-3B Inter-State Line: multi-company,rn.gst.3b.interstate.line,,crud,"[('company_id', 'in', company_ids)]"

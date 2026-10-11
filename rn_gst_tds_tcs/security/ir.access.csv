@@ -1,0 +1,8 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_gst_tds_tcs_period_user,rn.gst.tds.tcs.period.user,rn.gst.tds.tcs.period,rn_gst_tds_tcs.group_rn_gst_tds_tcs_user,r,
+access_rn_gst_tds_tcs_period_manager,rn.gst.tds.tcs.period.manager,rn.gst.tds.tcs.period,rn_gst_tds_tcs.group_rn_gst_tds_tcs_manager,crud,
+rn_gst_tds_tcs_period_comp_rule,rn.gst.tds.tcs.period: multi-company,rn.gst.tds.tcs.period,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_tds_tcs_credit_user,rn.gst.tds.tcs.credit.user,rn.gst.tds.tcs.credit,rn_gst_tds_tcs.group_rn_gst_tds_tcs_user,r,
+access_rn_gst_tds_tcs_credit_manager,rn.gst.tds.tcs.credit.manager,rn.gst.tds.tcs.credit,rn_gst_tds_tcs.group_rn_gst_tds_tcs_manager,crud,
+rn_gst_tds_tcs_credit_comp_rule,rn.gst.tds.tcs.credit: multi-company,rn.gst.tds.tcs.credit,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_tds_tcs_import_wizard_manager,rn.gst.tds.tcs.import.wizard.manager,rn.gst.tds.tcs.import.wizard,rn_gst_tds_tcs.group_rn_gst_tds_tcs_manager,crud,

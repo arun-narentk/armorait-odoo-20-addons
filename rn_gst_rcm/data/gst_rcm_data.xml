@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="seq_rn_gst_rcm_self_invoice" model="ir.sequence">
+        <field name="name">RCM Self-Invoice</field>
+        <field name="code">rn.gst.rcm.self.invoice</field>
+        <field name="prefix">SI/%(range_year)s/</field>
+        <field name="padding">4</field>
+        <field name="use_date_range" eval="True"/>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <!-- Common reverse charge supplies. Link each to your products or expense accounts
+         and pick its taxes; check the conditions of the notification before use. -->
+    <record id="rcm_rule_gta" model="rn.gst.rcm.rule">
+        <field name="name">Goods transport agency (GTA) services</field>
+        <field name="sequence">10</field>
+        <field name="note">Not under reverse charge when the GTA has opted to pay tax under forward charge.</field>
+    </record>
+    <record id="rcm_rule_advocate" model="rn.gst.rcm.rule">
+        <field name="name">Legal services by an advocate or a firm of advocates</field>
+        <field name="sequence">20</field>
+    </record>
+    <record id="rcm_rule_arbitral" model="rn.gst.rcm.rule">
+        <field name="name">Services by an arbitral tribunal</field>
+        <field name="sequence">30</field>
+    </record>
+    <record id="rcm_rule_sponsorship" model="rn.gst.rcm.rule">
+        <field name="name">Sponsorship services</field>
+        <field name="sequence">40</field>
+    </record>
+    <record id="rcm_rule_director" model="rn.gst.rcm.rule">
+        <field name="name">Services by a director to the company</field>
+        <field name="sequence">50</field>
+    </record>
+    <record id="rcm_rule_insurance_agent" model="rn.gst.rcm.rule">
+        <field name="name">Services by an insurance agent to an insurer</field>
+        <field name="sequence">60</field>
+    </record>
+    <record id="rcm_rule_recovery_agent" model="rn.gst.rcm.rule">
+        <field name="name">Services by a recovery agent to a bank or NBFC</field>
+        <field name="sequence">70</field>
+    </record>
+    <record id="rcm_rule_security" model="rn.gst.rcm.rule">
+        <field name="name">Security services by a person other than a body corporate</field>
+        <field name="sequence">80</field>
+    </record>
+    <record id="rcm_rule_motor_vehicle" model="rn.gst.rcm.rule">
+        <field name="name">Renting of motor vehicles by a person other than a body corporate</field>
+        <field name="sequence">90</field>
+    </record>
+    <record id="rcm_rule_residential" model="rn.gst.rcm.rule">
+        <field name="name">Renting of a residential dwelling to a registered person</field>
+        <field name="sequence">100</field>
+    </record>
+    <record id="rcm_rule_copyright" model="rn.gst.rcm.rule">
+        <field name="name">Transfer or use of copyright by an author, music composer or artist</field>
+        <field name="sequence">110</field>
+    </record>
+    <record id="rcm_rule_import_services" model="rn.gst.rcm.rule">
+        <field name="name">Import of services</field>
+        <field name="sequence">120</field>
+        <field name="section">import</field>
+    </record>
+    <record id="rcm_rule_unregistered" model="rn.gst.rcm.rule">
+        <field name="name">Specified supplies from unregistered suppliers</field>
+        <field name="sequence">130</field>
+        <field name="section">9_4</field>
+        <field name="supplier_condition">unregistered</field>
+    </record>
+</odoo>

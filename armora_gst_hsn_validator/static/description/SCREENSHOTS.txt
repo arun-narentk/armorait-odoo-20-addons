@@ -1,8 +1,0 @@
-Screenshots for armora_gst_hsn_validator
-
-Live Odoo UI (preferred):
-- screenshot_01_hsn_results.png: HSN Validation Results
-- screenshot_02_hsn_runs.png: HSN Validation Runs
-
-Branding: company_logo.png copied from armora_invoice_credit_notes.
-Do not use real taxpayer GSTINs or fabricated portal responses.

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_move_form_rn_gst_validator" model="ir.ui.view">
+        <field name="name">account.move.form.rn.gst.validator</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_rn_gst_validate" type="object" string="Validate GST"
+                        invisible="country_code != 'IN' or move_type == 'entry'"
+                        groups="account.group_account_invoice"/>
+                <button name="action_rn_gst_force_post" type="object" string="Force Post (GST)"
+                        invisible="country_code != 'IN' or state != 'draft' or rn_gst_validation_status != 'error'"
+                        groups="rn_gst_invoice_validator.group_rn_gst_validator_manager"
+                        confirm="Post anyway despite GST validation errors?"/>
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_rn_gst_view_issues" type="object"
+                        class="oe_stat_button" icon="security"
+                        invisible="country_code != 'IN' or move_type == 'entry'">
+                    <div class="o_stat_info">
+                        <span class="o_stat_value">
+                            <field name="rn_gst_validation_score"/> / 100
+                        </span>
+                        <span class="o_stat_text">GST Score</span>
+                    </div>
+                </button>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="GST Validation" name="rn_gst_rule_validation"
+                      invisible="country_code != 'IN' or move_type == 'entry'">
+                    <group>
+                        <group>
+                            <field name="rn_gst_validation_status"/>
+                            <field name="rn_gst_validation_score"/>
+                            <field name="rn_gst_validated_at"/>
+                        </group>
+                        <group>
+                            <field name="rn_gst_error_count"/>
+                            <field name="rn_gst_warning_count"/>
+                        </group>
+                    </group>
+                    <field name="rn_gst_issue_ids" readonly="1">
+                        <list>
+                            <field name="severity"
+                                      decoration-danger="severity == 'error'"
+                                      decoration-warning="severity == 'warning'"/>
+                            <field name="error_type"/>
+                            <field name="message"/>
+                            <field name="hint"/>
+                            <field name="move_line_id" optional="hide"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_move_list_rn_gst_validator" model="ir.ui.view">
+        <field name="name">account.move.list.rn.gst.validator</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_invoice_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="inside">
+                <field name="rn_gst_validation_status" optional="hide"
+                          decoration-danger="rn_gst_validation_status == 'error'"
+                          decoration-warning="rn_gst_validation_status == 'warning'"
+                          decoration-success="rn_gst_validation_status == 'ok'"/>
+                <field name="rn_gst_validation_score" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

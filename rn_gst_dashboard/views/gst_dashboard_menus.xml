@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_rn_gst_dashboard"
+              name="Dashboard"
+              parent="rn_gst_base.menu_rn_gst_root"
+              action="rn_gst_dashboard_action_kpi"
+              sequence="5"
+              groups="rn_gst_dashboard.group_rn_gst_dashboard_user"/>
+
+    <menuitem id="menu_rn_gst_dashboard_list"
+              name="Dashboard Workspaces"
+              parent="rn_gst_base.menu_rn_gst_configuration"
+              action="action_rn_gst_dashboard_list"
+              sequence="90"
+              groups="rn_gst_dashboard.group_rn_gst_dashboard_manager"/>
+
+    <menuitem id="menu_rn_gst_dashboard_filter"
+              name="Dashboard Filter Presets"
+              parent="rn_gst_base.menu_rn_gst_configuration"
+              action="action_rn_gst_dashboard_filter"
+              sequence="91"
+              groups="rn_gst_dashboard.group_rn_gst_dashboard_manager"/>
+</odoo>

@@ -1,0 +1,8 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_gst_rule_user,rn.gst.rule user,rn.gst.rule,rn_gst_base.group_rn_gst_user,r,
+access_rn_gst_rule_manager,rn.gst.rule manager,rn.gst.rule,rn_gst_base.group_rn_gst_manager,cru,
+access_rn_gst_rule_admin,rn.gst.rule admin,rn.gst.rule,rn_gst_base.group_rn_gst_administrator,crud,
+access_rn_gst_api_audit_user,rn.gst.api.audit user,rn.gst.api.audit,rn_gst_base.group_rn_gst_user,r,
+access_rn_gst_api_audit_manager,rn.gst.api.audit manager,rn.gst.api.audit,rn_gst_base.group_rn_gst_manager,cru,
+access_rn_gst_api_audit_admin,rn.gst.api.audit admin,rn.gst.api.audit,rn_gst_base.group_rn_gst_administrator,crud,
+rn_gst_api_audit_comp_rule,GST API Audit: multi-company,rn.gst.api.audit,,crud,"[('company_id', 'in', company_ids)]"

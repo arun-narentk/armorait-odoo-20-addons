@@ -1,8 +1,0 @@
-Screenshots for armora_gst_debit_note
-
-Live Odoo UI (preferred):
-- screenshot_01_dn_reasons.png: Debit Note Reasons
-- screenshot_02_dn_validations.png: Debit Note Validations
-
-Branding: company_logo.png copied from armora_invoice_credit_notes.
-Do not use real taxpayer GSTINs or fabricated portal responses.

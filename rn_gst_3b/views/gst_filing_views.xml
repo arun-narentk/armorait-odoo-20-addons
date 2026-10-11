@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rn_gst_filing_form_gstr3b" model="ir.ui.view">
+        <field name="name">rn.gst.filing.form.gstr3b</field>
+        <field name="model">rn.gst.filing</field>
+        <field name="inherit_id" ref="rn_gst_filing.view_rn_gst_filing_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_open_gstr3b" type="object" class="oe_stat_button" icon="description"
+                        invisible="filing_type != 'gstr1'">
+                    <field name="gstr3b_count" widget="statinfo" string="GSTR-3B"/>
+                </button>
+            </xpath>
+            <field name="currency_id" position="before">
+                <field name="gstr3b_id" invisible="1"/>
+            </field>
+        </field>
+    </record>
+</odoo>

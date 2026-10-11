@@ -1,0 +1,5 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_gst_registration_user,rn.gst.registration.user,rn.gst.registration,rn_gst_base.group_rn_gst_user,r,
+access_rn_gst_registration_manager,rn.gst.registration.manager,rn.gst.registration,rn_gst_base.group_rn_gst_manager,cru,
+access_rn_gst_registration_admin,rn.gst.registration.admin,rn.gst.registration,rn_gst_base.group_rn_gst_administrator,crud,
+rn_gst_registration_comp_rule,GST Registration: multi-company,rn.gst.registration,,crud,"[('company_id', 'in', company_ids)]"

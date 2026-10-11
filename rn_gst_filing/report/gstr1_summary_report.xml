@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rn_gst_filing_action_report_gstr1_summary" model="ir.actions.report">
+        <field name="name">GSTR-1 Summary</field>
+        <field name="model">rn.gst.filing</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">rn_gst_filing.report_gstr1_summary</field>
+        <field name="print_report_name">object._get_gstr1_report_filename()</field>
+        <field name="binding_model_id" ref="model_rn_gst_filing"/>
+        <field name="binding_type">report</field>
+        <field name="domain">[('filing_type', 'in', ('gstr1', 'gstr1a'))]</field>
+    </record>
+
+    <template id="report_gstr1_summary_document">
+        <t t-call="web.external_layout">
+            <t t-set="data" t-value="doc._get_gstr1_report_data()"/>
+            <t t-set="cur" t-value="doc.currency_id"/>
+            <div class="page o_rn_gst_report">
+                <h3 class="mb-1">GSTR-1 Summary</h3>
+                <p class="text-muted mb-3">Prepared from the Odoo snapshot. Check against the GST Portal before you file.</p>
+
+                <table class="table table-sm table-borderless mb-4">
+                    <tr>
+                        <td class="w-25"><strong>GSTIN</strong></td>
+                        <td class="w-25" t-out="doc.gstin"/>
+                        <td class="w-25"><strong>Reference</strong></td>
+                        <td class="w-25" t-out="doc.name"/>
+                    </tr>
+                    <tr>
+                        <td><strong>Legal name</strong></td>
+                        <td t-out="doc.company_id.name"/>
+                        <td><strong>Return type</strong></td>
+                        <td t-out="data['filing_type_label']"/>
+                    </tr>
+                    <tr>
+                        <td><strong>Financial year</strong></td>
+                        <td t-out="doc.financial_year"/>
+                        <td><strong>Return period</strong></td>
+                        <td><span t-out="doc.return_period"/> (<span t-field="doc.period_start"/> to <span t-field="doc.period_end"/>)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Status</strong></td>
+                        <td t-out="data['state_label']"/>
+                        <td><strong>Validation</strong></td>
+                        <td><span t-out="doc.validation_error_count"/> errors, <span t-out="doc.validation_warning_count"/> warnings</td>
+                    </tr>
+                </table>
+
+                <h5>Section-wise summary</h5>
+                <table class="table table-sm table-bordered mb-1">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Section</th>
+                            <th class="text-end">Documents</th>
+                            <th class="text-end">Taxable value</th>
+                            <th class="text-end">IGST</th>
+                            <th class="text-end">CGST</th>
+                            <th class="text-end">SGST/UTGST</th>
+                            <th class="text-end">Cess</th>
+                            <th class="text-end">Total tax</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="data['sections']" t-as="row">
+                            <td t-out="row['label']"/>
+                            <td class="text-end" t-out="row['documents']"/>
+                            <td class="text-end" t-out="row['taxable_value']" t-options="{'widget': 'monetary', 'display_currency': cur}"/>
+                            <td class="text-end" t-out="row['igst_amount']" t-options="{'widget': 'monetary', 'display_currency': cur}"/>
+                            <td class="text-end" t-out="row['cgst_amount']" t-options="{'widget': 'monetary', 'display_currency': cur}"/>
+                            <td class="text-end" t-out="row['sgst_amount']" t-options="{'widget': 'monetary', 'display_currency': cur}"/>
+                            <td class="text-end" t-out="row['cess_amount']" t-options="{'widget': 'monetary', 'display_currency': cur}"/>
+                            <td class="text-end" t-out="row['total_tax']" t-options="{'widget': 'monetary', 'display_currency': cur}"/>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr class="fw-bold">
+                            <td>Net total (credit notes subtracted)</td>
+                            <td class="text-end" t-out="doc.document_count"/>
+                            <td class="text-end" t-out="data['net']['taxable_value']" t-options="{'widget': 'monetary', 'display_currency': cur}"/>
+                            <td class="text-end" t-out="data['net']['igst_amount']" t-options="{'widget': 'monetary', 'display_currency': cur}"/>
+                            <td class="text-end" t-out="data['net']['cgst_amount']" t-options="{'widget': 'monetary', 'display_currency': cur}"/>
+                            <td class="text-end" t-out="data['net']['sgst_amount']" t-options="{'widget': 'monetary', 'display_currency': cur}"/>
+                            <td class="text-end" t-out="data['net']['cess_amount']" t-options="{'widget': 'monetary', 'display_currency': cur}"/>
+                            <td class="text-end" t-out="data['net']['total_tax']" t-options="{'widget': 'monetary', 'display_currency': cur}"/>
+                        </tr>
+                    </tfoot>
+                </table>
+                <p class="small text-muted mb-4">Credit and debit note sections show their own values. B2C Small counts lines, not invoices.</p>
+
+                <h5>HSN-wise summary (Table 12)</h5>
+                <table class="table table-sm table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>HSN/SAC</th>
+                            <th>UQC</th>
+                            <th class="text-end">Quantity</th>
+                            <th class="text-end">Rate %</th>
+                            <th class="text-end">Taxable value</th>
+                            <th class="text-end">IGST</th>
+                            <th class="text-end">CGST</th>
+                            <th class="text-end">SGST/UTGST</th>
+                            <th class="text-end">Cess</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-if="not data['hsn_rows']">
+                            <td colspan="9" class="text-center text-muted">No HSN lines in this filing.</td>
+                        </tr>
+                        <tr t-foreach="data['hsn_rows']" t-as="row">
+                            <td t-out="row['hsn']"/>
+                            <td t-out="row['uom'] or '-'"/>
+                            <td class="text-end" t-out="row['quantity']" t-options="{'widget': 'float', 'precision': 2}"/>
+                            <td class="text-end" t-out="row['rate']" t-options="{'widget': 'float', 'precision': 2}"/>
+                            <td class="text-end" t-out="row['taxable_value']" t-options="{'widget': 'monetary', 'display_currency': cur}"/>
+                            <td class="text-end" t-out="row['igst_amount']" t-options="{'widget': 'monetary', 'display_currency': cur}"/>
+                            <td class="text-end" t-out="row['cgst_amount']" t-options="{'widget': 'monetary', 'display_currency': cur}"/>
+                            <td class="text-end" t-out="row['sgst_amount']" t-options="{'widget': 'monetary', 'display_currency': cur}"/>
+                            <td class="text-end" t-out="row['cess_amount']" t-options="{'widget': 'monetary', 'display_currency': cur}"/>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_gstr1_summary">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="rn_gst_filing.report_gstr1_summary_document"/>
+            </t>
+        </t>
+    </template>
+</odoo>

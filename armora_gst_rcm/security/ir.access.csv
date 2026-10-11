@@ -1,5 +1,0 @@
-id,name,model_id,group_id/id,operation,domain
-access_armora_gst_rcm_rule_user,armora.gst.rcm.rule.user,armora.gst.rcm.rule,armora_gst_rcm.group_armora_gst_rcm_user,r,
-access_armora_gst_rcm_rule_manager,armora.gst.rcm.rule.manager,armora.gst.rcm.rule,armora_gst_rcm.group_armora_gst_rcm_manager,crud,
-access_armora_gst_rcm_rule_invoice,armora.gst.rcm.rule.invoice,armora.gst.rcm.rule,account.group_account_invoice,r,
-armora_gst_rcm_rule_comp_rule,armora.gst.rcm.rule: multi-company,armora.gst.rcm.rule,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"

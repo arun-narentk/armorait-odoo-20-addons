@@ -1,0 +1,8 @@
+Screenshots for rn_gst_base
+
+Live Odoo UI (preferred):
+- screenshot_01_registrations_list.png: GST Registrations List
+- screenshot_02_registration_form.png: GST Registration Form
+
+Branding: company_logo.png copied from rn_invoice_credit_notes.
+Do not use real taxpayer GSTINs or fabricated portal responses.

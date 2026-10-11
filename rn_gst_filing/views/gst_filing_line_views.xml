@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rn_gst_filing_line_list" model="ir.ui.view">
+        <field name="name">rn.gst.filing.line.list</field>
+        <field name="model">rn.gst.filing.line</field>
+        <field name="arch" type="xml">
+            <list string="GST Filing Lines" create="0">
+                <field name="filing_id"/>
+                <field name="invoice_date"/>
+                <field name="invoice_number"/>
+                <field name="partner_name"/>
+                <field name="partner_gstin"/>
+                <field name="document_type"/>
+                <field name="gst_table"/>
+                <field name="supply_type"/>
+                <field name="hsn_code"/>
+                <field name="taxable_value"/>
+                <field name="cgst_amount"/>
+                <field name="sgst_amount"/>
+                <field name="igst_amount"/>
+                <field name="validation_state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_rn_gst_filing_line_form" model="ir.ui.view">
+        <field name="name">rn.gst.filing.line.form</field>
+        <field name="model">rn.gst.filing.line</field>
+        <field name="arch" type="xml">
+            <form string="GST Filing Line" create="0">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="filing_id"/>
+                            <field name="move_id"/>
+                            <field name="invoice_number"/>
+                            <field name="invoice_date"/>
+                            <field name="document_type"/>
+                            <field name="partner_id"/>
+                            <field name="partner_gstin"/>
+                        </group>
+                        <group>
+                            <field name="gst_table"/>
+                            <field name="supply_type"/>
+                            <field name="place_of_supply_code"/>
+                            <field name="hsn_code"/>
+                            <field name="gst_rate"/>
+                            <field name="validation_state"/>
+                        </group>
+                    </group>
+                    <group string="Amounts">
+                        <field name="currency_id" invisible="1"/>
+                        <field name="taxable_value"/>
+                        <field name="cgst_amount"/>
+                        <field name="sgst_amount"/>
+                        <field name="igst_amount"/>
+                        <field name="cess_amount"/>
+                        <field name="total_tax"/>
+                        <field name="invoice_value"/>
+                    </group>
+                    <group string="Validation">
+                        <field name="validation_message"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_rn_gst_validation_result_list" model="ir.ui.view">
+        <field name="name">rn.gst.validation.result.list</field>
+        <field name="model">rn.gst.validation.result</field>
+        <field name="arch" type="xml">
+            <list string="GST Validation" create="0">
+                <field name="filing_id"/>
+                <field name="severity"
+                          decoration-danger="severity == 'error'"
+                          decoration-warning="severity == 'warning'"/>
+                <field name="error_type"/>
+                <field name="move_id"/>
+                <field name="partner_id"/>
+                <field name="message"/>
+                <field name="hint" optional="show"/>
+                <button name="action_open_invoice" type="object" string="Invoice"
+                        icon="open_in_new" invisible="not move_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_rn_gst_validation_result_form" model="ir.ui.view">
+        <field name="name">rn.gst.validation.result.form</field>
+        <field name="model">rn.gst.validation.result</field>
+        <field name="arch" type="xml">
+            <form string="GST Validation Issue" create="0" edit="0">
+                <header>
+                    <button name="action_open_invoice" type="object" string="Open Invoice"
+                            class="btn-primary" invisible="not move_id"/>
+                    <button name="action_open_partner" type="object" string="Open Partner"
+                            invisible="not partner_id"/>
+                    <button name="action_open_filing_line" type="object" string="Open Filing Line"
+                            invisible="not line_id"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="filing_id"/>
+                            <field name="severity"/>
+                            <field name="error_type"/>
+                        </group>
+                        <group>
+                            <field name="move_id"/>
+                            <field name="partner_id"/>
+                            <field name="line_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <group string="Issue">
+                        <field name="message" nolabel="1"/>
+                    </group>
+                    <group string="How to Fix">
+                        <field name="hint" nolabel="1" placeholder="Fix the source document, then regenerate the filing snapshot."/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_rn_gst_validation_result_search" model="ir.ui.view">
+        <field name="name">rn.gst.validation.result.search</field>
+        <field name="model">rn.gst.validation.result</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="message"/>
+                <field name="error_type"/>
+                <field name="move_id"/>
+                <filter string="Errors" name="error" domain="[('severity', '=', 'error')]"/>
+                <filter string="Warnings" name="warning" domain="[('severity', '=', 'warning')]"/>
+                <group>
+                    <filter string="Severity" name="group_severity" context="{'group_by': 'severity'}"/>
+                    <filter string="Error Type" name="group_error_type" context="{'group_by': 'error_type'}"/>
+                    <filter string="Invoice" name="group_move" context="{'group_by': 'move_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_rn_gst_rule_validation" model="ir.actions.act_window">
+        <field name="name">Validation</field>
+        <field name="res_model">rn.gst.validation.result</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_error': 1}</field>
+    </record>
+</odoo>

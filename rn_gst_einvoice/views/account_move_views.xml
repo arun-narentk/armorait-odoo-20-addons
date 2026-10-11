@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_move_form_rn_gst_einvoice" model="ir.ui.view">
+        <field name="name">account.move.form.rn.gst.einvoice</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Armora GST E-Invoice" name="rn_gst_einvoice"
+                      invisible="country_code != 'IN' or move_type not in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund')">
+                    <group>
+                        <group string="IRN / Status">
+                            <field name="rn_irn" readonly="1"/>
+                            <field name="rn_irn_status" readonly="1"/>
+                            <field name="rn_einvoice_status" readonly="1"/>
+                            <field name="rn_ewb_status_display" readonly="1"/>
+                            <field name="rn_ewb_required"/>
+                            <field name="rn_ship_details_locked" readonly="1"/>
+                            <button name="action_rn_unlock_ship_details"
+                                    type="object"
+                                    string="Unlock Ship Details"
+                                    groups="rn_gst_base.group_rn_gst_administrator"
+                                    invisible="not rn_ship_details_locked"
+                                    confirm="Unlock ship-to details? Use only when legally/technically appropriate."/>
+                        </group>
+                        <group string="Ship-to">
+                            <field name="rn_ship_to_gstin" readonly="rn_ship_details_locked"/>
+                            <field name="rn_ship_to_trade_name" readonly="rn_ship_details_locked"/>
+                            <field name="rn_ship_to_state_code" readonly="rn_ship_details_locked"/>
+                            <field name="rn_ship_to_pin" readonly="rn_ship_details_locked"/>
+                        </group>
+                    </group>
+                    <group string="Export Ship Details (ExpShipDtls)" invisible="l10n_in_gst_treatment != 'overseas'">
+                        <group>
+                            <field name="rn_exp_ship_gstin"/>
+                            <field name="rn_exp_ship_trade_name"/>
+                            <field name="rn_exp_ship_state_code"/>
+                            <field name="rn_exp_ship_pin"/>
+                        </group>
+                    </group>
+                    <group string="GST Validation">
+                        <field name="rn_gst_validation_summary" nolabel="1" colspan="2" readonly="1"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

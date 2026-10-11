@@ -1,2 +1,0 @@
-id,name,model_id,group_id/id,operation,domain
-access_armora_gst_ewaybill_close_wizard_user,armora.gst.ewaybill.close.wizard user,armora.gst.ewaybill.close.wizard,armora_gst_base.group_armora_gst_user,crud,

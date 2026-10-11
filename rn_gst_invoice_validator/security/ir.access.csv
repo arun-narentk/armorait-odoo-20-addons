@@ -1,0 +1,9 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_gst_invoice_issue_account,rn.gst.invoice.issue.account,rn.gst.invoice.issue,account.group_account_invoice,crud,
+rn_gst_invoice_issue_comp_rule,GST Invoice Issue: multi-company,rn.gst.invoice.issue,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_invoice_validation_user,rn.gst.invoice.validation.user,rn.gst.invoice.validation,rn_gst_invoice_validator.group_rn_gst_validator_user,cru,
+access_rn_gst_invoice_validation_manager,rn.gst.invoice.validation.manager,rn.gst.invoice.validation,rn_gst_invoice_validator.group_rn_gst_validator_manager,crud,
+rn_gst_invoice_validation_comp_rule,GST Invoice Validation Run: multi-company,rn.gst.invoice.validation,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_invoice_validation_line_user,rn.gst.invoice.validation.line.user,rn.gst.invoice.validation.line,rn_gst_invoice_validator.group_rn_gst_validator_user,crud,
+rn_gst_invoice_validation_line_comp_rule,GST Invoice Validation Result: multi-company,rn.gst.invoice.validation.line,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_invoice_validation_wizard_user,rn.gst.invoice.validation.wizard.user,rn.gst.invoice.validation.wizard,rn_gst_invoice_validator.group_rn_gst_validator_user,crud,

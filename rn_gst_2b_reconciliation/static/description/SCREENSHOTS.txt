@@ -1,0 +1,8 @@
+Screenshots for rn_gst_2b_reconciliation
+
+Live Odoo UI (preferred):
+- screenshot_01_2b_list.png: GSTR-2B Reconciliations
+- screenshot_02_2b_lines.png: GSTR-2B Lines
+
+Branding: company_logo.png copied from rn_invoice_credit_notes.
+Do not use real taxpayer GSTINs or fabricated portal responses.

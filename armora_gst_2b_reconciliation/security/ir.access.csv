@@ -1,8 +1,0 @@
-id,name,model_id,group_id/id,operation,domain
-access_armora_gst_gstr2b_user,armora.gst.gstr2b.user,armora.gst.gstr2b,armora_gst_2b_reconciliation.group_armora_gst_2b_user,cru,
-access_armora_gst_gstr2b_manager,armora.gst.gstr2b.manager,armora.gst.gstr2b,armora_gst_2b_reconciliation.group_armora_gst_2b_manager,crud,
-armora_gst_gstr2b_comp_rule,GSTR-2B Reconciliation: multi-company,armora.gst.gstr2b,,crud,"[('company_id', 'in', company_ids)]"
-access_armora_gst_gstr2b_line_user,armora.gst.gstr2b.line.user,armora.gst.gstr2b.line,armora_gst_2b_reconciliation.group_armora_gst_2b_user,cru,
-access_armora_gst_gstr2b_line_manager,armora.gst.gstr2b.line.manager,armora.gst.gstr2b.line,armora_gst_2b_reconciliation.group_armora_gst_2b_manager,crud,
-armora_gst_gstr2b_line_comp_rule,GSTR-2B Line: multi-company,armora.gst.gstr2b.line,,crud,"[('company_id', 'in', company_ids)]"
-access_armora_gst_2b_import_wizard_user,armora.gst.2b.import.wizard.user,armora.gst.2b.import.wizard,armora_gst_2b_reconciliation.group_armora_gst_2b_user,crud,

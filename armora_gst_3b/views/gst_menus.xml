@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <menuitem id="menu_armora_gst_3b"
-              name="GSTR-3B"
-              parent="armora_gst_base.menu_armora_gst_root"
-              action="action_armora_gst_3b"
-              sequence="30"
-              groups="armora_gst_base.group_armora_gst_user"/>
-</odoo>

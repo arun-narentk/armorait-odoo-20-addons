@@ -1,0 +1,35 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_gst_filing_user,rn.gst.filing.user,rn.gst.filing,rn_gst_filing.group_rn_gst_filing_user,cru,
+access_rn_gst_filing_manager,rn.gst.filing.manager,rn.gst.filing,rn_gst_filing.group_rn_gst_filing_manager,crud,
+rn_gst_filing_comp_rule,GST Filing: multi-company,rn.gst.filing,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_filing_line_user,rn.gst.filing.line.user,rn.gst.filing.line,rn_gst_filing.group_rn_gst_filing_user,cru,
+access_rn_gst_filing_line_manager,rn.gst.filing.line.manager,rn.gst.filing.line,rn_gst_filing.group_rn_gst_filing_manager,crud,
+rn_gst_filing_line_comp_rule,GST Filing Line: multi-company,rn.gst.filing.line,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_validation_result_user,rn.gst.validation.result.user,rn.gst.validation.result,rn_gst_filing.group_rn_gst_filing_user,crud,
+rn_gst_validation_result_comp_rule,GST Validation Result: multi-company,rn.gst.validation.result,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_excel_template_user,rn.gst.excel.template.user,rn.gst.excel.template,rn_gst_filing.group_rn_gst_filing_user,r,
+access_rn_gst_excel_template_admin,rn.gst.excel.template.admin,rn.gst.excel.template,rn_gst_filing.group_rn_gst_filing_administrator,crud,
+rn_gst_excel_template_comp_rule,GST Offline Tool Template: multi-company,rn.gst.excel.template,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+access_rn_gst_filing_generate_wizard_user,rn.gst.filing.generate.wizard.user,rn.gst.filing.generate.wizard,rn_gst_filing.group_rn_gst_filing_user,crud,
+access_rn_gst_excel_template_import_wizard_admin,rn.gst.excel.template.import.wizard.admin,rn.gst.excel.template.import.wizard,rn_gst_filing.group_rn_gst_filing_administrator,crud,
+access_rn_gst_gstr9_user,rn.gst.gstr9.user,rn.gst.gstr9,rn_gst_filing.group_rn_gst_filing_user,cru,
+access_rn_gst_gstr9_manager,rn.gst.gstr9.manager,rn.gst.gstr9,rn_gst_filing.group_rn_gst_filing_manager,crud,
+rn_gst_gstr9_comp_rule,rn.gst.gstr9: multi-company,rn.gst.gstr9,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_gstr9_line_user,rn.gst.gstr9.line.user,rn.gst.gstr9.line,rn_gst_filing.group_rn_gst_filing_user,cru,
+access_rn_gst_gstr9_line_manager,rn.gst.gstr9.line.manager,rn.gst.gstr9.line,rn_gst_filing.group_rn_gst_filing_manager,crud,
+rn_gst_gstr9_line_comp_rule,rn.gst.gstr9.line: multi-company,rn.gst.gstr9.line,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_gstr9_hsn_user,rn.gst.gstr9.hsn.user,rn.gst.gstr9.hsn,rn_gst_filing.group_rn_gst_filing_user,crud,
+access_rn_gst_gstr9_hsn_manager,rn.gst.gstr9.hsn.manager,rn.gst.gstr9.hsn,rn_gst_filing.group_rn_gst_filing_manager,crud,
+rn_gst_gstr9_hsn_comp_rule,rn.gst.gstr9.hsn: multi-company,rn.gst.gstr9.hsn,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_gstr9c_user,rn.gst.gstr9c.user,rn.gst.gstr9c,rn_gst_filing.group_rn_gst_filing_user,cru,
+access_rn_gst_gstr9c_manager,rn.gst.gstr9c.manager,rn.gst.gstr9c,rn_gst_filing.group_rn_gst_filing_manager,crud,
+rn_gst_gstr9c_comp_rule,rn.gst.gstr9c: multi-company,rn.gst.gstr9c,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_gstr9c_line_user,rn.gst.gstr9c.line.user,rn.gst.gstr9c.line,rn_gst_filing.group_rn_gst_filing_user,cru,
+access_rn_gst_gstr9c_line_manager,rn.gst.gstr9c.line.manager,rn.gst.gstr9c.line,rn_gst_filing.group_rn_gst_filing_manager,crud,
+rn_gst_gstr9c_line_comp_rule,rn.gst.gstr9c.line: multi-company,rn.gst.gstr9c.line,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_gstr9c_rate_user,rn.gst.gstr9c.rate.user,rn.gst.gstr9c.rate,rn_gst_filing.group_rn_gst_filing_user,crud,
+access_rn_gst_gstr9c_rate_manager,rn.gst.gstr9c.rate.manager,rn.gst.gstr9c.rate,rn_gst_filing.group_rn_gst_filing_manager,crud,
+rn_gst_gstr9c_rate_comp_rule,rn.gst.gstr9c.rate: multi-company,rn.gst.gstr9c.rate,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_gstr9c_expense_user,rn.gst.gstr9c.expense.user,rn.gst.gstr9c.expense,rn_gst_filing.group_rn_gst_filing_user,crud,
+access_rn_gst_gstr9c_expense_manager,rn.gst.gstr9c.expense.manager,rn.gst.gstr9c.expense,rn_gst_filing.group_rn_gst_filing_manager,crud,
+rn_gst_gstr9c_expense_comp_rule,rn.gst.gstr9c.expense: multi-company,rn.gst.gstr9c.expense,,crud,"[('company_id', 'in', company_ids)]"

@@ -1,0 +1,7 @@
+Screenshots for rn_gst_3b
+
+Live Odoo UI (preferred):
+- screenshot_01_3b_list.png: GSTR-3B Records
+
+Branding: company_logo.png copied from rn_invoice_credit_notes.
+Do not use real taxpayer GSTINs or fabricated portal responses.

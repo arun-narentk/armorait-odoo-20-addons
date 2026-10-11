@@ -1,0 +1,9 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_gst_dn_reason_user,rn.gst.debit.note.reason.user,rn.gst.debit.note.reason,rn_gst_debit_note.group_rn_gst_debit_note_user,r,
+access_rn_gst_dn_reason_manager,rn.gst.debit.note.reason.manager,rn.gst.debit.note.reason,rn_gst_debit_note.group_rn_gst_debit_note_manager,cru,
+access_rn_gst_dn_reason_admin,rn.gst.debit.note.reason.admin,rn.gst.debit.note.reason,rn_gst_debit_note.group_rn_gst_debit_note_administrator,crud,
+access_rn_gst_dn_validation_user,rn.gst.debit.note.validation.user,rn.gst.debit.note.validation,rn_gst_debit_note.group_rn_gst_debit_note_user,r,
+access_rn_gst_dn_validation_manager,rn.gst.debit.note.validation.manager,rn.gst.debit.note.validation,rn_gst_debit_note.group_rn_gst_debit_note_manager,cru,
+access_rn_gst_dn_validation_admin,rn.gst.debit.note.validation.admin,rn.gst.debit.note.validation,rn_gst_debit_note.group_rn_gst_debit_note_administrator,crud,
+rn_gst_debit_note_validation_comp_rule,GST Debit Note Validation: multi-company,rn.gst.debit.note.validation,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_dn_review_wizard_user,rn.gst.debit.note.review.wizard.user,rn.gst.debit.note.review.wizard,rn_gst_debit_note.group_rn_gst_debit_note_user,crud,

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_rn_gst_rcm_root"
+              name="Reverse Charge"
+              parent="rn_gst_base.menu_rn_gst_root"
+              sequence="55"
+              groups="rn_gst_rcm.group_rn_gst_rcm_user"/>
+
+    <menuitem id="rn_gst_rcm_register_menu"
+              name="RCM Register"
+              parent="menu_rn_gst_rcm_root"
+              action="rn_gst_rcm_register_action"
+              sequence="10"/>
+
+    <menuitem id="rn_gst_rcm_rule_menu"
+              name="RCM Rules"
+              parent="menu_rn_gst_rcm_root"
+              action="rn_gst_rcm_rule_action"
+              sequence="20"
+              groups="rn_gst_rcm.group_rn_gst_rcm_manager"/>
+</odoo>

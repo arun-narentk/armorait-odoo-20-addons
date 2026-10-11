@@ -1,0 +1,8 @@
+Screenshots for rn_gst_invoice_validator
+
+Live Odoo UI (preferred):
+- screenshot_01_validation_runs.png: Invoice Validation Runs
+- screenshot_02_invoice_issues.png: Invoice GST Issues
+
+Branding: company_logo.png copied from rn_invoice_credit_notes.
+Do not use real taxpayer GSTINs or fabricated portal responses.

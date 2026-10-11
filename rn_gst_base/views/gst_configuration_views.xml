@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rn_gst_base_res_config_settings" model="ir.ui.view">
+        <field name="name">rn.gst.base.res.config.settings</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@id='invoicing_settings']" position="after">
+                <block title="Armora GST" name="rn_gst_base_settings" invisible="country_code != 'IN'">
+                    <setting string="B2CL Threshold" help="Interstate B2C invoices above this value are classified as B2CL.">
+                        <field name="rn_gst_b2cl_threshold"/>
+                    </setting>
+                    <setting string="Reconciliation Tolerance" help="Absolute difference allowed before GST reconciliation becomes a blocking error.">
+                        <field name="rn_gst_recon_tolerance"/>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_rn_gst_base_configuration" model="ir.actions.act_window">
+        <field name="name">GST Settings</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="context">{'module': 'rn_gst_base'}</field>
+    </record>
+</odoo>

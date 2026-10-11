@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_l10n_in_ewaybill_form_armora" model="ir.ui.view">
+        <field name="name">l10n.in.ewaybill.form.armora</field>
+        <field name="model">l10n.in.ewaybill</field>
+        <field name="inherit_id" ref="l10n_in_ewaybill.l10n_in_ewaybill_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_rn_open_close_ewaybill_wizard"
+                        type="object"
+                        string="Close E-Way Bill"
+                        invisible="not name or rn_ewb_closure_status == 'closed' or state == 'cancel'"
+                        groups="rn_gst_base.group_rn_gst_user"/>
+            </xpath>
+            <xpath expr="//sheet" position="inside">
+                <group string="Armora EWB Lifecycle">
+                    <group>
+                        <field name="rn_ewb_number"/>
+                        <field name="rn_ewb_irn"/>
+                        <field name="rn_ewb_status"/>
+                        <field name="rn_ewb_generation_date"/>
+                        <field name="rn_ewb_validity_date"/>
+                        <field name="rn_ewb_delivery_status"/>
+                    </group>
+                    <group string="Closure">
+                        <field name="rn_ewb_closure_status"/>
+                        <field name="rn_ewb_closure_date"/>
+                        <field name="rn_ewb_closure_remarks"/>
+                        <field name="rn_ewb_closure_user_id"/>
+                        <field name="rn_ewb_closure_timestamp"/>
+                        <field name="rn_ewb_closure_error"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

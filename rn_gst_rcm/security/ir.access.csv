@@ -1,0 +1,5 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_gst_rcm_rule_user,rn.gst.rcm.rule.user,rn.gst.rcm.rule,rn_gst_rcm.group_rn_gst_rcm_user,r,
+access_rn_gst_rcm_rule_manager,rn.gst.rcm.rule.manager,rn.gst.rcm.rule,rn_gst_rcm.group_rn_gst_rcm_manager,crud,
+access_rn_gst_rcm_rule_invoice,rn.gst.rcm.rule.invoice,rn.gst.rcm.rule,account.group_account_invoice,r,
+rn_gst_rcm_rule_comp_rule,rn.gst.rcm.rule: multi-company,rn.gst.rcm.rule,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"

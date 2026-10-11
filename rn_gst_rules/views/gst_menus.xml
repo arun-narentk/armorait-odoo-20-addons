@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_rn_gst_rules"
+              name="GST Rules"
+              parent="rn_gst_base.menu_rn_gst_configuration"
+              action="action_rn_gst_rule"
+              sequence="20"
+              groups="rn_gst_base.group_rn_gst_manager"/>
+
+    <menuitem id="menu_rn_gst_api_audit"
+              name="GST API Audit"
+              parent="rn_gst_base.menu_rn_gst_root"
+              action="action_rn_gst_api_audit"
+              sequence="80"
+              groups="rn_gst_base.group_rn_gst_manager"/>
+</odoo>

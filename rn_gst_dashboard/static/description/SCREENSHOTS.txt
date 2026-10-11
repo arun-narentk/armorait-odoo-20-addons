@@ -1,0 +1,8 @@
+Screenshots for rn_gst_dashboard
+
+Live Odoo UI (preferred):
+- screenshot_01_dashboard.png: GST Compliance Dashboard
+- screenshot_02_filters.png: Dashboard Filter Presets
+
+Branding: company_logo.png copied from rn_invoice_credit_notes.
+Do not use real taxpayer GSTINs or fabricated portal responses.

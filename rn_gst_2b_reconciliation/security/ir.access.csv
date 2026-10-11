@@ -1,0 +1,8 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_gst_gstr2b_user,rn.gst.gstr2b.user,rn.gst.gstr2b,rn_gst_2b_reconciliation.group_rn_gst_2b_user,cru,
+access_rn_gst_gstr2b_manager,rn.gst.gstr2b.manager,rn.gst.gstr2b,rn_gst_2b_reconciliation.group_rn_gst_2b_manager,crud,
+rn_gst_gstr2b_comp_rule,GSTR-2B Reconciliation: multi-company,rn.gst.gstr2b,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_gstr2b_line_user,rn.gst.gstr2b.line.user,rn.gst.gstr2b.line,rn_gst_2b_reconciliation.group_rn_gst_2b_user,cru,
+access_rn_gst_gstr2b_line_manager,rn.gst.gstr2b.line.manager,rn.gst.gstr2b.line,rn_gst_2b_reconciliation.group_rn_gst_2b_manager,crud,
+rn_gst_gstr2b_line_comp_rule,GSTR-2B Line: multi-company,rn.gst.gstr2b.line,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_2b_import_wizard_user,rn.gst.2b.import.wizard.user,rn.gst.2b.import.wizard,rn_gst_2b_reconciliation.group_rn_gst_2b_user,crud,

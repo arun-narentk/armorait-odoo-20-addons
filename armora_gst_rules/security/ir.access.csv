@@ -1,8 +1,0 @@
-id,name,model_id,group_id/id,operation,domain
-access_armora_gst_rule_user,armora.gst.rule user,armora.gst.rule,armora_gst_base.group_armora_gst_user,r,
-access_armora_gst_rule_manager,armora.gst.rule manager,armora.gst.rule,armora_gst_base.group_armora_gst_manager,cru,
-access_armora_gst_rule_admin,armora.gst.rule admin,armora.gst.rule,armora_gst_base.group_armora_gst_administrator,crud,
-access_armora_gst_api_audit_user,armora.gst.api.audit user,armora.gst.api.audit,armora_gst_base.group_armora_gst_user,r,
-access_armora_gst_api_audit_manager,armora.gst.api.audit manager,armora.gst.api.audit,armora_gst_base.group_armora_gst_manager,cru,
-access_armora_gst_api_audit_admin,armora.gst.api.audit admin,armora.gst.api.audit,armora_gst_base.group_armora_gst_administrator,crud,
-armora_gst_api_audit_comp_rule,GST API Audit: multi-company,armora.gst.api.audit,,crud,"[('company_id', 'in', company_ids)]"

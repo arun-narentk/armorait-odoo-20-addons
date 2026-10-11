@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <record id="armora_gst_dashboard_action_kpi" model="ir.actions.client">
-        <field name="name">GST Dashboard</field>
-        <field name="tag">armora_gst_kpi_dashboard</field>
-    </record>
-</odoo>
