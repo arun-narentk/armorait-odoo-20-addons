@@ -12,3 +12,12 @@ access_armora_gst_excel_template_admin,armora.gst.excel.template.admin,armora.gs
 armora_gst_excel_template_comp_rule,GST Offline Tool Template: multi-company,armora.gst.excel.template,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
 access_armora_gst_filing_generate_wizard_user,armora.gst.filing.generate.wizard.user,armora.gst.filing.generate.wizard,armora_gst_filing.group_armora_gst_filing_user,crud,
 access_armora_gst_excel_template_import_wizard_admin,armora.gst.excel.template.import.wizard.admin,armora.gst.excel.template.import.wizard,armora_gst_filing.group_armora_gst_filing_administrator,crud,
+access_armora_gst_gstr9_user,armora.gst.gstr9.user,armora.gst.gstr9,armora_gst_filing.group_armora_gst_filing_user,cru,
+access_armora_gst_gstr9_manager,armora.gst.gstr9.manager,armora.gst.gstr9,armora_gst_filing.group_armora_gst_filing_manager,crud,
+armora_gst_gstr9_comp_rule,armora.gst.gstr9: multi-company,armora.gst.gstr9,,crud,"[('company_id', 'in', company_ids)]"
+access_armora_gst_gstr9_line_user,armora.gst.gstr9.line.user,armora.gst.gstr9.line,armora_gst_filing.group_armora_gst_filing_user,cru,
+access_armora_gst_gstr9_line_manager,armora.gst.gstr9.line.manager,armora.gst.gstr9.line,armora_gst_filing.group_armora_gst_filing_manager,crud,
+armora_gst_gstr9_line_comp_rule,armora.gst.gstr9.line: multi-company,armora.gst.gstr9.line,,crud,"[('company_id', 'in', company_ids)]"
+access_armora_gst_gstr9_hsn_user,armora.gst.gstr9.hsn.user,armora.gst.gstr9.hsn,armora_gst_filing.group_armora_gst_filing_user,crud,
+access_armora_gst_gstr9_hsn_manager,armora.gst.gstr9.hsn.manager,armora.gst.gstr9.hsn,armora_gst_filing.group_armora_gst_filing_manager,crud,
+armora_gst_gstr9_hsn_comp_rule,armora.gst.gstr9.hsn: multi-company,armora.gst.gstr9.hsn,,crud,"[('company_id', 'in', company_ids)]"

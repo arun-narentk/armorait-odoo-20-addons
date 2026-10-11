@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="armora_gst_gstr9_view_list" model="ir.ui.view">
+        <field name="name">armora.gst.gstr9.list</field>
+        <field name="model">armora.gst.gstr9</field>
+        <field name="arch" type="xml">
+            <list string="GSTR-9 Annual Returns">
+                <field name="name"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="gstin"/>
+                <field name="financial_year"/>
+                <field name="gstr3b_months"/>
+                <field name="filled_at"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'"
+                       decoration-warning="state == 'computed'" decoration-success="state == 'filed'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="armora_gst_gstr9_view_form" model="ir.ui.view">
+        <field name="name">armora.gst.gstr9.form</field>
+        <field name="model">armora.gst.gstr9</field>
+        <field name="arch" type="xml">
+            <form string="GSTR-9 Annual Return">
+                <header>
+                    <button name="action_fill_from_books" type="object" string="Fill from Books" class="btn-primary"
+                            invisible="state == 'filed'"
+                            title="Fill Tables 4 to 9, 16A, 17 and 18 from the year's invoices, bills, GSTR-3B and GSTR-2B. Manual rows are kept."/>
+                    <button name="%(armora_gst_filing_action_report_gstr9)d" type="action" string="Print GSTR-9" icon="print"/>
+                    <button name="action_mark_filed" type="object" string="Mark Filed" invisible="state != 'computed'"
+                            groups="armora_gst_filing.group_armora_gst_filing_manager"
+                            confirm="Mark this GSTR-9 as filed? It becomes read-only."/>
+                    <button name="action_reset_to_draft" type="object" string="Reset to Draft" invisible="state != 'filed'"
+                            groups="armora_gst_filing.group_armora_gst_filing_manager"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,computed,filed"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="company_id" groups="base.group_multi_company" readonly="state != 'draft'"/>
+                            <field name="gstin" readonly="state != 'draft'"/>
+                            <field name="financial_year" readonly="state != 'draft'" placeholder="2025-26"/>
+                        </group>
+                        <group>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="gstr3b_months"/>
+                            <field name="filled_at"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <div class="alert alert-warning" role="alert" invisible="not fill_warning">
+                        <field name="fill_warning"/>
+                    </div>
+                    <div class="text-muted mb-2">
+                        Rows marked Books, GSTR-3B or GSTR-2B are refilled each time. Manual rows are kept.
+                        Totals update when you change a row.
+                    </div>
+                    <notebook>
+                        <page string="Part II: Supplies (4, 5)" name="part2">
+                            <field name="part2_line_ids" readonly="state == 'filed'">
+                                <list editable="bottom" create="0" delete="0" decoration-bf="source == 'computed'" decoration-muted="source == 'computed'">
+                                    <field name="code" string="Row"/>
+                                    <field name="label"/>
+                                    <field name="value" readonly="source == 'computed'" invisible="kind == 'itc'"/>
+                                    <field name="cash" readonly="source == 'computed'" invisible="kind != 'pay'" optional="hide"/>
+                                    <field name="igst" readonly="source == 'computed'" invisible="kind == 'value'"/>
+                                    <field name="cgst" readonly="source == 'computed'" invisible="kind == 'value'"/>
+                                    <field name="sgst" readonly="source == 'computed'" invisible="kind == 'value'"/>
+                                    <field name="cess" readonly="source == 'computed'" invisible="kind == 'value'"/>
+                                    <field name="source" optional="show"/>
+                                    <field name="kind" column_invisible="1"/>
+                                    <field name="currency_id" column_invisible="1"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Part III: ITC (6, 7, 8)" name="part3">
+                            <field name="part3_line_ids" readonly="state == 'filed'">
+                                <list editable="bottom" create="0" delete="0" decoration-bf="source == 'computed'" decoration-muted="source == 'computed'">
+                                    <field name="code" string="Row"/>
+                                    <field name="label"/>
+                                    <field name="value" readonly="source == 'computed'" invisible="kind == 'itc'"/>
+                                    <field name="cash" readonly="source == 'computed'" invisible="kind != 'pay'" optional="hide"/>
+                                    <field name="igst" readonly="source == 'computed'" invisible="kind == 'value'"/>
+                                    <field name="cgst" readonly="source == 'computed'" invisible="kind == 'value'"/>
+                                    <field name="sgst" readonly="source == 'computed'" invisible="kind == 'value'"/>
+                                    <field name="cess" readonly="source == 'computed'" invisible="kind == 'value'"/>
+                                    <field name="source" optional="show"/>
+                                    <field name="kind" column_invisible="1"/>
+                                    <field name="currency_id" column_invisible="1"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Part IV: Tax Paid (9)" name="part4">
+                            <field name="part4_line_ids" readonly="state == 'filed'">
+                                <list editable="bottom" create="0" delete="0" decoration-bf="source == 'computed'" decoration-muted="source == 'computed'">
+                                    <field name="code" string="Row"/>
+                                    <field name="label"/>
+                                    <field name="value" readonly="source == 'computed'" invisible="kind == 'itc'"/>
+                                    <field name="cash" readonly="source == 'computed'" invisible="kind != 'pay'" optional="show"/>
+                                    <field name="igst" readonly="source == 'computed'" invisible="kind == 'value'"/>
+                                    <field name="cgst" readonly="source == 'computed'" invisible="kind == 'value'"/>
+                                    <field name="sgst" readonly="source == 'computed'" invisible="kind == 'value'"/>
+                                    <field name="cess" readonly="source == 'computed'" invisible="kind == 'value'"/>
+                                    <field name="source" optional="show"/>
+                                    <field name="kind" column_invisible="1"/>
+                                    <field name="currency_id" column_invisible="1"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Part V: Next Year (10 to 14)" name="part5">
+                            <field name="part5_line_ids" readonly="state == 'filed'">
+                                <list editable="bottom" create="0" delete="0" decoration-bf="source == 'computed'" decoration-muted="source == 'computed'">
+                                    <field name="code" string="Row"/>
+                                    <field name="label"/>
+                                    <field name="value" readonly="source == 'computed'" invisible="kind == 'itc'"/>
+                                    <field name="cash" readonly="source == 'computed'" invisible="kind != 'pay'" optional="show"/>
+                                    <field name="igst" readonly="source == 'computed'" invisible="kind == 'value'"/>
+                                    <field name="cgst" readonly="source == 'computed'" invisible="kind == 'value'"/>
+                                    <field name="sgst" readonly="source == 'computed'" invisible="kind == 'value'"/>
+                                    <field name="cess" readonly="source == 'computed'" invisible="kind == 'value'"/>
+                                    <field name="source" optional="show"/>
+                                    <field name="kind" column_invisible="1"/>
+                                    <field name="currency_id" column_invisible="1"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Part VI: Other (15, 16, 19)" name="part6">
+                            <field name="part6_line_ids" readonly="state == 'filed'">
+                                <list editable="bottom" create="0" delete="0" decoration-bf="source == 'computed'" decoration-muted="source == 'computed'">
+                                    <field name="code" string="Row"/>
+                                    <field name="label"/>
+                                    <field name="value" readonly="source == 'computed'" invisible="kind == 'itc'"/>
+                                    <field name="cash" readonly="source == 'computed'" invisible="kind != 'pay'" optional="hide"/>
+                                    <field name="igst" readonly="source == 'computed'" invisible="kind == 'value'"/>
+                                    <field name="cgst" readonly="source == 'computed'" invisible="kind == 'value'"/>
+                                    <field name="sgst" readonly="source == 'computed'" invisible="kind == 'value'"/>
+                                    <field name="cess" readonly="source == 'computed'" invisible="kind == 'value'"/>
+                                    <field name="source" optional="show"/>
+                                    <field name="kind" column_invisible="1"/>
+                                    <field name="currency_id" column_invisible="1"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="HSN Summary (17, 18)" name="hsn">
+                            <separator string="Table 17: HSN-wise summary of outward supplies"/>
+                            <field name="hsn_outward_ids" readonly="state == 'filed'" context="{'default_direction': 'outward'}">
+                                <list editable="bottom">
+                                    <field name="hsn_code"/>
+                                    <field name="uqc"/>
+                                    <field name="quantity"/>
+                                    <field name="rate"/>
+                                    <field name="taxable_value" sum="Total"/>
+                                    <field name="igst" sum="Total"/>
+                                    <field name="cgst" sum="Total"/>
+                                    <field name="sgst" sum="Total"/>
+                                    <field name="cess" sum="Total"/>
+                                    <field name="direction" column_invisible="1"/>
+                                    <field name="currency_id" column_invisible="1"/>
+                                </list>
+                            </field>
+                            <separator string="Table 18: HSN-wise summary of inward supplies"/>
+                            <field name="hsn_inward_ids" readonly="state == 'filed'" context="{'default_direction': 'inward'}">
+                                <list editable="bottom">
+                                    <field name="hsn_code"/>
+                                    <field name="uqc"/>
+                                    <field name="quantity"/>
+                                    <field name="rate"/>
+                                    <field name="taxable_value" sum="Total"/>
+                                    <field name="igst" sum="Total"/>
+                                    <field name="cgst" sum="Total"/>
+                                    <field name="sgst" sum="Total"/>
+                                    <field name="cess" sum="Total"/>
+                                    <field name="direction" column_invisible="1"/>
+                                    <field name="currency_id" column_invisible="1"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="notes" placeholder="Internal notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="armora_gst_gstr9_view_search" model="ir.ui.view">
+        <field name="name">armora.gst.gstr9.search</field>
+        <field name="model">armora.gst.gstr9</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="gstin"/>
+                <field name="financial_year"/>
+                <filter string="Filed" name="filed" domain="[('state', '=', 'filed')]"/>
+                <filter string="Not Filed" name="not_filed" domain="[('state', '!=', 'filed')]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="armora_gst_gstr9_action" model="ir.actions.act_window">
+        <field name="name">GSTR-9 Annual Returns</field>
+        <field name="res_model">armora.gst.gstr9</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Prepare your GSTR-9 annual return</p>
+            <p>Create one per financial year and press Fill from Books. Tables 4 to 9, 16A, 17 and 18 are filled from
+               the year's invoices, bills, GSTR-3B and GSTR-2B records.</p>
+        </field>
+    </record>
+
+    <menuitem id="armora_gst_gstr9_menu"
+              name="GSTR-9 Annual Return"
+              parent="menu_armora_gst_filing_root"
+              action="armora_gst_gstr9_action"
+              sequence="35"/>
+</odoo>

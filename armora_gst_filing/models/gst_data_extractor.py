@@ -102,6 +102,9 @@ class ArmoraGstDataExtractor(models.AbstractModel):
             tax_type = getattr(tax, 'l10n_in_gst_tax_type', False) if tax else False
             if tax and getattr(tax, 'l10n_in_reverse_charge', False):
                 is_rc = True
+            if tax and getattr(tax, 'l10n_in_is_lut', False):
+                # Export or SEZ supply under LUT: the rate is reported, no tax is paid.
+                amount = 0.0
             tax_amount_company = self._money(amount, company.currency_id)
             if tax_type == 'cgst':
                 cgst += tax_amount_company
