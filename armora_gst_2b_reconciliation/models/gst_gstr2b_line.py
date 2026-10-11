@@ -5,7 +5,7 @@ from odoo.exceptions import UserError
 
 class ArmoraGstGstr2bLine(models.Model):
     _name = 'armora.gst.gstr2b.line'
-    _description = 'GSTR-2B Reconciliation Line'
+    _description = 'GSTR-2A / GSTR-2B Reconciliation Line'
     _order = 'invoice_date, invoice_number, id'
 
     reconciliation_id = fields.Many2one(
@@ -18,7 +18,7 @@ class ArmoraGstGstr2bLine(models.Model):
     currency_id = fields.Many2one(related='reconciliation_id.currency_id', store=True)
 
     source = fields.Selection([
-        ('gstr2b', 'GSTR-2B'),
+        ('gstr2b', 'GST Portal'),
         ('odoo', 'Odoo Only'),
     ], required=True, default='gstr2b', index=True)
 
@@ -49,6 +49,20 @@ class ArmoraGstGstr2bLine(models.Model):
     igst_amount = fields.Monetary(currency_field='currency_id')
     cess_amount = fields.Monetary(currency_field='currency_id')
     invoice_value = fields.Monetary(currency_field='currency_id')
+
+    # GSTR-2A only: whether the supplier filed the returns behind this invoice.
+    supplier_filing_status = fields.Selection([
+        ('filed', 'Filed'),
+        ('not_filed', 'Not Filed'),
+    ], string='Supplier GSTR-1', index=True,
+        help='GSTR-1, IFF or GSTR-5 filing status of the supplier, from GSTR-2A.')
+    supplier_filing_date = fields.Date(string='Supplier GSTR-1 Filed On')
+    supplier_filing_period = fields.Char(string='Supplier GSTR-1 Period')
+    supplier_3b_status = fields.Selection([
+        ('filed', 'Filed'),
+        ('not_filed', 'Not Filed'),
+    ], string='Supplier GSTR-3B', index=True,
+        help='GSTR-3B filing status of the supplier for the period, from GSTR-2A.')
 
     match_state = fields.Selection([
         ('pending', 'Pending'),

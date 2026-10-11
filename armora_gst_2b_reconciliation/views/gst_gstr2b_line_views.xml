@@ -4,7 +4,7 @@
         <field name="name">armora.gst.gstr2b.line.list</field>
         <field name="model">armora.gst.gstr2b.line</field>
         <field name="arch" type="xml">
-            <list string="GSTR-2B Lines">
+            <list string="GSTR-2A / 2B Lines">
                 <field name="reconciliation_id"/>
                 <field name="source"/>
                 <field name="match_state"
@@ -22,6 +22,11 @@
                 <field name="cess_amount"/>
                 <field name="move_id"/>
                 <field name="mismatch_detail" optional="hide"/>
+                <field name="supplier_filing_status" optional="show"
+                       decoration-danger="supplier_filing_status == 'not_filed'"/>
+                <field name="supplier_3b_status" optional="show"
+                       decoration-danger="supplier_3b_status == 'not_filed'"/>
+                <field name="supplier_filing_period" optional="hide"/>
             </list>
         </field>
     </record>
@@ -97,6 +102,11 @@
                 <filter string="Missing in Odoo" name="missing_odoo" domain="[('match_state', '=', 'missing_in_odoo')]"/>
                 <filter string="Missing in 2B" name="missing_2b" domain="[('match_state', '=', 'missing_in_2b')]"/>
                 <filter string="Disputed" name="disputed" domain="[('match_state', '=', 'disputed')]"/>
+                <separator/>
+                <filter string="Supplier GSTR-1 Not Filed" name="supplier_gstr1_not_filed"
+                        domain="[('supplier_filing_status', '=', 'not_filed')]"/>
+                <filter string="Supplier GSTR-3B Not Filed" name="supplier_gstr3b_not_filed"
+                        domain="[('supplier_3b_status', '=', 'not_filed')]"/>
                 <group>
                     <filter string="Match State" name="group_match" context="{'group_by': 'match_state'}"/>
                     <filter string="Source" name="group_source" context="{'group_by': 'source'}"/>

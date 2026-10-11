@@ -59,6 +59,7 @@ Email:   info@armorait.com
         # 'demo/gst_filing_demo.xml',  # enable after fictional demo records are ready
     ],
     'images': [
+        'static/description/banner.png',
         'static/description/icon.png',
     ],
     'installable': True,

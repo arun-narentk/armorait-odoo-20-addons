@@ -7,4 +7,11 @@
         <field name="padding">4</field>
         <field name="company_id" eval="False"/>
     </record>
+    <record id="seq_armora_gst_gstr2a" model="ir.sequence">
+        <field name="name">GSTR-2A Reconciliation</field>
+        <field name="code">armora.gst.gstr2a</field>
+        <field name="prefix">2A/%(year)s/</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
 </odoo>

@@ -5,7 +5,7 @@ from odoo.exceptions import AccessError, UserError, ValidationError
 
 class ArmoraGstGstr2b(models.Model):
     _name = 'armora.gst.gstr2b'
-    _description = 'GSTR-2B Reconciliation'
+    _description = 'GSTR-2A / GSTR-2B Reconciliation'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = 'period_end desc, id desc'
 
@@ -25,6 +25,12 @@ class ArmoraGstGstr2b(models.Model):
         tracking=True,
     )
     currency_id = fields.Many2one(related='company_id.currency_id', store=True)
+    statement_type = fields.Selection([
+        ('gstr2b', 'GSTR-2B'),
+        ('gstr2a', 'GSTR-2A'),
+    ], string='Statement', required=True, default='gstr2b', tracking=True, index=True,
+        help='GSTR-2B is the fixed monthly ITC statement. GSTR-2A changes as suppliers file '
+             'and also shows whether each supplier filed GSTR-1 and GSTR-3B.')
     gstin = fields.Char(required=True, tracking=True, index=True)
     financial_year = fields.Char(required=True, tracking=True)
     return_period = fields.Char(
@@ -77,8 +83,8 @@ class ArmoraGstGstr2b(models.Model):
     matched_by = fields.Many2one('res.users', copy=False)
 
     _armora_gst_gstr2b_period_uniq = models.Constraint(
-        'unique(company_id, gstin, financial_year, return_period)',
-        "A GSTR-2B reconciliation already exists for this company, GSTIN and period.",
+        'unique(company_id, gstin, statement_type, financial_year, return_period)',
+        "A reconciliation of this statement already exists for this company, GSTIN and period.",
     )
 
     @api.depends(
@@ -142,14 +148,15 @@ class ArmoraGstGstr2b(models.Model):
     def create(self, vals_list):
         for vals in vals_list:
             if vals.get('name', _('New')) == _('New'):
-                vals['name'] = self.env['ir.sequence'].next_by_code('armora.gst.gstr2b') or _('New')
+                code = 'armora.gst.gstr2a' if vals.get('statement_type') == 'gstr2a' else 'armora.gst.gstr2b'
+                vals['name'] = self.env['ir.sequence'].next_by_code(code) or _('New')
             company = self.env['res.company'].browse(vals.get('company_id') or self.env.company.id)
             if not vals.get('gstin'):
                 vals['gstin'] = company.vat or ''
-            if vals.get('financial_year') and vals.get('return_period') and vals.get('filing_frequency'):
+            if vals.get('financial_year') and vals.get('return_period'):
                 if not vals.get('period_start') or not vals.get('period_end'):
                     start, end = self.env['armora.gst.period'].compute_period_dates(
-                        vals['financial_year'], vals['return_period'], vals['filing_frequency']
+                        vals['financial_year'], vals['return_period'], vals.get('filing_frequency') or 'monthly',
                     )
                     vals['period_start'] = start
                     vals['period_end'] = end
@@ -162,7 +169,7 @@ class ArmoraGstGstr2b(models.Model):
                     'message_follower_ids', 'activity_ids', 'message_ids', '__last_update', 'notes',
                 }
                 if protected:
-                    raise UserError(_('Closed or cancelled GSTR-2B reconciliations are read-only.'))
+                    raise UserError(_('Closed or cancelled reconciliations are read-only.'))
         return super().write(vals)
 
     def unlink(self):
@@ -176,7 +183,7 @@ class ArmoraGstGstr2b(models.Model):
         if self.state in ('closed', 'cancelled'):
             raise UserError(_('This reconciliation is closed.'))
         if not self.line_ids.filtered(lambda l: l.source == 'gstr2b'):
-            raise UserError(_('Import GSTR-2B lines before running matching.'))
+            raise UserError(_('Import the %s file before running matching.', self._statement_label()))
         self.env['armora.gst.2b.matching'].match_reconciliation(self)
         self.write({
             'state': 'matched',
@@ -227,7 +234,7 @@ class ArmoraGstGstr2b(models.Model):
         self.ensure_one()
         return {
             'type': 'ir.actions.act_window',
-            'name': _('Import GSTR-2B'),
+            'name': _('Import %s', self._statement_label()),
             'res_model': 'armora.gst.2b.import.wizard',
             'view_mode': 'form',
             'target': 'new',
@@ -236,6 +243,10 @@ class ArmoraGstGstr2b(models.Model):
                 'default_company_id': self.company_id.id,
             },
         }
+
+    def _statement_label(self):
+        self.ensure_one()
+        return dict(self._fields['statement_type']._description_selection(self.env)).get(self.statement_type)
 
     def _action_view_lines(self, match_state=None, name=None):
         self.ensure_one()

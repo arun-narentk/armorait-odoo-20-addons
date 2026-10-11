@@ -1,20 +1,22 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Armora GST 2B Reconciliation',
+    'name': 'Armora GST 2A/2B Reconciliation',
     'version': '20.0.1.0.0',
     'category': 'Accounting/Localizations',
-    'summary': 'GSTR-2B vs vendor bill matching for Indian GST ITC | ARMORA IT Technologies',
+    'summary': 'GSTR-2A and GSTR-2B vs vendor bill matching for Indian GST ITC | ARMORA IT Technologies',
     'description': """
 Armora GST 2B Reconciliation
 ===========================
 Part of the Armora GST Suite.
 
-Import GSTR-2B invoice data and match it against posted vendor bills:
+Import GSTR-2B or GSTR-2A invoice data and match it against posted vendor bills:
 
 * Match on GSTIN, invoice number, date, taxable value, CGST/SGST/IGST/Cess
 * Dashboard buckets: Matched, Mismatch, Missing in Odoo, Missing in 2B
 * Create vendor bill draft from a 2B line missing in Odoo
 * Mark mismatch / ignore / disputed for accountant workflow
+* GSTR-2A: supplier GSTR-1 and GSTR-3B filing status per invoice, to spot ITC at risk
+* Portal files with one row per tax rate are added up per invoice before matching
 
 Complements Odoo l10n_in GSTR-2B retrieval. This module focuses on
 reconciliation UX and exception handling, not replacing GSTN API import.
@@ -47,6 +49,7 @@ Email:   info@armorait.com
         'security/ir.access.csv',
     ],
     'images': [
+        'static/description/banner.png',
         'static/description/icon.png',
     ],
     'installable': True,

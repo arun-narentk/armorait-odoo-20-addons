@@ -35,6 +35,7 @@ Website: https://www.armorait.com/
         'security/ir.access.csv',
     ],
     'images': [
+        'static/description/banner.png',
         'static/description/icon.png',
     ],
     'installable': True,

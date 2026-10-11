@@ -30,7 +30,13 @@ LINE_COLUMNS = [
     ('Diff SGST', 12),
     ('Mismatch Detail', 45),
     ('Notes', 30),
+    ('Supplier GSTR-1', 14),
+    ('GSTR-1 Filed On', 14),
+    ('GSTR-1 Period', 12),
+    ('Supplier GSTR-3B', 14),
 ]
+
+DATE_COLUMNS = (5, 24)
 
 BUCKET_SHEETS = [
     ('mismatch', 'Mismatch'),
@@ -47,8 +53,8 @@ class ArmoraGstGstr2b(models.Model):
         self.ensure_one()
         content = self._armora_build_reconciliation_xlsx()
         filename = '%s.xlsx' % _(
-            'GSTR-2B Reconciliation %(gstin)s %(fy)s-%(period)s',
-            gstin=self.gstin, fy=self.financial_year, period=self.return_period,
+            '%(statement)s Reconciliation %(gstin)s %(fy)s-%(period)s',
+            statement=self._statement_label(), gstin=self.gstin, fy=self.financial_year, period=self.return_period,
         )
         # Keep one export per reconciliation: a new export replaces the previous file.
         Attachment = self.env['ir.attachment']
@@ -106,7 +112,7 @@ class ArmoraGstGstr2b(models.Model):
         sheet = book.add_worksheet(_('Summary'))
         sheet.set_column(0, 0, 26)
         sheet.set_column(1, 6, 16)
-        sheet.write(0, 0, _('GSTR-2B Reconciliation Summary'), styles['title'])
+        sheet.write(0, 0, _('%s Reconciliation Summary', self._statement_label()), styles['title'])
         state_label = dict(self._fields['state']._description_selection(self.env)).get(self.state)
         info = [
             (_('Company'), self.company_id.name),
@@ -143,7 +149,7 @@ class ArmoraGstGstr2b(models.Model):
             sheet.write_formula(row, col, '=SUM(%s%d:%s%d)' % (letter, first + 1, letter, row), styles['money_bold'])
 
         row += 2
-        sheet.write(row, 0, _('ITC in GSTR-2B'), styles['label'])
+        sheet.write(row, 0, _('ITC in %s', self._statement_label()), styles['label'])
         sheet.write(row, 1, self.amount_itc_total, styles['money'])
         sheet.write(row + 1, 0, _('ITC matched'), styles['label'])
         sheet.write(row + 1, 1, self.amount_matched, styles['money'])
@@ -162,7 +168,8 @@ class ArmoraGstGstr2b(models.Model):
         Line = self.env['armora.gst.gstr2b.line']
         selections = {
             fname: dict(Line._fields[fname]._description_selection(self.env))
-            for fname in ('match_state', 'source', 'document_type', 'itc_availability')
+            for fname in ('match_state', 'source', 'document_type', 'itc_availability',
+                          'supplier_filing_status', 'supplier_3b_status')
         }
         for row, line in enumerate(lines, start=1):
             values = [
@@ -189,9 +196,13 @@ class ArmoraGstGstr2b(models.Model):
                 line.diff_sgst,
                 line.mismatch_detail or '',
                 line.notes or '',
+                selections['supplier_filing_status'].get(line.supplier_filing_status, ''),
+                line.supplier_filing_date,
+                line.supplier_filing_period or '',
+                selections['supplier_3b_status'].get(line.supplier_3b_status, ''),
             ]
             for col, value in enumerate(values):
-                if col == 5:
+                if col in DATE_COLUMNS:
                     if value:
                         sheet.write_datetime(row, col, fields.Datetime.to_datetime(value), styles['date'])
                     else:

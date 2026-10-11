@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <menuitem id="menu_armora_gst_2b_root"
-              name="GSTR-2B"
+              name="GSTR-2A / 2B"
               parent="armora_gst_base.menu_armora_gst_root"
               sequence="25"
               groups="armora_gst_2b_reconciliation.group_armora_gst_2b_user"/>
 
     <menuitem id="menu_armora_gst_gstr2b"
-              name="Reconciliations"
+              name="GSTR-2B Reconciliations"
               parent="menu_armora_gst_2b_root"
               action="action_armora_gst_gstr2b"
               sequence="10"/>
 
+    <menuitem id="armora_gst_gstr2b_menu_gstr2a"
+              name="GSTR-2A Reconciliations"
+              parent="menu_armora_gst_2b_root"
+              action="armora_gst_gstr2b_action_gstr2a"
+              sequence="15"/>
+
     <menuitem id="menu_armora_gst_gstr2b_lines"
-              name="All 2B Lines"
+              name="All Lines"
               parent="menu_armora_gst_2b_root"
               action="action_armora_gst_gstr2b_lines"
               sequence="20"/>

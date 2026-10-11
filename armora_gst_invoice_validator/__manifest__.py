@@ -57,6 +57,7 @@ Email:   info@armorait.com
     ],
     'demo': [],
     'images': [
+        'static/description/banner.png',
         'static/description/icon.png',
     ],
     'installable': True,

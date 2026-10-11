@@ -20,6 +20,9 @@ def get_2b_stats(env, filters, availability):
         domain.append(('company_id', '=', filters['company_id']))
     elif env.companies:
         domain.append(('company_id', 'in', env.companies.ids))
+    if 'statement_type' in Gstr2b._fields:
+        # GSTR-2A of the same month covers the same invoices; count the 2B only.
+        domain.append(('statement_type', '=', 'gstr2b'))
     recons = Gstr2b.search(domain)
 
     section = empty_section('reconciliation_2b', available=True)

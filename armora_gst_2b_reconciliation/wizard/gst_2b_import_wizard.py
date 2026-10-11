@@ -12,23 +12,34 @@ except ImportError:  # pragma: no cover
     load_workbook = None
 
 
+TEXT_FIELDS = (
+    'gstin', 'vendor_name', 'invoice_number', 'invoice_date', 'document_type',
+    'reverse_charge', 'supplier_filing_status', 'supplier_filing_date', 'supplier_filing_period',
+    'supplier_3b_status',
+)
+AMOUNT_FIELDS = ('taxable_value', 'cgst', 'sgst', 'igst', 'cess')
+
+
 class ArmoraGst2bImportWizard(models.TransientModel):
     _name = 'armora.gst.2b.import.wizard'
-    _description = 'Import GSTR-2B Data'
+    _description = 'Import GSTR-2A / GSTR-2B Data'
 
     reconciliation_id = fields.Many2one('armora.gst.gstr2b', required=True, ondelete='cascade')
     company_id = fields.Many2one(related='reconciliation_id.company_id')
-    data_file = fields.Binary(string='GSTR-2B File', required=True)
+    data_file = fields.Binary(string='Portal File', required=True)
     filename = fields.Char()
     replace_existing = fields.Boolean(
-        string='Replace Existing 2B Lines',
+        string='Replace Existing Lines',
         default=True,
         help='Remove previously imported GSTR-2B lines before importing.',
     )
     note = fields.Text(readonly=True, default=lambda self: _(
-        'Upload a CSV or Excel export of GSTR-2B B2B invoices.\n'
+        'Upload the GSTR-2B or GSTR-2A Excel file downloaded from the GST Portal, or a CSV with the '
+        'same columns. The B2B and CDNR sheets are read; rows of one invoice (one row per tax rate) '
+        'are added up.\n'
         'Expected columns (header names, case-insensitive):\n'
-        'GSTIN, Invoice Number, Invoice Date, Taxable Value, CGST, SGST, IGST, Cess, Invoice Value, Vendor Name'
+        'GSTIN, Invoice Number, Invoice Date, Taxable Value, CGST, SGST, IGST, Cess, Invoice Value, Vendor Name; '
+        'GSTR-2A also: GSTR-1/IFF/GSTR-5 Filing Status, Filing Date, Filing Period, GSTR-3B Filing Status'
     ))
 
     def action_import(self):
@@ -37,7 +48,7 @@ class ArmoraGst2bImportWizard(models.TransientModel):
         if rec.state in ('closed', 'cancelled'):
             raise UserError(_('Cannot import into a closed or cancelled reconciliation.'))
         if not self.data_file:
-            raise UserError(_('Please upload a GSTR-2B file.'))
+            raise UserError(_('Please upload the portal file.'))
 
         raw = self.data_file.content
         rows = self._parse_file(raw, self.filename or '')
@@ -50,7 +61,7 @@ class ArmoraGst2bImportWizard(models.TransientModel):
 
         Line = self.env['armora.gst.gstr2b.line']
         vals_list = []
-        for row in rows:
+        for row in self._merge_rate_rows(rows):
             gstin = (row.get('gstin') or '').strip().upper()
             invoice_number = (row.get('invoice_number') or '').strip()
             if not invoice_number and not gstin:
@@ -70,6 +81,11 @@ class ArmoraGst2bImportWizard(models.TransientModel):
                 'cess_amount': row.get('cess') or 0.0,
                 'invoice_value': row.get('invoice_value') or 0.0,
                 'document_type': row.get('document_type') or 'invoice',
+                'reverse_charge': bool(row.get('reverse_charge')),
+                'supplier_filing_status': row.get('supplier_filing_status') or False,
+                'supplier_filing_date': row.get('supplier_filing_date') or False,
+                'supplier_filing_period': row.get('supplier_filing_period') or False,
+                'supplier_3b_status': row.get('supplier_3b_status') or False,
             })
         if not vals_list:
             raise UserError(_('Could not map any invoice rows. Check column headers.'))
@@ -98,9 +114,9 @@ class ArmoraGst2bImportWizard(models.TransientModel):
             wb = load_workbook(filename=io.BytesIO(raw), read_only=True, data_only=True)
         except Exception as err:
             raise UserError(_('Unable to open Excel file: %s') % err) from err
-        # GST portal GSTR-2B workbook: "Read me" first, invoices on "B2B",
-        # notes on "B2B-CDNR". A plain one-sheet export uses the active sheet.
-        sheets = [ws for ws in wb.worksheets if self._normalize_header(ws.title) in ('b2b', 'b2bcdnr')]
+        # GST portal workbooks: "Read me" first, invoices on "B2B", notes on
+        # "B2B-CDNR" (GSTR-2B) or "CDNR" (GSTR-2A). A one-sheet export uses the active sheet.
+        sheets = [ws for ws in wb.worksheets if self._normalize_header(ws.title) in ('b2b', 'b2bcdnr', 'cdnr')]
         rows = []
         for ws in sheets or [wb.active]:
             rows.extend(self._rows_from_sheet(ws))
@@ -182,6 +198,11 @@ class ArmoraGst2bImportWizard(models.TransientModel):
             'cess': col('Cess', 'Cess Amount'),
             'invoice_value': col('Invoice Value', 'Note Value', 'Total Invoice Value'),
             'document_type': col('Note Type', 'Document Type'),
+            'reverse_charge': col('Supply Attract Reverse Charge', 'Reverse Charge'),
+            'supplier_filing_status': col('GSTR-1/IFF/GSTR-5 Filing Status', 'GSTR-1 Filing Status'),
+            'supplier_filing_date': col('GSTR-1/IFF/GSTR-5 Filing Date', 'GSTR-1 Filing Date'),
+            'supplier_filing_period': col('GSTR-1/IFF/GSTR-5 Filing Period', 'GSTR-1 Filing Period'),
+            'supplier_3b_status': col('GSTR-3B Filing Status'),
         }
         result = []
         for row in rows_iter:
@@ -190,20 +211,58 @@ class ArmoraGst2bImportWizard(models.TransientModel):
             parsed = {}
             for field, idx in mapping.items():
                 if idx is None or idx >= len(row):
-                    parsed[field] = False if field in ('gstin', 'vendor_name', 'invoice_number', 'invoice_date', 'document_type') else 0.0
+                    parsed[field] = False if field in TEXT_FIELDS else 0.0
                     continue
                 value = row[idx]
-                if field == 'invoice_date':
+                if field in ('invoice_date', 'supplier_filing_date'):
                     parsed[field] = self._parse_date(value)
+                elif field == 'reverse_charge':
+                    parsed[field] = self._parse_yes_no(value) == 'yes'
+                elif field in ('supplier_filing_status', 'supplier_3b_status'):
+                    parsed[field] = {'yes': 'filed', 'no': 'not_filed'}.get(self._parse_yes_no(value), False)
                 elif field == 'document_type':
                     parsed[field] = self._parse_document_type(value)
-                elif field in ('gstin', 'vendor_name', 'invoice_number'):
+                elif field in ('gstin', 'vendor_name', 'invoice_number', 'supplier_filing_period'):
                     parsed[field] = str(value).strip() if value not in (None, '') else False
                 else:
                     parsed[field] = self._parse_float(value)
             if parsed.get('invoice_number') or parsed.get('gstin'):
                 result.append(parsed)
         return result
+
+    @api.model
+    def _parse_yes_no(self, value):
+        text = str(value or '').strip().lower()
+        if text in ('y', 'yes', 'filed', 'true', '1'):
+            return 'yes'
+        if text in ('n', 'no', 'not filed', 'false', '0'):
+            return 'no'
+        return False
+
+    @api.model
+    def _merge_rate_rows(self, rows):
+        """Add up the portal rows of one document.
+
+        GSTR-2A and GSTR-2B list an invoice once per tax rate; matching works on
+        the whole document, as a vendor bill is one record.
+        """
+        Line = self.env['armora.gst.gstr2b.line']
+        merged = {}
+        for row in rows:
+            key = (
+                (row.get('gstin') or '').strip().upper(),
+                Line.normalize_invoice_number(row.get('invoice_number')),
+                row.get('document_type') or 'invoice',
+            )
+            if key not in merged:
+                merged[key] = dict(row)
+                continue
+            target = merged[key]
+            for field in AMOUNT_FIELDS:
+                target[field] = (target.get(field) or 0.0) + (row.get(field) or 0.0)
+            # The invoice value is repeated on every rate row: keep it once.
+            target['invoice_value'] = max(target.get('invoice_value') or 0.0, row.get('invoice_value') or 0.0)
+        return list(merged.values())
 
     @api.model
     def _parse_document_type(self, value):

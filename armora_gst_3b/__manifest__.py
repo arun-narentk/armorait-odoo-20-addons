@@ -36,6 +36,7 @@ Developed by ARMORA IT Technologies
         'security/ir.access.csv',
     ],
     'images': [
+        'static/description/banner.png',
         'static/description/icon.png',
     ],
     'installable': True,

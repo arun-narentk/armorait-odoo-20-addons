@@ -33,6 +33,7 @@ Developed by ARMORA IT Technologies
         'views/account_move_views.xml',
     ],
     'images': [
+        'static/description/banner.png',
         'static/description/icon.png',
     ],
     'installable': True,
