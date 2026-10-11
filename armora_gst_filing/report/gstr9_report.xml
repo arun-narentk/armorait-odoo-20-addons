@@ -73,7 +73,7 @@
                 </tr>
                 <tr t-foreach="hsn_lines" t-as="line">
                     <td t-out="line.hsn_code"/>
-                    <td t-out="line.uqc"/>
+                    <td t-out="line.uqc or '-'"/>
                     <td class="text-end" t-out="line.quantity" t-options="{'widget': 'float', 'precision': 2}"/>
                     <td class="text-end" t-out="line.rate" t-options="{'widget': 'float', 'precision': 2}"/>
                     <td class="text-end" t-out="line.taxable_value" t-options="money"/>

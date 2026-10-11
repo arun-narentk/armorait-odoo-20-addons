@@ -296,8 +296,13 @@ class ArmoraGstItcLedger(models.Model):
     def _armora_paid_amount(self, move, on_date):
         """Amount of the bill paid (reconciled) on or before a date, in company currency."""
         payable = move.line_ids.filtered(lambda l: l.account_id.account_type == 'liability_payable')
-        partials = payable.matched_debit_ids | payable.matched_credit_ids
-        return sum(p.amount for p in partials if p.max_date and p.max_date <= on_date)
+        paid = 0.0
+        for partial in payable.matched_debit_ids | payable.matched_credit_ids:
+            # Date of the payment entry itself, not the later of the two matched lines.
+            counterpart = partial.debit_move_id if partial.credit_move_id in payable else partial.credit_move_id
+            if counterpart.date <= on_date:
+                paid += partial.amount
+        return paid
 
     def _armora_gstr2b_status(self, moves):
         if 'armora.gst.gstr2b.line' not in self.env:

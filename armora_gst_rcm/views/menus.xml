@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_armora_gst_rcm_root"
+              name="Reverse Charge"
+              parent="armora_gst_base.menu_armora_gst_root"
+              sequence="55"
+              groups="armora_gst_rcm.group_armora_gst_rcm_user"/>
+
+    <menuitem id="armora_gst_rcm_register_menu"
+              name="RCM Register"
+              parent="menu_armora_gst_rcm_root"
+              action="armora_gst_rcm_register_action"
+              sequence="10"/>
+
+    <menuitem id="armora_gst_rcm_rule_menu"
+              name="RCM Rules"
+              parent="menu_armora_gst_rcm_root"
+              action="armora_gst_rcm_rule_action"
+              sequence="20"
+              groups="armora_gst_rcm.group_armora_gst_rcm_manager"/>
+</odoo>

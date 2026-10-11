@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from collections import defaultdict
+from datetime import timedelta
 
 from odoo import Command, _, api, fields, models
 from odoo.exceptions import UserError
@@ -157,6 +158,7 @@ class ArmoraGst3b(models.Model):
                 raise UserError(_('Filed GSTR-3B records are read-only.'))
             vals, interstate, warnings = rec._armora_books_values()
             rec._armora_itc_ledger_values(vals, warnings)
+            rec._armora_rcm_time_of_supply_warnings(warnings)
             vals.update({
                 'interstate_line_ids': [Command.clear()] + [Command.create(line) for line in interstate],
                 'books_filled_at': fields.Datetime.now(),
@@ -205,6 +207,38 @@ class ArmoraGst3b(models.Model):
             vals['t4a5_%s' % head] += ledger['reclaimed_%s' % head]
             vals['t4d1_%s' % head] = ledger['reclaimed_%s' % head]
             vals['itc_opening_%s' % head] = ledger['opening_%s' % head]
+
+    def _armora_rcm_time_of_supply_warnings(self, warnings):
+        """Point out reverse charge bills whose tax falls due in another month than their
+        invoice date (Armora GST Reverse Charge computes the time of supply)."""
+        self.ensure_one()
+        Move = self.env['account.move']
+        if 'armora_rcm_tos_date' not in Move._fields:
+            return
+        bills = Move.search([
+            ('company_id', '=', self.company_id.id),
+            ('move_type', 'in', PURCHASE_TYPES),
+            ('state', '=', 'posted'),
+            ('armora_is_rcm', '=', True),
+            ('invoice_date', '>=', self.period_start - timedelta(days=62)),
+            ('invoice_date', '<=', self.period_end),
+        ])
+
+        def in_period(day):
+            return day and self.period_start <= day <= self.period_end
+
+        later = bills.filtered(lambda b: in_period(b.invoice_date) and not in_period(b.armora_rcm_tos_date))
+        earlier = bills.filtered(lambda b: not in_period(b.invoice_date) and in_period(b.armora_rcm_tos_date))
+        if later:
+            warnings.append(_(
+                'Reverse charge on %(count)s bills of this month falls due in a later month by time of supply: %(names)s',
+                count=len(later), names=', '.join(later[:5].mapped('name')),
+            ))
+        if earlier:
+            warnings.append(_(
+                'Reverse charge on %(count)s bills of earlier months falls due in this month by time of supply: %(names)s',
+                count=len(earlier), names=', '.join(earlier[:5].mapped('name')),
+            ))
 
     def action_compute_itc_utilization(self):
         res = super().action_compute_itc_utilization()

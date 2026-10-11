@@ -108,7 +108,7 @@
                         </tr>
                         <tr t-foreach="data['hsn_rows']" t-as="row">
                             <td t-out="row['hsn']"/>
-                            <td t-out="row['uom']"/>
+                            <td t-out="row['uom'] or '-'"/>
                             <td class="text-end" t-out="row['quantity']" t-options="{'widget': 'float', 'precision': 2}"/>
                             <td class="text-end" t-out="row['rate']" t-options="{'widget': 'float', 'precision': 2}"/>
                             <td class="text-end" t-out="row['taxable_value']" t-options="{'widget': 'monetary', 'display_currency': cur}"/>
