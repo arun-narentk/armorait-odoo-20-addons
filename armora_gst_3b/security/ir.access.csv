@@ -4,3 +4,6 @@ access_armora_gst_3b_manager,armora.gst.3b manager,armora.gst.3b,armora_gst_base
 access_armora_gst_3b_admin,armora.gst.3b admin,armora.gst.3b,armora_gst_base.group_armora_gst_administrator,crud,
 access_armora_gst_3b_liability_user,armora.gst.3b.liability.breakup user,armora.gst.3b.liability.breakup,armora_gst_base.group_armora_gst_user,r,
 access_armora_gst_3b_liability_manager,armora.gst.3b.liability.breakup manager,armora.gst.3b.liability.breakup,armora_gst_base.group_armora_gst_manager,crud,
+access_armora_gst_3b_interstate_user,armora.gst.3b.interstate.line user,armora.gst.3b.interstate.line,armora_gst_base.group_armora_gst_user,r,
+access_armora_gst_3b_interstate_manager,armora.gst.3b.interstate.line manager,armora.gst.3b.interstate.line,armora_gst_base.group_armora_gst_manager,crud,
+armora_gst_3b_interstate_comp_rule,GSTR-3B Inter-State Line: multi-company,armora.gst.3b.interstate.line,,crud,"[('company_id', 'in', company_ids)]"

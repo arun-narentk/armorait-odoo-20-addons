@@ -30,7 +30,9 @@
         <field name="arch" type="xml">
             <form string="GSTR-3B">
                 <header>
-                    <button name="action_compute_interest" type="object" string="Compute Interest" class="btn-primary" invisible="state == 'filed'"/>
+                    <button name="action_fill_from_books" type="object" string="Fill from Books" class="btn-primary" invisible="state == 'filed'"
+                            title="Fill Tables 3.1, 3.2, 4 and 5 from posted invoices and bills, then set off ITC."/>
+                    <button name="action_compute_interest" type="object" string="Compute Interest" invisible="state == 'filed'"/>
                     <button name="action_recompute_interest" type="object" string="Recompute Interest" invisible="state == 'filed'"/>
                     <button name="action_compute_itc_utilization" type="object" string="Compute ITC Utilization" invisible="state == 'filed'"/>
                     <button name="action_mark_filed" type="object" string="Mark Filed" invisible="state == 'filed'" confirm="Mark this GSTR-3B as filed (read-only)?"/>
@@ -56,6 +58,82 @@
                         </group>
                     </group>
                     <notebook>
+                        <page string="Tables 3.1, 3.2, 4 and 5" name="books">
+                            <div class="alert alert-warning" role="alert" invisible="not books_warning">
+                                <field name="books_warning"/>
+                            </div>
+                            <div class="text-muted mb-2" invisible="not books_filled_at">
+                                Filled from books on <field name="books_filled_at" class="oe_inline"/>.
+                                4(A)(4), 4(B)(2) and 4(D)(1) are entered by hand and kept on refill.
+                            </div>
+                            <group string="3.1 Outward and reverse charge inward supplies">
+                                <group string="(a) Outward taxable supplies">
+                                    <field name="t31a_taxable"/><field name="t31a_igst"/><field name="t31a_cgst"/><field name="t31a_sgst"/><field name="t31a_cess"/>
+                                </group>
+                                <group string="(b) Zero rated (exports, SEZ)">
+                                    <field name="t31b_taxable"/><field name="t31b_igst"/><field name="t31b_cess"/>
+                                </group>
+                                <group string="(c) Nil rated and exempt">
+                                    <field name="t31c_taxable"/>
+                                </group>
+                                <group string="(d) Inward supplies under reverse charge">
+                                    <field name="t31d_taxable"/><field name="t31d_igst"/><field name="t31d_cgst"/><field name="t31d_sgst"/><field name="t31d_cess"/>
+                                </group>
+                                <group string="(e) Non-GST outward supplies">
+                                    <field name="t31e_taxable"/>
+                                </group>
+                            </group>
+                            <separator string="3.2 Inter-state supplies to unregistered, composition and UIN holders"/>
+                            <field name="interstate_line_ids">
+                                <list editable="bottom">
+                                    <field name="supply_type"/>
+                                    <field name="state_id"/>
+                                    <field name="taxable_value" sum="Total"/>
+                                    <field name="igst" sum="Total"/>
+                                    <field name="currency_id" column_invisible="1"/>
+                                </list>
+                            </field>
+                            <group string="4 Eligible ITC">
+                                <group string="(A)(1) Import of goods">
+                                    <field name="t4a1_igst"/><field name="t4a1_cess"/>
+                                </group>
+                                <group string="(A)(2) Import of services">
+                                    <field name="t4a2_igst"/><field name="t4a2_cess"/>
+                                </group>
+                                <group string="(A)(3) Reverse charge (other)">
+                                    <field name="t4a3_igst"/><field name="t4a3_cgst"/><field name="t4a3_sgst"/><field name="t4a3_cess"/>
+                                </group>
+                                <group string="(A)(4) Inward supplies from ISD">
+                                    <field name="t4a4_igst"/><field name="t4a4_cgst"/><field name="t4a4_sgst"/><field name="t4a4_cess"/>
+                                </group>
+                                <group string="(A)(5) All other ITC">
+                                    <field name="t4a5_igst"/><field name="t4a5_cgst"/><field name="t4a5_sgst"/><field name="t4a5_cess"/>
+                                </group>
+                                <group string="(B)(1) Reversed: Rules 38, 42, 43 and section 17(5)">
+                                    <field name="t4b1_igst"/><field name="t4b1_cgst"/><field name="t4b1_sgst"/><field name="t4b1_cess"/>
+                                </group>
+                                <group string="(B)(2) Reversed: others">
+                                    <field name="t4b2_igst"/><field name="t4b2_cgst"/><field name="t4b2_sgst"/><field name="t4b2_cess"/>
+                                </group>
+                                <group string="(C) Net ITC available">
+                                    <field name="t4c_igst"/><field name="t4c_cgst"/><field name="t4c_sgst"/><field name="t4c_cess"/>
+                                </group>
+                                <group string="(D)(1) ITC reclaimed (reversed earlier)">
+                                    <field name="t4d1_igst"/><field name="t4d1_cgst"/><field name="t4d1_sgst"/><field name="t4d1_cess"/>
+                                </group>
+                                <group string="(D)(2) Ineligible: section 16(4) and place of supply">
+                                    <field name="t4d2_igst"/><field name="t4d2_cgst"/><field name="t4d2_sgst"/><field name="t4d2_cess"/>
+                                </group>
+                            </group>
+                            <group string="5 Exempt, nil rated and non-GST inward supplies">
+                                <group string="Composition, exempt and nil rated">
+                                    <field name="t5_exempt_inter" string="Inter-state"/><field name="t5_exempt_intra" string="Intra-state"/>
+                                </group>
+                                <group string="Non-GST supply">
+                                    <field name="t5_nongst_inter" string="Inter-state"/><field name="t5_nongst_intra" string="Intra-state"/>
+                                </group>
+                            </group>
+                        </page>
                         <page string="Interest (Table 5.1)">
                             <group>
                                 <group>

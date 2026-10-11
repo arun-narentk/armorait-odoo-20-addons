@@ -46,6 +46,98 @@
                     </tr>
                 </table>
 
+                <h5>Outward and reverse charge inward supplies (Table 3.1)</h5>
+                <table class="table table-sm table-bordered mb-4">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Nature of supplies</th>
+                            <th class="text-end">Taxable value</th>
+                            <th class="text-end">IGST</th>
+                            <th class="text-end">CGST</th>
+                            <th class="text-end">SGST/UTGST</th>
+                            <th class="text-end">Cess</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>(a) Outward taxable supplies (other than zero rated, nil rated and exempted)</td><td class="text-end" t-out="doc.t31a_taxable" t-options="money"/><td class="text-end" t-out="doc.t31a_igst" t-options="money"/><td class="text-end" t-out="doc.t31a_cgst" t-options="money"/><td class="text-end" t-out="doc.t31a_sgst" t-options="money"/><td class="text-end" t-out="doc.t31a_cess" t-options="money"/></tr>
+                        <tr><td>(b) Outward taxable supplies (zero rated)</td><td class="text-end" t-out="doc.t31b_taxable" t-options="money"/><td class="text-end" t-out="doc.t31b_igst" t-options="money"/><td class="text-end text-muted">-</td><td class="text-end text-muted">-</td><td class="text-end" t-out="doc.t31b_cess" t-options="money"/></tr>
+                        <tr><td>(c) Other outward supplies (nil rated, exempted)</td><td class="text-end" t-out="doc.t31c_taxable" t-options="money"/><td class="text-end text-muted">-</td><td class="text-end text-muted">-</td><td class="text-end text-muted">-</td><td class="text-end text-muted">-</td></tr>
+                        <tr><td>(d) Inward supplies (liable to reverse charge)</td><td class="text-end" t-out="doc.t31d_taxable" t-options="money"/><td class="text-end" t-out="doc.t31d_igst" t-options="money"/><td class="text-end" t-out="doc.t31d_cgst" t-options="money"/><td class="text-end" t-out="doc.t31d_sgst" t-options="money"/><td class="text-end" t-out="doc.t31d_cess" t-options="money"/></tr>
+                        <tr><td>(e) Non-GST outward supplies</td><td class="text-end" t-out="doc.t31e_taxable" t-options="money"/><td class="text-end text-muted">-</td><td class="text-end text-muted">-</td><td class="text-end text-muted">-</td><td class="text-end text-muted">-</td></tr>
+                    </tbody>
+                </table>
+
+                <h5>Inter-state supplies to unregistered, composition and UIN holders (Table 3.2)</h5>
+                <table class="table table-sm table-bordered mb-4">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Supplies made to</th>
+                            <th>Place of supply</th>
+                            <th class="text-end">Taxable value</th>
+                            <th class="text-end">IGST</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-if="not doc.interstate_line_ids">
+                            <td colspan="4" class="text-center text-muted">No inter-state supplies to unregistered persons, composition dealers or UIN holders.</td>
+                        </tr>
+                        <tr t-foreach="doc.interstate_line_ids" t-as="line">
+                            <td><span t-field="line.supply_type"/></td>
+                            <td><span t-out="line.state_id.name"/> (<span t-out="line.state_id.l10n_in_tin"/>)</td>
+                            <td class="text-end" t-out="line.taxable_value" t-options="money"/>
+                            <td class="text-end" t-out="line.igst" t-options="money"/>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h5>Eligible ITC (Table 4)</h5>
+                <table class="table table-sm table-bordered mb-4">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Details</th>
+                            <th class="text-end">IGST</th>
+                            <th class="text-end">CGST</th>
+                            <th class="text-end">SGST/UTGST</th>
+                            <th class="text-end">Cess</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>(A)(1) Import of goods</td><td class="text-end" t-out="doc.t4a1_igst" t-options="money"/><td class="text-end text-muted">-</td><td class="text-end text-muted">-</td><td class="text-end" t-out="doc.t4a1_cess" t-options="money"/></tr>
+                        <tr><td>(A)(2) Import of services</td><td class="text-end" t-out="doc.t4a2_igst" t-options="money"/><td class="text-end text-muted">-</td><td class="text-end text-muted">-</td><td class="text-end" t-out="doc.t4a2_cess" t-options="money"/></tr>
+                        <tr><td>(A)(3) Inward supplies liable to reverse charge (other than 1 and 2)</td><td class="text-end" t-out="doc.t4a3_igst" t-options="money"/><td class="text-end" t-out="doc.t4a3_cgst" t-options="money"/><td class="text-end" t-out="doc.t4a3_sgst" t-options="money"/><td class="text-end" t-out="doc.t4a3_cess" t-options="money"/></tr>
+                        <tr><td>(A)(4) Inward supplies from ISD</td><td class="text-end" t-out="doc.t4a4_igst" t-options="money"/><td class="text-end" t-out="doc.t4a4_cgst" t-options="money"/><td class="text-end" t-out="doc.t4a4_sgst" t-options="money"/><td class="text-end" t-out="doc.t4a4_cess" t-options="money"/></tr>
+                        <tr><td>(A)(5) All other ITC</td><td class="text-end" t-out="doc.t4a5_igst" t-options="money"/><td class="text-end" t-out="doc.t4a5_cgst" t-options="money"/><td class="text-end" t-out="doc.t4a5_sgst" t-options="money"/><td class="text-end" t-out="doc.t4a5_cess" t-options="money"/></tr>
+                        <tr><td>(B)(1) Reversed as per rules 38, 42, 43 and section 17(5)</td><td class="text-end" t-out="doc.t4b1_igst" t-options="money"/><td class="text-end" t-out="doc.t4b1_cgst" t-options="money"/><td class="text-end" t-out="doc.t4b1_sgst" t-options="money"/><td class="text-end" t-out="doc.t4b1_cess" t-options="money"/></tr>
+                        <tr><td>(B)(2) Reversed: others</td><td class="text-end" t-out="doc.t4b2_igst" t-options="money"/><td class="text-end" t-out="doc.t4b2_cgst" t-options="money"/><td class="text-end" t-out="doc.t4b2_sgst" t-options="money"/><td class="text-end" t-out="doc.t4b2_cess" t-options="money"/></tr>
+                        <tr class="fw-bold"><td>(C) Net ITC available (A) - (B)</td><td class="text-end" t-out="doc.t4c_igst" t-options="money"/><td class="text-end" t-out="doc.t4c_cgst" t-options="money"/><td class="text-end" t-out="doc.t4c_sgst" t-options="money"/><td class="text-end" t-out="doc.t4c_cess" t-options="money"/></tr>
+                        <tr><td>(D)(1) ITC reclaimed which was reversed earlier</td><td class="text-end" t-out="doc.t4d1_igst" t-options="money"/><td class="text-end" t-out="doc.t4d1_cgst" t-options="money"/><td class="text-end" t-out="doc.t4d1_sgst" t-options="money"/><td class="text-end" t-out="doc.t4d1_cess" t-options="money"/></tr>
+                        <tr><td>(D)(2) Ineligible ITC under section 16(4) and place of supply rules</td><td class="text-end" t-out="doc.t4d2_igst" t-options="money"/><td class="text-end" t-out="doc.t4d2_cgst" t-options="money"/><td class="text-end" t-out="doc.t4d2_sgst" t-options="money"/><td class="text-end" t-out="doc.t4d2_cess" t-options="money"/></tr>
+                    </tbody>
+                </table>
+
+                <h5>Exempt, nil rated and non-GST inward supplies (Table 5)</h5>
+                <table class="table table-sm table-bordered mb-4">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Nature of supplies</th>
+                            <th class="text-end">Inter-state</th>
+                            <th class="text-end">Intra-state</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>From a supplier under composition scheme, exempt and nil rated supply</td>
+                            <td class="text-end" t-out="doc.t5_exempt_inter" t-options="money"/>
+                            <td class="text-end" t-out="doc.t5_exempt_intra" t-options="money"/>
+                        </tr>
+                        <tr>
+                            <td>Non-GST supply</td>
+                            <td class="text-end" t-out="doc.t5_nongst_inter" t-options="money"/>
+                            <td class="text-end" t-out="doc.t5_nongst_intra" t-options="money"/>
+                        </tr>
+                    </tbody>
+                </table>
+
                 <h5>Payment of tax (Table 6.1)</h5>
                 <table class="table table-sm table-bordered mb-1">
                     <thead class="table-light">
@@ -54,7 +146,7 @@
                             <th class="text-end">Tax payable</th>
                             <th class="text-end">ITC opening</th>
                             <th class="text-end">ITC available</th>
-                            <th class="text-end">Paid through ITC</th>
+                            <th class="text-end">ITC used from this head</th>
                             <th class="text-end">ITC balance</th>
                             <th class="text-end">Paid in cash</th>
                         </tr>
@@ -83,7 +175,10 @@
                     </tfoot>
                 </table>
                 <p class="small text-muted mb-4">
-                    ITC set-off rule version: <span t-out="doc.itc_utilization_version or 'not computed yet'"/>
+                    ITC set-off rule version: <span t-out="doc.itc_utilization_version or 'not computed yet'"/>.
+                    <t t-if="doc.t31d_igst or doc.t31d_cgst or doc.t31d_sgst or doc.t31d_cess">
+                        Paid in cash includes reverse charge tax from Table 3.1(d), which cannot be paid from ITC.
+                    </t>
                 </p>
 
                 <h5>Interest (Table 5.1)</h5>
