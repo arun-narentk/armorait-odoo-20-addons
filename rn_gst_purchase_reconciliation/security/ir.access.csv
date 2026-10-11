@@ -1,0 +1,5 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_gst_purchase_recon_user,rn.gst.purchase.recon.user,rn.gst.purchase.recon,rn_gst_purchase_reconciliation.group_rn_gst_purchase_recon_user,crud,
+rn_gst_purchase_recon_comp_rule,rn.gst.purchase.recon: multi-company,rn.gst.purchase.recon,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_purchase_recon_line_user,rn.gst.purchase.recon.line.user,rn.gst.purchase.recon.line,rn_gst_purchase_reconciliation.group_rn_gst_purchase_recon_user,crud,
+rn_gst_purchase_recon_line_comp_rule,rn.gst.purchase.recon.line: multi-company,rn.gst.purchase.recon.line,,crud,"[('company_id', 'in', company_ids)]"

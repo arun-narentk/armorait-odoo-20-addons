@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="rn_gst_exception_menu"
+              name="Exceptions"
+              parent="rn_gst_base.menu_rn_gst_root"
+              action="rn_gst_exception_action"
+              sequence="15"
+              groups="rn_gst_exception.group_rn_gst_exception_user"/>
+</odoo>

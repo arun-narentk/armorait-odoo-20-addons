@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rn_gst_purchase_recon_view_list" model="ir.ui.view">
+        <field name="name">rn.gst.purchase.recon.list</field>
+        <field name="model">rn.gst.purchase.recon</field>
+        <field name="arch" type="xml">
+            <list string="Purchase Reconciliations">
+                <field name="name"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="bill_count"/>
+                <field name="error_count"/>
+                <field name="warning_count"/>
+                <field name="open_count"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+                <field name="state" widget="badge" decoration-success="state == 'done'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="rn_gst_purchase_recon_view_form" model="ir.ui.view">
+        <field name="name">rn.gst.purchase.recon.form</field>
+        <field name="model">rn.gst.purchase.recon</field>
+        <field name="arch" type="xml">
+            <form string="Purchase Reconciliation">
+                <header>
+                    <button name="action_run" type="object" string="Check Bills" class="btn-primary"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title"><h1><field name="name" readonly="1"/></h1></div>
+                    <group>
+                        <group>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="price_tolerance"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="bill_count"/>
+                            <field name="error_count"/>
+                            <field name="warning_count"/>
+                            <field name="open_count"/>
+                            <field name="checked_at"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <field name="line_ids">
+                        <list editable="bottom" create="false" decoration-danger="severity == 'error' and state == 'open'"
+                              decoration-warning="severity == 'warning' and state == 'open'" decoration-muted="state != 'open'">
+                            <field name="move_id" readonly="1"/>
+                            <field name="invoice_date" readonly="1" optional="show"/>
+                            <field name="partner_id" readonly="1"/>
+                            <field name="bill_ref" optional="show"/>
+                            <field name="code" readonly="1"/>
+                            <field name="message" readonly="1"/>
+                            <field name="difference" readonly="1" optional="show"/>
+                            <field name="note"/>
+                            <field name="severity" column_invisible="1"/>
+                            <field name="currency_id" column_invisible="1"/>
+                            <field name="state" widget="badge" readonly="1"/>
+                            <button name="action_open_bill" type="object" icon="fa-external-link" title="Open bill"/>
+                            <button name="action_reviewed" type="object" string="Reviewed" invisible="state != 'open'"/>
+                            <button name="action_ignore" type="object" string="Ignore" invisible="state != 'open'"/>
+                            <button name="action_reopen" type="object" string="Reopen" invisible="state == 'open'"/>
+                        </list>
+                    </field>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="rn_gst_purchase_recon_action" model="ir.actions.act_window">
+        <field name="name">Purchase Reconciliation</field>
+        <field name="res_model">rn.gst.purchase.recon</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Check a month of vendor bills</p>
+            <p>Pick the period and click "Check Bills". Each bill is compared with its purchase order and receipt.</p>
+        </field>
+    </record>
+
+    <record id="rn_gst_purchase_recon_line_view_search" model="ir.ui.view">
+        <field name="name">rn.gst.purchase.recon.line.search</field>
+        <field name="model">rn.gst.purchase.recon.line</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="move_id"/>
+                <field name="partner_id"/>
+                <filter string="Open" name="open" domain="[('state', '=', 'open')]"/>
+                <filter string="Errors" name="errors" domain="[('severity', '=', 'error')]"/>
+                <group>
+                    <filter string="Finding" name="group_code" context="{'group_by': 'code'}"/>
+                    <filter string="Supplier" name="group_partner" context="{'group_by': 'partner_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="rn_gst_purchase_recon_line_view_list" model="ir.ui.view">
+        <field name="name">rn.gst.purchase.recon.line.list</field>
+        <field name="model">rn.gst.purchase.recon.line</field>
+        <field name="arch" type="xml">
+            <list string="Purchase Findings" create="false" decoration-danger="severity == 'error' and state == 'open'"
+                  decoration-warning="severity == 'warning' and state == 'open'">
+                <field name="recon_id"/>
+                <field name="move_id"/>
+                <field name="invoice_date"/>
+                <field name="partner_id"/>
+                <field name="code"/>
+                <field name="message"/>
+                <field name="difference" sum="Total"/>
+                <field name="severity" column_invisible="1"/>
+                <field name="currency_id" column_invisible="1"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="rn_gst_purchase_recon_line_action" model="ir.actions.act_window">
+        <field name="name">Purchase Findings</field>
+        <field name="res_model">rn.gst.purchase.recon.line</field>
+        <field name="view_mode">list</field>
+        <field name="context">{'search_default_open': 1}</field>
+    </record>
+</odoo>

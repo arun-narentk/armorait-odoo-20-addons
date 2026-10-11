@@ -1,0 +1,5 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_gst_gstin_check_user,rn.gst.gstin.check.user,rn.gst.gstin.check,rn_gstin_verification.group_rn_gstin_verification_user,cr,
+access_rn_gst_gstin_check_manager,rn.gst.gstin.check.manager,rn.gst.gstin.check,rn_gstin_verification.group_rn_gstin_verification_manager,crud,
+rn_gst_gstin_check_comp_rule,rn.gst.gstin.check: multi-company,rn.gst.gstin.check,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_gstin_manual_check_wizard,rn.gst.gstin.manual.check.wizard,rn.gst.gstin.manual.check.wizard,rn_gstin_verification.group_rn_gstin_verification_user,crud,

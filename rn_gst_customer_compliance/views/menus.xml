@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="rn_gst_customer_profile_menu"
+              name="Customer Risk"
+              parent="rn_gst_base.menu_rn_gst_root"
+              action="rn_gst_customer_profile_action"
+              sequence="51"
+              groups="rn_gst_customer_compliance.group_rn_gst_customer_compliance_user"/>
+</odoo>

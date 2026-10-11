@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rn_gst_lut_view_list" model="ir.ui.view">
+        <field name="name">rn.gst.lut.list</field>
+        <field name="model">rn.gst.lut</field>
+        <field name="arch" type="xml">
+            <list string="LUT Register">
+                <field name="financial_year"/>
+                <field name="gstin"/>
+                <field name="arn"/>
+                <field name="filed_date"/>
+                <field name="valid_from"/>
+                <field name="valid_to"/>
+                <field name="invoice_count" string="Invoices"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="rn_gst_lut_view_form" model="ir.ui.view">
+        <field name="name">rn.gst.lut.form</field>
+        <field name="model">rn.gst.lut</field>
+        <field name="arch" type="xml">
+            <form string="Letter of Undertaking">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_invoices" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                            <field name="invoice_count" widget="statinfo" string="Invoices"/>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                    <group>
+                        <group>
+                            <field name="gstin"/>
+                            <field name="financial_year" placeholder="2025-26"/>
+                            <field name="arn" placeholder="AD2404250012345"/>
+                            <field name="filed_date"/>
+                        </group>
+                        <group>
+                            <field name="valid_from"/>
+                            <field name="valid_to"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                    </group>
+                    <field name="note" placeholder="Notes"/>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="rn_gst_lut_action" model="ir.actions.act_window">
+        <field name="name">LUT Register</field>
+        <field name="res_model">rn.gst.lut</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Record your Letter of Undertaking</p>
+            <p>File form RFD-11 on the GST portal every financial year, then record its ARN here.
+               Exports and SEZ supplies under LUT are checked against it.</p>
+        </field>
+    </record>
+</odoo>

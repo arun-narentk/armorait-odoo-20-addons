@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="rn_gst_purchase_recon_menu_root"
+              name="Purchase Check"
+              parent="rn_gst_base.menu_rn_gst_root"
+              sequence="53"
+              groups="rn_gst_purchase_reconciliation.group_rn_gst_purchase_recon_user"/>
+
+    <menuitem id="rn_gst_purchase_recon_menu"
+              name="Bill Checks"
+              parent="rn_gst_purchase_recon_menu_root"
+              action="rn_gst_purchase_recon_action"
+              sequence="10"/>
+
+    <menuitem id="rn_gst_purchase_recon_line_menu"
+              name="Open Findings"
+              parent="rn_gst_purchase_recon_menu_root"
+              action="rn_gst_purchase_recon_line_action"
+              sequence="20"/>
+</odoo>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rn_gst_credit_note_reason_view_list" model="ir.ui.view">
+        <field name="name">rn.gst.credit.note.reason.list</field>
+        <field name="model">rn.gst.credit.note.reason</field>
+        <field name="arch" type="xml">
+            <list string="Credit Note Reasons" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="gst_credit"/>
+                <field name="requires_original"/>
+                <field name="description" optional="show"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="rn_gst_credit_note_reason_action" model="ir.actions.act_window">
+        <field name="name">Credit Note Reasons</field>
+        <field name="res_model">rn.gst.credit.note.reason</field>
+        <field name="view_mode">list</field>
+    </record>
+</odoo>

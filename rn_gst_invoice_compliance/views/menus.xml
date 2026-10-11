@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="rn_gst_compliance_menu"
+              name="Compliance Board"
+              parent="rn_gst_base.menu_rn_gst_root"
+              action="rn_gst_compliance_action"
+              sequence="14"
+              groups="rn_gst_base.group_rn_gst_user"/>
+</odoo>

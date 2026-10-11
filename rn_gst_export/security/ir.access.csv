@@ -1,0 +1,4 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_gst_lut_invoice,rn.gst.lut.invoice,rn.gst.lut,account.group_account_invoice,r,
+access_rn_gst_lut_manager,rn.gst.lut.manager,rn.gst.lut,rn_gst_export.group_rn_gst_export_manager,crud,
+rn_gst_lut_comp_rule,rn.gst.lut: multi-company,rn.gst.lut,,crud,"[('company_id', 'in', company_ids)]"

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rn_gst_registration_form" model="ir.ui.view">
+        <field name="name">rn.gst.registration.form.inherit.rn.gst.calendar</field>
+        <field name="model">rn.gst.registration</field>
+        <field name="inherit_id" ref="rn_gst_base.view_rn_gst_registration_form"/>
+        <field name="arch" type="xml">
+            <field name="registration_type" position="after">
+                <field name="rn_filing_frequency"/>
+                <field name="rn_gstr9c_required"/>
+                <field name="rn_return_user_id" widget="many2one_avatar_user"/>
+            </field>
+        </field>
+    </record>
+</odoo>

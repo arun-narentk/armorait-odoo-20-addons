@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rn_gst_gstin_check_view_list" model="ir.ui.view">
+        <field name="name">rn.gst.gstin.check.list</field>
+        <field name="model">rn.gst.gstin.check</field>
+        <field name="arch" type="xml">
+            <list string="GSTIN Checks" create="false">
+                <field name="check_date"/>
+                <field name="partner_id"/>
+                <field name="gstin"/>
+                <field name="method"/>
+                <field name="portal_status" optional="show"/>
+                <field name="state_mismatch" optional="show"/>
+                <field name="name_mismatch" optional="show"/>
+                <field name="user_id" widget="many2one_avatar_user" optional="show"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+                <field name="result" widget="badge" decoration-success="result == 'active'"
+                       decoration-info="result == 'format_ok'" decoration-danger="result in ('inactive', 'format_invalid')"
+                       decoration-warning="result == 'unavailable'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="rn_gst_gstin_check_view_form" model="ir.ui.view">
+        <field name="name">rn.gst.gstin.check.form</field>
+        <field name="model">rn.gst.gstin.check</field>
+        <field name="arch" type="xml">
+            <form string="GSTIN Check" create="false" edit="false">
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="gstin"/></h1>
+                        <field name="result" widget="badge" decoration-success="result == 'active'"
+                               decoration-info="result == 'format_ok'" decoration-danger="result in ('inactive', 'format_invalid')"
+                               decoration-warning="result == 'unavailable'"/>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="method"/>
+                            <field name="check_date"/>
+                            <field name="user_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="portal_status"/>
+                            <field name="effective_date"/>
+                            <field name="legal_name"/>
+                            <field name="trade_name"/>
+                            <field name="state_mismatch"/>
+                            <field name="name_mismatch"/>
+                            <field name="attachment_id" widget="many2one_binary" invisible="not attachment_id"/>
+                        </group>
+                    </group>
+                    <field name="message" placeholder="No remarks"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="rn_gst_gstin_check_view_search" model="ir.ui.view">
+        <field name="name">rn.gst.gstin.check.search</field>
+        <field name="model">rn.gst.gstin.check</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="partner_id"/>
+                <field name="gstin"/>
+                <filter string="Active" name="active_result" domain="[('result', '=', 'active')]"/>
+                <filter string="Not Active" name="inactive" domain="[('result', '=', 'inactive')]"/>
+                <filter string="Structure Invalid" name="format_invalid" domain="[('result', '=', 'format_invalid')]"/>
+                <filter string="Check Unavailable" name="unavailable" domain="[('result', '=', 'unavailable')]"/>
+                <separator/>
+                <filter string="State Mismatch" name="state_mismatch" domain="[('state_mismatch', '=', True)]"/>
+                <filter string="Name Mismatch" name="name_mismatch" domain="[('name_mismatch', '=', True)]"/>
+                <group>
+                    <filter string="Partner" name="group_partner" context="{'group_by': 'partner_id'}"/>
+                    <filter string="Method" name="group_method" context="{'group_by': 'method'}"/>
+                    <filter string="Result" name="group_result" context="{'group_by': 'result'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="rn_gst_gstin_check_action" model="ir.actions.act_window">
+        <field name="name">GSTIN Check History</field>
+        <field name="res_model">rn.gst.gstin.check</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No GSTIN checks yet</p>
+            <p>Open a customer or vendor and click "Check GSTIN", or wait for the daily structure check.</p>
+        </field>
+    </record>
+</odoo>

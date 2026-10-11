@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rn_gst_exception_view_list" model="ir.ui.view">
+        <field name="name">rn.gst.exception.list</field>
+        <field name="model">rn.gst.exception</field>
+        <field name="arch" type="xml">
+            <list string="GST Exceptions" multi_edit="1"
+                  decoration-danger="is_overdue" decoration-muted="state in ('resolved', 'ignored')">
+                <header>
+                    <button name="action_collect" type="object" string="Refresh from GST Apps" display="always"
+                            class="btn-primary"/>
+                    <button name="action_assign_to_me" type="object" string="Assign to Me"/>
+                    <button name="action_resolve" type="object" string="Resolve"/>
+                </header>
+                <field name="priority" widget="priority" optional="show" nolabel="1"/>
+                <field name="name" optional="hide"/>
+                <field name="title"/>
+                <field name="source" optional="show"/>
+                <field name="category" optional="show"/>
+                <field name="move_id" optional="show"/>
+                <field name="partner_id" optional="show"/>
+                <field name="company_id" groups="base.group_multi_company" optional="show"/>
+                <field name="gstin" optional="hide"/>
+                <field name="user_id" widget="many2one_avatar_user" optional="show"/>
+                <field name="date_deadline" optional="show"/>
+                <field name="last_seen" optional="hide"/>
+                <field name="seen_count" optional="hide"/>
+                <field name="is_overdue" column_invisible="1"/>
+                <field name="severity" widget="badge" decoration-danger="severity == 'error'"
+                       decoration-warning="severity == 'warning'" decoration-info="severity == 'info'"/>
+                <field name="state" widget="badge" decoration-info="state == 'new'"
+                       decoration-warning="state in ('in_progress', 'waiting')" decoration-success="state == 'resolved'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="rn_gst_exception_view_form" model="ir.ui.view">
+        <field name="name">rn.gst.exception.form</field>
+        <field name="model">rn.gst.exception</field>
+        <field name="arch" type="xml">
+            <form string="GST Exception">
+                <header>
+                    <button name="action_assign_to_me" type="object" string="Assign to Me" class="btn-primary"
+                            invisible="not is_open or user_id"/>
+                    <button name="action_start" type="object" string="Start" invisible="state not in ('new', 'waiting')"/>
+                    <button name="action_wait" type="object" string="Waiting" invisible="state != 'in_progress'"
+                            title="Waiting on someone else, for example the supplier."/>
+                    <button name="action_resolve" type="object" string="Resolve" class="btn-primary"
+                            invisible="not is_open or not user_id"/>
+                    <button name="action_ignore" type="object" string="Ignore" invisible="not is_open"
+                            title="Accept the problem as it is. A resolution note is needed."/>
+                    <button name="action_reopen" type="object" string="Reopen" invisible="is_open"/>
+                    <field name="state" widget="statusbar" statusbar_visible="new,in_progress,resolved"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_document" type="object" class="oe_stat_button" icon="fa-file-text-o"
+                                string="Open Document" invisible="not res_id"/>
+                    </div>
+                    <widget name="web_ribbon" title="Overdue" bg_color="text-bg-danger" invisible="not is_overdue"/>
+                    <div class="oe_title">
+                        <label for="title"/>
+                        <h1><field name="title" placeholder="e.g. Supplier GSTIN wrong on bill BILL/2025/0042"/></h1>
+                        <field name="name" readonly="1"/>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="severity"/>
+                            <field name="priority" widget="priority"/>
+                            <field name="category"/>
+                            <field name="source"/>
+                            <field name="move_id"/>
+                            <field name="partner_id"/>
+                        </group>
+                        <group>
+                            <field name="user_id" widget="many2one_avatar_user"/>
+                            <field name="date_deadline"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="gstin"/>
+                            <field name="is_open" invisible="1"/>
+                            <field name="is_overdue" invisible="1"/>
+                            <field name="res_model" invisible="1"/>
+                            <field name="res_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Details" name="details">
+                            <group>
+                                <field name="message" nolabel="1" colspan="2" placeholder="What is wrong"/>
+                            </group>
+                            <group string="How to Fix" invisible="not hint">
+                                <field name="hint" nolabel="1" colspan="2"/>
+                            </group>
+                        </page>
+                        <page string="Resolution" name="resolution">
+                            <group>
+                                <field name="resolution_note" placeholder="What was done, or why the problem is accepted"/>
+                                <field name="resolved_by_id"/>
+                                <field name="resolved_date"/>
+                                <field name="auto_resolved"/>
+                            </group>
+                        </page>
+                        <page string="Tracking" name="tracking" invisible="source == 'manual'">
+                            <group>
+                                <field name="first_seen"/>
+                                <field name="last_seen"/>
+                                <field name="seen_count"/>
+                                <field name="fingerprint"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="rn_gst_exception_view_kanban" model="ir.ui.view">
+        <field name="name">rn.gst.exception.kanban</field>
+        <field name="model">rn.gst.exception</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state" class="o_kanban_small_column" quick_create="false">
+                <field name="is_overdue"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex justify-content-between">
+                            <field name="title" class="fw-bold"/>
+                            <field name="priority" widget="priority"/>
+                        </div>
+                        <field name="move_id" class="text-muted"/>
+                        <field name="partner_id" class="text-muted"/>
+                        <footer>
+                            <field name="severity" widget="badge" decoration-danger="severity == 'error'"
+                                   decoration-warning="severity == 'warning'"/>
+                            <field name="date_deadline" t-att-class="record.is_overdue.raw_value ? 'text-danger' : ''"/>
+                            <field name="activity_ids" widget="kanban_activity"/>
+                            <field name="user_id" widget="many2one_avatar_user" class="ms-auto"/>
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="rn_gst_exception_view_pivot" model="ir.ui.view">
+        <field name="name">rn.gst.exception.pivot</field>
+        <field name="model">rn.gst.exception</field>
+        <field name="arch" type="xml">
+            <pivot string="GST Exceptions">
+                <field name="source" type="row"/>
+                <field name="severity" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="rn_gst_exception_view_graph" model="ir.ui.view">
+        <field name="name">rn.gst.exception.graph</field>
+        <field name="model">rn.gst.exception</field>
+        <field name="arch" type="xml">
+            <graph string="GST Exceptions" type="bar" stacked="1">
+                <field name="first_seen" interval="month"/>
+                <field name="severity"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="rn_gst_exception_view_search" model="ir.ui.view">
+        <field name="name">rn.gst.exception.search</field>
+        <field name="model">rn.gst.exception</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="title"/>
+                <field name="name"/>
+                <field name="move_id"/>
+                <field name="partner_id"/>
+                <field name="user_id"/>
+                <field name="gstin"/>
+                <filter string="My Exceptions" name="mine" domain="[('user_id', '=', uid)]"/>
+                <filter string="Unassigned" name="unassigned" domain="[('user_id', '=', False)]"/>
+                <separator/>
+                <filter string="Open" name="open" domain="[('is_open', '=', True)]"/>
+                <filter string="Overdue" name="overdue" domain="[('is_overdue', '=', True)]"/>
+                <filter string="Closed" name="closed" domain="[('is_open', '=', False)]"/>
+                <separator/>
+                <filter string="Errors" name="errors" domain="[('severity', '=', 'error')]"/>
+                <filter string="Warnings" name="warnings" domain="[('severity', '=', 'warning')]"/>
+                <separator/>
+                <filter string="Sales" name="sales" domain="[('category', '=', 'sales')]"/>
+                <filter string="Purchases" name="purchases" domain="[('category', '=', 'purchase')]"/>
+                <filter string="Returns" name="returns" domain="[('category', '=', 'return')]"/>
+                <group>
+                    <filter string="Source" name="group_source" context="{'group_by': 'source'}"/>
+                    <filter string="Owner" name="group_user" context="{'group_by': 'user_id'}"/>
+                    <filter string="Status" name="group_state" context="{'group_by': 'state'}"/>
+                    <filter string="Partner" name="group_partner" context="{'group_by': 'partner_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="rn_gst_exception_action" model="ir.actions.act_window">
+        <field name="name">GST Exceptions</field>
+        <field name="res_model">rn.gst.exception</field>
+        <field name="view_mode">list,kanban,form,pivot,graph</field>
+        <field name="context">{'search_default_open': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No open GST problems</p>
+            <p>Click "Refresh from GST Apps" to pull problems found by the invoice validator, GSTR-2B
+               reconciliation and GSTR-1 validation. You can also add a problem by hand.</p>
+        </field>
+    </record>
+</odoo>

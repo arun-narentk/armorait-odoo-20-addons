@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rn_gst_compliance_review_wizard_view_form" model="ir.ui.view">
+        <field name="name">rn.gst.compliance.review.wizard.form</field>
+        <field name="model">rn.gst.compliance.review.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Approve GST Readiness">
+                <div class="alert alert-danger" role="alert" invisible="not blocked_count">
+                    <field name="blocked_count" class="oe_inline"/> blocked invoice(s): only a compliance manager
+                    can approve them, with a note.
+                </div>
+                <p class="text-muted">
+                    Approving records that you looked at the listed problems and accept them. If a new problem
+                    shows up later, the invoice goes back to review.
+                </p>
+                <field name="move_ids" readonly="1">
+                    <list>
+                        <field name="name"/>
+                        <field name="partner_id"/>
+                        <field name="rn_gst_readiness" widget="badge"/>
+                        <field name="rn_gst_readiness_reasons"/>
+                    </list>
+                </field>
+                <field name="review_count" invisible="1"/>
+                <field name="note" placeholder="Why these problems are accepted"/>
+                <footer>
+                    <button name="action_approve" type="object" string="Approve" class="btn-primary"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

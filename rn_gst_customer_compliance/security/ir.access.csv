@@ -1,0 +1,5 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_gst_customer_profile_user,rn.gst.customer.profile.user,rn.gst.customer.profile,rn_gst_customer_compliance.group_rn_gst_customer_compliance_user,crud,
+rn_gst_customer_profile_comp_rule,rn.gst.customer.profile: multi-company,rn.gst.customer.profile,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_customer_finding_user,rn.gst.customer.finding.user,rn.gst.customer.finding,rn_gst_customer_compliance.group_rn_gst_customer_compliance_user,crud,
+rn_gst_customer_finding_comp_rule,rn.gst.customer.finding: multi-company,rn.gst.customer.finding,,crud,"[('company_id', 'in', company_ids)]"

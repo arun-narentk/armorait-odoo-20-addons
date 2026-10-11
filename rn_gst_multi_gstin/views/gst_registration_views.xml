@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rn_gst_registration_form" model="ir.ui.view">
+        <field name="name">rn.gst.registration.form.inherit.rn.gst.multi.gstin</field>
+        <field name="model">rn.gst.registration</field>
+        <field name="inherit_id" ref="rn_gst_base.view_rn_gst_registration_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/div[hasclass('oe_title')]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button name="action_view_journals" type="object" class="oe_stat_button" icon="fa-book">
+                        <field name="journal_count" widget="statinfo" string="Journals"/>
+                    </button>
+                    <button name="action_view_invoices" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                        <field name="invoice_count" widget="statinfo" string="Invoices"/>
+                    </button>
+                    <button name="action_view_bills" type="object" class="oe_stat_button" icon="fa-shopping-cart">
+                        <field name="bill_count" widget="statinfo" string="Bills"/>
+                    </button>
+                    <button name="action_view_mismatches" type="object" class="oe_stat_button text-danger"
+                            icon="fa-exclamation-triangle" invisible="not mismatch_count">
+                        <field name="mismatch_count" widget="statinfo" string="Tax Type Warnings"/>
+                    </button>
+                </div>
+            </xpath>
+            <field name="registration_type" position="after">
+                <field name="is_default"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_rn_gst_registration_list" model="ir.ui.view">
+        <field name="name">rn.gst.registration.list.inherit.rn.gst.multi.gstin</field>
+        <field name="model">rn.gst.registration</field>
+        <field name="inherit_id" ref="rn_gst_base.view_rn_gst_registration_list"/>
+        <field name="arch" type="xml">
+            <field name="registration_type" position="after">
+                <field name="is_default" optional="show"/>
+            </field>
+        </field>
+    </record>
+</odoo>

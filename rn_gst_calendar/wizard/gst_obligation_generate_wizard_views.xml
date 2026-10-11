@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rn_gst_obligation_generate_wizard_view_form" model="ir.ui.view">
+        <field name="name">rn.gst.obligation.generate.wizard.form</field>
+        <field name="model">rn.gst.obligation.generate.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Generate GST Returns Due">
+                <p class="text-muted">
+                    Adds every return due in the financial year for the GSTINs below, using each GSTIN's
+                    registration type and monthly or quarterly filing. Returns already in the calendar are kept.
+                </p>
+                <group>
+                    <field name="financial_year" placeholder="2025-26"/>
+                    <field name="registration_ids" widget="many2many_tags"/>
+                </group>
+                <footer>
+                    <button name="action_generate" type="object" string="Generate" class="btn-primary"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

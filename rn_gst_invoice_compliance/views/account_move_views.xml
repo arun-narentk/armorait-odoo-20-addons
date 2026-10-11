@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="name">account.move.form.inherit.rn.gst.invoice.compliance</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="GST Readiness" name="rn_gst_readiness" invisible="not rn_gst_readiness"
+                      groups="rn_gst_base.group_rn_gst_user">
+                    <group>
+                        <group>
+                            <field name="rn_gst_readiness" widget="badge"
+                                   decoration-success="rn_gst_readiness in ('ready', 'approved')"
+                                   decoration-warning="rn_gst_readiness == 'review'"
+                                   decoration-danger="rn_gst_readiness == 'blocked'"
+                                   decoration-muted="rn_gst_readiness == 'not_checked'"/>
+                            <field name="rn_gst_reviewer_id" invisible="not rn_gst_reviewer_id"/>
+                            <field name="rn_gst_review_date" invisible="not rn_gst_reviewer_id"/>
+                        </group>
+                        <group>
+                            <button name="action_rn_gst_approve" type="object" string="Approve" class="btn-secondary"
+                                    invisible="rn_gst_readiness not in ('blocked', 'review', 'not_checked')"
+                                    groups="rn_gst_invoice_compliance.group_rn_gst_compliance_reviewer"/>
+                            <button name="action_rn_gst_reset_review" type="object" string="Withdraw Approval"
+                                    class="btn-link" invisible="not rn_gst_approved_reasons"
+                                    groups="rn_gst_invoice_compliance.group_rn_gst_compliance_reviewer"/>
+                        </group>
+                    </group>
+                    <group string="Problems found" invisible="not rn_gst_readiness_reasons">
+                        <field name="rn_gst_readiness_reasons" nolabel="1" colspan="2"/>
+                    </group>
+                    <group string="Review note" invisible="not rn_gst_review_note">
+                        <field name="rn_gst_review_note" nolabel="1" colspan="2"/>
+                        <field name="rn_gst_approved_reasons" invisible="1"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_account_invoice_filter" model="ir.ui.view">
+        <field name="name">account.invoice.select.inherit.rn.gst.invoice.compliance</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='late']" position="after">
+                <separator/>
+                <filter string="GST Blocked" name="rn_gst_blocked" domain="[('rn_gst_readiness', '=', 'blocked')]"/>
+                <filter string="GST Needs Review" name="rn_gst_review" domain="[('rn_gst_readiness', 'in', ('review', 'not_checked'))]"/>
+                <filter string="GST Ready" name="rn_gst_ready" domain="[('rn_gst_readiness', 'in', ('ready', 'approved'))]"/>
+            </xpath>
+            <xpath expr="//filter[@name='duedate']" position="after">
+                <filter string="GST Readiness" name="group_rn_gst_readiness" context="{'group_by': 'rn_gst_readiness'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="rn_gst_compliance_view_list" model="ir.ui.view">
+        <field name="name">account.move.list.rn.gst.compliance</field>
+        <field name="model">account.move</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <list string="GST Compliance" create="false" decoration-danger="rn_gst_readiness == 'blocked'"
+                  decoration-warning="rn_gst_readiness == 'review'">
+                <header>
+                    <button name="action_rn_gst_validate_selected" type="object" string="Validate GST"/>
+                    <button name="action_rn_gst_approve" type="object" string="Approve"
+                            groups="rn_gst_invoice_compliance.group_rn_gst_compliance_reviewer"/>
+                </header>
+                <field name="name"/>
+                <field name="move_type" optional="show"/>
+                <field name="invoice_date"/>
+                <field name="partner_id"/>
+                <field name="amount_total_signed" string="Total" sum="Total" optional="show"/>
+                <field name="rn_gst_validation_score" optional="show"/>
+                <field name="rn_gst_readiness_reasons" optional="show"/>
+                <field name="rn_gst_reviewer_id" optional="hide"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+                <field name="currency_id" column_invisible="1"/>
+                <field name="state" widget="badge" optional="hide"/>
+                <field name="rn_gst_readiness" widget="badge"
+                       decoration-success="rn_gst_readiness in ('ready', 'approved')"
+                       decoration-warning="rn_gst_readiness == 'review'"
+                       decoration-danger="rn_gst_readiness == 'blocked'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="rn_gst_compliance_view_kanban" model="ir.ui.view">
+        <field name="name">account.move.kanban.rn.gst.compliance</field>
+        <field name="model">account.move</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="rn_gst_readiness" create="false" quick_create="false" group_create="false"
+                    group_delete="false" records_draggable="false">
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex justify-content-between">
+                            <field name="name" class="fw-bold"/>
+                            <field name="invoice_date"/>
+                        </div>
+                        <field name="partner_id" class="text-muted"/>
+                        <field name="rn_gst_readiness_reasons" class="small"/>
+                        <footer>
+                            <field name="amount_total_signed"/>
+                            <field name="rn_gst_validation_score" class="ms-auto"/>
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="rn_gst_compliance_view_pivot" model="ir.ui.view">
+        <field name="name">account.move.pivot.rn.gst.compliance</field>
+        <field name="model">account.move</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <pivot string="GST Compliance" disable_linking="0">
+                <field name="invoice_date" interval="month" type="row"/>
+                <field name="rn_gst_readiness" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="rn_gst_compliance_action" model="ir.actions.act_window">
+        <field name="name">GST Compliance Board</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">list,kanban,pivot,form</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('rn_gst_compliance_view_list')}),
+            (0, 0, {'view_mode': 'kanban', 'view_id': ref('rn_gst_compliance_view_kanban')}),
+            (0, 0, {'view_mode': 'pivot', 'view_id': ref('rn_gst_compliance_view_pivot')})]"/>
+        <field name="domain">[('rn_gst_readiness', '!=', False)]</field>
+        <field name="context">{'create': False, 'search_default_rn_gst_blocked': 1, 'search_default_rn_gst_review': 1}</field>
+        <field name="search_view_id" ref="account.view_account_invoice_filter"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No blocked or unreviewed invoices</p>
+            <p>Every invoice gets a GST readiness status from the validator and the other GST checks.</p>
+        </field>
+    </record>
+</odoo>

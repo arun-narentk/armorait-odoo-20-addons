@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rn_gst_gstin_manual_check_wizard_view_form" model="ir.ui.view">
+        <field name="name">rn.gst.gstin.manual.check.wizard.form</field>
+        <field name="model">rn.gst.gstin.manual.check.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Record GST Portal Check">
+                <p class="text-muted">
+                    Look up the GSTIN on the GST portal (Search Taxpayer) and record what you see.
+                    Attach a screenshot as proof.
+                </p>
+                <group>
+                    <group>
+                        <field name="partner_id"/>
+                        <field name="gstin"/>
+                        <field name="result" widget="radio"/>
+                        <field name="portal_status"/>
+                        <field name="effective_date"/>
+                    </group>
+                    <group>
+                        <field name="legal_name"/>
+                        <field name="trade_name"/>
+                        <field name="proof" filename="proof_name"/>
+                        <field name="proof_name" invisible="1"/>
+                    </group>
+                </group>
+                <field name="note" placeholder="Remarks"/>
+                <footer>
+                    <button name="action_save" type="object" string="Save Check" class="btn-primary"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

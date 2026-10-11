@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="reason_sales_return" model="rn.gst.credit.note.reason">
+        <field name="name">Sales return</field>
+        <field name="code">RETURN</field>
+        <field name="sequence">10</field>
+        <field name="description">Goods returned by the customer.</field>
+    </record>
+    <record id="reason_price_reduction" model="rn.gst.credit.note.reason">
+        <field name="name">Price reduction / rate difference</field>
+        <field name="code">PRICE</field>
+        <field name="sequence">20</field>
+        <field name="description">Taxable value charged was more than the agreed value.</field>
+    </record>
+    <record id="reason_discount_agreed" model="rn.gst.credit.note.reason">
+        <field name="name">Discount agreed before the sale</field>
+        <field name="code">DISCOUNT</field>
+        <field name="sequence">30</field>
+        <field name="description">Post-sale discount agreed in the contract before the supply and linked to the invoice (section 15(3)(b)).</field>
+    </record>
+    <record id="reason_deficiency" model="rn.gst.credit.note.reason">
+        <field name="name">Deficiency in service or goods</field>
+        <field name="code">DEFICIENCY</field>
+        <field name="sequence">40</field>
+        <field name="description">Goods or services found deficient.</field>
+    </record>
+    <record id="reason_wrong_invoice" model="rn.gst.credit.note.reason">
+        <field name="name">Wrong invoice / tax charged in excess</field>
+        <field name="code">EXCESS</field>
+        <field name="sequence">50</field>
+        <field name="description">Tax charged was more than payable, or the invoice was raised in error.</field>
+    </record>
+    <record id="reason_financial" model="rn.gst.credit.note.reason">
+        <field name="name">Financial credit note (no GST)</field>
+        <field name="code">FINANCIAL</field>
+        <field name="sequence">60</field>
+        <field name="gst_credit" eval="False"/>
+        <field name="requires_original" eval="False"/>
+        <field name="description">Commercial discount not agreed before the sale. The supplier's GST liability does not change.</field>
+    </record>
+</odoo>

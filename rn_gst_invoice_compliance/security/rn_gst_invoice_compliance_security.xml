@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_groups_privilege_rn_gst_invoice_compliance" model="res.groups.privilege">
+        <field name="name">Invoice Compliance</field>
+        <field name="category_id" ref="rn_gst_base.module_category_rn_gst"/>
+    </record>
+
+    <record id="group_rn_gst_compliance_reviewer" model="res.groups">
+        <field name="name">Compliance Reviewer</field>
+        <field name="privilege_id" ref="res_groups_privilege_rn_gst_invoice_compliance"/>
+        <field name="implied_ids" eval="[(4, ref('rn_gst_base.group_rn_gst_user'))]"/>
+    </record>
+
+    <record id="group_rn_gst_compliance_manager" model="res.groups">
+        <field name="name">Compliance Manager</field>
+        <field name="privilege_id" ref="res_groups_privilege_rn_gst_invoice_compliance"/>
+        <field name="implied_ids" eval="[(4, ref('group_rn_gst_compliance_reviewer')), (4, ref('rn_gst_base.group_rn_gst_manager'))]"/>
+        <field name="user_ids" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    </record>
+</odoo>

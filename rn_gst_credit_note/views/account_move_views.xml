@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="name">account.move.form.inherit.rn.gst.credit.note</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <div class="alert alert-danger mb-0" role="alert" invisible="rn_cn_check_state != 'error'">
+                    <strong>GST credit note check</strong>
+                    <field name="rn_cn_check_messages" readonly="1"/>
+                </div>
+                <div class="alert alert-warning mb-0" role="alert" invisible="rn_cn_check_state != 'warning'">
+                    <strong>GST credit note check</strong>
+                    <field name="rn_cn_check_messages" readonly="1"/>
+                </div>
+                <field name="rn_cn_check_state" invisible="1"/>
+            </xpath>
+            <field name="l10n_in_gst_treatment" position="after">
+                <field name="rn_cn_reason_id" options="{'no_create': True}"
+                       invisible="move_type not in ('out_refund', 'in_refund')" readonly="state != 'draft'"/>
+                <field name="reversed_entry_id" string="Original Bill" readonly="state != 'draft'"
+                       invisible="move_type != 'in_refund' or country_code != 'IN'"
+                       domain="[('move_type', '=', 'in_invoice'), ('commercial_partner_id', '=', commercial_partner_id), ('state', '=', 'posted')]"/>
+                <field name="rn_cn_deadline" invisible="not rn_cn_deadline"/>
+                <field name="rn_cn_credited_amount" invisible="move_type not in ('out_invoice', 'in_invoice') or not rn_cn_credited_amount"/>
+                <field name="rn_cn_remaining_amount" invisible="move_type not in ('out_invoice', 'in_invoice') or not rn_cn_credited_amount"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_account_invoice_filter" model="ir.ui.view">
+        <field name="name">account.invoice.select.inherit.rn.gst.credit.note</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='late']" position="after">
+                <separator/>
+                <filter string="Credit Note GST Errors" name="rn_cn_errors" domain="[('rn_cn_check_state', '=', 'error')]"/>
+                <filter string="Credit Note GST Warnings" name="rn_cn_warnings" domain="[('rn_cn_check_state', '=', 'warning')]"/>
+            </xpath>
+            <xpath expr="//filter[@name='duedate']" position="after">
+                <filter string="Credit Note Reason" name="group_rn_cn_reason" context="{'group_by': 'rn_cn_reason_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="rn_gst_credit_note_view_list" model="ir.ui.view">
+        <field name="name">account.move.list.rn.gst.credit.note</field>
+        <field name="model">account.move</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <list string="Credit Note Register" create="false" decoration-danger="rn_cn_check_state == 'error'"
+                  decoration-warning="rn_cn_check_state == 'warning'" decoration-muted="state == 'cancel'">
+                <field name="name"/>
+                <field name="move_type" optional="show"/>
+                <field name="invoice_date"/>
+                <field name="partner_id"/>
+                <field name="reversed_entry_id" string="Original"/>
+                <field name="rn_cn_reason_id"/>
+                <field name="rn_cn_deadline" optional="show"/>
+                <field name="amount_untaxed" sum="Total" optional="show"/>
+                <field name="amount_tax" sum="Total" optional="show"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+                <field name="currency_id" column_invisible="1"/>
+                <field name="state" widget="badge" optional="show"/>
+                <field name="rn_cn_check_state" widget="badge" decoration-success="rn_cn_check_state == 'ok'"
+                       decoration-warning="rn_cn_check_state == 'warning'" decoration-danger="rn_cn_check_state == 'error'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="rn_gst_credit_note_action" model="ir.actions.act_window">
+        <field name="name">Credit Note Register</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="rn_gst_credit_note_view_list"/>
+        <field name="domain">[('move_type', 'in', ('out_refund', 'in_refund'))]</field>
+        <field name="context">{'create': False}</field>
+        <field name="search_view_id" ref="account.view_account_invoice_filter"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No credit notes</p>
+            <p>Make a credit note from an invoice with "Credit Note"; it is checked here against GST rules.</p>
+        </field>
+    </record>
+</odoo>

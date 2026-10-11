@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="name">account.move.form.inherit.rn.gst.einvoice.monitor</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@id='other_tab']/group[@id='other_tab_group']" position="after">
+                <group string="E-Invoice (IRN)" name="rn_einv" invisible="not rn_einv_state">
+                    <group>
+                        <field name="rn_einv_state" widget="badge"
+                               decoration-success="rn_einv_state == 'generated'" decoration-info="rn_einv_state == 'pending'"
+                               decoration-danger="rn_einv_state in ('failed', 'cancel_needed')"/>
+                        <field name="rn_einv_irn"/>
+                        <field name="rn_einv_ack_no"/>
+                        <field name="rn_einv_ack_date"/>
+                    </group>
+                    <group>
+                        <field name="rn_einv_cancel_until" invisible="not rn_einv_cancel_until"/>
+                        <field name="rn_einv_cancel_open" invisible="not rn_einv_cancel_until"/>
+                        <field name="rn_einv_report_by" invisible="not rn_einv_report_by"/>
+                        <field name="rn_einv_days_pending" invisible="not rn_einv_days_pending"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="rn_einv_monitor_view_list" model="ir.ui.view">
+        <field name="name">account.move.list.rn.einv.monitor</field>
+        <field name="model">account.move</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <list string="E-Invoice Monitor" create="false" decoration-danger="rn_einv_state in ('failed', 'cancel_needed') or rn_einv_report_late"
+                  decoration-info="rn_einv_state == 'pending'" decoration-muted="rn_einv_state == 'cancelled'">
+                <header>
+                    <button name="action_rn_einv_send_again" type="object" string="Send Again"/>
+                </header>
+                <field name="name"/>
+                <field name="invoice_date"/>
+                <field name="partner_id"/>
+                <field name="amount_total_signed" string="Total" sum="Total" optional="show"/>
+                <field name="rn_einv_ack_no" optional="show"/>
+                <field name="rn_einv_ack_date" optional="show"/>
+                <field name="rn_einv_cancel_until" optional="hide"/>
+                <field name="rn_einv_report_by" optional="hide"/>
+                <field name="rn_einv_days_pending" optional="show"/>
+                <field name="rn_einv_report_late" column_invisible="1"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+                <field name="currency_id" column_invisible="1"/>
+                <field name="state" widget="badge" optional="hide"/>
+                <field name="rn_einv_state" widget="badge"
+                       decoration-success="rn_einv_state == 'generated'" decoration-info="rn_einv_state == 'pending'"
+                       decoration-danger="rn_einv_state in ('failed', 'cancel_needed')"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="rn_einv_monitor_view_kanban" model="ir.ui.view">
+        <field name="name">account.move.kanban.rn.einv.monitor</field>
+        <field name="model">account.move</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="rn_einv_state" create="false" quick_create="false" group_create="false"
+                    records_draggable="false">
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex justify-content-between">
+                            <field name="name" class="fw-bold"/>
+                            <field name="invoice_date"/>
+                        </div>
+                        <field name="partner_id" class="text-muted"/>
+                        <footer>
+                            <field name="amount_total_signed"/>
+                            <field name="rn_einv_days_pending" class="ms-auto"/>
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="rn_einv_monitor_view_pivot" model="ir.ui.view">
+        <field name="name">account.move.pivot.rn.einv.monitor</field>
+        <field name="model">account.move</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <pivot string="E-Invoice Monitor">
+                <field name="invoice_date" interval="month" type="row"/>
+                <field name="rn_einv_state" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="rn_einv_monitor_view_search" model="ir.ui.view">
+        <field name="name">account.move.search.rn.einv.monitor</field>
+        <field name="model">account.move</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="rn_einv_irn"/>
+                <field name="rn_einv_ack_no"/>
+                <filter string="Pending" name="pending" domain="[('rn_einv_state', '=', 'pending')]"/>
+                <filter string="Failed" name="failed" domain="[('rn_einv_state', '=', 'failed')]"/>
+                <filter string="Cancel IRN" name="cancel_needed" domain="[('rn_einv_state', '=', 'cancel_needed')]"/>
+                <filter string="IRN Generated" name="generated" domain="[('rn_einv_state', '=', 'generated')]"/>
+                <filter string="Cancelled" name="cancelled" domain="[('rn_einv_state', '=', 'cancelled')]"/>
+                <separator/>
+                <filter string="Cancel Window Open" name="cancel_open" domain="[('rn_einv_cancel_open', '=', True)]"/>
+                <filter string="Past 30 Days" name="report_late" domain="[('rn_einv_report_late', '=', True)]"/>
+                <separator/>
+                <filter string="Invoice Date" name="invoice_date" date="invoice_date"/>
+                <group>
+                    <filter string="E-Invoice Status" name="group_state" context="{'group_by': 'rn_einv_state'}"/>
+                    <filter string="Customer" name="group_partner" context="{'group_by': 'partner_id'}"/>
+                    <filter string="Invoice Month" name="group_month" context="{'group_by': 'invoice_date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="rn_einv_monitor_action" model="ir.actions.act_window">
+        <field name="name">E-Invoice Monitor</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">list,kanban,pivot,form</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('rn_einv_monitor_view_list')}),
+            (0, 0, {'view_mode': 'kanban', 'view_id': ref('rn_einv_monitor_view_kanban')}),
+            (0, 0, {'view_mode': 'pivot', 'view_id': ref('rn_einv_monitor_view_pivot')})]"/>
+        <field name="search_view_id" ref="rn_einv_monitor_view_search"/>
+        <field name="domain">[('rn_einv_state', '!=', False)]</field>
+        <field name="context">{'create': False, 'search_default_pending': 1, 'search_default_failed': 1, 'search_default_cancel_needed': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No e-invoice waiting</p>
+            <p>Invoices that need an IRN show here until the IRP accepts them. Turn on Indian e-invoicing
+               in the Accounting settings to use this.</p>
+        </field>
+    </record>
+</odoo>

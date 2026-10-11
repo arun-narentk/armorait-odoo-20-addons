@@ -1,0 +1,2 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_gst_compliance_review_wizard,rn.gst.compliance.review.wizard,rn.gst.compliance.review.wizard,rn_gst_invoice_compliance.group_rn_gst_compliance_reviewer,crud,

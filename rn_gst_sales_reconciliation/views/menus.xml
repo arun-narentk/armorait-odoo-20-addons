@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="rn_gst_sales_recon_menu"
+              name="Sales Check"
+              parent="rn_gst_base.menu_rn_gst_root"
+              action="rn_gst_sales_recon_action"
+              sequence="54"
+              groups="rn_gst_sales_reconciliation.group_rn_gst_sales_recon_user"/>
+</odoo>

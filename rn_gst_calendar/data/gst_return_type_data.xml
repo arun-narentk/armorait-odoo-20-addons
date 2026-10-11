@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="return_type_gstr1" model="rn.gst.return.type">
+        <field name="name">GSTR-1</field>
+        <field name="code">GSTR1</field>
+        <field name="sequence">10</field>
+        <field name="color">1</field>
+        <field name="description">Outward supplies.</field>
+    </record>
+    <record id="return_type_gstr3b" model="rn.gst.return.type">
+        <field name="name">GSTR-3B</field>
+        <field name="code">GSTR3B</field>
+        <field name="sequence">20</field>
+        <field name="color">2</field>
+        <field name="description">Summary return and tax payment.</field>
+    </record>
+    <record id="return_type_pmt06" model="rn.gst.return.type">
+        <field name="name">PMT-06</field>
+        <field name="code">PMT06</field>
+        <field name="sequence">30</field>
+        <field name="color">3</field>
+        <field name="description">Tax payment in the first two months of a quarter under QRMP.</field>
+    </record>
+    <record id="return_type_cmp08" model="rn.gst.return.type">
+        <field name="name">CMP-08</field>
+        <field name="code">CMP08</field>
+        <field name="sequence">40</field>
+        <field name="color">4</field>
+        <field name="description">Quarterly statement and payment of composition dealers.</field>
+    </record>
+    <record id="return_type_gstr4" model="rn.gst.return.type">
+        <field name="name">GSTR-4</field>
+        <field name="code">GSTR4</field>
+        <field name="sequence">50</field>
+        <field name="color">5</field>
+        <field name="description">Annual return of composition dealers.</field>
+    </record>
+    <record id="return_type_gstr6" model="rn.gst.return.type">
+        <field name="name">GSTR-6</field>
+        <field name="code">GSTR6</field>
+        <field name="sequence">60</field>
+        <field name="color">6</field>
+        <field name="description">Input Service Distributor return.</field>
+    </record>
+    <record id="return_type_gstr9" model="rn.gst.return.type">
+        <field name="name">GSTR-9</field>
+        <field name="code">GSTR9</field>
+        <field name="sequence">70</field>
+        <field name="color">7</field>
+        <field name="description">Annual return.</field>
+    </record>
+    <record id="return_type_gstr9c" model="rn.gst.return.type">
+        <field name="name">GSTR-9C</field>
+        <field name="code">GSTR9C</field>
+        <field name="sequence">80</field>
+        <field name="color">8</field>
+        <field name="description">Reconciliation statement filed with GSTR-9 above the turnover limit.</field>
+    </record>
+
+    <record id="due_rule_gstr1_monthly" model="rn.gst.due.rule">
+        <field name="return_type_id" ref="return_type_gstr1"/>
+        <field name="registration_types">regular,sez,casual</field>
+        <field name="filer_frequency">monthly</field>
+        <field name="period_frequency">monthly</field>
+        <field name="due_month_offset">1</field>
+        <field name="due_day">11</field>
+        <field name="effective_from">2017-07-01</field>
+        <field name="note">Rule 59(1)</field>
+    </record>
+    <record id="due_rule_gstr1_qrmp" model="rn.gst.due.rule">
+        <field name="return_type_id" ref="return_type_gstr1"/>
+        <field name="registration_types">regular,sez,casual</field>
+        <field name="filer_frequency">quarterly</field>
+        <field name="period_frequency">quarterly</field>
+        <field name="due_month_offset">1</field>
+        <field name="due_day">13</field>
+        <field name="effective_from">2021-01-01</field>
+        <field name="note">QRMP, Notification 83/2020-CT</field>
+    </record>
+    <record id="due_rule_gstr3b_monthly" model="rn.gst.due.rule">
+        <field name="return_type_id" ref="return_type_gstr3b"/>
+        <field name="registration_types">regular,sez,casual</field>
+        <field name="filer_frequency">monthly</field>
+        <field name="period_frequency">monthly</field>
+        <field name="due_month_offset">1</field>
+        <field name="due_day">20</field>
+        <field name="effective_from">2017-07-01</field>
+        <field name="note">Rule 61(5)</field>
+    </record>
+    <record id="due_rule_gstr3b_qrmp_a" model="rn.gst.due.rule">
+        <field name="return_type_id" ref="return_type_gstr3b"/>
+        <field name="registration_types">regular,sez,casual</field>
+        <field name="filer_frequency">quarterly</field>
+        <field name="period_frequency">quarterly</field>
+        <field name="state_codes">22,23,24,25,26,27,29,30,31,32,33,34,35,36,37</field>
+        <field name="due_month_offset">1</field>
+        <field name="due_day">22</field>
+        <field name="effective_from">2021-01-01</field>
+        <field name="note">QRMP category A states</field>
+    </record>
+    <record id="due_rule_gstr3b_qrmp_b" model="rn.gst.due.rule">
+        <field name="return_type_id" ref="return_type_gstr3b"/>
+        <field name="registration_types">regular,sez,casual</field>
+        <field name="filer_frequency">quarterly</field>
+        <field name="period_frequency">quarterly</field>
+        <field name="state_codes">01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,38,97</field>
+        <field name="due_month_offset">1</field>
+        <field name="due_day">24</field>
+        <field name="effective_from">2021-01-01</field>
+        <field name="note">QRMP category B states</field>
+    </record>
+    <record id="due_rule_pmt06_qrmp" model="rn.gst.due.rule">
+        <field name="return_type_id" ref="return_type_pmt06"/>
+        <field name="registration_types">regular,sez,casual</field>
+        <field name="filer_frequency">quarterly</field>
+        <field name="period_frequency">monthly</field>
+        <field name="skip_quarter_end" eval="True"/>
+        <field name="due_month_offset">1</field>
+        <field name="due_day">25</field>
+        <field name="effective_from">2021-01-01</field>
+        <field name="note">Rule 61(1)(iii), PMT-06</field>
+    </record>
+    <record id="due_rule_cmp08" model="rn.gst.due.rule">
+        <field name="return_type_id" ref="return_type_cmp08"/>
+        <field name="registration_types">composition</field>
+        <field name="filer_frequency">any</field>
+        <field name="period_frequency">quarterly</field>
+        <field name="due_month_offset">1</field>
+        <field name="due_day">18</field>
+        <field name="effective_from">2019-04-01</field>
+        <field name="note">Rule 62</field>
+    </record>
+    <record id="due_rule_gstr4" model="rn.gst.due.rule">
+        <field name="return_type_id" ref="return_type_gstr4"/>
+        <field name="registration_types">composition</field>
+        <field name="filer_frequency">any</field>
+        <field name="period_frequency">annual</field>
+        <field name="due_month_offset">1</field>
+        <field name="due_day">30</field>
+        <field name="effective_from">2022-03-31</field>
+        <field name="note">Rule 62, from FY 2021-22</field>
+    </record>
+    <record id="due_rule_gstr6" model="rn.gst.due.rule">
+        <field name="return_type_id" ref="return_type_gstr6"/>
+        <field name="registration_types">isd</field>
+        <field name="filer_frequency">any</field>
+        <field name="period_frequency">monthly</field>
+        <field name="due_month_offset">1</field>
+        <field name="due_day">13</field>
+        <field name="effective_from">2017-07-01</field>
+        <field name="note">Rule 65</field>
+    </record>
+    <record id="due_rule_gstr9" model="rn.gst.due.rule">
+        <field name="return_type_id" ref="return_type_gstr9"/>
+        <field name="registration_types">regular,sez</field>
+        <field name="filer_frequency">any</field>
+        <field name="period_frequency">annual</field>
+        <field name="due_month_offset">9</field>
+        <field name="due_day">31</field>
+        <field name="effective_from">2018-03-31</field>
+        <field name="note">Section 44</field>
+    </record>
+    <record id="due_rule_gstr9c" model="rn.gst.due.rule">
+        <field name="return_type_id" ref="return_type_gstr9c"/>
+        <field name="registration_types">regular,sez</field>
+        <field name="filer_frequency">any</field>
+        <field name="period_frequency">annual</field>
+        <field name="needs_gstr9c" eval="True"/>
+        <field name="due_month_offset">9</field>
+        <field name="due_day">31</field>
+        <field name="effective_from">2018-03-31</field>
+        <field name="note">Rule 80(3)</field>
+    </record>
+</odoo>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rn_gst_vendor_profile_view_list" model="ir.ui.view">
+        <field name="name">rn.gst.vendor.profile.list</field>
+        <field name="model">rn.gst.vendor.profile</field>
+        <field name="arch" type="xml">
+            <list string="Supplier GST Profiles" create="false" decoration-danger="decision == 'block'"
+                  decoration-warning="decision in ('warn', 'approve')">
+                <header>
+                    <button name="action_create_all" type="object" string="Profile All Suppliers" display="always"
+                            class="btn-primary"/>
+                    <button name="action_refresh" type="object" string="Refresh"/>
+                </header>
+                <field name="partner_id"/>
+                <field name="gstin"/>
+                <field name="gstin_status" optional="show"/>
+                <field name="bill_count" optional="show"/>
+                <field name="bill_amount" sum="Total" optional="show"/>
+                <field name="missing_2b_count" optional="show"/>
+                <field name="itc_at_risk" sum="Total" optional="show"/>
+                <field name="score"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+                <field name="currency_id" column_invisible="1"/>
+                <field name="risk" widget="badge" decoration-success="risk == 'low'" decoration-warning="risk == 'medium'"
+                       decoration-danger="risk == 'high'"/>
+                <field name="decision" widget="badge" decoration-success="decision == 'allow'"
+                       decoration-warning="decision in ('warn', 'approve')" decoration-danger="decision == 'block'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="rn_gst_vendor_profile_view_form" model="ir.ui.view">
+        <field name="name">rn.gst.vendor.profile.form</field>
+        <field name="model">rn.gst.vendor.profile</field>
+        <field name="arch" type="xml">
+            <form string="Supplier GST Profile" create="false">
+                <header>
+                    <button name="action_refresh" type="object" string="Refresh" class="btn-primary"/>
+                    <field name="decision" widget="statusbar" statusbar_visible="allow,warn,approve,block"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_bills" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                            <field name="bill_count" widget="statinfo" string="Bills"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="partner_id" readonly="1"/></h1>
+                        <field name="risk" widget="badge" decoration-success="risk == 'low'"
+                               decoration-warning="risk == 'medium'" decoration-danger="risk == 'high'"/>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="gstin"/>
+                            <field name="gst_treatment"/>
+                            <field name="gstin_status"/>
+                            <field name="score"/>
+                            <field name="refreshed_at"/>
+                        </group>
+                        <group>
+                            <field name="bill_amount"/>
+                            <field name="missing_2b_count"/>
+                            <field name="itc_at_risk"/>
+                            <field name="computed_decision"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Findings" name="findings">
+                            <field name="finding_ids" readonly="1">
+                                <list decoration-danger="severity == 'error'" decoration-warning="severity == 'warning'">
+                                    <field name="severity" widget="badge"/>
+                                    <field name="message"/>
+                                    <field name="count"/>
+                                    <field name="amount"/>
+                                    <field name="penalty" string="Points Off"/>
+                                    <field name="currency_id" column_invisible="1"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Decision Override" name="override"
+                              groups="rn_gst_vendor_compliance.group_rn_gst_vendor_compliance_manager">
+                            <group>
+                                <field name="decision_override"/>
+                                <field name="override_reason" required="decision_override"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="rn_gst_vendor_profile_view_search" model="ir.ui.view">
+        <field name="name">rn.gst.vendor.profile.search</field>
+        <field name="model">rn.gst.vendor.profile</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="partner_id"/>
+                <field name="gstin"/>
+                <filter string="High Risk" name="high" domain="[('risk', '=', 'high')]"/>
+                <filter string="Medium Risk" name="medium" domain="[('risk', '=', 'medium')]"/>
+                <filter string="Blocked" name="blocked" domain="[('decision', '=', 'block')]"/>
+                <filter string="Needs Approval" name="approve" domain="[('decision', '=', 'approve')]"/>
+                <filter string="Overridden" name="overridden" domain="[('decision_override', '!=', False)]"/>
+                <group>
+                    <filter string="Risk" name="group_risk" context="{'group_by': 'risk'}"/>
+                    <filter string="Decision" name="group_decision" context="{'group_by': 'decision'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="rn_gst_vendor_profile_action" model="ir.actions.act_window">
+        <field name="name">Supplier GST Profiles</field>
+        <field name="res_model">rn.gst.vendor.profile</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No supplier profiles yet</p>
+            <p>Click "Profile All Suppliers" to score every supplier with a bill in the last 12 months.</p>
+        </field>
+    </record>
+</odoo>

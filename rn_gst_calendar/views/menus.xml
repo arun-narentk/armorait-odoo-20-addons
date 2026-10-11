@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="rn_gst_calendar_menu_root"
+              name="Due Dates"
+              parent="rn_gst_base.menu_rn_gst_root"
+              sequence="12"
+              groups="rn_gst_calendar.group_rn_gst_calendar_user"/>
+
+    <menuitem id="rn_gst_obligation_menu"
+              name="Returns Due"
+              parent="rn_gst_calendar_menu_root"
+              action="rn_gst_obligation_action"
+              sequence="10"/>
+
+    <menuitem id="rn_gst_obligation_generate_menu"
+              name="Generate Year"
+              parent="rn_gst_calendar_menu_root"
+              action="rn_gst_obligation_generate_action"
+              sequence="20"
+              groups="rn_gst_calendar.group_rn_gst_calendar_manager"/>
+
+    <menuitem id="rn_gst_due_extension_menu"
+              name="Due-Date Extensions"
+              parent="rn_gst_calendar_menu_root"
+              action="rn_gst_due_extension_action"
+              sequence="30"
+              groups="rn_gst_calendar.group_rn_gst_calendar_manager"/>
+
+    <menuitem id="rn_gst_return_type_menu"
+              name="Returns and Due Dates"
+              parent="rn_gst_base.menu_rn_gst_configuration"
+              action="rn_gst_return_type_action"
+              sequence="30"
+              groups="rn_gst_calendar.group_rn_gst_calendar_manager"/>
+</odoo>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rn_gst_return_type_view_list" model="ir.ui.view">
+        <field name="name">rn.gst.return.type.list</field>
+        <field name="model">rn.gst.return.type</field>
+        <field name="arch" type="xml">
+            <list string="GST Returns">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="description"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="rn_gst_return_type_view_form" model="ir.ui.view">
+        <field name="name">rn.gst.return.type.form</field>
+        <field name="model">rn.gst.return.type</field>
+        <field name="arch" type="xml">
+            <form string="GST Return">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                        </group>
+                        <group>
+                            <field name="active"/>
+                            <field name="color" widget="color_picker"/>
+                        </group>
+                    </group>
+                    <field name="description" placeholder="What the return is"/>
+                    <field name="rule_ids" context="{'default_return_type_id': id}">
+                        <list editable="bottom">
+                            <field name="registration_types"/>
+                            <field name="filer_frequency"/>
+                            <field name="period_frequency"/>
+                            <field name="skip_quarter_end" optional="hide"/>
+                            <field name="needs_gstr9c" optional="hide"/>
+                            <field name="state_codes" optional="show"/>
+                            <field name="due_month_offset"/>
+                            <field name="due_day"/>
+                            <field name="effective_from"/>
+                            <field name="effective_to"/>
+                            <field name="note" optional="show"/>
+                        </list>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="rn_gst_return_type_action" model="ir.actions.act_window">
+        <field name="name">Returns and Due Dates</field>
+        <field name="res_model">rn.gst.return.type</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="rn_gst_due_extension_view_list" model="ir.ui.view">
+        <field name="name">rn.gst.due.extension.list</field>
+        <field name="model">rn.gst.due.extension</field>
+        <field name="arch" type="xml">
+            <list string="Due-Date Extensions" editable="top">
+                <field name="return_type_id"/>
+                <field name="financial_year" placeholder="2025-26"/>
+                <field name="return_period" placeholder="04, Q1 or FY"/>
+                <field name="state_ids" widget="many2many_tags" placeholder="All states"/>
+                <field name="new_due_date"/>
+                <field name="reference"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="rn_gst_due_extension_action" model="ir.actions.act_window">
+        <field name="name">Due-Date Extensions</field>
+        <field name="res_model">rn.gst.due.extension</field>
+        <field name="view_mode">list</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No extensions</p>
+            <p>When the government moves a due date, add it here. The returns in the calendar move with it.</p>
+        </field>
+    </record>
+</odoo>

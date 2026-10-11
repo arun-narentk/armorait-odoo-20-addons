@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="ir_cron_rn_customer_profiles" model="ir.cron">
+        <field name="name">Customer Compliance: refresh customer GST profiles</field>
+        <field name="model_id" ref="model_rn_gst_customer_profile"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_refresh_all()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">weeks</field>
+        <field name="active" eval="True"/>
+    </record>
+</odoo>

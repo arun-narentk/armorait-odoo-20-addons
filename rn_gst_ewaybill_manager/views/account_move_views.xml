@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rn_ewb_missing_view_list" model="ir.ui.view">
+        <field name="name">account.move.list.rn.ewb.missing</field>
+        <field name="model">account.move</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <list string="Invoices without E-Way Bill" create="false">
+                <field name="name"/>
+                <field name="move_type" optional="hide"/>
+                <field name="invoice_date"/>
+                <field name="partner_id"/>
+                <field name="l10n_in_state_id" optional="show"/>
+                <field name="amount_total_signed" string="Total" sum="Total"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+                <field name="currency_id" column_invisible="1"/>
+                <button name="action_l10n_in_ewaybill_create" type="object" string="Create E-Way Bill" class="btn-link"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="rn_ewb_missing_action" model="ir.actions.act_window">
+        <field name="name">Invoices without E-Way Bill</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="rn_ewb_missing_view_list"/>
+        <field name="domain">[('rn_ewb_missing', '=', True)]</field>
+        <field name="context">{'create': False}</field>
+        <field name="search_view_id" ref="account.view_account_invoice_filter"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Every goods invoice above the limit has an e-way bill</p>
+        </field>
+    </record>
+
+    <record id="view_account_invoice_filter" model="ir.ui.view">
+        <field name="name">account.invoice.select.inherit.rn.ewb.manager</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='late']" position="after">
+                <separator/>
+                <filter string="E-Way Bill Missing" name="rn_ewb_missing" domain="[('rn_ewb_missing', '=', True)]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

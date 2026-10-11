@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rn_ewb_view_list" model="ir.ui.view">
+        <field name="name">l10n.in.ewaybill.list.rn.ewb.manager</field>
+        <field name="model">l10n.in.ewaybill</field>
+        <field name="arch" type="xml">
+            <list string="E-Way Bills" create="false" decoration-danger="rn_ewb_expired or rn_ewb_stage == 'failed'"
+                  decoration-warning="rn_ewb_expiring" decoration-muted="rn_ewb_stage == 'cancelled'">
+                <field name="name"/>
+                <field name="document_number"/>
+                <field name="document_date" optional="show"/>
+                <field name="rn_ewb_partner_id"/>
+                <field name="rn_ewb_amount" sum="Total" optional="show"/>
+                <field name="vehicle_no" optional="show"/>
+                <field name="distance" optional="hide"/>
+                <field name="ewaybill_date" optional="show"/>
+                <field name="ewaybill_expiry_date"/>
+                <field name="rn_ewb_days_left" optional="show"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+                <field name="company_currency_id" column_invisible="1"/>
+                <field name="rn_ewb_expiring" column_invisible="1"/>
+                <field name="rn_ewb_expired" column_invisible="1"/>
+                <field name="rn_ewb_stage" widget="badge" decoration-success="rn_ewb_stage == 'generated'"
+                       decoration-info="rn_ewb_stage == 'to_generate'" decoration-danger="rn_ewb_stage == 'failed'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="rn_ewb_view_kanban" model="ir.ui.view">
+        <field name="name">l10n.in.ewaybill.kanban.rn.ewb.manager</field>
+        <field name="model">l10n.in.ewaybill</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="rn_ewb_stage" create="false" quick_create="false" group_create="false"
+                    records_draggable="false">
+                <field name="rn_ewb_expired"/>
+                <field name="rn_ewb_expiring"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex justify-content-between">
+                            <field name="name" class="fw-bold"/>
+                            <field name="document_number"/>
+                        </div>
+                        <field name="rn_ewb_partner_id" class="text-muted"/>
+                        <field name="vehicle_no"/>
+                        <footer>
+                            <field name="ewaybill_expiry_date"
+                                   t-att-class="record.rn_ewb_expired.raw_value ? 'text-danger fw-bold' : (record.rn_ewb_expiring.raw_value ? 'text-warning fw-bold' : '')"/>
+                            <field name="activity_ids" widget="kanban_activity"/>
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="rn_ewb_view_search" model="ir.ui.view">
+        <field name="name">l10n.in.ewaybill.search.rn.ewb.manager</field>
+        <field name="model">l10n.in.ewaybill</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="rn_ewb_partner_id"/>
+                <field name="vehicle_no"/>
+                <filter string="To Generate" name="to_generate" domain="[('rn_ewb_stage', '=', 'to_generate')]"/>
+                <filter string="Failed" name="failed" domain="[('rn_ewb_stage', '=', 'failed')]"/>
+                <filter string="Active" name="active_ewb" domain="[('rn_ewb_stage', '=', 'generated'), ('rn_ewb_expired', '=', False)]"/>
+                <filter string="Expiring Soon" name="expiring" domain="[('rn_ewb_expiring', '=', True)]"/>
+                <filter string="Expired" name="expired" domain="[('rn_ewb_expired', '=', True)]"/>
+                <filter string="Cancelled" name="cancelled" domain="[('rn_ewb_stage', '=', 'cancelled')]"/>
+                <separator/>
+                <filter string="E-Way Bill Date" name="ewaybill_date" date="ewaybill_date"/>
+                <group>
+                    <filter string="Stage" name="group_stage" context="{'group_by': 'rn_ewb_stage'}"/>
+                    <filter string="Party" name="group_partner" context="{'group_by': 'rn_ewb_partner_id'}"/>
+                    <filter string="Valid Upto" name="group_expiry" context="{'group_by': 'ewaybill_expiry_date:day'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="l10n_in_ewaybill_form_view" model="ir.ui.view">
+        <field name="name">l10n.in.ewaybill.form.inherit.rn.ewb.manager</field>
+        <field name="model">l10n.in.ewaybill</field>
+        <field name="inherit_id" ref="l10n_in_ewaybill.l10n_in_ewaybill_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='distance']" position="after">
+                <field name="rn_ewb_expected_days" invisible="not distance"/>
+                <field name="rn_ewb_days_left" invisible="rn_ewb_stage != 'generated'"/>
+                <field name="rn_ewb_stage" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="rn_ewb_action" model="ir.actions.act_window">
+        <field name="name">E-Way Bills</field>
+        <field name="res_model">l10n.in.ewaybill</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('rn_ewb_view_list')}),
+            (0, 0, {'view_mode': 'kanban', 'view_id': ref('rn_ewb_view_kanban')})]"/>
+        <field name="search_view_id" ref="rn_ewb_view_search"/>
+        <field name="context">{'create': False}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No e-way bills yet</p>
+            <p>Create an e-way bill from a posted invoice or a delivery. Turn on E-Waybill in the Accounting settings first.</p>
+        </field>
+    </record>
+</odoo>

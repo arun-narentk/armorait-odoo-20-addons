@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="rn_gstin_verification_menu_root"
+              name="GSTIN Checks"
+              parent="rn_gst_base.menu_rn_gst_root"
+              sequence="20"
+              groups="rn_gstin_verification.group_rn_gstin_verification_user"/>
+
+    <menuitem id="rn_gstin_partner_menu"
+              name="Partners by GSTIN Status"
+              parent="rn_gstin_verification_menu_root"
+              action="rn_gstin_partner_action"
+              sequence="10"/>
+
+    <menuitem id="rn_gst_gstin_check_menu"
+              name="Check History"
+              parent="rn_gstin_verification_menu_root"
+              action="rn_gst_gstin_check_action"
+              sequence="20"/>
+</odoo>

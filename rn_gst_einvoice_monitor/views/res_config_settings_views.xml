@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.rn.gst.einvoice.monitor</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="rn_gst_base.view_rn_gst_base_res_config_settings"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@name='rn_gst_base_settings']" position="inside">
+                <setting string="E-Invoice 30-Day Limit" help="Turnover of 10 crore or more: flag invoices still without IRN 30 days after their date.">
+                    <field name="rn_einv_30_day_rule"/>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>

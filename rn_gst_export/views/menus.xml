@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="rn_gst_export_menu_root"
+              name="Exports"
+              parent="rn_gst_base.menu_rn_gst_root"
+              sequence="48"
+              groups="rn_gst_base.group_rn_gst_user"/>
+
+    <menuitem id="rn_exp_register_menu"
+              name="Export Register"
+              parent="rn_gst_export_menu_root"
+              action="rn_exp_register_action"
+              sequence="10"/>
+
+    <menuitem id="rn_gst_lut_menu"
+              name="LUT Register"
+              parent="rn_gst_export_menu_root"
+              action="rn_gst_lut_action"
+              sequence="20"/>
+</odoo>

@@ -1,0 +1,11 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_gst_return_type_user,rn.gst.return.type.user,rn.gst.return.type,rn_gst_calendar.group_rn_gst_calendar_user,r,
+access_rn_gst_return_type_manager,rn.gst.return.type.manager,rn.gst.return.type,rn_gst_calendar.group_rn_gst_calendar_manager,crud,
+access_rn_gst_due_rule_user,rn.gst.due.rule.user,rn.gst.due.rule,rn_gst_calendar.group_rn_gst_calendar_user,r,
+access_rn_gst_due_rule_manager,rn.gst.due.rule.manager,rn.gst.due.rule,rn_gst_calendar.group_rn_gst_calendar_manager,crud,
+access_rn_gst_due_extension_user,rn.gst.due.extension.user,rn.gst.due.extension,rn_gst_calendar.group_rn_gst_calendar_user,r,
+access_rn_gst_due_extension_manager,rn.gst.due.extension.manager,rn.gst.due.extension,rn_gst_calendar.group_rn_gst_calendar_manager,crud,
+access_rn_gst_obligation_user,rn.gst.obligation.user,rn.gst.obligation,rn_gst_calendar.group_rn_gst_calendar_user,ru,
+access_rn_gst_obligation_manager,rn.gst.obligation.manager,rn.gst.obligation,rn_gst_calendar.group_rn_gst_calendar_manager,crud,
+rn_gst_obligation_comp_rule,rn.gst.obligation: multi-company,rn.gst.obligation,,crud,"[('company_id', 'in', company_ids)]"
+access_rn_gst_obligation_generate_wizard,rn.gst.obligation.generate.wizard,rn.gst.obligation.generate.wizard,rn_gst_calendar.group_rn_gst_calendar_manager,crud,

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rn_gst_obligation_view_list" model="ir.ui.view">
+        <field name="name">rn.gst.obligation.list</field>
+        <field name="model">rn.gst.obligation</field>
+        <field name="arch" type="xml">
+            <list string="GST Returns Due" create="false" decoration-danger="is_overdue"
+                  decoration-muted="state == 'not_required'">
+                <header>
+                    <button name="action_mark_filed" type="object" string="Mark Filed"/>
+                </header>
+                <field name="due_date"/>
+                <field name="return_type_id"/>
+                <field name="return_period"/>
+                <field name="financial_year" optional="show"/>
+                <field name="registration_id"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+                <field name="user_id" widget="many2one_avatar_user" optional="show"/>
+                <field name="extension_id" optional="hide"/>
+                <field name="filed_date" optional="show"/>
+                <field name="arn" optional="hide"/>
+                <field name="days_late" optional="show"/>
+                <field name="is_overdue" column_invisible="1"/>
+                <field name="state" widget="badge" decoration-info="state == 'pending'"
+                       decoration-success="state == 'filed'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="rn_gst_obligation_view_form" model="ir.ui.view">
+        <field name="name">rn.gst.obligation.form</field>
+        <field name="model">rn.gst.obligation</field>
+        <field name="arch" type="xml">
+            <form string="GST Return Due" create="false">
+                <header>
+                    <button name="action_mark_filed" type="object" string="Mark Filed" class="btn-primary"
+                            invisible="state != 'pending'"/>
+                    <button name="action_mark_not_required" type="object" string="Not Required"
+                            invisible="state != 'pending'" title="For example a nil period already covered elsewhere. Write the reason in the note."/>
+                    <button name="action_reset_pending" type="object" string="Back to Pending" invisible="state == 'pending'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="pending,filed"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_source" type="object" class="oe_stat_button" icon="fa-file-text-o"
+                                string="Filing Record" invisible="not source_id"/>
+                    </div>
+                    <widget name="web_ribbon" title="Overdue" bg_color="text-bg-danger" invisible="not is_overdue"/>
+                    <div class="oe_title">
+                        <h1><field name="display_name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="registration_id" readonly="1"/>
+                            <field name="return_type_id" readonly="1"/>
+                            <field name="financial_year" readonly="1"/>
+                            <field name="return_period" readonly="1"/>
+                            <field name="period_start" readonly="1"/>
+                            <field name="period_end" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="rule_due_date"/>
+                            <field name="extension_id" invisible="not extension_id"/>
+                            <field name="due_date"/>
+                            <field name="days_late" invisible="not days_late"/>
+                            <field name="user_id" widget="many2one_avatar_user"/>
+                            <field name="filed_date" readonly="state == 'filed'"/>
+                            <field name="arn"/>
+                            <field name="is_overdue" invisible="1"/>
+                            <field name="source_model" invisible="1"/>
+                            <field name="source_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <field name="note" placeholder="Notes"/>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="rn_gst_obligation_view_calendar" model="ir.ui.view">
+        <field name="name">rn.gst.obligation.calendar</field>
+        <field name="model">rn.gst.obligation</field>
+        <field name="arch" type="xml">
+            <calendar string="GST Returns Due" date_start="due_date" color="return_type_id" mode="month"
+                      quick_create="0" create="0" event_open_popup="1">
+                <field name="registration_id"/>
+                <field name="state"/>
+                <field name="user_id" avatar_field="avatar_128"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="rn_gst_obligation_view_kanban" model="ir.ui.view">
+        <field name="name">rn.gst.obligation.kanban</field>
+        <field name="model">rn.gst.obligation</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state" create="false" quick_create="false">
+                <field name="is_overdue"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex justify-content-between">
+                            <field name="return_type_id" class="fw-bold"/>
+                            <field name="return_period"/>
+                        </div>
+                        <field name="registration_id" class="text-muted"/>
+                        <footer>
+                            <field name="due_date" t-att-class="record.is_overdue.raw_value ? 'text-danger fw-bold' : ''"/>
+                            <field name="activity_ids" widget="kanban_activity"/>
+                            <field name="user_id" widget="many2one_avatar_user" class="ms-auto"/>
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="rn_gst_obligation_view_search" model="ir.ui.view">
+        <field name="name">rn.gst.obligation.search</field>
+        <field name="model">rn.gst.obligation</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="registration_id"/>
+                <field name="return_type_id"/>
+                <field name="financial_year"/>
+                <field name="user_id"/>
+                <filter string="Pending" name="pending" domain="[('state', '=', 'pending')]"/>
+                <filter string="Overdue" name="overdue" domain="[('is_overdue', '=', True)]"/>
+                <filter string="Due in 7 Days" name="due_week"
+                        domain="[('state', '=', 'pending'), ('due_date', '>=', context_today().strftime('%Y-%m-%d')), ('due_date', '&lt;=', (context_today() + relativedelta(days=7)).strftime('%Y-%m-%d'))]"/>
+                <filter string="Filed" name="filed" domain="[('state', '=', 'filed')]"/>
+                <separator/>
+                <filter string="My Returns" name="mine" domain="[('user_id', '=', uid)]"/>
+                <filter string="Due Date" name="due_date_filter" date="due_date"/>
+                <group>
+                    <filter string="Return" name="group_return" context="{'group_by': 'return_type_id'}"/>
+                    <filter string="GSTIN" name="group_registration" context="{'group_by': 'registration_id'}"/>
+                    <filter string="Status" name="group_state" context="{'group_by': 'state'}"/>
+                    <filter string="Due Month" name="group_due" context="{'group_by': 'due_date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="rn_gst_obligation_action" model="ir.actions.act_window">
+        <field name="name">GST Returns Due</field>
+        <field name="res_model">rn.gst.obligation</field>
+        <field name="view_mode">list,calendar,kanban,form</field>
+        <field name="context">{'search_default_pending': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No GST returns in the calendar yet</p>
+            <p>Set monthly or quarterly filing on each GST registration, then use "Generate Year" to add
+               the year's GSTR-1, GSTR-3B and other returns with their due dates.</p>
+        </field>
+    </record>
+
+    <record id="rn_gst_obligation_generate_action" model="ir.actions.act_window">
+        <field name="name">Generate Year</field>
+        <field name="res_model">rn.gst.obligation.generate.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="rn_ewb_menu_root"
+              name="E-Way Bills"
+              parent="rn_gst_base.menu_rn_gst_root"
+              sequence="46"
+              groups="rn_gst_base.group_rn_gst_user"/>
+
+    <menuitem id="rn_ewb_menu"
+              name="E-Way Bill Manager"
+              parent="rn_ewb_menu_root"
+              action="rn_ewb_action"
+              sequence="10"/>
+
+    <menuitem id="rn_ewb_missing_menu"
+              name="Invoices without E-Way Bill"
+              parent="rn_ewb_menu_root"
+              action="rn_ewb_missing_action"
+              sequence="20"/>
+</odoo>

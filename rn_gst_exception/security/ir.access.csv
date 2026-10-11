@@ -1,0 +1,4 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_gst_exception_user,rn.gst.exception.user,rn.gst.exception,rn_gst_exception.group_rn_gst_exception_user,cru,
+access_rn_gst_exception_manager,rn.gst.exception.manager,rn.gst.exception,rn_gst_exception.group_rn_gst_exception_manager,crud,
+rn_gst_exception_comp_rule,rn.gst.exception: multi-company,rn.gst.exception,,crud,"[('company_id', 'in', company_ids)]"

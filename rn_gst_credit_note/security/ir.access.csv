@@ -1,0 +1,3 @@
+id,name,model_id,group_id/id,operation,domain
+access_rn_gst_credit_note_reason_invoice,rn.gst.credit.note.reason.invoice,rn.gst.credit.note.reason,account.group_account_invoice,r,
+access_rn_gst_credit_note_reason_manager,rn.gst.credit.note.reason.manager,rn.gst.credit.note.reason,rn_gst_credit_note.group_rn_gst_credit_note_manager,crud,
