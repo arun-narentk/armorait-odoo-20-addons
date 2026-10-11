@@ -9,3 +9,5 @@ from . import gst_filing
 from . import gst_filing_report
 from . import gst_gstr9_line
 from . import gst_gstr9
+from . import gst_gstr9c_line
+from . import gst_gstr9c

@@ -3,7 +3,7 @@
     'name': 'Armora GST Filing',
     'version': '20.0.1.4.0',
     'category': 'Accounting/Accounting',
-    'summary': 'Prepare GSTR-1 (Offline Tool Excel) and the GSTR-9 annual return from Odoo 20 | ARMORA IT Technologies',
+    'summary': 'Prepare GSTR-1 (Offline Tool Excel), GSTR-9 and GSTR-9C from Odoo 20 | ARMORA IT Technologies',
     'description': """
 Armora GST Filing for Odoo 20
 ============================
@@ -17,6 +17,8 @@ Prepare GSTR-1 filing data from posted Indian GST invoices:
 * Populate an official GSTN Returns Offline Tool Excel workbook
 * GSTR-9 annual return: Tables 4 to 9, 16A, 17 and 18 filled from the year's
   invoices, bills, GSTR-3B and GSTR-2B records, with manual rows for the rest
+* GSTR-9C reconciliation statement: turnover, rate-wise tax and ITC from the
+  ledger compared with the GSTR-9, with adjustments and reasons
 
 Workflow:
 Load GST Data → Validate → Generate GST Upload File → Download
@@ -57,6 +59,8 @@ Email:   info@armorait.com
         'views/gst_filing_report_views.xml',
         'report/gstr9_report.xml',
         'views/gst_gstr9_views.xml',
+        'report/gstr9c_report.xml',
+        'views/gst_gstr9c_views.xml',
         'security/ir.access.csv',
     ],
     'demo': [
