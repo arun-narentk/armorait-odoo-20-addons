@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="armora_gst_tds_tcs_period_view_list" model="ir.ui.view">
+        <field name="name">armora.gst.tds.tcs.period.list</field>
+        <field name="model">armora.gst.tds.tcs.period</field>
+        <field name="arch" type="xml">
+            <list string="GST TDS/TCS Months">
+                <field name="name"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="gstin"/>
+                <field name="financial_year"/>
+                <field name="return_period"/>
+                <field name="expected_total"/>
+                <field name="reported_total"/>
+                <field name="accepted_total"/>
+                <field name="mismatch_count"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'"
+                       decoration-warning="state == 'computed'" decoration-success="state == 'closed'"/>
+                <field name="currency_id" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="armora_gst_tds_tcs_period_view_form" model="ir.ui.view">
+        <field name="name">armora.gst.tds.tcs.period.form</field>
+        <field name="model">armora.gst.tds.tcs.period</field>
+        <field name="arch" type="xml">
+            <form string="GST TDS/TCS Month">
+                <header>
+                    <button name="action_compute_expected" type="object" string="Compute Expected" class="btn-primary"
+                            invisible="state == 'closed'"
+                            title="Expected TDS and TCS from the month's invoices to deductors and e-commerce operators."/>
+                    <button name="action_open_import_wizard" type="object" string="Import GSTR-2X" invisible="state == 'closed'"/>
+                    <button name="action_accept_matched" type="object" string="Accept Matched" invisible="state == 'closed'"/>
+                    <button name="action_close" type="object" string="Close" invisible="state != 'computed'"/>
+                    <button name="action_reopen" type="object" string="Reopen" invisible="state != 'closed'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,computed,closed"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="company_id" groups="base.group_multi_company" readonly="state != 'draft'"/>
+                            <field name="gstin" readonly="state != 'draft'"/>
+                            <field name="financial_year" readonly="state != 'draft'" placeholder="2025-26"/>
+                            <field name="return_period" readonly="state != 'draft'" placeholder="04"/>
+                        </group>
+                        <group>
+                            <field name="period_start"/>
+                            <field name="period_end"/>
+                            <field name="expected_total"/>
+                            <field name="reported_total"/>
+                            <field name="accepted_total"/>
+                            <field name="mismatch_count"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <field name="credit_ids" readonly="state == 'closed'">
+                        <list editable="bottom" decoration-danger="match_state in ('mismatch', 'reported_only')"
+                              decoration-success="state == 'accepted'" decoration-muted="state == 'rejected'">
+                            <field name="credit_type"/>
+                            <field name="partner_id"/>
+                            <field name="deductor_gstin"/>
+                            <field name="expected_taxable" optional="show"/>
+                            <field name="expected_total"/>
+                            <field name="reported_taxable" optional="show"/>
+                            <field name="reported_igst" optional="show"/>
+                            <field name="reported_cgst" optional="show"/>
+                            <field name="reported_sgst" optional="show"/>
+                            <field name="reported_total"/>
+                            <field name="difference"/>
+                            <field name="match_state" widget="badge"/>
+                            <field name="state" widget="badge"/>
+                            <field name="move_id" optional="hide"/>
+                            <field name="notes" optional="hide"/>
+                            <button name="action_accept" type="object" string="Accept" icon="check" invisible="state != 'pending'"/>
+                            <button name="action_reject" type="object" string="Reject" icon="close" invisible="state != 'pending'"/>
+                            <button name="action_reset" type="object" string="Reset" icon="undo" invisible="state == 'pending'"/>
+                            <field name="currency_id" column_invisible="1"/>
+                        </list>
+                    </field>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="armora_gst_tds_tcs_period_action" model="ir.actions.act_window">
+        <field name="name">GST TDS/TCS Credits</field>
+        <field name="res_model">armora.gst.tds.tcs.period</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Track GST TDS and TCS deducted from you</p>
+            <p>Mark customers that deduct GST TDS and e-commerce operators that collect GST TCS, then create a month,
+               compute the expected credits, import GSTR-2X and accept the credits.</p>
+        </field>
+    </record>
+
+    <record id="armora_gst_tds_tcs_credit_view_list" model="ir.ui.view">
+        <field name="name">armora.gst.tds.tcs.credit.list</field>
+        <field name="model">armora.gst.tds.tcs.credit</field>
+        <field name="arch" type="xml">
+            <list string="GST TDS/TCS Credits" create="0">
+                <field name="period_id"/>
+                <field name="credit_type"/>
+                <field name="partner_id"/>
+                <field name="deductor_gstin"/>
+                <field name="expected_total" sum="Total"/>
+                <field name="reported_total" sum="Total"/>
+                <field name="difference" sum="Total"/>
+                <field name="match_state" widget="badge"/>
+                <field name="state" widget="badge"/>
+                <field name="currency_id" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="armora_gst_tds_tcs_credit_view_search" model="ir.ui.view">
+        <field name="name">armora.gst.tds.tcs.credit.search</field>
+        <field name="model">armora.gst.tds.tcs.credit</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="partner_id"/>
+                <field name="deductor_gstin"/>
+                <filter string="TDS" name="tds" domain="[('credit_type', '=', 'tds')]"/>
+                <filter string="TCS" name="tcs" domain="[('credit_type', '=', 'tcs')]"/>
+                <separator/>
+                <filter string="Mismatch" name="mismatch" domain="[('match_state', 'in', ('mismatch', 'reported_only'))]"/>
+                <filter string="Pending" name="pending" domain="[('state', '=', 'pending')]"/>
+                <group>
+                    <filter string="Deductor" name="group_partner" context="{'group_by': 'partner_id'}"/>
+                    <filter string="Month" name="group_period" context="{'group_by': 'period_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="armora_gst_tds_tcs_credit_action" model="ir.actions.act_window">
+        <field name="name">All TDS/TCS Credits</field>
+        <field name="res_model">armora.gst.tds.tcs.credit</field>
+        <field name="view_mode">list</field>
+    </record>
+
+    <record id="armora_gst_tds_tcs_import_wizard_view_form" model="ir.ui.view">
+        <field name="name">armora.gst.tds.tcs.import.wizard.form</field>
+        <field name="model">armora.gst.tds.tcs.import.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Import GSTR-2X">
+                <p class="text-muted">
+                    Upload the TDS or TCS credits downloaded from GSTR-2X on the GST Portal (CSV or Excel). The file needs the
+                    deductor or operator GSTIN and the tax amounts; rows of one deductor are added up.
+                </p>
+                <group>
+                    <field name="period_id" invisible="1"/>
+                    <field name="credit_type"/>
+                    <field name="data_file" filename="filename"/>
+                    <field name="filename" invisible="1"/>
+                </group>
+                <footer>
+                    <button name="action_import" type="object" string="Import" class="btn-primary"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_partner_property_form" model="ir.ui.view">
+        <field name="name">res.partner.property.form.inherit.armora.gst.tds.tcs</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.view_partner_property_form"/>
+        <field name="arch" type="xml">
+            <field name="property_account_position_id" position="after">
+                <field name="armora_gst_tds_deductor"/>
+                <field name="armora_gst_tcs_operator"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.armora.gst.tds.tcs</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="armora_gst_base.view_armora_gst_base_res_config_settings"/>
+        <field name="arch" type="xml">
+            <block name="armora_gst_base_settings" position="inside">
+                <setting string="GST TDS and TCS" help="Rates and threshold for expected credits, and where accepted credits are booked.">
+                    <div class="row"><label for="armora_gst_tds_threshold" class="col-lg-5"/><field name="armora_gst_tds_threshold"/></div>
+                    <div class="row"><label for="armora_gst_tds_rate" class="col-lg-5"/><field name="armora_gst_tds_rate"/></div>
+                    <div class="row"><label for="armora_gst_tcs_rate" class="col-lg-5"/><field name="armora_gst_tcs_rate"/></div>
+                    <div class="row"><label for="armora_gst_tds_tcs_account_id" class="col-lg-5"/><field name="armora_gst_tds_tcs_account_id"/></div>
+                    <div class="row"><label for="armora_gst_tds_tcs_journal_id" class="col-lg-5"/><field name="armora_gst_tds_tcs_journal_id"/></div>
+                </setting>
+            </block>
+        </field>
+    </record>
+</odoo>
