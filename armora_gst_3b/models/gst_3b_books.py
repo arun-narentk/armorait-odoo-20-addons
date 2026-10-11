@@ -156,6 +156,7 @@ class ArmoraGst3b(models.Model):
             if rec.state == 'filed':
                 raise UserError(_('Filed GSTR-3B records are read-only.'))
             vals, interstate, warnings = rec._armora_books_values()
+            rec._armora_itc_ledger_values(vals, warnings)
             vals.update({
                 'interstate_line_ids': [Command.clear()] + [Command.create(line) for line in interstate],
                 'books_filled_at': fields.Datetime.now(),
@@ -179,6 +180,31 @@ class ArmoraGst3b(models.Model):
                 cash=rec.net_tax_liability,
             ))
         return True
+
+    def _armora_itc_ledger_values(self, vals, warnings):
+        """Take reversals, reclaims and the opening credit from the month's ITC ledger
+        (Armora GST ITC), when that app is installed."""
+        self.ensure_one()
+        if 'armora.gst.itc.ledger' not in self.env:
+            return
+        Ledger = self.env['armora.gst.itc.ledger'].sudo()
+        company_domain = [('company_id', '=', self.company_id.id), ('gstin', '=', self.gstin)]
+        ledger = Ledger.search(company_domain + [
+            ('financial_year', '=', self.financial_year),
+            ('return_period', '=', self.return_period),
+            ('state', 'in', ('computed', 'locked')),
+        ], limit=1)
+        if not ledger:
+            if Ledger.search_count(company_domain, limit=1):
+                warnings.append(_('No computed ITC ledger for this month: Rule 37, Rule 42 and blocked credit are not reversed.'))
+            return
+        for head in HEADS:
+            vals['t4b1_%s' % head] += ledger['blocked_%s' % head] + ledger['rule42_%s' % head]
+            vals['t4b2_%s' % head] = ledger['rule37_%s' % head]
+            # Reclaimed credit is claimed again in 4(A)(5) and also shown in 4(D)(1).
+            vals['t4a5_%s' % head] += ledger['reclaimed_%s' % head]
+            vals['t4d1_%s' % head] = ledger['reclaimed_%s' % head]
+            vals['itc_opening_%s' % head] = ledger['opening_%s' % head]
 
     def action_compute_itc_utilization(self):
         res = super().action_compute_itc_utilization()

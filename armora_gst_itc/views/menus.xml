@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_armora_gst_itc_root"
+              name="ITC"
+              parent="armora_gst_base.menu_armora_gst_root"
+              sequence="50"
+              groups="armora_gst_itc.group_armora_gst_itc_user"/>
+
+    <menuitem id="armora_gst_itc_ledger_menu"
+              name="ITC Ledger"
+              parent="menu_armora_gst_itc_root"
+              action="armora_gst_itc_ledger_action"
+              sequence="10"/>
+
+    <menuitem id="armora_gst_itc_entry_menu"
+              name="Rule 37 Reversals and Reclaims"
+              parent="menu_armora_gst_itc_root"
+              action="armora_gst_itc_entry_action"
+              sequence="20"/>
+
+    <menuitem id="armora_gst_itc_bill_menu"
+              name="ITC Register"
+              parent="menu_armora_gst_itc_root"
+              action="armora_gst_itc_bill_action"
+              sequence="30"/>
+</odoo>
